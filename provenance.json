@@ -4,7 +4,7 @@
     "revision": "04e833e535602560cf0bc1b439f5a070db8ca936",
     "license": "MIT; vendored/dependency components retain their own licenses"
   },
-  "source_recipe": "BD-008 r6 source snapshot plus the two BD-009 overlays accepted for BD-010. All retained code bytes are exact; internal docs and research fixtures excluded.",
+  "source_recipe": "Published f57e668 source plus BD-017 native Catalog/InformationRegister rights ordering; form reader unchanged.",
   "replacements": {
     "src/mssql_dump/form_body.rs": {
       "bytes": 1922507,
@@ -92,8 +92,8 @@
         "sha256": "8cae94f958621b33804923a9c96cbba400463ca295f4fcfe1c9648180ecc1f72"
       },
       "published": {
-        "bytes": 85533,
-        "sha256": "41dcd284ac61b43913414775185bb206baa346014e26b20f72c20a8ba0c3c7a5"
+        "bytes": 85717,
+        "sha256": "23c013acbecccb182b967554688cfd7730d14f3041adff250afb9ac0191b4964"
       }
     },
     "src/mssql_dump/source_assets.rs": {
@@ -159,6 +159,44 @@
         "bytes": 2425,
         "sha256": "0de1679a71b12dede5a772950931b41c689320169f0af86789262b50f28d43b7"
       }
+    },
+    "crates/ibcmd-schema/src/lib.rs": {
+      "upstream": {
+        "bytes": 783361,
+        "sha256": "b89ee58da77c776db7565f37f7770d38036656e67534d46abea15a000c9aa2e6"
+      },
+      "published": {
+        "bytes": 783385,
+        "sha256": "d930d7af5d76982c205b189fa507dd9f641605f26b782a9793b65839175d819e"
+      }
+    },
+    "crates/ibcmd-schema/src/object_rights.rs": {
+      "upstream": null,
+      "published": {
+        "bytes": 5694,
+        "sha256": "43a67303a8605eb3172d72f562574043ffb5bc0034a72a475a4b996864ee80c6"
+      }
+    },
+    "tests/native_rights_order.rs": {
+      "upstream": null,
+      "published": {
+        "bytes": 5517,
+        "sha256": "afbf201944c20722ec0522c694cfaf77254250d465f2129009d0ac9c0eba33b6"
+      }
+    },
+    "docs/rights-order-evidence.md": {
+      "upstream": null,
+      "published": {
+        "bytes": 1939,
+        "sha256": "2ea9acb85e7c6bea5df3b66349c5ec730aacd067e547410c4ace671496d5c94b"
+      }
+    },
+    "docs/form-binding-scope.md": {
+      "upstream": null,
+      "published": {
+        "bytes": 1736,
+        "sha256": "da3706a6450871febac3795eb8d01e7e5020638a87f8dcf8745239eba99b3006"
+      }
     }
   },
   "cargo_lock": {
@@ -197,5 +235,28 @@
     "url": "https://raw.githubusercontent.com/Untru/ibcmd-rs/04e833e535602560cf0bc1b439f5a070db8ca936/tests/fixtures/form_choice_parameters_slot27_live.json",
     "license": "MIT (upstream root LICENSE)",
     "publication_review": "Leader verified public exact upstream resource and authorized unchanged inclusion. This schema example is not a project field configuration. Public upstream provenance text is retained, not a runtime dependency."
+  },
+  "baseline_source_recipe": "BD-008 r6 source snapshot plus the two BD-009 overlays accepted for BD-010. All retained code bytes are exact; internal docs and research fixtures excluded.",
+  "development_candidate": {
+    "source_base": "f57e668a21c14e027f7e4f97f741e66e5f61c6dd",
+    "rights_patch_commit": "e879041",
+    "status": "RIGHTS_FOCUSED_VALIDATED_FORM_UNRESOLVED",
+    "build_binary": {
+      "bytes": 65346072,
+      "sha256": "b087962e13423f833ccae5e495423fa2228767da628f3c06a375ba48b7a48358"
+    },
+    "build_seconds": 289.930319,
+    "tests": {
+      "schema": 5,
+      "production_parser_renderer": 6,
+      "cf_derived_role_xml_exact": {
+        "mssql": 4,
+        "postgresql": 4
+      }
+    },
+    "full_new_configuration_export": false,
+    "bundled_app_runtime_updated": false,
+    "bundled_app_runtime_source": "f57e668 publication / accepted BD-015 binary",
+    "note": "Current source includes the rights fix; the committed app/runtime remains the previous release. No new native rule for the remaining form marker was inferred."
   }
 }

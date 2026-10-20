@@ -1,8 +1,8 @@
 {
   "files": {
     "BUILD-AND-TEST.ru.md": {
-      "bytes": 8466,
-      "sha256": "0e2ddbadda35e41ee2f07525e2b605eb1c8bc37edd3ec6c43324ba7623882fbb"
+      "bytes": 9203,
+      "sha256": "f710d8520f68dc849118e041295c98997a5431f4f48c8432566475d543c88242"
     },
     "closure-audit.json": {
       "bytes": 321017,
@@ -3409,8 +3409,8 @@
       "sha256": "b52684e0271fa6a3c867d796ba3a51444f5d18f2629ecf4c1606e5940067e348"
     },
     "converter/crates/ibcmd-schema/src/lib.rs": {
-      "bytes": 783361,
-      "sha256": "b89ee58da77c776db7565f37f7770d38036656e67534d46abea15a000c9aa2e6"
+      "bytes": 783385,
+      "sha256": "d930d7af5d76982c205b189fa507dd9f641605f26b782a9793b65839175d819e"
     },
     "converter/crates/ibcmd-schema/src/metadata_record_upgrades.rs": {
       "bytes": 7097,
@@ -4653,8 +4653,8 @@
       "sha256": "fcca76e9c4585f584d13901e0d19607f10557cf8829bd3498c5ae6a961e6c9ad"
     },
     "converter/src/mssql_dump/role_rights.rs": {
-      "bytes": 85533,
-      "sha256": "41dcd284ac61b43913414775185bb206baa346014e26b20f72c20a8ba0c3c7a5"
+      "bytes": 85717,
+      "sha256": "23c013acbecccb182b967554688cfd7730d14f3041adff250afb9ac0191b4964"
     },
     "converter/src/mssql_dump/selected.rs": {
       "bytes": 19754,
@@ -5509,8 +5509,8 @@
       "sha256": "014a570d7b780689bbb2a03cb168d249d80062f2dfc22a3c6d876b99c9d44481"
     },
     "provenance.json": {
-      "bytes": 7405,
-      "sha256": "c624f9b57046c1ad7b5125661377f75ebc4e38cbeb59c1d02b5b9b322cef5e84"
+      "bytes": 9642,
+      "sha256": "d5815036a3a2f94b9a40d49d5fc8db2776ac6465884555cd644ccc3706de60e7"
     },
     "python-test-provenance.json": {
       "bytes": 1781,
@@ -6595,7 +6595,24 @@
     "third-party-licenses/rust/zmij-1.0.21/LICENSE-MIT": {
       "bytes": 1023,
       "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+    },
+    "converter/crates/ibcmd-schema/src/object_rights.rs": {
+      "bytes": 5694,
+      "sha256": "43a67303a8605eb3172d72f562574043ffb5bc0034a72a475a4b996864ee80c6"
+    },
+    "converter/tests/native_rights_order.rs": {
+      "bytes": 5517,
+      "sha256": "afbf201944c20722ec0522c694cfaf77254250d465f2129009d0ac9c0eba33b6"
+    },
+    "converter/docs/rights-order-evidence.md": {
+      "bytes": 1939,
+      "sha256": "2ea9acb85e7c6bea5df3b66349c5ec730aacd067e547410c4ace671496d5c94b"
+    },
+    "converter/docs/form-binding-scope.md": {
+      "bytes": 1736,
+      "sha256": "da3706a6450871febac3795eb8d01e7e5020638a87f8dcf8745239eba99b3006"
     }
   },
-  "scope": "Source, test, notices and minimal build description; application is supplied separately by publication owner."
+  "scope": "Source, test, notices and minimal build description; application is supplied separately by publication owner.",
+  "source_status": "BD-017 rights candidate; bundled application runtime remains BD-015"
 }
