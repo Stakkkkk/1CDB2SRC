@@ -1,0 +1,29 @@
+{
+  "image_id": "sha256:d002173098e07d6bac3bcea54f1b769f5d517b4ff41c2c1d62682e032a1da30e",
+  "archive": {
+    "bytes": 23498752,
+    "sha256": "0d3775747fec3a6e7644fc018d7341c6614a20fa6086c1be43f2524148c90763"
+  },
+  "binary": {
+    "path": "/engine/ibcmd-rs",
+    "bytes": 65312536,
+    "sha256": "6d82fbd8213acec5981d41a5b5b400e975e6aac63b2571bf1a621c52e563fbd1"
+  },
+  "target": "Linux x86_64 inside Docker Desktop on Windows x64",
+  "experimental": true,
+  "platform_oracle": false,
+  "licenses": {
+    "licenses/runtime/GPL-3.txt": {
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    "licenses/runtime/ibcmd-rs-MIT.txt": {
+      "bytes": 1099,
+      "sha256": "866a167ccd074fe0b81754c777f0587d7fb3fd27c605fb06c1f50a50dd061b92"
+    },
+    "licenses/runtime/LGPL-2.1.txt": {
+      "bytes": 26530,
+      "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "platform": "Linux x86_64 / CPython3.13",
+  "source_index": "https://pypi.org/simple",
+  "created_utc": "2026-10-20T14:14:52.791897+00:00",
+  "files": {
+    "psutil": {
+      "version": "7.2.2",
+      "file": "wheels-linux/psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl",
+      "bytes": 155560,
+      "sha256": "076a2d2f923fd4821644f5ba89f059523da90dc9014e85f8e45a5774ca5bc6f9",
+      "tags": [
+        "cp36-abi3-manylinux_2_12_x86_64",
+        "cp36-abi3-manylinux2010_x86_64",
+        "cp36-abi3-manylinux_2_28_x86_64"
+      ]
+    },
+    "psycopg": {
+      "version": "3.3.6",
+      "file": "wheels-linux/psycopg-3.3.6-py3-none-any.whl",
+      "bytes": 215490,
+      "sha256": "a1db9f7148b06a28606767efaca51fa6f9398c5c0a3810519be69d7000bdb631",
+      "tags": [
+        "py3-none-any"
+      ]
+    },
+    "psycopg-binary": {
+      "version": "3.3.6",
+      "file": "wheels-linux/psycopg_binary-3.3.6-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "bytes": 5237855,
+      "sha256": "cec5ea900390897d0b46130f60bc2883bf19c314f9044235217c8be88b0ef269",
+      "tags": [
+        "cp313-cp313-manylinux_2_17_x86_64",
+        "cp313-cp313-manylinux2014_x86_64"
+      ]
+    },
+    "python-tds": {
+      "version": "1.17.1",
+      "file": "wheels-linux/python_tds-1.17.1-py3-none-any.whl",
+      "bytes": 86635,
+      "sha256": "35cb210b1a54e5ccc91570a83d4e9a2a16682cbeb00bede06fd6cdf9afa9762f",
+      "tags": [
+        "py3-none-any"
+      ]
+    },
+    "tzdata": {
+      "version": "2026.5",
+      "file": "wheels-linux/tzdata-2026.5-py2.py3-none-any.whl",
+      "bytes": 347996,
+      "sha256": "b683bd1b6659ddcd810ff02ad09ba821d4bf1065072805063eb35c49617905ac",
+      "tags": [
+        "py2-none-any",
+        "py3-none-any"
+      ]
+    }
+  },
+  "licenses": [
+    {
+      "path": "licenses/python-linux/psutil/psutil-7.2.2.dist-info/LICENSE",
+      "bytes": 1548,
+      "sha256": "b89c063b3786e28e0c0a38f1931db61fed35e69dd2a2966fbecffee0f46c8d10",
+      "wheel_member": "psutil-7.2.2.dist-info/LICENSE"
+    },
+    {
+      "path": "licenses/python-linux/psycopg/psycopg-3.3.6.dist-info/licenses/LICENSE.txt",
+      "bytes": 7652,
+      "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+      "wheel_member": "psycopg-3.3.6.dist-info/licenses/LICENSE.txt"
+    },
+    {
+      "path": "licenses/python-linux/psycopg-binary/psycopg_binary-3.3.6.dist-info/licenses/LICENSE.txt",
+      "bytes": 7652,
+      "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+      "wheel_member": "psycopg_binary-3.3.6.dist-info/licenses/LICENSE.txt"
+    },
+    {
+      "path": "licenses/python-linux/python-tds/python_tds-1.17.1.dist-info/licenses/LICENSE.txt",
+      "bytes": 1105,
+      "sha256": "cd57e8ac0a040a5d039cd9666994a1ce15bb6395cb655c16f2842affccdc2108",
+      "wheel_member": "python_tds-1.17.1.dist-info/licenses/LICENSE.txt"
+    },
+    {
+      "path": "licenses/python-linux/tzdata/tzdata-2026.5.dist-info/licenses/LICENSE",
+      "bytes": 625,
+      "sha256": "df58f69ea88683035d720b5375bcef0cf5aeaa98a1d098d572e0992c378deb46",
+      "wheel_member": "tzdata-2026.5.dist-info/licenses/LICENSE"
+    },
+    {
+      "path": "licenses/python-linux/tzdata/tzdata-2026.5.dist-info/licenses/licenses/LICENSE_APACHE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "wheel_member": "tzdata-2026.5.dist-info/licenses/licenses/LICENSE_APACHE"
+    }
+  ],
+  "optional_windows_odbc": "not included in Linux requirements; Linux MS SQL uses python-tds; requirements.txt unchanged",
+  "actual_installation": "NOT_RUN"
+}

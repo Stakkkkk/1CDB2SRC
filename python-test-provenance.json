@@ -1,0 +1,54 @@
+{
+  "scope": "BD-015 test copies only. app code/runtime unchanged. Relative import root is repository/app.",
+  "files": {
+    "test_export_local.py": {
+      "bytes": 9381,
+      "sha256": "36e63c16251d346462b021c703758c23316845770f4e8318d69754dee8a7c3e4"
+    },
+    "test_posix_env_boundary.py": {
+      "bytes": 4481,
+      "sha256": "2e724241d8547d82ad860212b0930c972ce2a01d5e795d661bf342b52a32f001"
+    },
+    "test_posix_process.py": {
+      "bytes": 11538,
+      "sha256": "7037826a8538fd621b30af1dd46f72767da95bca2f5a4d7bd9065bbc4a49153c"
+    },
+    "test_runtime_boundaries.py": {
+      "bytes": 4842,
+      "sha256": "79a28b943545b7579d56fc79604edbd1dd800a68df2429c9cc0126fb9755b8e3"
+    },
+    "test_runtime_identity.py": {
+      "bytes": 5166,
+      "sha256": "9063af1be6c37ba917cd0585201872b2af6c74c8115c29fd428a41625067632e"
+    },
+    "__init__.py": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "changes": [
+    "Repository-relative app imports",
+    "Neutral generated receipt/storage instead of saved CF and reports",
+    "OCI test simulates bind/resource admission on both hosts",
+    "Native command assertion checks executable names, not arbitrary parent paths"
+  ],
+  "verification": {
+    "windows_final": {
+      "passed": 34,
+      "unittest_seconds": 0.287,
+      "wrapper_seconds": 0.6349799
+    },
+    "linux_final_pure_mock": {
+      "passed": 34,
+      "unittest_seconds": 2.716,
+      "wrapper_seconds": 5.806183
+    },
+    "linux_real_process": {
+      "passed": 17,
+      "unittest_seconds": 17.207,
+      "wrapper_seconds": 18.897821599966846
+    },
+    "unique_cases": 51,
+    "db_or_converter_or_rust_build_runs": 0
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "runtime_backend": "native",
+  "platform": "linux-x86_64",
+  "image_id": "sha256:d002173098e07d6bac3bcea54f1b769f5d517b4ff41c2c1d62682e032a1da30e",
+  "archive_sha256": "0d3775747fec3a6e7644fc018d7341c6614a20fa6086c1be43f2524148c90763",
+  "oci_digest_chain": [
+    "sha256:d002173098e07d6bac3bcea54f1b769f5d517b4ff41c2c1d62682e032a1da30e",
+    "sha256:d701bbe2447b895a25f6946f7a9b01317efb9384cedc8cfaf3a38e7f5f10ee0d",
+    "sha256:e44e74f949f04b1eb5fb3acfd62e19b7aa68a0d8508640d519205184e2ee9062",
+    "sha256:eaaff9e0bf9c2097e32be1acd5ce85ac014af4480ccbed477c0458516808c5f8",
+    "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1"
+  ],
+  "binary": "ibcmd-rs",
+  "loader": "ld-linux-x86-64.so.2",
+  "library_path": "lib",
+  "version_stdout": "ibcmd-rs 0.4.1\n",
+  "version_origin": "accepted BD-010 smoke-attempt02/version.stdout; no new engine run",
+  "files": {
+    "ibcmd-rs": {
+      "bytes": 65312536,
+      "sha256": "6d82fbd8213acec5981d41a5b5b400e975e6aac63b2571bf1a621c52e563fbd1",
+      "source_image_path": "/engine/ibcmd-rs",
+      "mode": "0755"
+    },
+    "lib/libc.so.6": {
+      "bytes": 1926232,
+      "sha256": "6b4a45352fd0c540a9c7c718f35ce8c8e46a4e482f9d3885a910c32d1a0e1421",
+      "source_image_path": "/lib/x86_64-linux-gnu/libc.so.6",
+      "mode": "0644"
+    },
+    "lib/libgcc_s.so.1": {
+      "bytes": 125312,
+      "sha256": "2bd1552c47799ef67e701e81d4383061fd76059868e446e63560f0dd0d5ec14e",
+      "source_image_path": "/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "mode": "0644"
+    },
+    "ld-linux-x86-64.so.2": {
+      "bytes": 215000,
+      "sha256": "02bcda52c1a5dfc236f94d9e5255b4a0e26347d8a372a5223b650e31f291ce3c",
+      "source_image_path": "/lib64/ld-linux-x86-64.so.2",
+      "mode": "0755"
+    },
+    "licenses/GPL-3.txt": {
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "source_image_path": "/licenses/GPL-3.txt",
+      "mode": "0644"
+    },
+    "licenses/LGPL-2.1.txt": {
+      "bytes": 26530,
+      "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551",
+      "source_image_path": "/licenses/LGPL-2.1.txt",
+      "mode": "0644"
+    },
+    "licenses/ibcmd-rs-MIT.txt": {
+      "bytes": 1099,
+      "sha256": "866a167ccd074fe0b81754c777f0587d7fb3fd27c605fb06c1f50a50dd061b92",
+      "source_image_path": "/licenses/ibcmd-rs-MIT.txt",
+      "mode": "0644"
+    }
+  },
+  "libc_boundary": "bundled exact glibc loader/libc from accepted image; host Linux x86-64 required; no ARM/Windows native claim",
+  "elapsed_seconds": 0.28620729997055605,
+  "created_utc": "2026-10-20T14:12:19.497461+00:00",
+  "docker_calls": 0,
+  "engine_calls": 0
+}

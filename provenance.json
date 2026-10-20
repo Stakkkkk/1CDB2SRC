@@ -1,0 +1,201 @@
+{
+  "upstream": {
+    "url": "https://github.com/Untru/ibcmd-rs",
+    "revision": "04e833e535602560cf0bc1b439f5a070db8ca936",
+    "license": "MIT; vendored/dependency components retain their own licenses"
+  },
+  "source_recipe": "BD-008 r6 source snapshot plus the two BD-009 overlays accepted for BD-010. All retained code bytes are exact; internal docs and research fixtures excluded.",
+  "replacements": {
+    "src/mssql_dump/form_body.rs": {
+      "bytes": 1922507,
+      "sha256": "b8d20f17ab2369922bde90cd967ae82ec963fb90cd3169710e4322848145702e"
+    },
+    "src/mssql_dump/tests.rs": {
+      "bytes": 3262797,
+      "sha256": "d3d46ce8797a2c64052b8830fb45901847fe8300c1298483008452b0ae789849"
+    }
+  },
+  "changed_from_upstream": {
+    "Cargo.toml": {
+      "upstream": {
+        "bytes": 3721,
+        "sha256": "765d923b91a444b70b1aa960b939611739c16095c258a06adae9072f0defc5b5"
+      },
+      "published": {
+        "bytes": 3760,
+        "sha256": "1cbafaf1f2f0d615f16c295bb964a6d82bd9df6928aa423e47897cf9a8511f61"
+      }
+    },
+    "src/form_schema.rs": {
+      "upstream": {
+        "bytes": 442113,
+        "sha256": "8a7def2b982c6419d7e47717493b64dca5f2de46aebff10d48041ac120452005"
+      },
+      "published": {
+        "bytes": 431913,
+        "sha256": "24469922b3f5f3c964d10205fb691dbc23c0a5e55448543221857aa501c874d3"
+      }
+    },
+    "src/mssql_dump/form_body.rs": {
+      "upstream": {
+        "bytes": 1884080,
+        "sha256": "47a76d00255e49d5b7dc67bbaedb180e70485891f1027f6c5b6635881cdbc891"
+      },
+      "published": {
+        "bytes": 1922507,
+        "sha256": "b8d20f17ab2369922bde90cd967ae82ec963fb90cd3169710e4322848145702e"
+      }
+    },
+    "src/mssql_dump/mod.rs": {
+      "upstream": {
+        "bytes": 1850590,
+        "sha256": "8d7ffbae8b5ba65148acd60994cce49be0e192c18ca4fe910b20375bd37a3f03"
+      },
+      "published": {
+        "bytes": 1804928,
+        "sha256": "75405ab0f7d353db7edd6fc01ce291e02c11c238380e389d968b057089b78bb4"
+      }
+    },
+    "src/mssql_dump/moxel.rs": {
+      "upstream": {
+        "bytes": 695524,
+        "sha256": "9c9ea1a4a2217074b7cd2db17216491ee861a6992b26ec9a99a96ec53e9afefb"
+      },
+      "published": {
+        "bytes": 698415,
+        "sha256": "217d2d5a9f594626abd140cc756050a6df9e4b23ba70cbb08afbc1700918f86b"
+      }
+    },
+    "src/mssql_dump/mxl_ir.rs": {
+      "upstream": {
+        "bytes": 10763,
+        "sha256": "b6664fe9a999d7ace73f8fe0f1f772b70c7dc95811a7a7b58fa6677820b5a588"
+      },
+      "published": {
+        "bytes": 11803,
+        "sha256": "fa21a7b68c36313a800b573dc225f5b2252f5cacfdddd5d968dcbd470fa07e7c"
+      }
+    },
+    "src/mssql_dump/refs.rs": {
+      "upstream": {
+        "bytes": 251278,
+        "sha256": "1a989145b2673783e1c0ace6e19515fad270f1a634d59ec37a6eb83808fa0548"
+      },
+      "published": {
+        "bytes": 258555,
+        "sha256": "7ef59a743abd27aeb0e123f21dc7b700c5b71ec87804e437f3c798eaff1bfd01"
+      }
+    },
+    "src/mssql_dump/role_rights.rs": {
+      "upstream": {
+        "bytes": 75128,
+        "sha256": "8cae94f958621b33804923a9c96cbba400463ca295f4fcfe1c9648180ecc1f72"
+      },
+      "published": {
+        "bytes": 85533,
+        "sha256": "41dcd284ac61b43913414775185bb206baa346014e26b20f72c20a8ba0c3c7a5"
+      }
+    },
+    "src/mssql_dump/source_assets.rs": {
+      "upstream": {
+        "bytes": 244190,
+        "sha256": "ed6d852deb1ce8008b4cec880a353e94fad170144e00778fe6fa8abc8cd01a1f"
+      },
+      "published": {
+        "bytes": 243167,
+        "sha256": "c4d5ed626c19c116167eb94847558c9ca7b0fbee287f14c69e465225ca66addf"
+      }
+    },
+    "src/mssql_dump/tests.rs": {
+      "upstream": {
+        "bytes": 3341272,
+        "sha256": "85421c87aab7c6a5f2835a3f4e908c494aaa93c13e49849cb1748f01830be8d2"
+      },
+      "published": {
+        "bytes": 3262797,
+        "sha256": "d3d46ce8797a2c64052b8830fb45901847fe8300c1298483008452b0ae789849"
+      }
+    },
+    "crates/ibcmd-xml/Cargo.toml": {
+      "upstream": {
+        "bytes": 418,
+        "sha256": "d4a50d8a54be0e83c15d71a5617250ebfe95c5ab541e1a6218b255f8cb92bb3a"
+      },
+      "published": {
+        "bytes": 462,
+        "sha256": "cc9e61654c12da6e41d48df48f3780f4e84d0927626a8971f119ca0ac7c2aae1"
+      }
+    },
+    "crates/ibcmd-xml/src/dcs.rs": {
+      "upstream": {
+        "bytes": 273957,
+        "sha256": "860a97c5cfbd57fab2de2f32a4a2bc301497764600a647d053b951d1a9eed713"
+      },
+      "published": {
+        "bytes": 267862,
+        "sha256": "183de05a0b0228b767896c16d4044a8d2f38b7696dccccc1a67c281ffd82057e"
+      }
+    },
+    "crates/ibcmd-xml/src/dcs_schema.rs": {
+      "upstream": {
+        "bytes": 309435,
+        "sha256": "ba6c29358fa65b18e75e414b3e513dc293270517c39d6c539bc6c8cefddae776"
+      },
+      "published": {
+        "bytes": 303567,
+        "sha256": "00ad108f0528ea8c2c8d51903f14dfca8d23857222129d94204a1ac9dbf5ba3d"
+      }
+    },
+    "crates/ibcmd-xml/tests/bd008_nil_precedence.rs": {
+      "upstream": null,
+      "published": {
+        "bytes": 2215,
+        "sha256": "722827c9ee568bef3d7776181e36bc8b714b441e5dc78c78dde2acb6419819b7"
+      }
+    },
+    "crates/ibcmd-xml/tests/bd008_orphan_type_id.rs": {
+      "upstream": null,
+      "published": {
+        "bytes": 2425,
+        "sha256": "0de1679a71b12dede5a772950931b41c689320169f0af86789262b50f28d43b7"
+      }
+    }
+  },
+  "cargo_lock": {
+    "bytes": 45948,
+    "sha256": "d36182664e9b0184be324ac895fb694859b2bb6b56331a196fc8ea10435bf4a7"
+  },
+  "accepted_binary": {
+    "version": "ibcmd-rs 0.4.1",
+    "target": "x86_64-unknown-linux-gnu",
+    "sha256": "6d82fbd8213acec5981d41a5b5b400e975e6aac63b2571bf1a621c52e563fbd1",
+    "bytes": 65312536,
+    "feature": "experimental-native-projection"
+  },
+  "original_build": {
+    "rustc": "1.95.0",
+    "SOURCE_DATE_EPOCH": "1791526512",
+    "command": "cargo build --release --offline --frozen --features experimental-native-projection --bin ibcmd-rs --target x86_64-unknown-linux-gnu",
+    "inherited_dependency_cache": true,
+    "clean_rebuild_verified": false,
+    "byte_reproducible_rebuild_claimed": false
+  },
+  "omissions": [
+    ".git",
+    "target",
+    "Cargo registry/cache",
+    "internal docs/chat instructions/AGENTS",
+    "field CF/XML/DT/SQL captures",
+    "upstream external corpus test datasets"
+  ],
+  "compile_time_probe_resources": "Only directly required upstream schema/probe manifests and base64 reference included by production include_str! are retained. They are not project customer snapshots.",
+  "public_upstream_resource": {
+    "path": "tests/fixtures/form_choice_parameters_slot27_live.json",
+    "bytes": 3716,
+    "sha256": "05e4ef14ae7e3de0b2cc7d1b46e042be6ec70df629c57355036c5c7e58148bf7",
+    "git_blob_sha1": "a12cc854ed27a67beecbe017b50293c72c9db8bf",
+    "url": "https://raw.githubusercontent.com/Untru/ibcmd-rs/04e833e535602560cf0bc1b439f5a070db8ca936/tests/fixtures/form_choice_parameters_slot27_live.json",
+    "license": "MIT (upstream root LICENSE)",
+    "publication_review": "Leader verified public exact upstream resource and authorized unchanged inclusion. This schema example is not a project field configuration. Public upstream provenance text is retained, not a runtime dependency."
+  }
+}

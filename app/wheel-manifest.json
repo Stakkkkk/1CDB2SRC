@@ -1,0 +1,32 @@
+[
+  {
+    "file": "wheels/psutil-7.2.2-cp37-abi3-win_amd64.whl",
+    "bytes": 137737,
+    "sha256": "eb7e81434c8d223ec4a219b5fc1c47d0417b12be7ea866e24fb5ad6e84b3d988"
+  },
+  {
+    "file": "wheels/psycopg-3.3.6-py3-none-any.whl",
+    "bytes": 215490,
+    "sha256": "a1db9f7148b06a28606767efaca51fa6f9398c5c0a3810519be69d7000bdb631"
+  },
+  {
+    "file": "wheels/psycopg_binary-3.3.6-cp313-cp313-win_amd64.whl",
+    "bytes": 3658179,
+    "sha256": "0ebfad5d131de9f892ae9e70cc7616207768b6714b66a52d4612b8ceaf78b372"
+  },
+  {
+    "file": "wheels/pyodbc-5.3.0-cp313-cp313-win_amd64.whl",
+    "bytes": 70133,
+    "sha256": "01166162149adf2b8a6dc21a212718f205cabbbdff4047dc0c415af3fd85867e"
+  },
+  {
+    "file": "wheels/python_tds-1.17.1-py3-none-any.whl",
+    "bytes": 86635,
+    "sha256": "35cb210b1a54e5ccc91570a83d4e9a2a16682cbeb00bede06fd6cdf9afa9762f"
+  },
+  {
+    "file": "wheels/tzdata-2026.5-py2.py3-none-any.whl",
+    "bytes": 347996,
+    "sha256": "b683bd1b6659ddcd810ff02ad09ba821d4bf1065072805063eb35c49617905ac"
+  }
+]

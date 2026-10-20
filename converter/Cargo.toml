@@ -1,0 +1,101 @@
+[package]
+name = "ibcmd-rs"
+version = "0.4.1"
+edition = "2024"
+license = "MIT"
+
+[workspace]
+members = [
+    "crates/ibcmd-core",
+    "crates/ibcmd-schema",
+    "crates/ibcmd-xml",
+    "crates/ibcmd-v8",
+    "crates/ibcmd-cf",
+    "crates/ibcmd-edt",
+    "crates/ibcmd-number-format",
+]
+resolver = "3"
+exclude = ["crates/ibcmd-edt/vendor/morph1c"]
+
+[features]
+default = []
+# Experimental policies; native generalization is unproven.
+experimental-native-projection = ["ibcmd-xml/experimental-native-projection"]
+# Research-only integrations that locate or execute an installed 1C platform.
+# This feature is intentionally excluded from default and release builds.
+platform-oracle = []
+mssql-live-tests = []
+research-corpus-tests = []
+
+[dependencies]
+anyhow = "1.0"
+clap = { version = "4.5", features = ["derive"] }
+flate2 = "1.1"
+# The SQL Server client (src/sql): TDS in-process instead of sqlcmd.exe and
+# bcp.exe. TLS through rustls, so no OpenSSL and no Microsoft driver; SQL
+# Browser lookups for `host\instance`. Windows logins (SSPI) are added below.
+futures-util = { version = "0.3", default-features = false, features = ["std"] }
+tiberius = { version = "0.13", default-features = false, features = ["tds73", "rustls", "sql-browser-tokio"] }
+tokio = { version = "1", default-features = false, features = ["rt", "net", "time"] }
+tokio-util = { version = "0.7", default-features = false, features = ["compat"] }
+ibcmd-core = { path = "crates/ibcmd-core" }
+ibcmd-cf = { path = "crates/ibcmd-cf" }
+ibcmd-schema = { path = "crates/ibcmd-schema" }
+ibcmd-v8 = { path = "crates/ibcmd-v8" }
+ibcmd-xml = { path = "crates/ibcmd-xml" }
+ibcmd-edt = { path = "crates/ibcmd-edt" }
+# The process allocator, installed in main.rs.
+mimalloc = "0.1.52"
+quick-xml = "0.38"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha1 = "0.10"
+sha2 = "0.10"
+rayon = "1.10"
+# ibcmd-rs.toml, the settings files (src/settings.rs): reading only.
+toml = { version = "1.1", default-features = false, features = ["std", "parse", "serde"] }
+uuid = { version = "1.19", features = ["v4"] }
+walkdir = "2.5"
+# The database section of native ibcmd's YAML config (`--config`), read by
+# src/settings.rs; the maintained successor of serde_yaml.
+yaml_serde = "0.10"
+
+[target.'cfg(unix)'.dependencies]
+# Original source directory-relative NOFOLLOW reads; same pinned fs package.
+rustix = { version = "1.1.5", features = ["fs"] }
+
+[target.'cfg(windows)'.dependencies]
+# Integrated (Windows) logins to SQL Server through SSPI.
+tiberius = { version = "0.13", default-features = false, features = ["winauth"] }
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_Storage_FileSystem", "Win32_System_Threading", "Win32_System_SystemInformation"] }
+
+# Fast rebuilds while iterating on a compiler against the lab corpora:
+# `cargo build --profile iter` -> target/iter/ibcmd-rs.exe.
+[profile.iter]
+inherits = "release"
+opt-level = 1
+incremental = true
+codegen-units = 256
+
+[patch.crates-io]
+morph1c-core = { path = "crates/ibcmd-edt/vendor/morph1c/crates/core" }
+formats-xml = { path = "crates/ibcmd-edt/vendor/morph1c/crates/formats-xml" }
+morph1c-pipeline = { path = "crates/ibcmd-edt/vendor/morph1c/crates/pipeline" }
+formats-edt = { path = "crates/ibcmd-edt/vendor/morph1c/crates/formats/edt" }
+formats-designer = { path = "crates/ibcmd-edt/vendor/morph1c/crates/formats/designer" }
+
+# Real original-process/BOTH boundary tests, each scenario in its own process.
+[[test]]
+name = "rac_process_deadline"
+path = "tests/rac_process_deadline.rs"
+harness = false
+
+[[test]]
+name = "profile_process_deadline"
+path = "tests/profile_process_deadline.rs"
+harness = false
+
+[[test]]
+name = "managed_command_deadline"
+path = "tests/managed_command_deadline.rs"
+harness = false

@@ -1,0 +1,7 @@
+# Keep pinned source/runtime/wheel hashes identical on Windows and Linux.
+* -text
+app/runtime/local/ibcmd-rs binary
+app/runtime/local/ld-linux-x86-64.so.2 binary
+*.whl binary
+*.tar binary
+*.gz binary

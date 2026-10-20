@@ -1,0 +1,74 @@
+pub mod adapters;
+pub mod apply_check;
+pub mod cancel;
+pub mod cli;
+pub mod commands;
+pub mod compatibility;
+pub mod compiler;
+pub mod conversion;
+pub mod dcs_template_audit;
+pub mod dropin;
+#[cfg(feature = "platform-oracle")]
+pub mod dump_sources;
+pub mod extension;
+pub mod external;
+pub mod form_matrix;
+pub mod form_provenance;
+pub(crate) mod form_schema;
+pub mod infobase;
+#[cfg(feature = "platform-oracle")]
+pub mod infobase_oracle;
+pub mod legacy_version;
+pub mod load;
+pub mod metadata_model;
+pub(crate) mod metadata_owner_graph;
+pub mod module_blob;
+pub mod mssql;
+pub mod mssql_apply;
+mod mssql_artifact;
+pub mod mssql_config_apply;
+pub mod mssql_dump;
+pub mod mssql_effective_row;
+pub mod mssql_extension_activation;
+pub mod mssql_extension_export;
+pub mod mssql_extension_load;
+pub mod mssql_extension_stage;
+pub mod mssql_extension_tree_load;
+pub mod mssql_extensions;
+mod mssql_live_artifact;
+pub mod mssql_live_gate;
+pub mod mssql_main_activation;
+mod mssql_managed_worker;
+pub mod mssql_platform_profile;
+mod mssql_recovery_artifact;
+pub mod mssql_source_change;
+pub mod mssql_worker_switch;
+pub mod mxl_line_provenance;
+pub mod parallel;
+pub mod plan;
+pub mod platform;
+#[cfg(feature = "platform-oracle")]
+pub mod probe;
+#[cfg(feature = "platform-oracle")]
+pub mod profile;
+pub mod profile_registry;
+pub mod restructure;
+pub(crate) mod runtime_evidence_schema;
+pub mod server;
+pub mod settings;
+pub mod source;
+pub mod source_audit;
+pub(crate) mod source_listing;
+pub mod source_oracle;
+pub mod sql;
+pub mod storage_map;
+pub mod stored_objects;
+pub mod templates;
+pub mod trace;
+pub mod update;
+pub(crate) mod v8_container;
+
+pub mod mssql_live_continue;
+
+mod profile_process;
+mod rac_process;

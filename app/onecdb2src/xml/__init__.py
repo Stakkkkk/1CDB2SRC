@@ -1,0 +1,1 @@
+"""Isolated vendored helper namespace."""
