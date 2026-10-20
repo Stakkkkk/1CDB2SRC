@@ -13,6 +13,7 @@ pub mod configuration_v85_projection;
 pub mod external_artifact;
 pub mod external_data_source;
 pub mod external_named;
+pub mod object_rights;
 
 use std::borrow::Cow;
 use std::collections::{BTreeMap, BTreeSet};

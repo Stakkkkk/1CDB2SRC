@@ -1439,7 +1439,12 @@ pub(super) fn format_role_rights_xml(rights: &RoleRights) -> String {
         xml_bool(rights.independent_rights_of_child_objects)
     );
     for object in &rights.objects {
-        let object_rights = role_rights_for_xml(rights, object);
+        let mut object_rights = role_rights_for_xml(rights, object);
+        ibcmd_schema::object_rights::order_native_object_rights(
+            &object.name,
+            &mut object_rights,
+            |right| right.name.as_str(),
+        );
         if object_rights.is_empty() {
             // The platform never prints an empty `<object>` block, for any
             // object kind or reason: 0/0 across a direct scan of every
