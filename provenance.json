@@ -206,8 +206,8 @@
   "accepted_binary": {
     "version": "ibcmd-rs 0.4.1",
     "target": "x86_64-unknown-linux-gnu",
-    "sha256": "6d82fbd8213acec5981d41a5b5b400e975e6aac63b2571bf1a621c52e563fbd1",
-    "bytes": 65312536,
+    "sha256": "b087962e13423f833ccae5e495423fa2228767da628f3c06a375ba48b7a48358",
+    "bytes": 65346072,
     "feature": "experimental-native-projection"
   },
   "original_build": {
@@ -240,7 +240,7 @@
   "development_candidate": {
     "source_base": "f57e668a21c14e027f7e4f97f741e66e5f61c6dd",
     "rights_patch_commit": "e879041",
-    "status": "RIGHTS_FOCUSED_VALIDATED_FORM_UNRESOLVED",
+    "status": "RIGHTS_DELIVERED_FORM_UNRESOLVED",
     "build_binary": {
       "bytes": 65346072,
       "sha256": "b087962e13423f833ccae5e495423fa2228767da628f3c06a375ba48b7a48358"
@@ -255,8 +255,29 @@
       }
     },
     "full_new_configuration_export": false,
-    "bundled_app_runtime_updated": false,
-    "bundled_app_runtime_source": "f57e668 publication / accepted BD-015 binary",
-    "note": "Current source includes the rights fix; the committed app/runtime remains the previous release. No new native rule for the remaining form marker was inferred."
+    "bundled_app_runtime_updated": true,
+    "bundled_app_runtime_source": "BD017 release build, rights source e879041; BD018 runtime packaging",
+    "note": "Four CF-derived role XML files per provider validated byte-exact; remaining form rule unresolved. Full large configuration export not repeated."
+  },
+  "previous_accepted_binary": {
+    "version": "ibcmd-rs 0.4.1",
+    "target": "x86_64-unknown-linux-gnu",
+    "sha256": "6d82fbd8213acec5981d41a5b5b400e975e6aac63b2571bf1a621c52e563fbd1",
+    "bytes": 65312536,
+    "feature": "experimental-native-projection"
+  },
+  "runtime_packaging": {
+    "stage": "BD018",
+    "image_id": "sha256:00eeff2d089cb123646f480e348e54f73b548f18b67244d935357af158df1343",
+    "archive": {
+      "bytes": 23050240,
+      "sha256": "71db00225db926c4cb813b0fe64ac7eeb05d4aa9aea7d7e0f759de2ac7d7827e"
+    },
+    "preserved_rootfs_entries": 18,
+    "changed_rootfs_paths": [
+      "engine/ibcmd-rs"
+    ],
+    "stale_attestations_removed": true,
+    "rust_rebuilt_during_packaging": false
   }
 }

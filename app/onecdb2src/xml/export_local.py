@@ -4,9 +4,9 @@ from pathlib import Path
 from .. import profiles
 
 RUNTIME_ROOT=Path(__file__).resolve().parents[2]/'runtime/local'
-IMAGE='sha256:d002173098e07d6bac3bcea54f1b769f5d517b4ff41c2c1d62682e032a1da30e'
+IMAGE='sha256:00eeff2d089cb123646f480e348e54f73b548f18b67244d935357af158df1343'
 EXPECTED={
- 'ibcmd-rs':(65312536,'6d82fbd8213acec5981d41a5b5b400e975e6aac63b2571bf1a621c52e563fbd1'),
+ 'ibcmd-rs':(65346072,'b087962e13423f833ccae5e495423fa2228767da628f3c06a375ba48b7a48358'),
  'ld-linux-x86-64.so.2':(215000,'02bcda52c1a5dfc236f94d9e5255b4a0e26347d8a372a5223b650e31f291ce3c'),
  'lib/libc.so.6':(1926232,'6b4a45352fd0c540a9c7c718f35ce8c8e46a4e482f9d3885a910c32d1a0e1421'),
  'lib/libgcc_s.so.1':(125312,'2bd1552c47799ef67e701e81d4383061fd76059868e446e63560f0dd0d5ec14e'),

@@ -1,8 +1,8 @@
 {
   "files": {
     "BUILD-AND-TEST.ru.md": {
-      "bytes": 9203,
-      "sha256": "f710d8520f68dc849118e041295c98997a5431f4f48c8432566475d543c88242"
+      "bytes": 9268,
+      "sha256": "bfb8200e0f415038977793c0229a727e72e2451fc81760f273f227c0aa16fbaf"
     },
     "closure-audit.json": {
       "bytes": 321017,
@@ -5509,8 +5509,8 @@
       "sha256": "014a570d7b780689bbb2a03cb168d249d80062f2dfc22a3c6d876b99c9d44481"
     },
     "provenance.json": {
-      "bytes": 9642,
-      "sha256": "d5815036a3a2f94b9a40d49d5fc8db2776ac6465884555cd644ccc3706de60e7"
+      "bytes": 10382,
+      "sha256": "bba8d31b81f465000f40f8d4fe0b0d2a855db955d21e1c12ca053e032f02f777"
     },
     "python-test-provenance.json": {
       "bytes": 1781,
@@ -6611,8 +6611,12 @@
     "converter/docs/form-binding-scope.md": {
       "bytes": 1736,
       "sha256": "da3706a6450871febac3795eb8d01e7e5020638a87f8dcf8745239eba99b3006"
+    },
+    "RELEASE-NOTES.ru.md": {
+      "bytes": 2869,
+      "sha256": "196bbac309562d13d9928da90a4d069852be5b1afc86fcb2e7f2f00546e8440c"
     }
   },
   "scope": "Source, test, notices and minimal build description; application is supplied separately by publication owner.",
-  "source_status": "BD-017 rights candidate; bundled application runtime remains BD-015"
+  "source_status": "BD018: BD017 rights source and matching bundled runtime; form reader unchanged"
 }
