@@ -645,7 +645,7 @@ fn configuration_complete_nil_and_nonempty_properties_keep_exact_presence_and_in
                 Brace::List(vec![
                     Brace::str("#"),
                     Brace::uuid("1708fdaa-cbce-4289-b373-07a5a74bee91"),
-                    Brace::num(2),
+                    Brace::num(3),
                 ]),
             ]),
         ] {
@@ -761,5 +761,34 @@ fn configuration_empty_use_purposes_require_canonical_count_and_same_properties_
             text,
             "negative edits leave original compiled row untouched"
         );
+    }
+}
+
+#[test]
+fn configuration_typed_use_purposes_preserve_all_known_members_and_order() {
+    for (dialect, v76, version) in [
+        ("2.20", false, InfobaseConfigSourceVersion::V2_20),
+        ("2.21", false, InfobaseConfigSourceVersion::V2_21),
+        ("2.21", true, InfobaseConfigSourceVersion::V2_21),
+    ] {
+        let (original, context) = fixture(dialect, "Taxi", v76);
+        for codes in [vec![1], vec![2], vec![1, 2], vec![2, 1]] {
+            let mut row = original.clone();
+            let mut purposes = vec![Brace::num(codes.len() as i64)];
+            purposes.extend(codes.iter().map(|code| Brace::List(vec![
+                Brace::str("#"),
+                Brace::uuid("1708fdaa-cbce-4289-b373-07a5a74bee91"),
+                Brace::num(*code),
+            ])));
+            tuple_mut(&mut row)[33] = Brace::List(purposes);
+            let expected = codes.iter().map(|code| match code {
+                1 => "PlatformApplication", 2 => "MobilePlatformApplication", _ => unreachable!(),
+            }).collect::<Vec<_>>();
+            assert_eq!(refs::parse_configuration_use_purposes(&serialize(&row), ROOT_UUID), Some(expected));
+            let xml = canonical(&row, &context, dialect).unwrap();
+            assert_eq!(physical(&row, &context, version).unwrap().xml, xml.as_bytes());
+            let restored = compile_descriptor("Configuration", &context.root.join("Configuration.xml"), xml.as_bytes(), &context).unwrap();
+            assert_eq!(parse_row(&restored).unwrap(), row);
+        }
     }
 }

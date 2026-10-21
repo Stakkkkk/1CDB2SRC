@@ -1010,7 +1010,7 @@ fn roles_list(roles: &[String]) -> Brace {
     Brace::List(items)
 }
 
-/// `{<n>,{"#",<use purpose>,<code>}...}`: `PlatformApplication` = 1.
+/// Typed ApplicationUsePurpose collection; shared with forms and extensions.
 fn use_purposes(p: &Element) -> Result<Brace> {
     let values = p
         .child("UsePurposes")
@@ -1023,10 +1023,10 @@ fn use_purposes(p: &Element) -> Result<Brace> {
         .unwrap_or_default();
     let mut items = vec![Brace::num(values.len() as i64)];
     for value in values {
-        let code = match value.as_str() {
-            "PlatformApplication" => 1,
-            other => bail!("Configuration <UsePurposes> {other:?} has no known stored code"),
-        };
+        let code = ibcmd_schema::external_named::USE_PURPOSES
+            .iter()
+            .find_map(|(name, code)| (*name == value).then_some(*code))
+            .ok_or_else(|| anyhow::anyhow!("Configuration <UsePurposes> {value:?} has no known stored code"))?;
         items.push(brace_list![
             Brace::str("#"),
             Brace::atom(USE_PURPOSE_CLASS_ID),

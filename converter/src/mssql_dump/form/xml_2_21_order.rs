@@ -839,6 +839,8 @@ pub(in crate::mssql_dump) fn child_order(parent: &str) -> Option<&'static [&'sta
             "Enabled",
             "DefaultItem",
             "TitleTextColor",
+            // Inherited field title block; preserve the existing font.
+            "TitleFont",
             "TitleBackColor",
             "TitleLocation",
             "WarningOnEditRepresentation",

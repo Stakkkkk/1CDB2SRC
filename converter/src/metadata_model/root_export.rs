@@ -443,25 +443,18 @@ pub(crate) fn decode(row: &Brace, context: &ExportContext) -> Result<Element> {
     }
     let head = header(item(first, 1)?)?;
 
-    // Compatibility: fields 26 and 43 hold the same value in every row
-    // `root.rs` writes and in every corpus; the 60-field shape is read at 43,
-    // the others at 26.
-    //
-    // The one row that differs is the one a native import stages for an older
-    // configuration: it is rewritten to the shape the platform writes, with the
-    // configuration's own compatibility in field 26 and the platform's edition
-    // in field 43 (80324 and 80327 in the stage of the БСП demo, twice). The
-    // platform prints field 26 as `CompatibilityMode` and field 43 as
-    // `ConfigurationExtensionCompatibilityMode`.
+    // Ordinary configurations and extensions do not share a compatibility
+    // coordinate. Configuration.py in pinned v8unpack reads ordinary mode
+    // from 26; ConfigurationExtension.py reads an extension's mode from 43.
+    // Native config_compat fixtures c19_e12 and c21_e24 prove that ordinary
+    // 26/43 need neither agree nor be ordered. Their XML prints field 26 and
+    // the reading platform's edition as extension compatibility. This also
+    // agrees with the existing mssql_dump::refs ordinary-root reader.
     let compat_26 = packed(t, 26)?;
     let compat_43 = packed(t, 43)?;
-    let staged = compat_43 > compat_26
-        && shape == ConfigurationShape::V68
-        && own_shape == ConfigurationShape::V68;
-    if compat_26 != compat_43 && !staged {
-        bail!(
-            "Configuration fields 26 and 43 hold {compat_26} and {compat_43}; no corpus shows which one the platform prints"
-        );
+    // Do not generalize this legacy evidence to unequal V76 coordinates.
+    if shape == ConfigurationShape::V76 && compat_26 != compat_43 {
+        bail!("unequal V76 configuration compatibility coordinates are not established");
     }
     if compat_26.max(compat_43) > platform.compatibility_packed() {
         bail!(
@@ -470,18 +463,7 @@ pub(crate) fn decode(row: &Brace, context: &ExportContext) -> Result<Element> {
         );
     }
     let compatibility = version_text(compat_26);
-    // The extension compatibility the platform prints: its own edition for
-    // an older tuple and for ordinary V76; preserve the staged V68 rule.
-    let extension_compatibility = if shape < own_shape || shape == ConfigurationShape::V76 {
-        // Ordinary V76 at stored 80327/80327 still prints 80501 when read
-        // by 8.5 (native 8.5.1.1529). The reader edition is independent of
-        // the stored compatibility used by the inverse compiler.
-        platform.compatibility_mode()
-    } else if staged {
-        version_text(compat_43)
-    } else {
-        compatibility.clone()
-    };
+    let extension_compatibility = platform.compatibility_mode();
 
     // Default roles; field 12 keeps the first of them.
     let roles_node = list(item(t, 39)?)?;
@@ -537,10 +519,14 @@ pub(crate) fn decode(row: &Brace, context: &ExportContext) -> Result<Element> {
         if string(item(fields, 0)?)? != "#" || atom(item(fields, 1)?)? != USE_PURPOSE_CLASS_ID {
             bail!("a use purpose is not typed: {}", short(purpose));
         }
-        let name = match atom(item(fields, 2)?)? {
-            "1" => "PlatformApplication",
-            other => bail!("use purpose {other} has no known name"),
-        };
+        if fields.len() != 3 {
+            bail!("a typed use purpose must have exactly three members");
+        }
+        let code = number(item(fields, 2)?)?;
+        let name = ibcmd_schema::external_named::USE_PURPOSES
+            .iter()
+            .find_map(|(name, known)| (*known == code).then_some(*name))
+            .ok_or_else(|| anyhow::anyhow!("use purpose {code} has no known name"))?;
         use_purposes
             .children
             .push(leaf("v8:Value", name).attr("type", "app:ApplicationUsePurpose"));

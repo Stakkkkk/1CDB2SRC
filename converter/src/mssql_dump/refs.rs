@@ -4165,26 +4165,11 @@ pub(super) fn parse_configuration_properties_from_text(
     source_version: InfobaseConfigSourceVersion,
 ) -> Option<ConfigurationProperties> {
     let (fields, is_native_68_shape) = configuration_root_fields(text)?;
-    // Field 26 mirroring field 43 (`CompatibilityMode`, below) into
-    // `ConfigurationExtensionCompatibilityMode` is proven only for the
-    // genuine `{68,...}` shape -- three corpora, "none match their own field
-    // 43 ... under `configuration_compatibility_mode_xml`'s formula", i.e.
-    // field 26 was the only working coordinate for either property there.
-    // SSL/БСП 3.1.12.297's `{67,...}` short revision (which
-    // `configuration_root_fields` normalizes into this same 61-field shape,
-    // leaving fields 1..59 -- 26 and 43 among them -- at their original
-    // tuple positions) is a different record altogether: both `sslbase`'s
-    // and `ssl`-demo's copies carry `80324` at *both* fields 26 and 43, and
-    // native prints `CompatibilityMode` `Version8_3_24` (matching field 43
-    // directly, not mirrored) alongside `ConfigurationExtensionCompatibilityMode`
-    // `Version8_3_27` -- a value present nowhere in the tuple. `Version8_3_27`
-    // is exactly this reading platform's own build
-    // (`MAX_EVIDENCED_PACKED_PLATFORM_VERSION`, `ibcmd` 8.3.27.2214): the
-    // shorter `{67,...}` shape predates the extension-compatibility property,
-    // so a config still in that shape has no explicit value for it and the
-    // platform substitutes its own version when reading it back, while field
-    // 43 there -- unlike on the genuine `{68,...}` shape -- is this record's
-    // own faithful `CompatibilityMode` storage, not a stale alias of field 26.
+    // Ordinary Configuration compatibility is field 26, independently of
+    // field 43. Pinned v8unpack Configuration.py/ConfigurationExtension.py
+    // distinguish those coordinates by component kind. Earlier equal-valued
+    // V67 samples could not establish field 43 as an ordinary-mode source.
+    // The short tuple normalizer preserves both original positions.
     //
     // `configuration_root_fields` is a blind text search, not the
     // uuid-anchored kind `configuration_root_property_fields` does: a
@@ -4207,7 +4192,7 @@ pub(super) fn parse_configuration_properties_from_text(
     } else {
         MAX_EVIDENCED_PACKED_PLATFORM_VERSION
     };
-    let stored_compatibility_mode = if is_native_68_shape {
+    let stored_compatibility_mode = if is_native_68_shape || is_normalized_67_shape {
         fields
             .get(26)
             .and_then(|field| configuration_compatibility_mode_xml_under(field.trim(), ceiling))
@@ -4255,15 +4240,7 @@ pub(super) fn parse_configuration_properties_from_text(
     } else {
         None
     };
-    let compatibility_mode = if is_native_68_shape {
-        stored_compatibility_mode
-    } else if is_normalized_67_shape {
-        fields
-            .get(43)
-            .and_then(|field| configuration_compatibility_mode_xml(field.trim()))
-    } else {
-        None
-    };
+    let compatibility_mode = stored_compatibility_mode;
     // ScriptVariant and DefaultRunMode are independent coordinates in the
     // normalized configuration record. Keep their storage interpretation out
     // of the property assembly below.
@@ -4634,18 +4611,32 @@ pub(super) fn parse_configuration_use_purposes(
             }))
         .then(Vec::new);
     }
-    if raw_fields.len() != 2 || raw_fields.first()?.trim() != "1" {
+    if raw_fields.len().checked_sub(1)? != count {
         return None;
     }
-    let purpose_fields = split_1c_braced_fields(raw_fields.get(1)?.trim(), 0)?;
-    if purpose_fields.len() != 3
-        || parse_1c_quoted_string(purpose_fields.first()?.trim()).as_deref() != Some("#")
-        || purpose_fields.get(1)?.trim() != CONFIGURATION_USE_PURPOSE_TYPE_UUID
-        || purpose_fields.get(2)?.trim() != "1"
-    {
-        return None;
-    }
-    Some(vec!["PlatformApplication"])
+    // Same typed ApplicationUsePurpose domain as forms and extensions.
+    // Decode every declared member, preserving order; unknown tags/counts
+    // still refuse the whole property rather than silently losing a member.
+    raw_fields[1..]
+        .iter()
+        .map(|purpose| {
+            let fields = split_1c_braced_fields(purpose.trim(), 0)?;
+            if fields.len() != 3
+                || parse_1c_quoted_string(fields[0].trim()).as_deref() != Some("#")
+                || fields[1].trim() != CONFIGURATION_USE_PURPOSE_TYPE_UUID
+            {
+                return None;
+            }
+            let code = fields[2].trim().parse::<i64>().ok()?;
+            if fields[2].trim() != code.to_string() {
+                return None;
+            }
+            ibcmd_schema::external_named::USE_PURPOSES
+                .iter()
+                .find_map(|(name, known)| (*known == code).then_some(*name))
+        })
+        .collect()
+
 }
 
 /// The OS permissions a `<app:permissionMessage>` can explain.
