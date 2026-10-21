@@ -49,11 +49,40 @@ def validate_metadata_envelopes(tree,xml_version):
     return count
 
 
-def signature_profile_guard(source,configuration_uuid,profile,legacy_flags=False):
+def signature_profile_guard(source,configuration_uuid,profile,legacy_flags=False,modern_passthrough=False):
     if profile['xml_version']=='2.21':
         require(not legacy_flags,'Legacy signature projection has no XML2.21 proof')
-        require(not {configuration_uuid+'.d',configuration_uuid+'.10'} & set(source.names()),
-                'Unsupported XML2.21 configuration signature form')
+        names=set(source.names())
+        require(configuration_uuid+'.d' not in names,'Unsupported XML2.21 legacy signature form')
+        require(configuration_uuid+'.10' not in names or modern_passthrough,
+                'XML2.21 modern signature needs explicit byte-preservation validation')
+        if modern_passthrough:
+            require(configuration_uuid+'.10' in names,'Modern signature record missing')
+    else:require(not modern_passthrough,'Modern passthrough profile requires XML2.21')
+
+
+def validate_modern_signature_passthrough(source,configuration_uuid,profile,entries,generated):
+    # Opaque binary route: prove every byte, without interpreting or regenerating
+    # the signature. The public registry names .10 MobileClientSignature.
+    signature_profile_guard(source,configuration_uuid,profile,modern_passthrough=True)
+    require(routes(Path(__file__).resolve().parent/'data/assets.rs').get(('Configuration','10'))=='MobileClientSignature',
+            'Modern signature route changed')
+    record=configuration_uuid+'.10';rows=[r for r in entries if r['logical_name']==record]
+    require(len(rows)==1 and rows[0].get('disposition')=='supported' and
+            rows[0]['outputs']==['Ext/MobileClientSignature.bin'],'Modern signature output route missing/ambiguous')
+    raw=source.inflated(record);path=long_path(Path(generated)/'Ext/MobileClientSignature.bin')
+    import stat
+    before=path.lstat()
+    require(stat.S_ISREG(before.st_mode) and before.st_nlink==1 and
+            not getattr(before,'st_file_attributes',0)&0x400,'Nonregular signature output')
+    require(path.read_bytes()==raw,'Modern signature output differs from CF bytes')
+    after=path.lstat()
+    require((before.st_dev,before.st_ino,before.st_size,before.st_mtime_ns)==
+            (after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns),'Signature changed during validation')
+    return {'status':'MODERN_SIGNATURE_CF_BYTES_PRESERVED','record':record,
+            'path':'Ext/MobileClientSignature.bin','bytes':len(raw),
+            'sha256':hashlib.sha256(raw).hexdigest(),'cryptographic_validation':False,
+            'fixed_profile_sha256':digest(__file__)}
 
 
 def validate_current_signature_model(tree):
@@ -284,6 +313,7 @@ def main():
                         help='Experimental public 2.11 empty Configuration.d spelling; requires exact CF shape')
     parser.add_argument('--omit-empty-legacy-signature-profile', action='store_true',
                         help='Experimental 2.20 projection: empty legacy body beside verified emitted current signature')
+    parser.add_argument('--modern-signature-passthrough',action='store_true',help='XML2.21 .10 binary must match CF bytes; no legacy signature allowed')
     args = parser.parse_args()
     output = Path(args.output).resolve()
     require(not output.exists(), 'Output already exists')
@@ -311,7 +341,7 @@ def main():
         print(json.dumps({'stage': 'index-metadata', 'versions': len(stamps)}), flush=True)
         configuration_storage = str(source.tree('root')[1])
         configuration_identity = cf_identity(source.tree(configuration_storage))
-        signature_profile_guard(source,configuration_identity['uuid'],profile,args.legacy_empty_signature_profile or args.omit_empty_legacy_signature_profile)
+        signature_profile_guard(source,configuration_identity['uuid'],profile,args.legacy_empty_signature_profile or args.omit_empty_legacy_signature_profile,args.modern_signature_passthrough)
         legacy_empty_signature = None
         if args.legacy_empty_signature_profile:
             legacy_empty_signature = configuration_identity['uuid'] + '.d'
@@ -333,6 +363,8 @@ def main():
         outputs = {entry['logical_name']: entry['outputs'] for entry in entries}
         require(len(outputs) == len(entries) and set(outputs) == set(source.names()), 'CF/report logical inventory mismatch')
         require(all(entry['packed_bytes'] == source.catalog.entries[entry['logical_name']].stored_size for entry in entries), 'CF/report stored lengths mismatch')
+        if args.modern_signature_passthrough:
+            receipt['modern_signature_passthrough']=validate_modern_signature_passthrough(source,configuration_identity['uuid'],profile,entries,Path(args.generated).resolve(strict=True))
         child_discrepancies = check_cf_children(source, stamps, children, evidence, configuration_storage, configuration_identity)
         receipt['cf_child_discrepancies'] = child_discrepancies
         receipt['metadata_xml'] = evidence

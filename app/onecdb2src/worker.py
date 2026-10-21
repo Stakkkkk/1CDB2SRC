@@ -14,6 +14,9 @@ def signature_options(cf,profile):
     source=CFSource(cf)
     try:
         root=str(source.tree('root')[1]);uid=identity(source.tree(root))['uuid'];legacy=uid+'.d';modern=uid+'.10'
+        if profile['xml_version']=='2.21' and modern in source.names() and legacy not in source.names():
+            signature_profile_guard(source,uid,profile,modern_passthrough=True)
+            return ['--modern-signature-passthrough']
         signature_profile_guard(source,uid,profile)
         if legacy not in source.names():return []
         if source.inflated(legacy)!=b'\xef\xbb\xbf{0,"",""}':return []
@@ -52,6 +55,7 @@ def integrity(config):
     from .sqlcf.export_cf import config_identity,cf_tree
     from . import profiles
     import xml.etree.ElementTree as ET
+    from .xml.dump_info import long_path
     root=Path(config['root']);manifest=read(root/'_work/cf/manifest.json');result={}
     for side,key in [('main','main_cf'),('vendor','supplier_cf')]:
         source=root/'_work/cf'/side/'source.cf';target=root/(side+'.cf')
@@ -67,7 +71,7 @@ def integrity(config):
             require(all(identity[k]==expected_identity[k] for k in ('uuid','name','vendor','version')),'Final CF identity mismatch')
             entry_count=len(archive.catalog.entries)
         finally:archive.close()
-        final=root/side;receipt=read(final/'receipt.json')
+        final=long_path(root/side);receipt=read(final/'receipt.json')
         profile_path=root/'_work/profiles'/(side+'.json');profile=profiles.load(profile_path,source)
         require(receipt.get('profile')==profile and receipt.get('profile_receipt')=={'path':str(profile_path.resolve()),'sha256':fact(profile_path)['sha256']},'Final profile lineage mismatch')
         require(receipt['status']=='CANDIDATE_POSTGEN_VERIFICATION_REQUIRED','Assembly incomplete')
@@ -129,7 +133,7 @@ def run(stage,config):
         from . import profiles
         profile_path=work/'profiles'/(side+'.json');profile=profiles.load(profile_path,cf)
         options=signature_options(cf,profile)
-        require(profile['xml_version']!='2.21' or not options,'Unsupported legacy signature projection for XML2.21')
+        require(profile['xml_version']!='2.21' or options in ([],['--modern-signature-passthrough']),'Unsupported legacy signature projection for XML2.21')
         invoke(module,['--cf',cf,'--generated',native/'tree/xml','--engine-report',native/'engine.stderr.json','--run-receipt',native/'receipt.json','--profile-receipt',profile_path,'--output',work/stage,*options])
     elif stage.startswith('parents-'):parents(config,stage[8:])
     elif stage.startswith('assembly-'):

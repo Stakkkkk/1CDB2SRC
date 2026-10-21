@@ -19,7 +19,7 @@ def config_identity(tree):
     groups=[(path,node) for path,node in walk(tree) if isinstance(node,list) and len(node)==2 and node[0]=='9cd510cd-abfc-11d4-9434-004095e12fc7']
     require(len(groups)==1,'Missing/ambiguous general metadata group')
     path,group=groups[0]; header=group[1][1]
-    require(isinstance(header,list) and header[0] in {'68','76'} and len(header)>15,'Unsupported configuration identity version')
+    require(isinstance(header,list) and bool(header) and {'67':60,'68':61,'76':77}.get(header[0])==len(header),'Unsupported configuration identity version')
     require(isinstance(header[14],str) and isinstance(header[15],str),'Invalid vendor/version identity')
     require(isinstance(header[1],list) and len(header[1])==2 and header[1][0]=='0','Unsupported general identity wrapper')
     result=identity(header[1][1]); require(result['path']==[],'Missing direct configuration common identity')

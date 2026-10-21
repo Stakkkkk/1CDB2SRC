@@ -1,13 +1,13 @@
 {
-  "image_id": "sha256:00eeff2d089cb123646f480e348e54f73b548f18b67244d935357af158df1343",
+  "image_id": "sha256:40e04a9a6ef3d30217c30ead631e2cdd3c53fe4767ef7ae070d046df3ef72b83",
   "archive": {
-    "bytes": 23050240,
-    "sha256": "71db00225db926c4cb813b0fe64ac7eeb05d4aa9aea7d7e0f759de2ac7d7827e"
+    "bytes": 23070720,
+    "sha256": "799805dee0470b5366d1bec11ecdd80cdc22e39b712d64056aafced5a36ca8af"
   },
   "binary": {
     "path": "/engine/ibcmd-rs",
-    "bytes": 65346072,
-    "sha256": "b087962e13423f833ccae5e495423fa2228767da628f3c06a375ba48b7a48358"
+    "bytes": 65435328,
+    "sha256": "e4823a015f093e3e805da57f874793cf767d35675314baf58a13424f3f67a0df"
   },
   "target": "Linux x86_64; Docker on Windows/Linux, or bundled native loader on Linux",
   "experimental": true,

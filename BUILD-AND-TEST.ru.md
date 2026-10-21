@@ -1,5 +1,26 @@
 # Исходники конвертера и воспроизведение сборки
 
+## Выпуск 0.2.0
+
+Содержит generic legacy roots/UsePurposes/TitleFont из исходного commit7cefdce
+и Python-исправления профилей, сохранения подписи и длинных путей. Исходники
+Rust и runtime поставляются вместе. Новый ELF65435328байт,
+SHA256 `e4823a015f093e3e805da57f874793cf767d35675314baf58a13424f3f67a0df`.
+Docker и native используют этот ELF; сборка не повторялась ради упаковки.
+
+Команда Cargo ниже и ограничения legacy corpus сохраняются. Дополнительные
+переносимые Rust integration-тесты без внешнего корпуса:
+
+```sh
+cargo test --release --offline --frozen --features experimental-native-projection --test native_configuration_legacy --target x86_64-unknown-linux-gnu
+```
+
+В принятой сборке:8PASS/1external-corpusignored. Python-тесты из `tests/`
+проверяют приложение, а не Rust и не живую СУБД. Полный результат проверок
+упаковки этого выпуска хранится в `release-validation.json`.
+
+## История предыдущего выпуска
+
 Комплект BD-018 включает универсальное исправление порядка прав
 Catalog/InformationRegister из BD-017. Исходники и оба runtime соответствуют
 новой принятой сборке. Проверены 5 schema + 6 production-тестов, адресная

@@ -1,8 +1,16 @@
 {
   "files": {
     "BUILD-AND-TEST.ru.md": {
-      "bytes": 9268,
-      "sha256": "bfb8200e0f415038977793c0229a727e72e2451fc81760f273f227c0aa16fbaf"
+      "bytes": 10582,
+      "sha256": "9e850f96beef9ce5ce51dd7b7a1978d57157f102e34887db3b51f7513bb56dc5"
+    },
+    "RELEASE-NOTES.ru.md": {
+      "bytes": 5643,
+      "sha256": "e74fe7505af5eb0de851b982adb32c56da86417541b0f7c7ae37c9000ee064c2"
+    },
+    "VERSION": {
+      "bytes": 6,
+      "sha256": "1f930dd1f133c1f97a94fe3acb8db34372cf4c01ffdb2b3ff4ca72f9494121e9"
     },
     "closure-audit.json": {
       "bytes": 321017,
@@ -15,6 +23,10 @@
     "converter/Cargo.toml": {
       "bytes": 3760,
       "sha256": "1cbafaf1f2f0d615f16c295bb964a6d82bd9df6928aa423e47897cf9a8511f61"
+    },
+    "converter/LICENSE": {
+      "bytes": 1099,
+      "sha256": "866a167ccd074fe0b81754c777f0587d7fb3fd27c605fb06c1f50a50dd061b92"
     },
     "converter/compatibility/bootstrap.json": {
       "bytes": 16874,
@@ -568,13 +580,29 @@
       "bytes": 146,
       "sha256": "1854e717196d1f429f3b6ed0716d78aa34c97932d4370a734dccf4e28350971e"
     },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/core/build.rs": {
-      "bytes": 39686,
-      "sha256": "8a6ad3229e9ea5cd66654618f0a8272b9736806e8846e3a42198d402b8103221"
+    "converter/crates/ibcmd-edt/vendor/morph1c/LICENSE-APACHE": {
+      "bytes": 11358,
+      "sha256": "c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/LOCAL-FILES.json": {
+      "bytes": 129646,
+      "sha256": "2ea1d39c263642a134037fe1adb8966de778123e24c50c3f9fe7524b1ad24b18"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/NOTICE.md": {
+      "bytes": 1943,
+      "sha256": "af7db79c9f5372033eef82c8640a72164c9c51dd36b54848c5df4a21db72639d"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/UPSTREAM-FILES.json": {
+      "bytes": 105415,
+      "sha256": "a89fa1bf8658ca9837c3e27fef425cfdca89c56c03569cc29f6b362c961469a5"
     },
     "converter/crates/ibcmd-edt/vendor/morph1c/crates/core/Cargo.toml": {
       "bytes": 1833,
       "sha256": "b15de588be0bbce0b549d9b82576ece4f82aebb9d66ccdae64cb860924f4e617"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/core/build.rs": {
+      "bytes": 39686,
+      "sha256": "8a6ad3229e9ea5cd66654618f0a8272b9736806e8846e3a42198d402b8103221"
     },
     "converter/crates/ibcmd-edt/vendor/morph1c/crates/core/src/engine.rs": {
       "bytes": 23768,
@@ -1980,438 +2008,6 @@
       "bytes": 27536,
       "sha256": "9e9b042b8de24706dd946642adfc6d25719bb532f5efd8c3b17dc371bd4d0778"
     },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/build.rs": {
-      "bytes": 3308,
-      "sha256": "2d6a87f01484f2224edc9f046a46ebfa8b21fa44bc82a078582b71dc6ca7795e"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/Cargo.toml": {
-      "bytes": 1050,
-      "sha256": "8d6660659712268c9d4a607934c45c9f0f54623dd4c2a29e94003dcda4c59a51"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/common/mod.rs": {
-      "bytes": 18103,
-      "sha256": "a1e97da67da7b84f739570e18b0521472050da9ad94d175a895e43184c20aa4c"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/common/tests.rs": {
-      "bytes": 9440,
-      "sha256": "a5441c29bc2db2e6ef6fb353fe64faa364d0c8774a69f5490b2594bc9d390cd3"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/language.rs": {
-      "bytes": 22366,
-      "sha256": "1f6bbeb91399d49aead72f1bfe9c3a8fea3987da72c7baed5e52e7c4d6d75d18"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/lib.rs": {
-      "bytes": 26927,
-      "sha256": "0d2c91394790f0fa95ad2a0e68ab23cff1d56384f1ea4d104b890de3e5e751ed"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/accounting_register.rs": {
-      "bytes": 15944,
-      "sha256": "755f19aabd1dc17790b05fcc2b421da66171aac471a9bb3c1dbaabd40f0b60a9"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/accumulation_register.rs": {
-      "bytes": 15058,
-      "sha256": "361de3c1d89b1c484bd1742175ccb408195453e52456e334c998c72b04c1bb6f"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/bot.rs": {
-      "bytes": 1819,
-      "sha256": "a3512fd73972b808c894e7584ea564554dde384a1bda39299842b82536279455"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/business_process.rs": {
-      "bytes": 15575,
-      "sha256": "4f0ad8def29f470ca574f6841af05d33eb09a3a3f1d12d07bd1cf072dbbf1b0b"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/calculation_register.rs": {
-      "bytes": 15939,
-      "sha256": "0ce6a11af54c2eb5c916dc3db4d6cb0fb64197d071eb8ccda9f425e16cf33c89"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/catalog.rs": {
-      "bytes": 16926,
-      "sha256": "abf27bc3e13d3e89b4c15120f55b198e4c75bdbc6c4f84c64897582ee5ea1ed8"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/chart_of_accounts.rs": {
-      "bytes": 18706,
-      "sha256": "5921c17e84ed499da4f8416fe1f938f827e0a1843b8d3efd3d04b7fd5290e2c2"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/chart_of_calculation_types.rs": {
-      "bytes": 17129,
-      "sha256": "867598b25c44b5e9aa3e18f9c49c77ccaa996f34b0f16bac93065affa606b272"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/chart_of_characteristic_types.rs": {
-      "bytes": 18762,
-      "sha256": "b23ad1fa6750d74337c048d209149d09ed877630dab795e506d4ffb505520ac3"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/command_group.rs": {
-      "bytes": 4834,
-      "sha256": "d6e19f013aa03df3806c4e0d026487e8e112fae79160aa319f1c6ebac0d7e8a1"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/common_attribute.rs": {
-      "bytes": 10005,
-      "sha256": "9b582cc029560d99f86d59eaff4bcee59967d31c32e7bd407fd2842dba1e4ba0"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/common_command.rs": {
-      "bytes": 5448,
-      "sha256": "2e96a65156264469ee5d4a58e8cfb50f2c060a7a752d63927ad02cbb9e1ac4ad"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/common_form.rs": {
-      "bytes": 6955,
-      "sha256": "35e8f982b692512acb0d75654c278e8c7092803c5b53dfb35f3af6f28f6881bb"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/common_module.rs": {
-      "bytes": 4100,
-      "sha256": "bf593cbc412659ee943990a994b9c08b47c82336454e68a7947a3718fa64e6a9"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/common_picture.rs": {
-      "bytes": 4604,
-      "sha256": "9f21c69de5b6ab4cabf55a1d1d9bcfcec2671e9dafa975f8a0a7aefd55d13506"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/common_template.rs": {
-      "bytes": 4206,
-      "sha256": "bbd9d22840f478eea9f4a8e3190ac3aec528b9155d76da00933cc75ad85585d7"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/configuration.rs": {
-      "bytes": 21696,
-      "sha256": "6671241fd63868f39f6a858d291aaf45a554fca63e7c30aff8370aedc55168af"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/constant.rs": {
-      "bytes": 4220,
-      "sha256": "3900404649b3f1f7207a7d434a4152bba57053100de0bd5cdf6c8e6a2fbd37d0"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/data_processor.rs": {
-      "bytes": 13159,
-      "sha256": "90ecb95fa6d0932d6eb86516e6e82af92650b4ab536b46a59e1e950a8ff7d7e5"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/defined_type.rs": {
-      "bytes": 3113,
-      "sha256": "bef441117070c66c00e90b20acd1005438b72b4e591585bddb52473d8028eeb8"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/document.rs": {
-      "bytes": 16330,
-      "sha256": "ba7b577fe88631a3f1a7ee105f496019297568467b30256de5b4adcb34b54529"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/document_journal.rs": {
-      "bytes": 8473,
-      "sha256": "667f4f582f8db17c0b66cb799e8291563094decd3f913c4551fb8c9a0abd41a6"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/document_numerator.rs": {
-      "bytes": 3628,
-      "sha256": "a54e098b1c3253172729c098f3ee50ac9fe654292e1d05d3aaf788721c2e0421"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/enumeration.rs": {
-      "bytes": 15027,
-      "sha256": "4b27b67aab5e5b36010737c7c2cb57e60b77ed9da4d2c5c998b2ad3b349d6e56"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/event_subscription.rs": {
-      "bytes": 3654,
-      "sha256": "523af01d06f54122093a3deab81f0787a5af14291e1e0fc1109aa47e42be9a69"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/exchange_plan.rs": {
-      "bytes": 15703,
-      "sha256": "dd8b176f1f7194f69497ee6283c33cd6fd2807844417bd844256e79d03ab4a4a"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/external_data_source.rs": {
-      "bytes": 10907,
-      "sha256": "f7101eb6e8e0ebfcfca1a4c5fb1d05278cdc4de8f1c0aeee5bfde026edfc94b0"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/filter_criterion.rs": {
-      "bytes": 6786,
-      "sha256": "b7819f6a3056bd1c148f15e8482e04440aead25767ebf6bc624df8c195843ff3"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/functional_option.rs": {
-      "bytes": 4645,
-      "sha256": "6b458340db8355d69aae7258209594cef243fa9467e0a410fa7ad16a55c270ad"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/functional_options_parameter.rs": {
-      "bytes": 4319,
-      "sha256": "1debd4bf54473bec5d196d2859b4c0122bbd5aeef908ecf1bdfad55b8e67309b"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/http_service.rs": {
-      "bytes": 9705,
-      "sha256": "74f143ab6c99c352dee88b3c41317c12984257f571292b3a4c9c05d1a3f3107f"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/information_register.rs": {
-      "bytes": 14084,
-      "sha256": "56d38f0cf3fb9c96ec899ba72077bd4a4d8413b9de03532351dd1be32f0ebea4"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/integration_service.rs": {
-      "bytes": 4459,
-      "sha256": "57f6597a0086dccecf8c8c0560e080d54c214714e1df7ca94d614c367e522c2c"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/mod.rs": {
-      "bytes": 1087,
-      "sha256": "db05e3c86b9dbabe91fac4b45f46efff914b23cd7797175f548ba44b1f18cf66"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/palette_color.rs": {
-      "bytes": 2192,
-      "sha256": "c295fbdddeb60f8234529df8d1c6273836b6beba5e0eded3b43700b84dc5639d"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/report.rs": {
-      "bytes": 13418,
-      "sha256": "b89b64a2ec3b1155c4d1adf28fb5add0ad476ce1308abdbce4dd5f69bc0aa72f"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/role.rs": {
-      "bytes": 3761,
-      "sha256": "7adf4f00629de9bb65d8582a0382430929f3337a5ac8cd56929245d0cd130193"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/scheduled_job.rs": {
-      "bytes": 3612,
-      "sha256": "36c7bc8381c5c6e9018d021566a89c815086632e4c7aacc5873a94731b131862"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/sequence.rs": {
-      "bytes": 5818,
-      "sha256": "18d38864621ce6a6e98e854ea3951e381b413c1977ba5bf3d8fe8a58afeba2d6"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/session_parameter.rs": {
-      "bytes": 3213,
-      "sha256": "88b607faf000c055017d4fd9d16fad3963cfbfc4d54d968f36f47777579db4b7"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/settings_storage.rs": {
-      "bytes": 5592,
-      "sha256": "e22186aa4048ffe8b504617a4133080ef4ce2d1dcbd6bddcee8d424b5e437c69"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/style.rs": {
-      "bytes": 3235,
-      "sha256": "9d93cbd1811b980c08bdb31978b7237ef54a84578b2e57874cdb63cb6de65e1a"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/style_item.rs": {
-      "bytes": 4143,
-      "sha256": "9db07c025dfdace8835cdadd71a61a9574774129cd1d70bfe834a8af6dcc3fd8"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/subsystem.rs": {
-      "bytes": 8452,
-      "sha256": "c01263d79544994a679026a9a7d747762f52dcc5a4c9392b06607a1998316420"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/task.rs": {
-      "bytes": 16522,
-      "sha256": "ebcd1902eeb951b404a65957f602902c97c539f7f4f7601e00a928efa1a10b7f"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/w_s_reference.rs": {
-      "bytes": 3415,
-      "sha256": "37e25528f44cea4d952519abc90d0e801ef3ddc64073c0094153938861104cf9"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/web_service.rs": {
-      "bytes": 12224,
-      "sha256": "0145aeb0620789002c26f0c846ecf2e15423748a267a1b8ee7cb46557de205a4"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/web_socket_client.rs": {
-      "bytes": 2724,
-      "sha256": "a5e0bac48bf2aabacbeb7921fa178af83ebe8243afa2aa69c619ad3fffa2eef1"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/x_d_t_o_package.rs": {
-      "bytes": 4069,
-      "sha256": "8769383aefaee74a48fb274d18a56a6ccc44eb8b3d08378099c9268facc589ca"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/build.rs": {
-      "bytes": 3308,
-      "sha256": "2d6a87f01484f2224edc9f046a46ebfa8b21fa44bc82a078582b71dc6ca7795e"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/Cargo.toml": {
-      "bytes": 992,
-      "sha256": "d0182b9296762daeeb60aa1d961a4071be42dd6688d806cf4eccef3dfd0dfbcf"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/common/mod.rs": {
-      "bytes": 2557,
-      "sha256": "e7b9c53e37c2054ef4ebab0d29bebe147a7afc55a46c61d1a9f9eeda3a5aa600"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/lib.rs": {
-      "bytes": 23933,
-      "sha256": "d1c557a8b98a1ac3f578a0160c05bc4c757a3c2ec74d4952a265262d692c683b"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/accounting_register.rs": {
-      "bytes": 13983,
-      "sha256": "7b3b2bc102cdf03e4d8af3fa8d0e675d5c1d14a01db15209289ae95814944970"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/accumulation_register.rs": {
-      "bytes": 15196,
-      "sha256": "88b534991e2d9f0a6cdce4b2f0d9c1050be4bedfd73df60229abeadc70d311fe"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/bot.rs": {
-      "bytes": 1751,
-      "sha256": "0c93343a242e27e3209377cb10d0d6eecc61a69c0c36f283030dc6d5bfb1c57f"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/business_process.rs": {
-      "bytes": 21719,
-      "sha256": "6de0c9839a1c71ec11305dd65672af8b3883e15c4628b38144e502f3f215e372"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/calculation_register.rs": {
-      "bytes": 14272,
-      "sha256": "aac8301a14aeec2328deaa3bd48935f5a44c1126d1e50a14284b05eda4b9b31f"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/catalog.rs": {
-      "bytes": 25875,
-      "sha256": "575026792cca12eb0896d812eba979be312545fdf9b7de6d4606e42ffb7bd0cb"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/chart_of_accounts.rs": {
-      "bytes": 25920,
-      "sha256": "acda826800d69c0e98b06e3a51d7605becc8c718f9901d96f899477ef21b69fa"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/chart_of_calculation_types.rs": {
-      "bytes": 23637,
-      "sha256": "be16f292a1bded580b4e585c4aa5a24de903201b3a70be2a7ebcd099a29463ab"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/chart_of_characteristic_types.rs": {
-      "bytes": 23295,
-      "sha256": "c671e90a924dc1861831b2487fe2ecd12cd2060e9c53734523c191358e8359c6"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/command_group.rs": {
-      "bytes": 5570,
-      "sha256": "a8e24e03cf07911f15f5206ae22e8ac7fa093e7f15b7f2219da0754a19183383"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/common_attribute.rs": {
-      "bytes": 8780,
-      "sha256": "ae6f4642dc0ccb3d2be6697f47ed67433bc6959740b5c3855797bbae7672c834"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/common_command.rs": {
-      "bytes": 6014,
-      "sha256": "44379d02f99e394c3039ef0052a9b3c8f6109cbba8bc160b2a0b199dc697588c"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/common_form.rs": {
-      "bytes": 6582,
-      "sha256": "865c244a52f2f080382c73420d32e8d6bee6985ac2558f67f2ee280e153d5956"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/common_module.rs": {
-      "bytes": 3413,
-      "sha256": "c181214e51d4031747f5e134c1630894468d5ba85878174d3df3701f91fbbc5a"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/common_picture.rs": {
-      "bytes": 5274,
-      "sha256": "7c4e6f4c1ce78e19bd6edebfe67e1f7644477383171b0161fc82b2ad146e554f"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/common_template.rs": {
-      "bytes": 3630,
-      "sha256": "081b446280d07aef2c477baa94007bf1f07ae5362c5c607d4aa35e1329a6beff"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/configuration.rs": {
-      "bytes": 16963,
-      "sha256": "9171a8f8c6ec102682476232ff7ec5301670d17907c09f28e453cc9909d0c356"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/constant.rs": {
-      "bytes": 5942,
-      "sha256": "2031f54f3034981e6dbd9c60bc662d543a1d5f557a99aa571898527084f78077"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/data_processor.rs": {
-      "bytes": 19719,
-      "sha256": "6ecf9c883f50c5b1b13c172ee8205bf1f12f6c3d66ebfe384ab82b3961fb768b"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/defined_type.rs": {
-      "bytes": 2945,
-      "sha256": "8876a1e7fe9b49550d8cc7adaa2fbd3b99b66df5b53e73881f83f5222dcdb9de"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/document.rs": {
-      "bytes": 26647,
-      "sha256": "4bc09c32f67b40491f6cb5fe729ef458ddafcec9bbbecf64ec1ca5c2ce3a76c5"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/document_journal.rs": {
-      "bytes": 11307,
-      "sha256": "1b5ce9a620c6cbba22bac850e5fc51187790881563f573fb9f2fb07f49405ee8"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/document_numerator.rs": {
-      "bytes": 3597,
-      "sha256": "fdb7cb317857af157ab765ad2d67f834e9af19d9fc2a51ce5bee8e1273e16060"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/enumeration.rs": {
-      "bytes": 16753,
-      "sha256": "d590ac685b3d105cf3f5ebbbacc04de865b0f1e47f8b6c02c51ded8904983a74"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/event_subscription.rs": {
-      "bytes": 3289,
-      "sha256": "b70a4c5126360addd1d74b8c541badfd2d1142c091119e6106d70d533a0a589d"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/exchange_plan.rs": {
-      "bytes": 21689,
-      "sha256": "d669e9656b4c49ffde647d301cdcb9263fcd3468d61cc4eb8da2aa08fc391ca5"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/external_data_source.rs": {
-      "bytes": 9786,
-      "sha256": "bb6f67b024473d0f564b2ba19ebb8695e7c336d17a5c25c7f1a2a10f91d2c809"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/filter_criterion.rs": {
-      "bytes": 7587,
-      "sha256": "ef14055a95c8f02365535cc64e43a41fa83752d371f974e43aebda61967945c1"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/functional_option.rs": {
-      "bytes": 4235,
-      "sha256": "a621b9128e2bd7a0a7405f5290c3e5e46420284d008185a6aa247604fdb73c1c"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/functional_options_parameter.rs": {
-      "bytes": 3889,
-      "sha256": "f23ed8600ab0fa17acd6ed70948884558aca724a1b2014019fe6133d7816de02"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/http_service.rs": {
-      "bytes": 6273,
-      "sha256": "a81c6887ecf0904f30a2ad035e37f01eef5f1f5098ab14e51b2e27f57aa169c4"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/information_register.rs": {
-      "bytes": 23340,
-      "sha256": "1afc51bab0eb306f035e300071be42d0d914a55fafa7ebb1609fa83b433017cb"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/integration_service.rs": {
-      "bytes": 3862,
-      "sha256": "9143a1c7fd3acbdcd3aac793a12936b96f77b668340d9dc1bc0081ab933078f7"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/mod.rs": {
-      "bytes": 1082,
-      "sha256": "eb93bf4947f9d15dc8a492be0c3a0a0d8e6f73e588138149cfa0f73cb2291970"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/palette_color.rs": {
-      "bytes": 1765,
-      "sha256": "af60db8920f704fee6d67755289b3a32c92eb4d855121987a1a9468046096cc9"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/report.rs": {
-      "bytes": 20374,
-      "sha256": "d8494eb2e629fd2fb88d2b1c18688cc8f96408fe7d4532abd6459e0eafa7da9b"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/role.rs": {
-      "bytes": 4109,
-      "sha256": "e2496e82b8272def1b1753d4215a0dbf7b51a0f105fd73e1e2fdb96231ae4528"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/scheduled_job.rs": {
-      "bytes": 3269,
-      "sha256": "5395d727d0fb01b23a1edd9c2af7482537e6c5bd8df2149944f6e202b255fc41"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/sequence.rs": {
-      "bytes": 5143,
-      "sha256": "99351623b76d6ddaf88c1f17359f48ce7d408f66d4a18b284b325f882015fd10"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/session_parameter.rs": {
-      "bytes": 2969,
-      "sha256": "be06ab8ca46c98a5f245959a983b22300ce8fa4f9e5653bafe0fc812480dfe1d"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/settings_storage.rs": {
-      "bytes": 6396,
-      "sha256": "266b5f01938d138d86efb695d4c840c18cd1c91f3248f642e5c95354a762c83d"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/style.rs": {
-      "bytes": 3159,
-      "sha256": "737340fa800c3ac141f33340882162ec833b7fcc7cc7d1d4c27aec4dd1c40a7e"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/style_item.rs": {
-      "bytes": 4259,
-      "sha256": "ef53e9b04e1b62b472affc9cd5263ada61f6a98b452e4bccb971b6c5fef37758"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/subsystem.rs": {
-      "bytes": 10455,
-      "sha256": "64857d22ac70ced0cf28a3ae20bf2b701e64fb9c839667d2ffe6c1e01fd1b15f"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/task.rs": {
-      "bytes": 23106,
-      "sha256": "827ec1d64e6b0d8c0eee716eef6f8af27d49ea6958366059d46c1563a63d7eb0"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/w_s_reference.rs": {
-      "bytes": 3321,
-      "sha256": "7cd980c6d3e5e567f17f0460085d50002c17f199b576b8afd92889166614dd35"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/web_service.rs": {
-      "bytes": 13151,
-      "sha256": "49ed7010ab4a9de74f263499df0101c5b9e0255a317bd1d126a15a7e5fdf4c2a"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/web_socket_client.rs": {
-      "bytes": 2126,
-      "sha256": "a35efda5bca27ee7dc4a3f113cb2355476488286f0b8df9331314938686c1e91"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/x_d_t_o_package.rs": {
-      "bytes": 4346,
-      "sha256": "7ef865aba64b782e61c9eaad1f464d39f1e630f00976d47f4cf320384ebed6e5"
-    },
     "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats-xml/Cargo.toml": {
       "bytes": 1259,
       "sha256": "00fc47c617e6101afc0b4f7b0cfd7c10242ae4a462ab6165d088af923099bdfb"
@@ -2836,21 +2432,21 @@
       "bytes": 11211,
       "sha256": "49f05bcc7b3c0621a48c7e90ec104d2b3c06ad6f0d1acffb5d6ea2b819092cf9"
     },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats-xml/src/form_tree/tests.rs": {
-      "bytes": 17225,
-      "sha256": "620fff8309b59e9727a4e5dd82d9c9e6698f80b92a089ee15ae80ff1f5d0210d"
-    },
     "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats-xml/src/form_tree.rs": {
       "bytes": 18798,
       "sha256": "3097c19f56f36974df75f54c4ded13a0caea91c3ec509b17f41d96779c8f60c6"
     },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats-xml/src/geoschema/tests.rs": {
-      "bytes": 8440,
-      "sha256": "b91bb17c7a203a5f568b2e4f4c47347d6bfaca8e18a26882c545670ca2a963bf"
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats-xml/src/form_tree/tests.rs": {
+      "bytes": 17225,
+      "sha256": "620fff8309b59e9727a4e5dd82d9c9e6698f80b92a089ee15ae80ff1f5d0210d"
     },
     "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats-xml/src/geoschema.rs": {
       "bytes": 31952,
       "sha256": "52dadac041d39e64bba4679ccf5e77a06b34146baf32bf407739003c4e739f9b"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats-xml/src/geoschema/tests.rs": {
+      "bytes": 8440,
+      "sha256": "b91bb17c7a203a5f568b2e4f4c47347d6bfaca8e18a26882c545670ca2a963bf"
     },
     "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats-xml/src/help.rs": {
       "bytes": 2692,
@@ -3052,6 +2648,438 @@
       "bytes": 17330,
       "sha256": "b581c59bbe4b5f1971ed6ad6bbd1aab260a706217bafb3426ef9b96d6b6f7cbb"
     },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/Cargo.toml": {
+      "bytes": 1050,
+      "sha256": "8d6660659712268c9d4a607934c45c9f0f54623dd4c2a29e94003dcda4c59a51"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/build.rs": {
+      "bytes": 3308,
+      "sha256": "2d6a87f01484f2224edc9f046a46ebfa8b21fa44bc82a078582b71dc6ca7795e"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/common/mod.rs": {
+      "bytes": 18103,
+      "sha256": "a1e97da67da7b84f739570e18b0521472050da9ad94d175a895e43184c20aa4c"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/common/tests.rs": {
+      "bytes": 9440,
+      "sha256": "a5441c29bc2db2e6ef6fb353fe64faa364d0c8774a69f5490b2594bc9d390cd3"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/language.rs": {
+      "bytes": 22366,
+      "sha256": "1f6bbeb91399d49aead72f1bfe9c3a8fea3987da72c7baed5e52e7c4d6d75d18"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/lib.rs": {
+      "bytes": 26927,
+      "sha256": "0d2c91394790f0fa95ad2a0e68ab23cff1d56384f1ea4d104b890de3e5e751ed"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/accounting_register.rs": {
+      "bytes": 15944,
+      "sha256": "755f19aabd1dc17790b05fcc2b421da66171aac471a9bb3c1dbaabd40f0b60a9"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/accumulation_register.rs": {
+      "bytes": 15058,
+      "sha256": "361de3c1d89b1c484bd1742175ccb408195453e52456e334c998c72b04c1bb6f"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/bot.rs": {
+      "bytes": 1819,
+      "sha256": "a3512fd73972b808c894e7584ea564554dde384a1bda39299842b82536279455"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/business_process.rs": {
+      "bytes": 15575,
+      "sha256": "4f0ad8def29f470ca574f6841af05d33eb09a3a3f1d12d07bd1cf072dbbf1b0b"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/calculation_register.rs": {
+      "bytes": 15939,
+      "sha256": "0ce6a11af54c2eb5c916dc3db4d6cb0fb64197d071eb8ccda9f425e16cf33c89"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/catalog.rs": {
+      "bytes": 16926,
+      "sha256": "abf27bc3e13d3e89b4c15120f55b198e4c75bdbc6c4f84c64897582ee5ea1ed8"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/chart_of_accounts.rs": {
+      "bytes": 18706,
+      "sha256": "5921c17e84ed499da4f8416fe1f938f827e0a1843b8d3efd3d04b7fd5290e2c2"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/chart_of_calculation_types.rs": {
+      "bytes": 17129,
+      "sha256": "867598b25c44b5e9aa3e18f9c49c77ccaa996f34b0f16bac93065affa606b272"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/chart_of_characteristic_types.rs": {
+      "bytes": 18762,
+      "sha256": "b23ad1fa6750d74337c048d209149d09ed877630dab795e506d4ffb505520ac3"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/command_group.rs": {
+      "bytes": 4834,
+      "sha256": "d6e19f013aa03df3806c4e0d026487e8e112fae79160aa319f1c6ebac0d7e8a1"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/common_attribute.rs": {
+      "bytes": 10005,
+      "sha256": "9b582cc029560d99f86d59eaff4bcee59967d31c32e7bd407fd2842dba1e4ba0"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/common_command.rs": {
+      "bytes": 5448,
+      "sha256": "2e96a65156264469ee5d4a58e8cfb50f2c060a7a752d63927ad02cbb9e1ac4ad"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/common_form.rs": {
+      "bytes": 6955,
+      "sha256": "35e8f982b692512acb0d75654c278e8c7092803c5b53dfb35f3af6f28f6881bb"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/common_module.rs": {
+      "bytes": 4100,
+      "sha256": "bf593cbc412659ee943990a994b9c08b47c82336454e68a7947a3718fa64e6a9"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/common_picture.rs": {
+      "bytes": 4604,
+      "sha256": "9f21c69de5b6ab4cabf55a1d1d9bcfcec2671e9dafa975f8a0a7aefd55d13506"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/common_template.rs": {
+      "bytes": 4206,
+      "sha256": "bbd9d22840f478eea9f4a8e3190ac3aec528b9155d76da00933cc75ad85585d7"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/configuration.rs": {
+      "bytes": 21696,
+      "sha256": "6671241fd63868f39f6a858d291aaf45a554fca63e7c30aff8370aedc55168af"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/constant.rs": {
+      "bytes": 4220,
+      "sha256": "3900404649b3f1f7207a7d434a4152bba57053100de0bd5cdf6c8e6a2fbd37d0"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/data_processor.rs": {
+      "bytes": 13159,
+      "sha256": "90ecb95fa6d0932d6eb86516e6e82af92650b4ab536b46a59e1e950a8ff7d7e5"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/defined_type.rs": {
+      "bytes": 3113,
+      "sha256": "bef441117070c66c00e90b20acd1005438b72b4e591585bddb52473d8028eeb8"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/document.rs": {
+      "bytes": 16330,
+      "sha256": "ba7b577fe88631a3f1a7ee105f496019297568467b30256de5b4adcb34b54529"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/document_journal.rs": {
+      "bytes": 8473,
+      "sha256": "667f4f582f8db17c0b66cb799e8291563094decd3f913c4551fb8c9a0abd41a6"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/document_numerator.rs": {
+      "bytes": 3628,
+      "sha256": "a54e098b1c3253172729c098f3ee50ac9fe654292e1d05d3aaf788721c2e0421"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/enumeration.rs": {
+      "bytes": 15027,
+      "sha256": "4b27b67aab5e5b36010737c7c2cb57e60b77ed9da4d2c5c998b2ad3b349d6e56"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/event_subscription.rs": {
+      "bytes": 3654,
+      "sha256": "523af01d06f54122093a3deab81f0787a5af14291e1e0fc1109aa47e42be9a69"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/exchange_plan.rs": {
+      "bytes": 15703,
+      "sha256": "dd8b176f1f7194f69497ee6283c33cd6fd2807844417bd844256e79d03ab4a4a"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/external_data_source.rs": {
+      "bytes": 10907,
+      "sha256": "f7101eb6e8e0ebfcfca1a4c5fb1d05278cdc4de8f1c0aeee5bfde026edfc94b0"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/filter_criterion.rs": {
+      "bytes": 6786,
+      "sha256": "b7819f6a3056bd1c148f15e8482e04440aead25767ebf6bc624df8c195843ff3"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/functional_option.rs": {
+      "bytes": 4645,
+      "sha256": "6b458340db8355d69aae7258209594cef243fa9467e0a410fa7ad16a55c270ad"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/functional_options_parameter.rs": {
+      "bytes": 4319,
+      "sha256": "1debd4bf54473bec5d196d2859b4c0122bbd5aeef908ecf1bdfad55b8e67309b"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/http_service.rs": {
+      "bytes": 9705,
+      "sha256": "74f143ab6c99c352dee88b3c41317c12984257f571292b3a4c9c05d1a3f3107f"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/information_register.rs": {
+      "bytes": 14084,
+      "sha256": "56d38f0cf3fb9c96ec899ba72077bd4a4d8413b9de03532351dd1be32f0ebea4"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/integration_service.rs": {
+      "bytes": 4459,
+      "sha256": "57f6597a0086dccecf8c8c0560e080d54c214714e1df7ca94d614c367e522c2c"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/mod.rs": {
+      "bytes": 1087,
+      "sha256": "db05e3c86b9dbabe91fac4b45f46efff914b23cd7797175f548ba44b1f18cf66"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/palette_color.rs": {
+      "bytes": 2192,
+      "sha256": "c295fbdddeb60f8234529df8d1c6273836b6beba5e0eded3b43700b84dc5639d"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/report.rs": {
+      "bytes": 13418,
+      "sha256": "b89b64a2ec3b1155c4d1adf28fb5add0ad476ce1308abdbce4dd5f69bc0aa72f"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/role.rs": {
+      "bytes": 3761,
+      "sha256": "7adf4f00629de9bb65d8582a0382430929f3337a5ac8cd56929245d0cd130193"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/scheduled_job.rs": {
+      "bytes": 3612,
+      "sha256": "36c7bc8381c5c6e9018d021566a89c815086632e4c7aacc5873a94731b131862"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/sequence.rs": {
+      "bytes": 5818,
+      "sha256": "18d38864621ce6a6e98e854ea3951e381b413c1977ba5bf3d8fe8a58afeba2d6"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/session_parameter.rs": {
+      "bytes": 3213,
+      "sha256": "88b607faf000c055017d4fd9d16fad3963cfbfc4d54d968f36f47777579db4b7"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/settings_storage.rs": {
+      "bytes": 5592,
+      "sha256": "e22186aa4048ffe8b504617a4133080ef4ce2d1dcbd6bddcee8d424b5e437c69"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/style.rs": {
+      "bytes": 3235,
+      "sha256": "9d93cbd1811b980c08bdb31978b7237ef54a84578b2e57874cdb63cb6de65e1a"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/style_item.rs": {
+      "bytes": 4143,
+      "sha256": "9db07c025dfdace8835cdadd71a61a9574774129cd1d70bfe834a8af6dcc3fd8"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/subsystem.rs": {
+      "bytes": 8452,
+      "sha256": "c01263d79544994a679026a9a7d747762f52dcc5a4c9392b06607a1998316420"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/task.rs": {
+      "bytes": 16522,
+      "sha256": "ebcd1902eeb951b404a65957f602902c97c539f7f4f7601e00a928efa1a10b7f"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/w_s_reference.rs": {
+      "bytes": 3415,
+      "sha256": "37e25528f44cea4d952519abc90d0e801ef3ddc64073c0094153938861104cf9"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/web_service.rs": {
+      "bytes": 12224,
+      "sha256": "0145aeb0620789002c26f0c846ecf2e15423748a267a1b8ee7cb46557de205a4"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/web_socket_client.rs": {
+      "bytes": 2724,
+      "sha256": "a5e0bac48bf2aabacbeb7921fa178af83ebe8243afa2aa69c619ad3fffa2eef1"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/designer/src/metadata/x_d_t_o_package.rs": {
+      "bytes": 4069,
+      "sha256": "8769383aefaee74a48fb274d18a56a6ccc44eb8b3d08378099c9268facc589ca"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/Cargo.toml": {
+      "bytes": 992,
+      "sha256": "d0182b9296762daeeb60aa1d961a4071be42dd6688d806cf4eccef3dfd0dfbcf"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/build.rs": {
+      "bytes": 3308,
+      "sha256": "2d6a87f01484f2224edc9f046a46ebfa8b21fa44bc82a078582b71dc6ca7795e"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/common/mod.rs": {
+      "bytes": 2557,
+      "sha256": "e7b9c53e37c2054ef4ebab0d29bebe147a7afc55a46c61d1a9f9eeda3a5aa600"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/lib.rs": {
+      "bytes": 23933,
+      "sha256": "d1c557a8b98a1ac3f578a0160c05bc4c757a3c2ec74d4952a265262d692c683b"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/accounting_register.rs": {
+      "bytes": 13983,
+      "sha256": "7b3b2bc102cdf03e4d8af3fa8d0e675d5c1d14a01db15209289ae95814944970"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/accumulation_register.rs": {
+      "bytes": 15196,
+      "sha256": "88b534991e2d9f0a6cdce4b2f0d9c1050be4bedfd73df60229abeadc70d311fe"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/bot.rs": {
+      "bytes": 1751,
+      "sha256": "0c93343a242e27e3209377cb10d0d6eecc61a69c0c36f283030dc6d5bfb1c57f"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/business_process.rs": {
+      "bytes": 21719,
+      "sha256": "6de0c9839a1c71ec11305dd65672af8b3883e15c4628b38144e502f3f215e372"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/calculation_register.rs": {
+      "bytes": 14272,
+      "sha256": "aac8301a14aeec2328deaa3bd48935f5a44c1126d1e50a14284b05eda4b9b31f"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/catalog.rs": {
+      "bytes": 25875,
+      "sha256": "575026792cca12eb0896d812eba979be312545fdf9b7de6d4606e42ffb7bd0cb"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/chart_of_accounts.rs": {
+      "bytes": 25920,
+      "sha256": "acda826800d69c0e98b06e3a51d7605becc8c718f9901d96f899477ef21b69fa"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/chart_of_calculation_types.rs": {
+      "bytes": 23637,
+      "sha256": "be16f292a1bded580b4e585c4aa5a24de903201b3a70be2a7ebcd099a29463ab"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/chart_of_characteristic_types.rs": {
+      "bytes": 23295,
+      "sha256": "c671e90a924dc1861831b2487fe2ecd12cd2060e9c53734523c191358e8359c6"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/command_group.rs": {
+      "bytes": 5570,
+      "sha256": "a8e24e03cf07911f15f5206ae22e8ac7fa093e7f15b7f2219da0754a19183383"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/common_attribute.rs": {
+      "bytes": 8780,
+      "sha256": "ae6f4642dc0ccb3d2be6697f47ed67433bc6959740b5c3855797bbae7672c834"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/common_command.rs": {
+      "bytes": 6014,
+      "sha256": "44379d02f99e394c3039ef0052a9b3c8f6109cbba8bc160b2a0b199dc697588c"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/common_form.rs": {
+      "bytes": 6582,
+      "sha256": "865c244a52f2f080382c73420d32e8d6bee6985ac2558f67f2ee280e153d5956"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/common_module.rs": {
+      "bytes": 3413,
+      "sha256": "c181214e51d4031747f5e134c1630894468d5ba85878174d3df3701f91fbbc5a"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/common_picture.rs": {
+      "bytes": 5274,
+      "sha256": "7c4e6f4c1ce78e19bd6edebfe67e1f7644477383171b0161fc82b2ad146e554f"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/common_template.rs": {
+      "bytes": 3630,
+      "sha256": "081b446280d07aef2c477baa94007bf1f07ae5362c5c607d4aa35e1329a6beff"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/configuration.rs": {
+      "bytes": 16963,
+      "sha256": "9171a8f8c6ec102682476232ff7ec5301670d17907c09f28e453cc9909d0c356"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/constant.rs": {
+      "bytes": 5942,
+      "sha256": "2031f54f3034981e6dbd9c60bc662d543a1d5f557a99aa571898527084f78077"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/data_processor.rs": {
+      "bytes": 19719,
+      "sha256": "6ecf9c883f50c5b1b13c172ee8205bf1f12f6c3d66ebfe384ab82b3961fb768b"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/defined_type.rs": {
+      "bytes": 2945,
+      "sha256": "8876a1e7fe9b49550d8cc7adaa2fbd3b99b66df5b53e73881f83f5222dcdb9de"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/document.rs": {
+      "bytes": 26647,
+      "sha256": "4bc09c32f67b40491f6cb5fe729ef458ddafcec9bbbecf64ec1ca5c2ce3a76c5"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/document_journal.rs": {
+      "bytes": 11307,
+      "sha256": "1b5ce9a620c6cbba22bac850e5fc51187790881563f573fb9f2fb07f49405ee8"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/document_numerator.rs": {
+      "bytes": 3597,
+      "sha256": "fdb7cb317857af157ab765ad2d67f834e9af19d9fc2a51ce5bee8e1273e16060"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/enumeration.rs": {
+      "bytes": 16753,
+      "sha256": "d590ac685b3d105cf3f5ebbbacc04de865b0f1e47f8b6c02c51ded8904983a74"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/event_subscription.rs": {
+      "bytes": 3289,
+      "sha256": "b70a4c5126360addd1d74b8c541badfd2d1142c091119e6106d70d533a0a589d"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/exchange_plan.rs": {
+      "bytes": 21689,
+      "sha256": "d669e9656b4c49ffde647d301cdcb9263fcd3468d61cc4eb8da2aa08fc391ca5"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/external_data_source.rs": {
+      "bytes": 9786,
+      "sha256": "bb6f67b024473d0f564b2ba19ebb8695e7c336d17a5c25c7f1a2a10f91d2c809"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/filter_criterion.rs": {
+      "bytes": 7587,
+      "sha256": "ef14055a95c8f02365535cc64e43a41fa83752d371f974e43aebda61967945c1"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/functional_option.rs": {
+      "bytes": 4235,
+      "sha256": "a621b9128e2bd7a0a7405f5290c3e5e46420284d008185a6aa247604fdb73c1c"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/functional_options_parameter.rs": {
+      "bytes": 3889,
+      "sha256": "f23ed8600ab0fa17acd6ed70948884558aca724a1b2014019fe6133d7816de02"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/http_service.rs": {
+      "bytes": 6273,
+      "sha256": "a81c6887ecf0904f30a2ad035e37f01eef5f1f5098ab14e51b2e27f57aa169c4"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/information_register.rs": {
+      "bytes": 23340,
+      "sha256": "1afc51bab0eb306f035e300071be42d0d914a55fafa7ebb1609fa83b433017cb"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/integration_service.rs": {
+      "bytes": 3862,
+      "sha256": "9143a1c7fd3acbdcd3aac793a12936b96f77b668340d9dc1bc0081ab933078f7"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/mod.rs": {
+      "bytes": 1082,
+      "sha256": "eb93bf4947f9d15dc8a492be0c3a0a0d8e6f73e588138149cfa0f73cb2291970"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/palette_color.rs": {
+      "bytes": 1765,
+      "sha256": "af60db8920f704fee6d67755289b3a32c92eb4d855121987a1a9468046096cc9"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/report.rs": {
+      "bytes": 20374,
+      "sha256": "d8494eb2e629fd2fb88d2b1c18688cc8f96408fe7d4532abd6459e0eafa7da9b"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/role.rs": {
+      "bytes": 4109,
+      "sha256": "e2496e82b8272def1b1753d4215a0dbf7b51a0f105fd73e1e2fdb96231ae4528"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/scheduled_job.rs": {
+      "bytes": 3269,
+      "sha256": "5395d727d0fb01b23a1edd9c2af7482537e6c5bd8df2149944f6e202b255fc41"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/sequence.rs": {
+      "bytes": 5143,
+      "sha256": "99351623b76d6ddaf88c1f17359f48ce7d408f66d4a18b284b325f882015fd10"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/session_parameter.rs": {
+      "bytes": 2969,
+      "sha256": "be06ab8ca46c98a5f245959a983b22300ce8fa4f9e5653bafe0fc812480dfe1d"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/settings_storage.rs": {
+      "bytes": 6396,
+      "sha256": "266b5f01938d138d86efb695d4c840c18cd1c91f3248f642e5c95354a762c83d"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/style.rs": {
+      "bytes": 3159,
+      "sha256": "737340fa800c3ac141f33340882162ec833b7fcc7cc7d1d4c27aec4dd1c40a7e"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/style_item.rs": {
+      "bytes": 4259,
+      "sha256": "ef53e9b04e1b62b472affc9cd5263ada61f6a98b452e4bccb971b6c5fef37758"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/subsystem.rs": {
+      "bytes": 10455,
+      "sha256": "64857d22ac70ced0cf28a3ae20bf2b701e64fb9c839667d2ffe6c1e01fd1b15f"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/task.rs": {
+      "bytes": 23106,
+      "sha256": "827ec1d64e6b0d8c0eee716eef6f8af27d49ea6958366059d46c1563a63d7eb0"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/w_s_reference.rs": {
+      "bytes": 3321,
+      "sha256": "7cd980c6d3e5e567f17f0460085d50002c17f199b576b8afd92889166614dd35"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/web_service.rs": {
+      "bytes": 13151,
+      "sha256": "49ed7010ab4a9de74f263499df0101c5b9e0255a317bd1d126a15a7e5fdf4c2a"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/web_socket_client.rs": {
+      "bytes": 2126,
+      "sha256": "a35efda5bca27ee7dc4a3f113cb2355476488286f0b8df9331314938686c1e91"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/formats/edt/src/metadata/x_d_t_o_package.rs": {
+      "bytes": 4346,
+      "sha256": "7ef865aba64b782e61c9eaad1f464d39f1e630f00976d47f4cf320384ebed6e5"
+    },
     "converter/crates/ibcmd-edt/vendor/morph1c/crates/pipeline/Cargo.toml": {
       "bytes": 2510,
       "sha256": "6666dc54c089d34bfd09cd8ad5a8fe023ff8751e5bb97bd23430a240a313671e"
@@ -3088,13 +3116,13 @@
       "bytes": 15723,
       "sha256": "1b8c51400aae1048b33380775f7ffbe6a76a5905742518f7a26b633eaccbd738"
     },
-    "converter/crates/ibcmd-edt/vendor/morph1c/crates/pipeline/src/ext_read/mobile_signature.rs": {
-      "bytes": 8561,
-      "sha256": "057894426fd1e137853a9702567516c07f6609b5b4b51c7d6959e88e69bbd521"
-    },
     "converter/crates/ibcmd-edt/vendor/morph1c/crates/pipeline/src/ext_read.rs": {
       "bytes": 59947,
       "sha256": "0a44af9a5d409567e1b9f1adc9a53aafdc307e8feaeaa6b3e8864aa8e1c87657"
+    },
+    "converter/crates/ibcmd-edt/vendor/morph1c/crates/pipeline/src/ext_read/mobile_signature.rs": {
+      "bytes": 8561,
+      "sha256": "057894426fd1e137853a9702567516c07f6609b5b4b51c7d6959e88e69bbd521"
     },
     "converter/crates/ibcmd-edt/vendor/morph1c/crates/pipeline/src/flowchart_read.rs": {
       "bytes": 19526,
@@ -3240,14 +3268,6 @@
       "bytes": 1767979,
       "sha256": "83df2ac6ca45f729bbb71aab6d0ef2d1b3b46972d9018d5c250ac843a0d2df9f"
     },
-    "converter/crates/ibcmd-edt/vendor/morph1c/LICENSE-APACHE": {
-      "bytes": 11358,
-      "sha256": "c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/LOCAL-FILES.json": {
-      "bytes": 129646,
-      "sha256": "2ea1d39c263642a134037fe1adb8966de778123e24c50c3f9fe7524b1ad24b18"
-    },
     "converter/crates/ibcmd-edt/vendor/morph1c/models/format_layouts.jsonl": {
       "bytes": 14902,
       "sha256": "491711a235eaede3423278d6322468b1b24c5ddb61926b18b48e8156c85550f0"
@@ -3259,14 +3279,6 @@
     "converter/crates/ibcmd-edt/vendor/morph1c/models/version_registry.jsonl": {
       "bytes": 2488588,
       "sha256": "13406bc3bca6b65ab8d7f1b9348fac8a0fa9581da42bc6822004a60b098fe123"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/NOTICE.md": {
-      "bytes": 1943,
-      "sha256": "af7db79c9f5372033eef82c8640a72164c9c51dd36b54848c5df4a21db72639d"
-    },
-    "converter/crates/ibcmd-edt/vendor/morph1c/UPSTREAM-FILES.json": {
-      "bytes": 105415,
-      "sha256": "a89fa1bf8658ca9837c3e27fef425cfdca89c56c03569cc29f6b362c961469a5"
     },
     "converter/crates/ibcmd-number-format/Cargo.toml": {
       "bytes": 343,
@@ -3415,6 +3427,10 @@
     "converter/crates/ibcmd-schema/src/metadata_record_upgrades.rs": {
       "bytes": 7097,
       "sha256": "1943ea58766f75da411495001d3e807d6177737f9e437e4577a441702e5d484b"
+    },
+    "converter/crates/ibcmd-schema/src/object_rights.rs": {
+      "bytes": 5694,
+      "sha256": "43a67303a8605eb3172d72f562574043ffb5bc0034a72a475a4b996864ee80c6"
     },
     "converter/crates/ibcmd-schema/src/optional_metadata_collection.rs": {
       "bytes": 1476,
@@ -3604,13 +3620,13 @@
       "bytes": 11557,
       "sha256": "54cc8bc67a5409ec2dc82b92329e359e301aeb160436689b9b3575f7288375ac"
     },
-    "converter/crates/ibcmd-xml/src/reader/inspection.rs": {
-      "bytes": 13082,
-      "sha256": "6fdb7f1a15f719cc7d7f3b395e4b91a90f3f728f37a940a67137b20bffb2e89e"
-    },
     "converter/crates/ibcmd-xml/src/reader.rs": {
       "bytes": 21966,
       "sha256": "e2a8a6180e81711ea641f301fa861f619cf97117d88a40075335381b0c82b8f1"
+    },
+    "converter/crates/ibcmd-xml/src/reader/inspection.rs": {
+      "bytes": 13082,
+      "sha256": "6fdb7f1a15f719cc7d7f3b395e4b91a90f3f728f37a940a67137b20bffb2e89e"
     },
     "converter/crates/ibcmd-xml/src/source_tree/mod.rs": {
       "bytes": 38953,
@@ -3640,9 +3656,13 @@
       "bytes": 3256,
       "sha256": "b8d47d960221ab0849925ae5a5fea7321c8d46c1d21bca849acba21fd961e2db"
     },
-    "converter/LICENSE": {
-      "bytes": 1099,
-      "sha256": "866a167ccd074fe0b81754c777f0587d7fb3fd27c605fb06c1f50a50dd061b92"
+    "converter/docs/form-binding-scope.md": {
+      "bytes": 1736,
+      "sha256": "da3706a6450871febac3795eb8d01e7e5020638a87f8dcf8745239eba99b3006"
+    },
+    "converter/docs/rights-order-evidence.md": {
+      "bytes": 1939,
+      "sha256": "2ea9acb85e7c6bea5df3b66349c5ec730aacd067e547410c4ace671496d5c94b"
     },
     "converter/profiles/edt/2025.2.3-xml-2.20.json": {
       "bytes": 404,
@@ -3896,13 +3916,13 @@
       "bytes": 66467,
       "sha256": "3a97d5c35a16bc7f7a4724c75fc2892e613da62f47aba3c2ad13e24eaf97c05c"
     },
-    "converter/src/compiler/families/business_object/register_native.rs": {
-      "bytes": 60766,
-      "sha256": "a85e2b1a3ad17e6fc10f2c0ce9e7b24705ba51d2693da449cdfcad0636f8b543"
-    },
     "converter/src/compiler/families/business_object.rs": {
       "bytes": 266421,
       "sha256": "fffaeb02b3198fca7efb1af2f6c6d2226b96b09d0e02e90ae0184d1e720df150"
+    },
+    "converter/src/compiler/families/business_object/register_native.rs": {
+      "bytes": 60766,
+      "sha256": "a85e2b1a3ad17e6fc10f2c0ce9e7b24705ba51d2693da449cdfcad0636f8b543"
     },
     "converter/src/compiler/families/business_process.rs": {
       "bytes": 1646,
@@ -4020,29 +4040,29 @@
       "bytes": 11629,
       "sha256": "76b77ee3299c972cb06fc38f354cbc186c44f21ab11722a76adafc664f87f34a"
     },
-    "converter/src/conversion/edt.rs": {
-      "bytes": 9673,
-      "sha256": "a049965473dfcc302f1da9c2aaab4e0a0e68ad57405c2fb522eeb0891dd08bbd"
-    },
     "converter/src/conversion.rs": {
       "bytes": 57271,
       "sha256": "fe7f1638f14b3868035af293a5583c324430f18d9afded99b8b2618c92f681ff"
+    },
+    "converter/src/conversion/edt.rs": {
+      "bytes": 9673,
+      "sha256": "a049965473dfcc302f1da9c2aaab4e0a0e68ad57405c2fb522eeb0891dd08bbd"
     },
     "converter/src/dcs_template_audit.rs": {
       "bytes": 14725,
       "sha256": "cc9f12bab08091568f436d48ecd9e804a5095062d8fab876d629eff3bd37bba7"
     },
-    "converter/src/dropin/apply/routing/tests.rs": {
-      "bytes": 10472,
-      "sha256": "80a28d548f602acc3a33e2acbe1275f3553badba6949d4e7f4b65dcb60dfb371"
+    "converter/src/dropin/apply.rs": {
+      "bytes": 50132,
+      "sha256": "11f09b70ef6633a5a50461e8fea04a7694a19fd2914564fafc933d01fd8e0338"
     },
     "converter/src/dropin/apply/routing.rs": {
       "bytes": 5106,
       "sha256": "53c7684720b9e00074a1c8cb1ea8538d8d61240cc90608d3a12b2a59b3e8f7fc"
     },
-    "converter/src/dropin/apply.rs": {
-      "bytes": 50132,
-      "sha256": "11f09b70ef6633a5a50461e8fea04a7694a19fd2914564fafc933d01fd8e0338"
+    "converter/src/dropin/apply/routing/tests.rs": {
+      "bytes": 10472,
+      "sha256": "80a28d548f602acc3a33e2acbe1275f3553badba6949d4e7f4b65dcb60dfb371"
     },
     "converter/src/dropin/help.rs": {
       "bytes": 24301,
@@ -4140,6 +4160,10 @@
       "bytes": 1784,
       "sha256": "5c68b92da21e548b60e77013ae487d7ac5d613fb6be6317735910c263fe6923d"
     },
+    "converter/src/load.rs": {
+      "bytes": 43108,
+      "sha256": "d7972abd91d30b6fe33191be238c7c4b3a0854564dee55ce24cac6da7616c37a"
+    },
     "converter/src/load/compiled.rs": {
       "bytes": 27215,
       "sha256": "beb83cc7e9fee7a4c8116bccd3b2ded2411926d07289f9493c4db526882f892a"
@@ -4151,10 +4175,6 @@
     "converter/src/load/index.rs": {
       "bytes": 13632,
       "sha256": "e2191188e534be6e92074d9352489eb342ec6cbe51a395d7e107c9537c9af0b4"
-    },
-    "converter/src/load.rs": {
-      "bytes": 43108,
-      "sha256": "d7972abd91d30b6fe33191be238c7c4b3a0854564dee55ce24cac6da7616c37a"
     },
     "converter/src/main.rs": {
       "bytes": 47597,
@@ -4265,12 +4285,12 @@
       "sha256": "1581b8a053fe86a217ad5d76a3710fb494beaa95dfb21db9ed560c09f26413c7"
     },
     "converter/src/metadata_model/root.rs": {
-      "bytes": 55535,
-      "sha256": "4469c25fad6b2f8e29c17428dc4667617a19e2bcc701008b8de45554882ae156"
+      "bytes": 55622,
+      "sha256": "d1db11822f369c5ce7750a5bf594935c22fdb161d2d9f707ccaad038158d36ae"
     },
     "converter/src/metadata_model/root_export.rs": {
-      "bytes": 44061,
-      "sha256": "33c6a93b237aba668167cfc8e28593ff1a919fbe65822c55384864583acdc61a"
+      "bytes": 43548,
+      "sha256": "7b17242a1bd96409440e71ab5b9bfb7a1ebef136992f044e062899f41be96651"
     },
     "converter/src/metadata_model/simple.rs": {
       "bytes": 24785,
@@ -4308,6 +4328,10 @@
       "bytes": 75138,
       "sha256": "54b7c7cd10d983d6dfe79f078a78c16b3a9024ec2281bbe22d0300cfe26b894d"
     },
+    "converter/src/module_blob.rs": {
+      "bytes": 1947767,
+      "sha256": "fa7eb9b4950bff6852a07f4180f23025952e4552f7a94099e9756a29ab69935d"
+    },
     "converter/src/module_blob/form_root_42.rs": {
       "bytes": 24528,
       "sha256": "6bac2c27956a061270db390d8a0e38cd133902f8d29aacc250f5a7b1a5c7190b"
@@ -4324,9 +4348,9 @@
       "bytes": 50289,
       "sha256": "682517d42d8bc151d611edd8de32f41ae9e2da8f0cea54542b7dc7fb1556a72f"
     },
-    "converter/src/module_blob.rs": {
-      "bytes": 1947767,
-      "sha256": "fa7eb9b4950bff6852a07f4180f23025952e4552f7a94099e9756a29ab69935d"
+    "converter/src/mssql.rs": {
+      "bytes": 689207,
+      "sha256": "18ab37028b6854191ed3e640f500d2b61495628eee159d60f96a040cadc2a572"
     },
     "converter/src/mssql/base_free_cf.rs": {
       "bytes": 6007,
@@ -4376,9 +4400,9 @@
       "bytes": 8842,
       "sha256": "514e2eac3057f3411e02bb1c477c660c35266f12254685cb4db1a11f8f3d03f7"
     },
-    "converter/src/mssql.rs": {
-      "bytes": 689207,
-      "sha256": "18ab37028b6854191ed3e640f500d2b61495628eee159d60f96a040cadc2a572"
+    "converter/src/mssql_apply.rs": {
+      "bytes": 100240,
+      "sha256": "194a0d51de6fe84ff1cbfb9a3fa02c9e7ce2e17be1afe451ee8d106e4c8bd327"
     },
     "converter/src/mssql_apply/certificate_policy_tests.rs": {
       "bytes": 6950,
@@ -4387,10 +4411,6 @@
     "converter/src/mssql_apply/original_file_tests.rs": {
       "bytes": 7474,
       "sha256": "b9adb4ece6468e8b2a3762d0ba63b51267cc9ed23fe8ef477aabfdec78a67232"
-    },
-    "converter/src/mssql_apply.rs": {
-      "bytes": 100240,
-      "sha256": "194a0d51de6fe84ff1cbfb9a3fa02c9e7ce2e17be1afe451ee8d106e4c8bd327"
     },
     "converter/src/mssql_artifact.rs": {
       "bytes": 8154,
@@ -4509,8 +4529,8 @@
       "sha256": "a053c7c5ca72ca4cdb5a6f53fb8cf37ccc4f333e3515f4e900a54d8b2534c209"
     },
     "converter/src/mssql_dump/configuration_interface_pair_tests.rs": {
-      "bytes": 31271,
-      "sha256": "6709053fcb02bfbd1eae61bb9e34013573e6111b73047a9f5b75d9de55411e1e"
+      "bytes": 32824,
+      "sha256": "f58aa10aa2a6bb4fa6a281090b8f4740859f3532a010762719454786471c12f6"
     },
     "converter/src/mssql_dump/configuration_properties_evidence.rs": {
       "bytes": 27064,
@@ -4569,8 +4589,8 @@
       "sha256": "efe8e1e09c9503f6b4f03b2b12ec10c0bf710ab26759d60ee5b736a1e4a167e7"
     },
     "converter/src/mssql_dump/form/xml_2_21_order.rs": {
-      "bytes": 43621,
-      "sha256": "a271a4f09f26ea36683b612c444bd36536295121d6968e0682cc33dbabecce6d"
+      "bytes": 43720,
+      "sha256": "59bd2bd96753c9639bcf1cc2c152348d90864e2ee6a674150e41c4cc24c2ca75"
     },
     "converter/src/mssql_dump/form/xml_2_21_writer.rs": {
       "bytes": 64808,
@@ -4645,8 +4665,8 @@
       "sha256": "7fc246786b3a13be0e693f2db5394529f8716e2008403fe2ee76c139b645f516"
     },
     "converter/src/mssql_dump/refs.rs": {
-      "bytes": 258555,
-      "sha256": "7ef59a743abd27aeb0e123f21dc7b700c5b71ec87804e437f3c798eaff1bfd01"
+      "bytes": 257769,
+      "sha256": "33ec8506a6899ce1bcfcd5ff5c5be28a2d73e80f9952c73c82f5c0db9546c3d7"
     },
     "converter/src/mssql_dump/revision_mix_tests.rs": {
       "bytes": 6894,
@@ -4668,6 +4688,10 @@
       "bytes": 243167,
       "sha256": "c4d5ed626c19c116167eb94847558c9ca7b0fbee287f14c69e465225ca66addf"
     },
+    "converter/src/mssql_dump/tests.rs": {
+      "bytes": 3262797,
+      "sha256": "d3d46ce8797a2c64052b8830fb45901847fe8300c1298483008452b0ae789849"
+    },
     "converter/src/mssql_dump/tests/configuration_rights_436.rs": {
       "bytes": 1713,
       "sha256": "bf3c85452d0801a2e74bb10b73e2b234ca6d79f2545745af96d513e25caf306f"
@@ -4675,10 +4699,6 @@
     "converter/src/mssql_dump/tests/onecdec.rs": {
       "bytes": 26114,
       "sha256": "859204e0bf6d800873fd43269b59f47eb519f60cc3120b0821b0000094083e7f"
-    },
-    "converter/src/mssql_dump/tests.rs": {
-      "bytes": 3262797,
-      "sha256": "d3d46ce8797a2c64052b8830fb45901847fe8300c1298483008452b0ae789849"
     },
     "converter/src/mssql_dump/timing.rs": {
       "bytes": 26871,
@@ -4732,17 +4752,21 @@
       "bytes": 131925,
       "sha256": "d5f3497dca9713a28f1aae844a6e122f033b8f4fa81994529bf88ca4e5591f39"
     },
+    "converter/src/mssql_managed_worker.rs": {
+      "bytes": 21968,
+      "sha256": "22b59752a029fc6a4e794d66dae3d961f2ed3afd9e36508613abf833d330f7c9"
+    },
     "converter/src/mssql_managed_worker/child.rs": {
       "bytes": 37360,
       "sha256": "bfa1e8c223ef064f2d6be29345dafa129f03bc6cbcce0c85d8dfc17be47fe930"
     },
-    "converter/src/mssql_managed_worker/cli/tests.rs": {
-      "bytes": 34313,
-      "sha256": "9577abbef6574a29e26601b0db1b261444dee1b786131c567701de2852e87234"
-    },
     "converter/src/mssql_managed_worker/cli.rs": {
       "bytes": 20490,
       "sha256": "fa6671a0649ca1d443f9e80d775032ba8c8ef19c6cfc1baa4374f1de162d3ab2"
+    },
+    "converter/src/mssql_managed_worker/cli/tests.rs": {
+      "bytes": 34313,
+      "sha256": "9577abbef6574a29e26601b0db1b261444dee1b786131c567701de2852e87234"
     },
     "converter/src/mssql_managed_worker/command.rs": {
       "bytes": 2584,
@@ -4752,37 +4776,33 @@
       "bytes": 347,
       "sha256": "98fd69b1a0db775b3ecc8414acd05e52c3565ef101bc56b50f21ef9fedd19852"
     },
-    "converter/src/mssql_managed_worker/native/authentication/tests.rs": {
-      "bytes": 11967,
-      "sha256": "11c4a2f4b3cb586d355ccef446cd7d00599a53b5e9f5fd6d246b3e563d10888e"
+    "converter/src/mssql_managed_worker/native.rs": {
+      "bytes": 79572,
+      "sha256": "b5a46b5f5bbfef6088d6df93206e089ffec023fb281715dd09d398f07bb9ecf2"
     },
     "converter/src/mssql_managed_worker/native/authentication.rs": {
       "bytes": 10347,
       "sha256": "7066e4434e22edeefd1f50fdfc4cd2082eb8940bf793f112346c73a898a81142"
     },
+    "converter/src/mssql_managed_worker/native/authentication/tests.rs": {
+      "bytes": 11967,
+      "sha256": "11c4a2f4b3cb586d355ccef446cd7d00599a53b5e9f5fd6d246b3e563d10888e"
+    },
     "converter/src/mssql_managed_worker/native/census_observer_tests.rs": {
       "bytes": 21164,
       "sha256": "8e635229c7a6503016b9c59fb53278f2bb54438b432973d33d058277dc459487"
-    },
-    "converter/src/mssql_managed_worker/native.rs": {
-      "bytes": 79572,
-      "sha256": "b5a46b5f5bbfef6088d6df93206e089ffec023fb281715dd09d398f07bb9ecf2"
     },
     "converter/src/mssql_managed_worker/tests.rs": {
       "bytes": 14765,
       "sha256": "56b6ad5a8a15d49f898755fa48a47fc1de161f3abbbda62f9596a294dcac8bda"
     },
-    "converter/src/mssql_managed_worker/undo/tests.rs": {
-      "bytes": 30675,
-      "sha256": "8a7f11fd0cb534530ce765328a4e3674c6d06072fc1770301032a2eaca9958ba"
-    },
     "converter/src/mssql_managed_worker/undo.rs": {
       "bytes": 33041,
       "sha256": "61bf392dc8be6eb4e78883bd4ab8893bc7c39139cdc1b9f1007fbde6dc1c2b38"
     },
-    "converter/src/mssql_managed_worker.rs": {
-      "bytes": 21968,
-      "sha256": "22b59752a029fc6a4e794d66dae3d961f2ed3afd9e36508613abf833d330f7c9"
+    "converter/src/mssql_managed_worker/undo/tests.rs": {
+      "bytes": 30675,
+      "sha256": "8a7f11fd0cb534530ce765328a4e3674c6d06072fc1770301032a2eaca9958ba"
     },
     "converter/src/mssql_platform_profile.rs": {
       "bytes": 58803,
@@ -4792,6 +4812,10 @@
       "bytes": 21596,
       "sha256": "ef1126e9a44d81432569ab5f194d401ae9c6817eeee554e898171d78711d528c"
     },
+    "converter/src/mssql_source_change.rs": {
+      "bytes": 96086,
+      "sha256": "7d4d52ea118210afcaca46e527c88421af3216f2595fc6b6d96c25a79c2e46b8"
+    },
     "converter/src/mssql_source_change/files.rs": {
       "bytes": 13700,
       "sha256": "da292a868bf4a3db0e44a8fed994ec16847465f580ab7958681050bd93cbdfca"
@@ -4799,10 +4823,6 @@
     "converter/src/mssql_source_change/original_source_tests.rs": {
       "bytes": 17128,
       "sha256": "e690cf1184080510c203fa82b0dbb8f3a1160a7950785f7f828e1b619b38bc28"
-    },
-    "converter/src/mssql_source_change.rs": {
-      "bytes": 96086,
-      "sha256": "7d4d52ea118210afcaca46e527c88421af3216f2595fc6b6d96c25a79c2e46b8"
     },
     "converter/src/mssql_worker_switch.rs": {
       "bytes": 5995,
@@ -5064,13 +5084,17 @@
       "bytes": 8031,
       "sha256": "d9e70f900c187cb829dca8138f7161b20a9f4d751fb3abc86d088ff625320bdb"
     },
-    "converter/src/settings/commands/tests.rs": {
-      "bytes": 9517,
-      "sha256": "9d6250a66bc1953505f5524e5e141514efb5a65de5c6a61d0967d3f455e27233"
+    "converter/src/settings.rs": {
+      "bytes": 28758,
+      "sha256": "3cb731196ed7ede50daad1b5ce1cf37cecc84ed76f688b37ea6705b07c4572c8"
     },
     "converter/src/settings/commands.rs": {
       "bytes": 12110,
       "sha256": "419273d89660dd02e3c9d9afa74aaaeb20d5fcad758292816126764b88902fe3"
+    },
+    "converter/src/settings/commands/tests.rs": {
+      "bytes": 9517,
+      "sha256": "9d6250a66bc1953505f5524e5e141514efb5a65de5c6a61d0967d3f455e27233"
     },
     "converter/src/settings/files.rs": {
       "bytes": 8243,
@@ -5087,10 +5111,6 @@
     "converter/src/settings/tests.rs": {
       "bytes": 22810,
       "sha256": "24073d2b312982f5f74614aaa70dd55db4b198f7464e51cd30cbe5dc2d451e97"
-    },
-    "converter/src/settings.rs": {
-      "bytes": 28758,
-      "sha256": "3cb731196ed7ede50daad1b5ce1cf37cecc84ed76f688b37ea6705b07c4572c8"
     },
     "converter/src/source.rs": {
       "bytes": 199745,
@@ -5372,13 +5392,13 @@
       "bytes": 13996,
       "sha256": "4ed478aa1f528e8f540554b8a8caacf0d1a543fa2094897aa243de7a5c0fc5c8"
     },
-    "converter/tests/fixtures/native-evidence/8.3.27.2214/dcs-area-template/manifest.json": {
-      "bytes": 4312,
-      "sha256": "4ce71c78c0a24b130b17ab40a99b0465189cc118e5b25874a26ebca6baa74357"
-    },
     "converter/tests/fixtures/native-evidence/8.3.27.2214/dcs-area-template-appearance/manifest.json": {
       "bytes": 4651,
       "sha256": "a86d85f123ffa263a23ed52af20de9f041cadd7d5f78a917e17d1fd5c592dea2"
+    },
+    "converter/tests/fixtures/native-evidence/8.3.27.2214/dcs-area-template/manifest.json": {
+      "bytes": 4312,
+      "sha256": "4ce71c78c0a24b130b17ab40a99b0465189cc118e5b25874a26ebca6baa74357"
     },
     "converter/tests/fixtures/native-evidence/8.3.27.2214/dcs-link-expressions/manifest.json": {
       "bytes": 5769,
@@ -5396,13 +5416,13 @@
       "bytes": 4941,
       "sha256": "1eb46e96e5c992f926a4cb117c5cc18a608729d77761a03b7b668fb6f9373436"
     },
-    "converter/tests/fixtures/native-evidence/8.3.27.2214/dcs-query-union-link/manifest.json": {
-      "bytes": 3442,
-      "sha256": "8159efb0b3398e413729ecf7860c28e6f5f6ca1c7811a7d18b7692361985fe74"
-    },
     "converter/tests/fixtures/native-evidence/8.3.27.2214/dcs-query-union-link-typeid/manifest.json": {
       "bytes": 3648,
       "sha256": "37bcb3ebddfc8357fea21701643eb0820fed2f6e3773f939ef66583c9b948498"
+    },
+    "converter/tests/fixtures/native-evidence/8.3.27.2214/dcs-query-union-link/manifest.json": {
+      "bytes": 3442,
+      "sha256": "8159efb0b3398e413729ecf7860c28e6f5f6ca1c7811a7d18b7692361985fe74"
     },
     "converter/tests/form_compat_namespace.rs": {
       "bytes": 1791,
@@ -5431,6 +5451,14 @@
     "converter/tests/migration_2_21_to_2_20.rs": {
       "bytes": 12039,
       "sha256": "323209d17d3f1637fdad607691c83a6f9d15ccf0b8eae674b67f0440c2c811be"
+    },
+    "converter/tests/native_configuration_legacy.rs": {
+      "bytes": 4712,
+      "sha256": "c9fbb66e46271910d7542fe1a520c4249cc672c6b6bdc8a6ceaacdce179027c4"
+    },
+    "converter/tests/native_rights_order.rs": {
+      "bytes": 5517,
+      "sha256": "afbf201944c20722ec0522c694cfaf77254250d465f2129009d0ac9c0eba33b6"
     },
     "converter/tests/offline_conversion_matrix.rs": {
       "bytes": 17318,
@@ -5509,12 +5537,16 @@
       "sha256": "014a570d7b780689bbb2a03cb168d249d80062f2dfc22a3c6d876b99c9d44481"
     },
     "provenance.json": {
-      "bytes": 10382,
-      "sha256": "bba8d31b81f465000f40f8d4fe0b0d2a855db955d21e1c12ca053e032f02f777"
+      "bytes": 13814,
+      "sha256": "29e12b9b40cda16596493b96b82255c758ff9c36cc379eb890368d01a94ba71c"
     },
     "python-test-provenance.json": {
-      "bytes": 1781,
-      "sha256": "2ebe25993702bb5ca64bd34e6f7a3616b3109a5de7bba8aaea85ec7a67ad31ed"
+      "bytes": 1948,
+      "sha256": "666b340a565815044c7baa051c8be3177a1e1be9b3a62a1032bbd8041ea36b28"
+    },
+    "release-validation.json": {
+      "bytes": 1836,
+      "sha256": "52c25042e42214da3149d41d70efdfeec895f989c9673e2df39f0ac78cbaf7f9"
     },
     "tests/__init__.py": {
       "bytes": 0,
@@ -5524,13 +5556,29 @@
       "bytes": 9381,
       "sha256": "36e63c16251d346462b021c703758c23316845770f4e8318d69754dee8a7c3e4"
     },
+    "tests/test_integrity_long_paths.py": {
+      "bytes": 3944,
+      "sha256": "832c8312d694cc74eeae9bb9aec5f3875d1fb19da70bab7a96ae000c3df219c4"
+    },
+    "tests/test_legacy67.py": {
+      "bytes": 3166,
+      "sha256": "c2f00dbb909c47f6b3ed81e0769d5b0dce630eff8f6a3e71a5f3d83a4e2e6fb7"
+    },
+    "tests/test_modern_signature.py": {
+      "bytes": 3159,
+      "sha256": "f00f3218ee02cd42528d5514877d9c05c7c56c0b9fe6273d27da585a7fff5f49"
+    },
     "tests/test_posix_env_boundary.py": {
-      "bytes": 4481,
-      "sha256": "2e724241d8547d82ad860212b0930c972ce2a01d5e795d661bf342b52a32f001"
+      "bytes": 4536,
+      "sha256": "246f5e577aa86f61322d6d3bb72e70056eaf09e8c93467ad3de2503111270a4a"
     },
     "tests/test_posix_process.py": {
-      "bytes": 11538,
-      "sha256": "7037826a8538fd621b30af1dd46f72767da95bca2f5a4d7bd9065bbc4a49153c"
+      "bytes": 11793,
+      "sha256": "f8d90ee0b2c46f89ba922894a15fe1288ed8b6592d8c7568222b7263e9b29966"
+    },
+    "tests/test_profiles.py": {
+      "bytes": 9018,
+      "sha256": "f4d44dc81cddd26b81ae9150b76a1a1f992ff3b803bf6b87d1f2b845a99e1fc2"
     },
     "tests/test_runtime_boundaries.py": {
       "bytes": 4842,
@@ -5616,6 +5664,10 @@
       "bytes": 11085,
       "sha256": "b50b376e7d24a0598488b730c3034ffcd0b58dd36c0913a24b9903a3cfd04bf7"
     },
+    "third-party-licenses/rust/aws-lc-sys-0.45.0/LICENSE": {
+      "bytes": 20337,
+      "sha256": "728536b4160e051f86d7c9c388f704866b3d512cd7df97ac3516c65279523c4e"
+    },
     "third-party-licenses/rust/aws-lc-sys-0.45.0/aws-lc/LICENSE": {
       "bytes": 20338,
       "sha256": "977c541bd25ffe36975dde25c028c0cd15ddf3d08243983b58e8a6a3d9447523"
@@ -5623,10 +5675,6 @@
     "third-party-licenses/rust/aws-lc-sys-0.45.0/aws-lc/third_party/fiat/LICENSE": {
       "bytes": 1161,
       "sha256": "43e358d7b6eb109d0f51f7b3a090fd82607965767c25fadee39e922475de2061"
-    },
-    "third-party-licenses/rust/aws-lc-sys-0.45.0/LICENSE": {
-      "bytes": 20337,
-      "sha256": "728536b4160e051f86d7c9c388f704866b3d512cd7df97ac3516c65279523c4e"
     },
     "third-party-licenses/rust/base64-0.21.7/LICENSE-APACHE": {
       "bytes": 10847,
@@ -6016,6 +6064,10 @@
       "bytes": 1066,
       "sha256": "123a331b5dbf04c30097fa43b8f858bc85df671fe776de498d01f3d6b7c1f69e"
     },
+    "third-party-licenses/rust/libmimalloc-sys-0.1.49/LICENSE.txt": {
+      "bytes": 1055,
+      "sha256": "a08554fab028af3af047e8588d32d019662c1b1bf07959a195a2f75fe340726b"
+    },
     "third-party-licenses/rust/libmimalloc-sys-0.1.49/c_src/mimalloc/v2/LICENSE": {
       "bytes": 1096,
       "sha256": "82ade5d7d9b029044b5fbbc326207fc47c2d44ee4dd71e8a559c36d728217de9"
@@ -6023,10 +6075,6 @@
     "third-party-licenses/rust/libmimalloc-sys-0.1.49/c_src/mimalloc/v3/LICENSE": {
       "bytes": 1096,
       "sha256": "82ade5d7d9b029044b5fbbc326207fc47c2d44ee4dd71e8a559c36d728217de9"
-    },
-    "third-party-licenses/rust/libmimalloc-sys-0.1.49/LICENSE.txt": {
-      "bytes": 1055,
-      "sha256": "a08554fab028af3af047e8588d32d019662c1b1bf07959a195a2f75fe340726b"
     },
     "third-party-licenses/rust/libyaml-rs-0.3.0/LICENSE-MIT": {
       "bytes": 1023,
@@ -6595,28 +6643,8 @@
     "third-party-licenses/rust/zmij-1.0.21/LICENSE-MIT": {
       "bytes": 1023,
       "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
-    },
-    "converter/crates/ibcmd-schema/src/object_rights.rs": {
-      "bytes": 5694,
-      "sha256": "43a67303a8605eb3172d72f562574043ffb5bc0034a72a475a4b996864ee80c6"
-    },
-    "converter/tests/native_rights_order.rs": {
-      "bytes": 5517,
-      "sha256": "afbf201944c20722ec0522c694cfaf77254250d465f2129009d0ac9c0eba33b6"
-    },
-    "converter/docs/rights-order-evidence.md": {
-      "bytes": 1939,
-      "sha256": "2ea9acb85e7c6bea5df3b66349c5ec730aacd067e547410c4ace671496d5c94b"
-    },
-    "converter/docs/form-binding-scope.md": {
-      "bytes": 1736,
-      "sha256": "da3706a6450871febac3795eb8d01e7e5020638a87f8dcf8745239eba99b3006"
-    },
-    "RELEASE-NOTES.ru.md": {
-      "bytes": 2869,
-      "sha256": "196bbac309562d13d9928da90a4d069852be5b1afc86fcb2e7f2f00546e8440c"
     }
   },
   "scope": "Source, test, notices and minimal build description; application is supplied separately by publication owner.",
-  "source_status": "BD018: BD017 rights source and matching bundled runtime; form reader unchanged"
+  "source_status": "0.2.0 generic compatibility source7cefdce and matching BD021 ELF, runtime and Python fixes; platform8.3.27 user roundtrip accepted for one DO main configuration."
 }

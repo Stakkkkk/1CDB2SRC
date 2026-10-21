@@ -4,7 +4,7 @@
     "revision": "04e833e535602560cf0bc1b439f5a070db8ca936",
     "license": "MIT; vendored/dependency components retain their own licenses"
   },
-  "source_recipe": "Published f57e668 source plus BD-017 native Catalog/InformationRegister rights ordering; form reader unchanged.",
+  "source_recipe": "Published rights-order source plus generic legacy roots, typed application purposes and inherited form font support, source commit7cefdce. Python supports legacy identities, reader selection, modern signature byte preservation and long paths.",
   "replacements": {
     "src/mssql_dump/form_body.rs": {
       "bytes": 1922507,
@@ -13,6 +13,30 @@
     "src/mssql_dump/tests.rs": {
       "bytes": 3262797,
       "sha256": "d3d46ce8797a2c64052b8830fb45901847fe8300c1298483008452b0ae789849"
+    },
+    "src/metadata_model/root.rs": {
+      "bytes": 55622,
+      "sha256": "d1db11822f369c5ce7750a5bf594935c22fdb161d2d9f707ccaad038158d36ae"
+    },
+    "src/metadata_model/root_export.rs": {
+      "bytes": 43548,
+      "sha256": "7b17242a1bd96409440e71ab5b9bfb7a1ebef136992f044e062899f41be96651"
+    },
+    "src/mssql_dump/configuration_interface_pair_tests.rs": {
+      "bytes": 32824,
+      "sha256": "f58aa10aa2a6bb4fa6a281090b8f4740859f3532a010762719454786471c12f6"
+    },
+    "src/mssql_dump/form/xml_2_21_order.rs": {
+      "bytes": 43720,
+      "sha256": "59bd2bd96753c9639bcf1cc2c152348d90864e2ee6a674150e41c4cc24c2ca75"
+    },
+    "src/mssql_dump/refs.rs": {
+      "bytes": 257769,
+      "sha256": "33ec8506a6899ce1bcfcd5ff5c5be28a2d73e80f9952c73c82f5c0db9546c3d7"
+    },
+    "tests/native_configuration_legacy.rs": {
+      "bytes": 4712,
+      "sha256": "c9fbb66e46271910d7542fe1a520c4249cc672c6b6bdc8a6ceaacdce179027c4"
     }
   },
   "changed_from_upstream": {
@@ -82,8 +106,8 @@
         "sha256": "1a989145b2673783e1c0ace6e19515fad270f1a634d59ec37a6eb83808fa0548"
       },
       "published": {
-        "bytes": 258555,
-        "sha256": "7ef59a743abd27aeb0e123f21dc7b700c5b71ec87804e437f3c798eaff1bfd01"
+        "bytes": 257769,
+        "sha256": "33ec8506a6899ce1bcfcd5ff5c5be28a2d73e80f9952c73c82f5c0db9546c3d7"
       }
     },
     "src/mssql_dump/role_rights.rs": {
@@ -206,9 +230,11 @@
   "accepted_binary": {
     "version": "ibcmd-rs 0.4.1",
     "target": "x86_64-unknown-linux-gnu",
-    "sha256": "b087962e13423f833ccae5e495423fa2228767da628f3c06a375ba48b7a48358",
-    "bytes": 65346072,
-    "feature": "experimental-native-projection"
+    "sha256": "e4823a015f093e3e805da57f874793cf767d35675314baf58a13424f3f67a0df",
+    "bytes": 65435328,
+    "feature": "experimental-native-projection",
+    "path": "/engine/ibcmd-rs",
+    "source_commit": "7cefdceb5232a99e7de79bffc4a7963a5c6bbc67"
   },
   "original_build": {
     "rustc": "1.95.0",
@@ -240,6 +266,74 @@
   "development_candidate": {
     "source_base": "f57e668a21c14e027f7e4f97f741e66e5f61c6dd",
     "rights_patch_commit": "e879041",
+    "status": "DO_COMPATIBILITY_DELIVERED_WITH_LIMITATIONS",
+    "build_binary": {
+      "path": "/engine/ibcmd-rs",
+      "bytes": 65435328,
+      "sha256": "e4823a015f093e3e805da57f874793cf767d35675314baf58a13424f3f67a0df"
+    },
+    "tests": {
+      "rust_integration_passed": 8,
+      "external_corpus_ignored": 1,
+      "python_windows_total": 78,
+      "python_windows_passed": 61,
+      "python_windows_linux_only_skipped": 17
+    },
+    "full_new_configuration_export": false,
+    "bundled_app_runtime_updated": true,
+    "bundled_app_runtime_source": "BD021 final release ELF; BD025 delivery",
+    "note": "DO main XML2.20 imported and compared by user on8.3.27 with no configuration differences.8.5 roundtrip and complete arbitrary support not established. Legacy ERP form binding and XML2.21 picture resource limitations remain.",
+    "build_history": "Accepted ELF produced during BD021 incremental release compilation; 131.949s attempt later failed only in integration helper, followed by15.571s successful corrected tests. Packaging did not rebuild."
+  },
+  "previous_accepted_binary": {
+    "version": "ibcmd-rs 0.4.1",
+    "target": "x86_64-unknown-linux-gnu",
+    "sha256": "6d82fbd8213acec5981d41a5b5b400e975e6aac63b2571bf1a621c52e563fbd1",
+    "bytes": 65312536,
+    "feature": "experimental-native-projection"
+  },
+  "runtime_packaging": {
+    "stage": "BD025",
+    "image_id": "sha256:40e04a9a6ef3d30217c30ead631e2cdd3c53fe4767ef7ae070d046df3ef72b83",
+    "archive": {
+      "bytes": 23070720,
+      "sha256": "799805dee0470b5366d1bec11ecdd80cdc22e39b712d64056aafced5a36ca8af"
+    },
+    "preserved_rootfs_entries": 18,
+    "changed_rootfs_paths": [
+      "engine/ibcmd-rs"
+    ],
+    "stale_attestations_removed": true,
+    "rust_rebuilt_during_packaging": false
+  },
+  "previous_accepted_binary_bd018": {
+    "version": "ibcmd-rs 0.4.1",
+    "target": "x86_64-unknown-linux-gnu",
+    "sha256": "b087962e13423f833ccae5e495423fa2228767da628f3c06a375ba48b7a48358",
+    "bytes": 65346072,
+    "feature": "experimental-native-projection"
+  },
+  "validation_boundaries": {
+    "user_roundtrip": {
+      "configuration_family": "Document management",
+      "side": "main",
+      "platform": "8.3.27; exact build not supplied",
+      "differences": 0,
+      "platform_used_by_extractor": false
+    },
+    "new_live_db_export_in_release_packaging": false,
+    "source_commit": "7cefdceb5232a99e7de79bffc4a7963a5c6bbc67",
+    "known_limits": [
+      "ERP UseAlways plain/tilde rule unresolved",
+      "XML2.21 DCS pictures still embedded instead of native sidecar representation",
+      "Empty localized choice presentations can differ as XML",
+      "Opaque entries and unavailable protected source reported",
+      "Platform8.5 roundtrip not accepted"
+    ]
+  },
+  "previous_rights_validation": {
+    "source_base": "f57e668a21c14e027f7e4f97f741e66e5f61c6dd",
+    "rights_patch_commit": "e879041",
     "status": "RIGHTS_DELIVERED_FORM_UNRESOLVED",
     "build_binary": {
       "bytes": 65346072,
@@ -258,26 +352,5 @@
     "bundled_app_runtime_updated": true,
     "bundled_app_runtime_source": "BD017 release build, rights source e879041; BD018 runtime packaging",
     "note": "Four CF-derived role XML files per provider validated byte-exact; remaining form rule unresolved. Full large configuration export not repeated."
-  },
-  "previous_accepted_binary": {
-    "version": "ibcmd-rs 0.4.1",
-    "target": "x86_64-unknown-linux-gnu",
-    "sha256": "6d82fbd8213acec5981d41a5b5b400e975e6aac63b2571bf1a621c52e563fbd1",
-    "bytes": 65312536,
-    "feature": "experimental-native-projection"
-  },
-  "runtime_packaging": {
-    "stage": "BD018",
-    "image_id": "sha256:00eeff2d089cb123646f480e348e54f73b548f18b67244d935357af158df1343",
-    "archive": {
-      "bytes": 23050240,
-      "sha256": "71db00225db926c4cb813b0fe64ac7eeb05d4aa9aea7d7e0f759de2ac7d7827e"
-    },
-    "preserved_rootfs_entries": 18,
-    "changed_rootfs_paths": [
-      "engine/ibcmd-rs"
-    ],
-    "stale_attestations_removed": true,
-    "rust_rebuilt_during_packaging": false
   }
 }

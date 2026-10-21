@@ -1,7 +1,7 @@
 {
-  "release": "BD-018-rights",
-  "source_package": "1CDB2SRC-rights",
-  "application": "BD017 validated universal rights-order build delivered in Docker and Linux native runtimes; remaining form limitation documented.",
+  "release": "0.2.0",
+  "source_package": "1CDB2SRC-0.2.0",
+  "application": "Legacy configuration compatibility, application purposes, inherited form fonts, signature byte preservation and long-path validation; explicit XML profiles and limitations.",
   "runtime_upstream": "https://github.com/Untru/ibcmd-rs",
   "runtime_upstream_revision": "04e833e535602560cf0bc1b439f5a070db8ca936",
   "files": {
@@ -82,8 +82,8 @@
       "sha256": "af24de2f30d9fb2a03c7f72be6d896c37a5ae33a19dbc2fe98c00f47f094653a"
     },
     "runtime/local/ibcmd-rs": {
-      "bytes": 65346072,
-      "sha256": "b087962e13423f833ccae5e495423fa2228767da628f3c06a375ba48b7a48358"
+      "bytes": 65435328,
+      "sha256": "e4823a015f093e3e805da57f874793cf767d35675314baf58a13424f3f67a0df"
     },
     "runtime/local/ld-linux-x86-64.so.2": {
       "bytes": 215000,
@@ -111,15 +111,15 @@
     },
     "runtime/local/manifest.json": {
       "bytes": 2734,
-      "sha256": "2c32fbc24eeae48baad4e4eb7e0d55b876f21e1b621ae4e70f5bc19830d76f20"
+      "sha256": "53bb5322d6fd59fb0bbcfc97366991a1cc31ff556934d88fc3f2a8485c5fae67"
     },
     "runtime/manifest.json": {
       "bytes": 1013,
-      "sha256": "ff438812584d96ce3bf88fb561683608e51c9d62d7b2b4914d36187849e1381e"
+      "sha256": "54b95244dd1eafb369b62b989ff2a1a6f48e52e56fa228c7b89f5b94c140d9d2"
     },
     "runtime/runtime-image.tar": {
-      "bytes": 23050240,
-      "sha256": "71db00225db926c4cb813b0fe64ac7eeb05d4aa9aea7d7e0f759de2ac7d7827e"
+      "bytes": 23070720,
+      "sha256": "799805dee0470b5366d1bec11ecdd80cdc22e39b712d64056aafced5a36ca8af"
     },
     "onecdb2src/__init__.py": {
       "bytes": 0,
@@ -202,8 +202,8 @@
       "sha256": "74ecdf3a208d8a926a97b9ff4616bf40f28068f0dfce8e8e96392e4f49cba816"
     },
     "onecdb2src/profiles.py": {
-      "bytes": 14347,
-      "sha256": "b1241cfa8198db8909477f585c5c00910323766f6c16d3518e0f5a9e2d152c9b"
+      "bytes": 15313,
+      "sha256": "34aae3209407e9789f68ad5e4cfa4ac5c848c85416cf97fdee3a4d286c4ee181"
     },
     "onecdb2src/sqlcf/__init__.py": {
       "bytes": 43,
@@ -214,8 +214,8 @@
       "sha256": "f66efc8fccc48cce80b5ebabb50caee179c297c808c2fb515b45699808cdc398"
     },
     "onecdb2src/sqlcf/export_cf.py": {
-      "bytes": 9939,
-      "sha256": "651f858a9dc37e6c854054210bd4bfc70723f82d6ab63df60b8f23879a816a67"
+      "bytes": 10098,
+      "sha256": "21965001bc6c679088e2fe809b92aac57b71b39b68859d435a518e7727a6d6be"
     },
     "onecdb2src/sqlcf/snapshot.py": {
       "bytes": 6106,
@@ -234,16 +234,16 @@
       "sha256": "ab71d4c5cf4f8619c0a85a8290f63881c631b03680b52d7c926ce061af66e53c"
     },
     "onecdb2src/worker.py": {
-      "bytes": 11153,
-      "sha256": "c9455fd614c51cee7d93d41931f3bf2f9c1906ac952c0c6e43b62f6265aede44"
+      "bytes": 11658,
+      "sha256": "2465c3b0b1fbd9ef39a5adbe56b46390373ef204f27134506493fd9913360e49"
     },
     "onecdb2src/xml/__init__.py": {
       "bytes": 43,
       "sha256": "fe3b6922e8c75ccb4ce594f87795e32cdbf1e839f869990a4a001ca3ef6d6990"
     },
     "onecdb2src/xml/complete_native_with_parents_r9.py": {
-      "bytes": 28355,
-      "sha256": "c22a0393a0b379b04864490f20db9f7cb0fde46feea8403dcf311681adeb178f"
+      "bytes": 29374,
+      "sha256": "9527de9243abf43735bc51612c5978bbbed969fd3a8c2f852923b6885a615339"
     },
     "onecdb2src/xml/data/assets.rs": {
       "bytes": 66467,
@@ -254,12 +254,12 @@
       "sha256": "b8b52f7b94ba8c1b62f3e98583de36b5430654ddd6521ad9fafd4a6f348dfc53"
     },
     "onecdb2src/xml/dump_info_modern_r3.py": {
-      "bytes": 24214,
-      "sha256": "078ecfa32901620946c4c08862f10e7a2b08dc6adef1923363daa44ce0835032"
+      "bytes": 27115,
+      "sha256": "eb54877a086c3bfdcf02d57ff65a88c96c1289b262f8035a4ffc0f911381d7c2"
     },
     "onecdb2src/xml/export_local.py": {
       "bytes": 11167,
-      "sha256": "2cfde704626895817bcf115b98146c94398525cca520a43c2fa10886f35ecd64"
+      "sha256": "5dfea6d7baee74728d7b1630029e819ddccf6e7f14192267cfcd44425ac55233"
     },
     "onecdb2src/xml/export_native.py": {
       "bytes": 22379,

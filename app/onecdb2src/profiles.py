@@ -2,7 +2,7 @@
 
 Structural model: metadata_model/root_export.rs read_row; root.rs SECTIONS;
 mssql_dump/refs.rs root owner/header/footer; configuration_root.rs V76 pairs.
-Only two complete seven-section shapes are admitted. No nested identity search,
+Three complete seven-section shapes are admitted. Legacy67 uses the existing 8.3.27/XML2.20 reader policy. No nested identity search,
 configuration names, business versions, data hashes or oracle select a profile.
 """
 import copy
@@ -181,15 +181,17 @@ def _detect_rows(root,row):
                 children.add(child_uuid)
     require(not (owners & children),'section owner reused as child UUID')
     tag = _atom(properties[0])
-    require((tag,len(properties)) in (('68',61),('76',77)),'unsupported properties shape (legacy67 is not admitted)')
+    require((tag,len(properties)) in (('67',60),('68',61),('76',77)),'unsupported properties shape')
     # Stored shape authority is independent of business version and name.
     # These lexical bounds are not a semantic equality assertion: V76 stored
     # 80327/80501 is evidenced too. Native semantic guards remain authoritative.
     c26,c43 = _number(properties[26]),_number(properties[43])
-    maximum = 80327 if tag=='68' else 80501
+    maximum = 80501 if tag=='76' else 80327
     require(80000<=c26<=maximum and 80000<=c43<=maximum,'unsupported compatibility coordinates')
-    require(c26<=c43,'contradictory compatibility coordinates')
-    _atom(properties[60],'1')
+    # Ordinary legacy roots store independent coordinates; native c19_e12
+    # proves that field43 may be below field26. Retain V76's previous guard.
+    if tag=='76': require(c26<=c43,'contradictory compatibility coordinates')
+    if tag!='67': _atom(properties[60],'1')
     pair = None
     if tag=='76':
         pair = [_atom(properties[38]),_atom(properties[62])]
@@ -199,7 +201,7 @@ def _detect_rows(root,row):
         for index in range(69,77): _atom(properties[index],NIL)
     return dict(root_storage_uuid=storage,configuration_uuid=configuration,shape_tag=tag,
                 shape_arity=len(properties),interface_pair=pair,
-                platform_profile='8.3.27' if tag=='68' else '8.5.1',xml_version='2.20' if tag=='68' else '2.21')
+                platform_profile='8.5.1' if tag=='76' else '8.3.27',xml_version='2.21' if tag=='76' else '2.20')
 
 def _canonical(value):
     return json.dumps(value,sort_keys=True,ensure_ascii=False,separators=(',',':'),allow_nan=False).encode('utf-8')
@@ -225,7 +227,15 @@ def select(cf_path,request='auto'):
         storage = _uuid(root[1])
         require(storage in source.names(),'root pointer target missing from CF')
         facts = _detect_rows(root,source.tree(storage))
-        require(request=='auto' or request==facts['platform_profile'],'requested platform contradicts stored CF shape')
+        # A known newer writer can read a legacy ordinary root. The shape
+        # sets the minimum reader, not the only possible XML edition. Auto
+        # remains unchanged; a V76 root still refuses the older reader.
+        if request!='auto':
+            require(request==facts['platform_profile'] or
+                    request=='8.5.1' and facts['shape_tag'] in ('67','68'),
+                    'requested platform is older than the supported CF reader')
+            facts['platform_profile']=request
+            facts['xml_version']='2.21' if request=='8.5.1' else '2.20'
         source.stream.seek(0)
         digest = hashlib.file_digest(source.stream,'sha256').hexdigest()
         after = os.fstat(source.stream.fileno())

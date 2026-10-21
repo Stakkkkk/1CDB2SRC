@@ -241,11 +241,19 @@ def main():
     dump_node=ET.fromstring((component/'ConfigDumpInfo.xml').read_bytes())
     require(dump_node.tag=='{http://v8.1c.ru/8.3/xcf/dumpinfo}ConfigDumpInfo' and dump_node.get('version')==profile['xml_version'],
             'Actual DumpInfo XML profile mismatch')
+    modern_signature_gate=None
     if profile['xml_version']=='2.21':
         require(not info.get('suppressed_empty_legacy_records') and not info.get('experimental_legacy_signature'),
                 'Unsupported XML2.21 signature projection')
         archive=CFSource(cf)
-        try:signature_rules.signature_profile_guard(archive,profile['configuration_uuid'],profile)
+        try:
+            # Properties owner UUID differs legitimately from RootMainGuid.
+            owner=signature_rules.cf_identity(archive.tree(str(archive.tree('root')[1])))['uuid']
+            proof=info.get('modern_signature_passthrough')
+            signature_rules.signature_profile_guard(archive,owner,profile,modern_passthrough=proof is not None)
+            if proof is not None:
+                modern_signature_gate=signature_rules.validate_modern_signature_passthrough(archive,owner,profile,entries,tree)
+                require(proof==modern_signature_gate,'Modern signature proof differs from actual CF/output bytes')
         finally:archive.close()
     require(info['status'] == 'CANDIDATE' and not info['unresolved'] and not info['unowned_children']
             and not info['cf_child_discrepancies'], 'DumpInfo refused or incomplete')
@@ -254,7 +262,7 @@ def main():
     require(info['run_receipt_sha256'] == digest(base / 'receipt.json')
             and info['engine_report_sha256'] == digest(base / 'engine.stderr.json'), 'DumpInfo/run binding mismatch')
     require(digest(component / 'ConfigDumpInfo.xml') == info['output_sha256'], 'DumpInfo changed')
-    signature_gate = None
+    signature_gate = modern_signature_gate
     if info.get('suppressed_empty_legacy_records'):
         signature_rules_sha_before = digest(signature_rules.__file__)
         suppressed = info['suppressed_empty_legacy_records']

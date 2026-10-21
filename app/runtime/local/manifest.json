@@ -2,24 +2,24 @@
   "schema": 1,
   "runtime_backend": "native",
   "platform": "linux-x86_64",
-  "image_id": "sha256:00eeff2d089cb123646f480e348e54f73b548f18b67244d935357af158df1343",
-  "archive_sha256": "71db00225db926c4cb813b0fe64ac7eeb05d4aa9aea7d7e0f759de2ac7d7827e",
+  "image_id": "sha256:40e04a9a6ef3d30217c30ead631e2cdd3c53fe4767ef7ae070d046df3ef72b83",
+  "archive_sha256": "799805dee0470b5366d1bec11ecdd80cdc22e39b712d64056aafced5a36ca8af",
   "oci_digest_chain": [
-    "sha256:00eeff2d089cb123646f480e348e54f73b548f18b67244d935357af158df1343",
-    "sha256:ff583a1cba4405ce93bdb52e6fa50e4932d1fdf19ef46bd2add98c490e811d83",
-    "sha256:868910a95b7dd649858c9855be0c00c5b524b8589e5650687b352ab3a93cdb27",
-    "sha256:57f1242b234666dbcddc53a548280f9a9cb409a57de687b1934d3deae63a530f",
+    "sha256:40e04a9a6ef3d30217c30ead631e2cdd3c53fe4767ef7ae070d046df3ef72b83",
+    "sha256:4a795ea4288e893435f3b42ef36b0290e275361952b82e97f38e4fc6541b9705",
+    "sha256:c380d502e2371730cb3864710ceb84f7c4f5637890c5da483298a5234d5a4471",
+    "sha256:86f991014c83b0d1cb3c12415052d91957877e2067e39360bfa977b4506ebae3",
     "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1"
   ],
   "binary": "ibcmd-rs",
   "loader": "ld-linux-x86-64.so.2",
   "library_path": "lib",
   "version_stdout": "ibcmd-rs 0.4.1\n",
-  "version_origin": "BD018 repackaged BD017 validated binary; version checked separately",
+  "version_origin": "BD021 repackaged BD021 validated binary; version checked separately",
   "files": {
     "ibcmd-rs": {
-      "bytes": 65346072,
-      "sha256": "b087962e13423f833ccae5e495423fa2228767da628f3c06a375ba48b7a48358",
+      "bytes": 65435328,
+      "sha256": "e4823a015f093e3e805da57f874793cf767d35675314baf58a13424f3f67a0df",
       "source_image_path": "/engine/ibcmd-rs",
       "mode": "0755"
     },
@@ -61,7 +61,7 @@
     }
   },
   "libc_boundary": "bundled exact glibc loader/libc from accepted image; host Linux x86-64 required; no ARM/Windows native claim",
-  "created_utc": "2026-10-21T02:37:35.010120+00:00",
+  "created_utc": "2026-10-21T10:53:08.688138+00:00",
   "docker_calls": 0,
   "engine_calls": 0
 }

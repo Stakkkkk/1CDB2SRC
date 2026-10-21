@@ -139,7 +139,10 @@ class PosixTests(unittest.TestCase):
             root=Path(td);pidfile=root/'engine-child.pid'
             grandchild='import os,time;os.setsid();time.sleep(30)'
             engine='import subprocess,sys,pathlib,time;p=subprocess.Popen([sys.executable,"-c",'+repr(grandchild)+']);pathlib.Path('+repr(str(pidfile))+').write_text(str(p.pid));time.sleep(30)'
-            inner='import sys;sys.path.insert(0,'+repr(str(PACKAGE))+');from onecdb2src.control.bounded_process import run;run('+repr([sys.executable,'-B','-c',engine])+','+repr(str(root/'inner-out'))+','+repr(str(root/'inner-err'))+','+repr(str(root/'inner-receipt'))+',30,10000,10000)'
+            # Inner process cannot raise the outer supervisor's inherited
+            # 256MiB hard RLIMIT_AS to the default 1GiB. Give this tiny fixture
+            # an explicit smaller bound, preserving the nested-timeout check.
+            inner='import sys;sys.path.insert(0,'+repr(str(PACKAGE))+');from onecdb2src.control.bounded_process import run;run('+repr([sys.executable,'-B','-c',engine])+','+repr(str(root/'inner-out'))+','+repr(str(root/'inner-err'))+','+repr(str(root/'inner-receipt'))+',30,10000,10000,rss_cap=128*1024**2)'
             # Three interpreter startups over the host-mounted private Python
             # need fixture startup room; this is not a product timeout change.
             result=run([sys.executable,'-B','-c',inner],root/'out',root/'err',root/'receipt',4,10000,10000,256*1024**2)

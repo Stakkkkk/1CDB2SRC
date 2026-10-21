@@ -41,8 +41,9 @@ class BootstrapEnvTests(unittest.TestCase):
                     observed['target_dummy_correct']=(target_seen.get(key.encode())==token.encode())==expected_secret
                     observed['bootstrap_dummy_correct']=(bootstrap_seen.get(key.encode())==token.encode())==expected_secret
                     observed['unrelated_parent_correct']=(parent_only.encode() in bootstrap_seen)==(mode=='inherit')
-                    observed['bootstrap_loader_from_parent']=bootstrap_seen.get(b'LD_LIBRARY_PATH')==baseline.get('LD_LIBRARY_PATH','').encode()
-                    observed['target_loader_unchanged']=(target_seen.get(b'LD_LIBRARY_PATH')==(baseline.get('LD_LIBRARY_PATH','').encode() if target_env is None else target_env['LD_LIBRARY_PATH'].encode()))
+                    parent_loader=baseline['LD_LIBRARY_PATH'].encode() if 'LD_LIBRARY_PATH' in baseline else None
+                    observed['bootstrap_loader_from_parent']=bootstrap_seen.get(b'LD_LIBRARY_PATH')==parent_loader
+                    observed['target_loader_unchanged']=(target_seen.get(b'LD_LIBRARY_PATH')==(parent_loader if target_env is None else target_env['LD_LIBRARY_PATH'].encode()))
                     target_cmd=Path('/proc',str(target),'cmdline').read_bytes()
                     bootstrap_cmd=Path('/proc',str(bootstrap),'cmdline').read_bytes()
                     observed['argv_clean']=token.encode() not in target_cmd+bootstrap_cmd
