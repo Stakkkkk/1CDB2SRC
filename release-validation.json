@@ -1,53 +1,77 @@
 {
-  "version": "0.2.0",
-  "status": "PASS_WITH_DOCUMENTED_XML_LIMITATIONS",
-  "runtime_binary": {
-    "path": "/engine/ibcmd-rs",
-    "bytes": 65435328,
-    "sha256": "e4823a015f093e3e805da57f874793cf767d35675314baf58a13424f3f67a0df"
-  },
-  "packaging_checks": {
-    "windows_offline_install_seconds": 10.608578599989414,
-    "linux_offline_install_seconds": 69.82254976697732,
-    "python_windows": {
-      "total": 78,
-      "passed": 61,
-      "linux_only_skipped": 17
+  "version": "0.3.0-rc.1",
+  "status": "PACKAGE_WITH_SUPPLIED_ACCEPTED_EVIDENCE",
+  "scope": "Evidence copied and byte-verified, not validation executed by this sealer",
+  "current_evidence": [
+    {
+      "label": "small",
+      "path": "release-evidence/current/small.json",
+      "fact": {
+        "bytes": 4770,
+        "sha256": "8a1a91cbc771b20437bcbb3ce234f4827878626c8187cce99d18112e689da45c"
+      },
+      "reported_status": "PASS_WITH_LIMITATIONS",
+      "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     },
-    "python_linux": {
-      "total": 78,
-      "passed": 78
+    {
+      "label": "large-fixture-1",
+      "path": "release-evidence/current/large-fixture-1.json",
+      "fact": {
+        "bytes": 4968,
+        "sha256": "9e7c10e6fd37b61ab39e509e474ded5df9e76594f34aa5ac6f2e71062be02553"
+      },
+      "reported_status": "PASS_WITH_LIMITATIONS",
+      "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     },
-    "saved_cf_replay": {
-      "windows_docker_seconds": 16.140930099994875,
-      "linux_native_seconds": 15.008484048012178,
-      "all_paths_and_bytes_equal": true,
-      "main_files": 9,
-      "vendor_files": 6,
-      "live_database_read": false
+    {
+      "label": "large-erp",
+      "path": "release-evidence/current/large-erp.json",
+      "fact": {
+        "bytes": 6011,
+        "sha256": "caf5bbfe0dbcd547a0416ebb120cb3504b7c46e910873c14aeab803f96f90ca4"
+      },
+      "reported_status": "PASS_WITH_LIMITATIONS",
+      "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
+    },
+    {
+      "label": "windows-units",
+      "path": "release-evidence/current/windows-units.json",
+      "fact": {
+        "bytes": 1805,
+        "sha256": "658384be0c0408580da05497d8088c0be48e4b05d2f5bda3686c8a598d96826a"
+      },
+      "reported_status": "PASS_WITH_LIMITATIONS",
+      "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
+    },
+    {
+      "label": "linux-offline-units",
+      "path": "release-evidence/current/linux-offline-units.json",
+      "fact": {
+        "bytes": 2851,
+        "sha256": "ba75a66f95a47c6ad4ea71db023abe9d71301fb8e41398869990c1ef7ab7a675"
+      },
+      "reported_status": "PASS_WITH_DECLARED_SKIPS",
+      "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     }
-  },
-  "prior_validation": {
-    "rust_integration_passed": 8,
-    "external_corpus_ignored": 1,
-    "full_large_configuration_repeated_for_packaging": false,
-    "DO_main_user_load_and_compare": {
-      "platform": "8.3.27; exact build not supplied",
-      "configuration_differences": 0
-    }
-  },
-  "historical_packaging_failure": {
-    "linux_tests_before_portability_fixes": {
-      "passed": 74,
-      "failed": 4
+  ],
+  "historical_validation": {
+    "path": "release-evidence/historical/release-validation-previous.json",
+    "fact": {
+      "bytes": 1836,
+      "sha256": "52c25042e42214da3149d41d70efdfeec895f989c9673e2df39f0ac78cbaf7f9"
     },
-    "cause": "Test assumptions: absent vs empty LD_LIBRARY_PATH, and nested fixture requesting a memory hard limit above its inherited outer hard limit. Only tests corrected; production process supervision unchanged."
+    "current_release_claim": false
   },
-  "boundaries": [
-    "CF replay is not a new live DB-to-XML end-to-end run",
-    "Linux native checked in offline container harness, not bare metal",
-    "Platform8.5 roundtrip not accepted",
-    "XML2.21 picture sidecar representation and ERP tilde binding remain limited",
-    "Unavailable protected BSL is not recovered"
-  ]
+  "performance_backend": {
+    "host_route_preserved": true,
+    "fast_docker": true,
+    "fast_helper_manifest": {
+      "bytes": 11559,
+      "sha256": "981fff1e7a02f3dbc25df17bc1b988a0220d365c21eba1ee7fbddd3e90be3117"
+    },
+    "rust_rebuilt_by_sealer": false,
+    "converter_source_unchanged": true,
+    "memory_policy": "Existing backend policy; sealer runs no converter or supervisor"
+  },
+  "live_DB_or_platform_run_by_sealer": false
 }

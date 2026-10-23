@@ -1,13 +1,29 @@
 {
-  "release": "0.2.0",
-  "source_package": "1CDB2SRC-0.2.0",
-  "application": "Legacy configuration compatibility, application purposes, inherited form fonts, signature byte preservation and long-path validation; explicit XML profiles and limitations.",
+  "release": "0.3.0-rc.1",
+  "source_package": "1CDB2SRC-0.3.0-rc.1",
+  "application": "CF/XML extractor; explicit fast Docker backend with documented validation boundaries.",
   "runtime_upstream": "https://github.com/Untru/ibcmd-rs",
   "runtime_upstream_revision": "04e833e535602560cf0bc1b439f5a070db8ca936",
   "files": {
     "export_1c.py": {
       "bytes": 634,
       "sha256": "03304ccc42a81f18ade2172976c326cc821b33d96b48191b0d9cb20cc54f4902"
+    },
+    "requirements-linux.txt": {
+      "bytes": 485,
+      "sha256": "29572d5b58ccbe451f83cb5204780dde9fbee7bf57dd46260bdf89b6fd643492"
+    },
+    "requirements.txt": {
+      "bytes": 579,
+      "sha256": "af24de2f30d9fb2a03c7f72be6d896c37a5ae33a19dbc2fe98c00f47f094653a"
+    },
+    "wheel-manifest-linux.json": {
+      "bytes": 3774,
+      "sha256": "23036afc92a3de4e4a2d1718335561330650ea263fbf922a000ed7ea0df4f9ee"
+    },
+    "wheel-manifest.json": {
+      "bytes": 1056,
+      "sha256": "280fb2effa2c70616811c30e74616a66ef514f849b1327a20ede5b9f087e0e84"
     },
     "licenses/python/psutil/LICENSE": {
       "bytes": 1577,
@@ -73,13 +89,25 @@
       "bytes": 26530,
       "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
     },
-    "requirements-linux.txt": {
-      "bytes": 485,
-      "sha256": "29572d5b58ccbe451f83cb5204780dde9fbee7bf57dd46260bdf89b6fd643492"
+    "runtime/manifest.json": {
+      "bytes": 1013,
+      "sha256": "54b95244dd1eafb369b62b989ff2a1a6f48e52e56fa228c7b89f5b94c140d9d2"
     },
-    "requirements.txt": {
-      "bytes": 579,
-      "sha256": "af24de2f30d9fb2a03c7f72be6d896c37a5ae33a19dbc2fe98c00f47f094653a"
+    "runtime/runtime-image.tar": {
+      "bytes": 23070720,
+      "sha256": "799805dee0470b5366d1bec11ecdd80cdc22e39b712d64056aafced5a36ca8af"
+    },
+    "runtime/fast-helper/helper-image.tar.gz": {
+      "bytes": 69615016,
+      "sha256": "72ec3b902aaf03eb2c6710c56e23fbfceb3fd98a18e8b37354e849a60185c45b"
+    },
+    "runtime/fast-helper/manifest.json": {
+      "bytes": 11559,
+      "sha256": "981fff1e7a02f3dbc25df17bc1b988a0220d365c21eba1ee7fbddd3e90be3117"
+    },
+    "runtime/fast-helper/THIRD-PARTY-NOTICES.txt": {
+      "bytes": 710,
+      "sha256": "45eecb24f86a0894c2663e73d2bdebbe5b8a4f6ad3ac4f4218d5e43110314478"
     },
     "runtime/local/ibcmd-rs": {
       "bytes": 65435328,
@@ -88,6 +116,10 @@
     "runtime/local/ld-linux-x86-64.so.2": {
       "bytes": 215000,
       "sha256": "02bcda52c1a5dfc236f94d9e5255b4a0e26347d8a372a5223b650e31f291ce3c"
+    },
+    "runtime/local/manifest.json": {
+      "bytes": 2734,
+      "sha256": "53bb5322d6fd59fb0bbcfc97366991a1cc31ff556934d88fc3f2a8485c5fae67"
     },
     "runtime/local/lib/libc.so.6": {
       "bytes": 1926232,
@@ -109,57 +141,57 @@
       "bytes": 26530,
       "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
     },
-    "runtime/local/manifest.json": {
-      "bytes": 2734,
-      "sha256": "53bb5322d6fd59fb0bbcfc97366991a1cc31ff556934d88fc3f2a8485c5fae67"
+    "onecdb2src/cli.py": {
+      "bytes": 27725,
+      "sha256": "7fd10d7e60cd730f2c7772f6f2bc7ef5e5570b01b6c090dfd7ae19e6a74817b5"
     },
-    "runtime/manifest.json": {
-      "bytes": 1013,
-      "sha256": "54b95244dd1eafb369b62b989ff2a1a6f48e52e56fa228c7b89f5b94c140d9d2"
+    "onecdb2src/native_policy.py": {
+      "bytes": 4957,
+      "sha256": "734565da3b3ab622b7bcbe64edb65cf843edb0f01a69ae563f851b6faa6d0de2"
     },
-    "runtime/runtime-image.tar": {
-      "bytes": 23070720,
-      "sha256": "799805dee0470b5366d1bec11ecdd80cdc22e39b712d64056aafced5a36ca8af"
+    "onecdb2src/profiles.py": {
+      "bytes": 15313,
+      "sha256": "34aae3209407e9789f68ad5e4cfa4ac5c848c85416cf97fdee3a4d286c4ee181"
+    },
+    "onecdb2src/util.py": {
+      "bytes": 1174,
+      "sha256": "ab71d4c5cf4f8619c0a85a8290f63881c631b03680b52d7c926ce061af66e53c"
+    },
+    "onecdb2src/worker.py": {
+      "bytes": 13960,
+      "sha256": "c3f33e1d7fd1ad9ed75a2c94f9ef58ba60fa407f11f72dd97129c7acfe03d24d"
     },
     "onecdb2src/__init__.py": {
       "bytes": 0,
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    "onecdb2src/cli.py": {
-      "bytes": 21252,
-      "sha256": "14ba8720078110ee14797877538cdd225e87775e45f6228c3605f6a82da81ddf"
-    },
-    "onecdb2src/control/__init__.py": {
-      "bytes": 44,
-      "sha256": "db4606ddbbfe268b4fdc4872381552e23e9eb32ac6273a69f2dda11e173e5c66"
     },
     "onecdb2src/control/bootstrap.py": {
       "bytes": 466,
       "sha256": "98886800e0fe90617df43c5926c4516be3fd17be8add6795bbbc5e46897550ce"
     },
     "onecdb2src/control/bootstrap_posix.py": {
-      "bytes": 6672,
-      "sha256": "3fdc0ecd537f08852351874a43903852799563ff8fe3e2682e6a1f4244f9645d"
+      "bytes": 7051,
+      "sha256": "38f3e086652e1f9d9b5777f3dec58902f5abf8da0595411ad8e30c24dca32a71"
     },
     "onecdb2src/control/bounded_posix.py": {
-      "bytes": 11719,
-      "sha256": "60420b82119b884321cd16b6b342bdfa62ccd2c36c16a1810c48d5157559cf7f"
+      "bytes": 12223,
+      "sha256": "3d2d674f200a278e9252d8398e5e612a20787788da3f0998b1650aef4b678dcb"
     },
     "onecdb2src/control/bounded_process.py": {
       "bytes": 529,
       "sha256": "3e128190c6ea52d1bbb2747d0e7b8852a239e1e9166d4e6cd9f1595b3a77cb99"
     },
     "onecdb2src/control/bounded_windows.py": {
-      "bytes": 12296,
-      "sha256": "b6d1242abe5f0dd40605942f6edb58a90be74fd8f6c8a5af7fa6e674f341d6d3"
+      "bytes": 13641,
+      "sha256": "99e554422886744997078fd4596109e9da5eb1fbb84c196104d7f09258267b6e"
     },
     "onecdb2src/control/posix_support.py": {
-      "bytes": 2753,
-      "sha256": "e3fe35437db4415cec729015966979fb67e993999c4f3c79b636cb496973b6fa"
+      "bytes": 2981,
+      "sha256": "86f486b321963d3c1757a9c7aca0ff1acfc833d9705c4178796fb973b73aae46"
     },
-    "onecdb2src/db/__init__.py": {
-      "bytes": 163,
-      "sha256": "330af1a3f439df14df3e4cce085b8b41f4636fd6d904aa4929bfa85e364b6c16"
+    "onecdb2src/control/__init__.py": {
+      "bytes": 44,
+      "sha256": "db4606ddbbfe268b4fdc4872381552e23e9eb32ac6273a69f2dda11e173e5c66"
     },
     "onecdb2src/db/capture.py": {
       "bytes": 9316,
@@ -181,13 +213,9 @@
       "bytes": 16305,
       "sha256": "ba60d52330fb69d696f7d3b4889bdd44ccb2a710323284115e1614165018b468"
     },
-    "onecdb2src/native_policy.py": {
-      "bytes": 4957,
-      "sha256": "734565da3b3ab622b7bcbe64edb65cf843edb0f01a69ae563f851b6faa6d0de2"
-    },
-    "onecdb2src/nativecf/__init__.py": {
-      "bytes": 43,
-      "sha256": "fe3b6922e8c75ccb4ce594f87795e32cdbf1e839f869990a4a001ca3ef6d6990"
+    "onecdb2src/db/__init__.py": {
+      "bytes": 163,
+      "sha256": "330af1a3f439df14df3e4cce085b8b41f4636fd6d904aa4929bfa85e364b6c16"
     },
     "onecdb2src/nativecf/brace.py": {
       "bytes": 4224,
@@ -201,11 +229,7 @@
       "bytes": 9681,
       "sha256": "74ecdf3a208d8a926a97b9ff4616bf40f28068f0dfce8e8e96392e4f49cba816"
     },
-    "onecdb2src/profiles.py": {
-      "bytes": 15313,
-      "sha256": "34aae3209407e9789f68ad5e4cfa4ac5c848c85416cf97fdee3a4d286c4ee181"
-    },
-    "onecdb2src/sqlcf/__init__.py": {
+    "onecdb2src/nativecf/__init__.py": {
       "bytes": 43,
       "sha256": "fe3b6922e8c75ccb4ce594f87795e32cdbf1e839f869990a4a001ca3ef6d6990"
     },
@@ -229,33 +253,21 @@
       "bytes": 9681,
       "sha256": "74ecdf3a208d8a926a97b9ff4616bf40f28068f0dfce8e8e96392e4f49cba816"
     },
-    "onecdb2src/util.py": {
-      "bytes": 1174,
-      "sha256": "ab71d4c5cf4f8619c0a85a8290f63881c631b03680b52d7c926ce061af66e53c"
-    },
-    "onecdb2src/worker.py": {
-      "bytes": 11658,
-      "sha256": "2465c3b0b1fbd9ef39a5adbe56b46390373ef204f27134506493fd9913360e49"
-    },
-    "onecdb2src/xml/__init__.py": {
+    "onecdb2src/sqlcf/__init__.py": {
       "bytes": 43,
       "sha256": "fe3b6922e8c75ccb4ce594f87795e32cdbf1e839f869990a4a001ca3ef6d6990"
     },
     "onecdb2src/xml/complete_native_with_parents_r9.py": {
-      "bytes": 29374,
-      "sha256": "9527de9243abf43735bc51612c5978bbbed969fd3a8c2f852923b6885a615339"
-    },
-    "onecdb2src/xml/data/assets.rs": {
-      "bytes": 66467,
-      "sha256": "3a97d5c35a16bc7f7a4724c75fc2892e613da62f47aba3c2ad13e24eaf97c05c"
+      "bytes": 31020,
+      "sha256": "e8585df92561b45c52087b8e98accabc9163a8754ae9223156e683bf1cf4aa15"
     },
     "onecdb2src/xml/dump_info.py": {
       "bytes": 17002,
       "sha256": "b8b52f7b94ba8c1b62f3e98583de36b5430654ddd6521ad9fafd4a6f348dfc53"
     },
     "onecdb2src/xml/dump_info_modern_r3.py": {
-      "bytes": 27115,
-      "sha256": "eb54877a086c3bfdcf02d57ff65a88c96c1289b262f8035a4ffc0f911381d7c2"
+      "bytes": 27827,
+      "sha256": "7190899bdf744e4ae9b6c3c9121fe89e76fd120b7713dcc56b81b569a682341f"
     },
     "onecdb2src/xml/export_local.py": {
       "bytes": 11167,
@@ -269,21 +281,57 @@
       "bytes": 15425,
       "sha256": "397f1fef455c522e6946485d57c501748974f15362c6fba26e958f5e43453cad"
     },
+    "onecdb2src/xml/fast_docker.py": {
+      "bytes": 40980,
+      "sha256": "5affc81b81174bb930291a55b034202e23002d4d6a994f014e148a53a0e74b60"
+    },
+    "onecdb2src/xml/fast_runtime.py": {
+      "bytes": 20556,
+      "sha256": "892bf366edc462c8bd8aa9490f01725634a91d5be89d08af9e8d7c5cc23d012b"
+    },
+    "onecdb2src/xml/fast_stream.py": {
+      "bytes": 36641,
+      "sha256": "feceb35ab4c7c06866530da84977829993cf6fda00611209305ad2f804a85713"
+    },
+    "onecdb2src/xml/linux_helpers.py": {
+      "bytes": 6624,
+      "sha256": "db1d3a134a60e5653eb848b1eb82955804e1cebe93e146dbf88f3c9bf1e203b7"
+    },
+    "onecdb2src/xml/materialize.py": {
+      "bytes": 3377,
+      "sha256": "fbae3bfe0bf76118f096020f38f339e6720955888bda3ef6a7167417b6d17f02"
+    },
+    "onecdb2src/xml/namespace_result.py": {
+      "bytes": 19864,
+      "sha256": "87a408bf10e4f61d66583d4ec88d3dfa32064e6cd8f170e0802c334a8c8286fc"
+    },
     "onecdb2src/xml/parent_v8container_r1.py": {
       "bytes": 7059,
       "sha256": "198e023d07f50163ca9377f88c921d8cd930a98d70468d10c552b1f2b5912279"
+    },
+    "onecdb2src/xml/readback.py": {
+      "bytes": 10812,
+      "sha256": "cffa7b06df06fd99469a8709324c773a8837ccedcb5ced16dd9e0a277b6457a5"
     },
     "onecdb2src/xml/runtime_identity.py": {
       "bytes": 1867,
       "sha256": "f0db2486ccc91b9d0c5634d7c75a5984661310319194c80fceed9d429f5cdc75"
     },
-    "wheel-manifest-linux.json": {
-      "bytes": 3774,
-      "sha256": "23036afc92a3de4e4a2d1718335561330650ea263fbf922a000ed7ea0df4f9ee"
+    "onecdb2src/xml/stream_tar.py": {
+      "bytes": 11750,
+      "sha256": "84367146ad2ecc49e43135dadd00f97c00bb86724f5778a5e199394e56253fc1"
     },
-    "wheel-manifest.json": {
-      "bytes": 1056,
-      "sha256": "280fb2effa2c70616811c30e74616a66ef514f849b1327a20ede5b9f087e0e84"
+    "onecdb2src/xml/_fast_contract.py": {
+      "bytes": 5447,
+      "sha256": "444fd61ea6832497508ac95dc4482568a4640c190e8a9acc180635a962af47f2"
+    },
+    "onecdb2src/xml/__init__.py": {
+      "bytes": 43,
+      "sha256": "fe3b6922e8c75ccb4ce594f87795e32cdbf1e839f869990a4a001ca3ef6d6990"
+    },
+    "onecdb2src/xml/data/assets.rs": {
+      "bytes": 66467,
+      "sha256": "3a97d5c35a16bc7f7a4724c75fc2892e613da62f47aba3c2ad13e24eaf97c05c"
     },
     "wheels/psutil-7.2.2-cp37-abi3-win_amd64.whl": {
       "bytes": 137737,
@@ -329,5 +377,16 @@
       "bytes": 347996,
       "sha256": "b683bd1b6659ddcd810ff02ad09ba821d4bf1065072805063eb35c49617905ac"
     }
+  },
+  "performance_backend": {
+    "host_route_preserved": true,
+    "fast_docker": true,
+    "fast_helper_manifest": {
+      "bytes": 11559,
+      "sha256": "981fff1e7a02f3dbc25df17bc1b988a0220d365c21eba1ee7fbddd3e90be3117"
+    },
+    "rust_rebuilt_by_sealer": false,
+    "converter_source_unchanged": true,
+    "memory_policy": "Existing backend policy; sealer runs no converter or supervisor"
   }
 }

@@ -1,0 +1,291 @@
+{
+  "schema": "1CDB2SRC_FAST_HELPER_V1",
+  "status": "SEALED_OFFLINE_HELPER_REQUIRES_PRODUCT_ACTUAL",
+  "image_id": "sha256:df9a477e95e0d7119f7ed94cf4f8c2f19d365cdb4548a6bf00ce5092c91ce361",
+  "image_identity": {
+    "archive_format": "OCI_DIRECT_MANIFEST",
+    "provenance_image_id": "sha256:df9a477e95e0d7119f7ed94cf4f8c2f19d365cdb4548a6bf00ce5092c91ce361",
+    "platform_manifest_id": "sha256:df9a477e95e0d7119f7ed94cf4f8c2f19d365cdb4548a6bf00ce5092c91ce361",
+    "classic_config_image_id": "sha256:2d5f5ddd6cd8fd089fc14c74531709a8bb838b8216dbb4d1c071e086b74d5cf2",
+    "allowed_image_ids": [
+      "sha256:df9a477e95e0d7119f7ed94cf4f8c2f19d365cdb4548a6bf00ce5092c91ce361",
+      "sha256:2d5f5ddd6cd8fd089fc14c74531709a8bb838b8216dbb4d1c071e086b74d5cf2"
+    ],
+    "rootfs_diff_ids": [
+      "sha256:e58989146fcec76699871403b9897b5c014af1ccd85f5a9300a215e7975525d7",
+      "sha256:ba0f973ad05d82f20d8dd8dc79a9d1b71e9d90ab48380d8c0912fad39dda5ced",
+      "sha256:8664c9b18215e1141ccc8fa3cbc7483f4cd16fb5230b570fa7c744da58251da3",
+      "sha256:c167899be569aee196241ae0905aeed34708881d5a8784be3de0ed9bf9db7200",
+      "sha256:400bf20a88b58aeff6637c22332bddcf36de4edac0b1a78da2c42182d93631d8"
+    ]
+  },
+  "entrypoint": [
+    "python",
+    "-I",
+    "-S",
+    "-B",
+    "/opt/app/onecdb2src/xml/linux_helpers.py"
+  ],
+  "env": [
+    "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+    "PYTHON_VERSION=3.13.16",
+    "PYTHON_SHA256=f4b1bfb3c79b5bb11b8d228a12504163b4c0dab4d679828d8f5f26b6cb6ab35d",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "PYTHONUTF8=1"
+  ],
+  "archive": {
+    "file": "helper-image.tar.gz",
+    "bytes": 69615016,
+    "sha256": "72ec3b902aaf03eb2c6710c56e23fbfceb3fd98a18e8b37354e849a60185c45b"
+  },
+  "source_files": {
+    "onecdb2src/__init__.py": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "onecdb2src/cli.py": {
+      "bytes": 27725,
+      "sha256": "7fd10d7e60cd730f2c7772f6f2bc7ef5e5570b01b6c090dfd7ae19e6a74817b5"
+    },
+    "onecdb2src/control/__init__.py": {
+      "bytes": 44,
+      "sha256": "db4606ddbbfe268b4fdc4872381552e23e9eb32ac6273a69f2dda11e173e5c66"
+    },
+    "onecdb2src/control/bootstrap.py": {
+      "bytes": 466,
+      "sha256": "98886800e0fe90617df43c5926c4516be3fd17be8add6795bbbc5e46897550ce"
+    },
+    "onecdb2src/control/bootstrap_posix.py": {
+      "bytes": 7051,
+      "sha256": "38f3e086652e1f9d9b5777f3dec58902f5abf8da0595411ad8e30c24dca32a71"
+    },
+    "onecdb2src/control/bounded_posix.py": {
+      "bytes": 12223,
+      "sha256": "3d2d674f200a278e9252d8398e5e612a20787788da3f0998b1650aef4b678dcb"
+    },
+    "onecdb2src/control/bounded_process.py": {
+      "bytes": 529,
+      "sha256": "3e128190c6ea52d1bbb2747d0e7b8852a239e1e9166d4e6cd9f1595b3a77cb99"
+    },
+    "onecdb2src/control/bounded_windows.py": {
+      "bytes": 13641,
+      "sha256": "99e554422886744997078fd4596109e9da5eb1fbb84c196104d7f09258267b6e"
+    },
+    "onecdb2src/control/posix_support.py": {
+      "bytes": 2981,
+      "sha256": "86f486b321963d3c1757a9c7aca0ff1acfc833d9705c4178796fb973b73aae46"
+    },
+    "onecdb2src/db/__init__.py": {
+      "bytes": 163,
+      "sha256": "330af1a3f439df14df3e4cce085b8b41f4636fd6d904aa4929bfa85e364b6c16"
+    },
+    "onecdb2src/db/capture.py": {
+      "bytes": 9316,
+      "sha256": "f16d8954c79ad141db9f9597a861b6e25e26d88aefdaa73af1a54382f6f40ee6"
+    },
+    "onecdb2src/db/common.py": {
+      "bytes": 1642,
+      "sha256": "978262badd951a213bd11cb72b6df07c32baba5a184403431d8c48bc61fd952e"
+    },
+    "onecdb2src/db/mssql.py": {
+      "bytes": 7194,
+      "sha256": "f2ff5c93d4e917dd5a1ccc7ab725952284b11b6283bb4b29aa7f25e9c99f5804"
+    },
+    "onecdb2src/db/odbc.py": {
+      "bytes": 5935,
+      "sha256": "50f2f3f8f61f9abcc00bb190ce87b8a8a963f0dfd9f43e2944cd3af5fce05dda"
+    },
+    "onecdb2src/db/postgresql.py": {
+      "bytes": 16305,
+      "sha256": "ba60d52330fb69d696f7d3b4889bdd44ccb2a710323284115e1614165018b468"
+    },
+    "onecdb2src/native_policy.py": {
+      "bytes": 4957,
+      "sha256": "734565da3b3ab622b7bcbe64edb65cf843edb0f01a69ae563f851b6faa6d0de2"
+    },
+    "onecdb2src/nativecf/__init__.py": {
+      "bytes": 43,
+      "sha256": "fe3b6922e8c75ccb4ce594f87795e32cdbf1e839f869990a4a001ca3ef6d6990"
+    },
+    "onecdb2src/nativecf/brace.py": {
+      "bytes": 4224,
+      "sha256": "e75d4a301c5b583f9c64f0d19e0f41dd52b06dfc530b1e7cf50af6bebedd7f8a"
+    },
+    "onecdb2src/nativecf/cf_source.py": {
+      "bytes": 2044,
+      "sha256": "7ac456465057dbe5dc7fc262fe20e9382090ff3d7846f653f63ed66aeda28e4f"
+    },
+    "onecdb2src/nativecf/v8container.py": {
+      "bytes": 9681,
+      "sha256": "74ecdf3a208d8a926a97b9ff4616bf40f28068f0dfce8e8e96392e4f49cba816"
+    },
+    "onecdb2src/profiles.py": {
+      "bytes": 15313,
+      "sha256": "34aae3209407e9789f68ad5e4cfa4ac5c848c85416cf97fdee3a4d286c4ee181"
+    },
+    "onecdb2src/sqlcf/__init__.py": {
+      "bytes": 43,
+      "sha256": "fe3b6922e8c75ccb4ce594f87795e32cdbf1e839f869990a4a001ca3ef6d6990"
+    },
+    "onecdb2src/sqlcf/brace.py": {
+      "bytes": 3369,
+      "sha256": "f66efc8fccc48cce80b5ebabb50caee179c297c808c2fb515b45699808cdc398"
+    },
+    "onecdb2src/sqlcf/export_cf.py": {
+      "bytes": 10098,
+      "sha256": "21965001bc6c679088e2fe809b92aac57b71b39b68859d435a518e7727a6d6be"
+    },
+    "onecdb2src/sqlcf/snapshot.py": {
+      "bytes": 6106,
+      "sha256": "49d21477a22749e678d5d9a1fac193a1af1539ee48ae236ac09750a0547a1a00"
+    },
+    "onecdb2src/sqlcf/support.py": {
+      "bytes": 2740,
+      "sha256": "c5c321200c1dcaf2aaabcfe2c75df4c0812131b3ce4860260cceaca62f892283"
+    },
+    "onecdb2src/sqlcf/v8container.py": {
+      "bytes": 9681,
+      "sha256": "74ecdf3a208d8a926a97b9ff4616bf40f28068f0dfce8e8e96392e4f49cba816"
+    },
+    "onecdb2src/util.py": {
+      "bytes": 1174,
+      "sha256": "ab71d4c5cf4f8619c0a85a8290f63881c631b03680b52d7c926ce061af66e53c"
+    },
+    "onecdb2src/worker.py": {
+      "bytes": 13960,
+      "sha256": "c3f33e1d7fd1ad9ed75a2c94f9ef58ba60fa407f11f72dd97129c7acfe03d24d"
+    },
+    "onecdb2src/xml/__init__.py": {
+      "bytes": 43,
+      "sha256": "fe3b6922e8c75ccb4ce594f87795e32cdbf1e839f869990a4a001ca3ef6d6990"
+    },
+    "onecdb2src/xml/_fast_contract.py": {
+      "bytes": 5447,
+      "sha256": "444fd61ea6832497508ac95dc4482568a4640c190e8a9acc180635a962af47f2"
+    },
+    "onecdb2src/xml/complete_native_with_parents_r9.py": {
+      "bytes": 31020,
+      "sha256": "e8585df92561b45c52087b8e98accabc9163a8754ae9223156e683bf1cf4aa15"
+    },
+    "onecdb2src/xml/data/assets.rs": {
+      "bytes": 66467,
+      "sha256": "3a97d5c35a16bc7f7a4724c75fc2892e613da62f47aba3c2ad13e24eaf97c05c"
+    },
+    "onecdb2src/xml/dump_info.py": {
+      "bytes": 17002,
+      "sha256": "b8b52f7b94ba8c1b62f3e98583de36b5430654ddd6521ad9fafd4a6f348dfc53"
+    },
+    "onecdb2src/xml/dump_info_modern_r3.py": {
+      "bytes": 27827,
+      "sha256": "7190899bdf744e4ae9b6c3c9121fe89e76fd120b7713dcc56b81b569a682341f"
+    },
+    "onecdb2src/xml/export_local.py": {
+      "bytes": 11167,
+      "sha256": "5dfea6d7baee74728d7b1630029e819ddccf6e7f14192267cfcd44425ac55233"
+    },
+    "onecdb2src/xml/export_native.py": {
+      "bytes": 22379,
+      "sha256": "8e6aa7029d28274e2839844e18bf94f226275f462187e66a6fc04b12c094c9da"
+    },
+    "onecdb2src/xml/extract_parent_assets_r8.py": {
+      "bytes": 15425,
+      "sha256": "397f1fef455c522e6946485d57c501748974f15362c6fba26e958f5e43453cad"
+    },
+    "onecdb2src/xml/fast_docker.py": {
+      "bytes": 40980,
+      "sha256": "5affc81b81174bb930291a55b034202e23002d4d6a994f014e148a53a0e74b60"
+    },
+    "onecdb2src/xml/fast_runtime.py": {
+      "bytes": 20556,
+      "sha256": "892bf366edc462c8bd8aa9490f01725634a91d5be89d08af9e8d7c5cc23d012b"
+    },
+    "onecdb2src/xml/fast_stream.py": {
+      "bytes": 36641,
+      "sha256": "feceb35ab4c7c06866530da84977829993cf6fda00611209305ad2f804a85713"
+    },
+    "onecdb2src/xml/linux_helpers.py": {
+      "bytes": 6624,
+      "sha256": "db1d3a134a60e5653eb848b1eb82955804e1cebe93e146dbf88f3c9bf1e203b7"
+    },
+    "onecdb2src/xml/materialize.py": {
+      "bytes": 3377,
+      "sha256": "fbae3bfe0bf76118f096020f38f339e6720955888bda3ef6a7167417b6d17f02"
+    },
+    "onecdb2src/xml/namespace_result.py": {
+      "bytes": 19864,
+      "sha256": "87a408bf10e4f61d66583d4ec88d3dfa32064e6cd8f170e0802c334a8c8286fc"
+    },
+    "onecdb2src/xml/parent_v8container_r1.py": {
+      "bytes": 7059,
+      "sha256": "198e023d07f50163ca9377f88c921d8cd930a98d70468d10c552b1f2b5912279"
+    },
+    "onecdb2src/xml/readback.py": {
+      "bytes": 10812,
+      "sha256": "cffa7b06df06fd99469a8709324c773a8837ccedcb5ced16dd9e0a277b6457a5"
+    },
+    "onecdb2src/xml/runtime_identity.py": {
+      "bytes": 1867,
+      "sha256": "f0db2486ccc91b9d0c5634d7c75a5984661310319194c80fceed9d429f5cdc75"
+    },
+    "onecdb2src/xml/stream_tar.py": {
+      "bytes": 11750,
+      "sha256": "84367146ad2ecc49e43135dadd00f97c00bb86724f5778a5e199394e56253fc1"
+    }
+  },
+  "runtime_files": {
+    "runtime/local/ibcmd-rs": {
+      "bytes": 65435328,
+      "sha256": "e4823a015f093e3e805da57f874793cf767d35675314baf58a13424f3f67a0df"
+    },
+    "runtime/local/ld-linux-x86-64.so.2": {
+      "bytes": 215000,
+      "sha256": "02bcda52c1a5dfc236f94d9e5255b4a0e26347d8a372a5223b650e31f291ce3c"
+    },
+    "runtime/local/lib/libc.so.6": {
+      "bytes": 1926232,
+      "sha256": "6b4a45352fd0c540a9c7c718f35ce8c8e46a4e482f9d3885a910c32d1a0e1421"
+    },
+    "runtime/local/lib/libgcc_s.so.1": {
+      "bytes": 125312,
+      "sha256": "2bd1552c47799ef67e701e81d4383061fd76059868e446e63560f0dd0d5ec14e"
+    },
+    "runtime/local/licenses/GPL-3.txt": {
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    "runtime/local/licenses/LGPL-2.1.txt": {
+      "bytes": 26530,
+      "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
+    },
+    "runtime/local/licenses/ibcmd-rs-MIT.txt": {
+      "bytes": 1099,
+      "sha256": "866a167ccd074fe0b81754c777f0587d7fb3fd27c605fb06c1f50a50dd061b92"
+    },
+    "runtime/local/manifest.json": {
+      "bytes": 2734,
+      "sha256": "53bb5322d6fd59fb0bbcfc97366991a1cc31ff556934d88fc3f2a8485c5fae67"
+    }
+  },
+  "provenance": {
+    "base_source": "python:3.13-slim-bookworm",
+    "base_image": "sha256:a1165e272e578941b84abc79e4ab38a0305cd12803a5c4247979ac7655f4d641",
+    "assembly": {
+      "bytes": 7378,
+      "sha256": "8b3c537ddb8a441bbeff0f986c8a41b5cbcc86d2c50f318638d471e2b6f6d1fd"
+    },
+    "context_manifest": {
+      "bytes": 27105,
+      "sha256": "adeb68b2f746b72a9ba2ca6f88486367fb076806f4208a7cd2c6a290087c7e69"
+    },
+    "accepted_image_id": "sha256:df9a477e95e0d7119f7ed94cf4f8c2f19d365cdb4548a6bf00ce5092c91ce361",
+    "seal_producer": {
+      "bytes": 16581,
+      "sha256": "03b08e531b730df943733bdb20cf7e27a7ca4665ec84eb6ed8dfb35c32385615"
+    },
+    "no_remote_resolution": true,
+    "docker_save_only": true
+  },
+  "source_closure_before_after": true,
+  "product_actual": "NOT_RUN_THIS_TOOL"
+}

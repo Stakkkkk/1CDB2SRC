@@ -1,0 +1,5 @@
+This helper inherits the unmodified filesystem layers of python:3.13-slim-bookworm (sha256:a1165e272e578941b84abc79e4ab38a0305cd12803a5c4247979ac7655f4d641).
+This name records build provenance; no tag lookup/pull was performed.
+CPython, Debian packages and other base-image components keep their respective licenses and notices; this file does not replace or relicense them. Inherited layers are preserved in the offline image archive.
+The bundled independent converter/runtime licenses are in /opt/app/runtime/local/licenses in the image, and app/runtime/local/licenses in this distribution.
+Application source is governed by its repository license notices. No blanket license is claimed for this image.

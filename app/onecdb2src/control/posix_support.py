@@ -4,20 +4,21 @@ import os
 import signal
 from pathlib import Path
 
-def process(pid):
+def process(pid,*,include_rss=True):
     try:text=Path('/proc',str(pid),'stat').read_text()
     except (FileNotFoundError,ProcessLookupError):return None
     fields=text[text.rfind(')')+2:].split()
     if len(fields)<22:raise RuntimeError('Incomplete owned process observation')
-    return dict(pid=int(pid),state=fields[0],ppid=int(fields[1]),pgid=int(fields[2]),sid=int(fields[3]),
-                start_ticks=int(fields[19]),rss_bytes=max(0,int(fields[21]))*os.sysconf('SC_PAGE_SIZE'))
+    token=dict(pid=int(pid),state=fields[0],ppid=int(fields[1]),pgid=int(fields[2]),sid=int(fields[3]),start_ticks=int(fields[19]))
+    if include_rss:token['rss_bytes']=max(0,int(fields[21]))*os.sysconf('SC_PAGE_SIZE')
+    return token
 
-def same_process(token):
-    current=process(token['pid'])
+def same_process(token,*,include_rss=True):
+    current=process(token['pid'],include_rss=include_rss)
     return current if current and current['start_ticks']==token['start_ticks'] else None
 
 def live(token):
-    current=same_process(token)
+    current=same_process(token,include_rss=False)
     return current is not None and current['state'] not in ('Z','X')
 
 def signal_process(token,sig):
@@ -25,23 +26,23 @@ def signal_process(token,sig):
     try:fd=os.pidfd_open(token['pid'],0)
     except ProcessLookupError:return
     try:
-        if same_process(token):
+        if same_process(token,include_rss=False):
             try:signal.pidfd_send_signal(fd,sig)
             except ProcessLookupError:pass
     finally:os.close(fd)
 
-def descendants(root,on_process=None):
-    result={};root_token=process(root);pending=[root_token] if root_token else []
+def descendants(root,on_process=None,*,include_rss=True):
+    result={};root_token=process(root,include_rss=include_rss);pending=[root_token] if root_token else []
     while pending:
         parent_token=pending.pop();pid=parent_token['pid']
-        if same_process(parent_token) is None:continue
+        if same_process(parent_token,include_rss=False) is None:continue
         try:children=Path('/proc',str(pid),'task',str(pid),'children').read_text().split()
         except (FileNotFoundError,ProcessLookupError):continue
         for child in children:
             child=int(child)
             if child in result:continue
-            item=process(child)
-            if item and item['ppid']==pid and same_process(parent_token) is not None:
+            item=process(child,include_rss=include_rss)
+            if item and item['ppid']==pid and same_process(parent_token,include_rss=False) is not None:
                 result[child]=item;pending.append(item)
                 # Record identities in the caller BEFORE an observation quota
                 # can abort enumeration, so finally still owns what to kill.

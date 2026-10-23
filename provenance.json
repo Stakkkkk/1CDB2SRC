@@ -352,5 +352,24 @@
     "bundled_app_runtime_updated": true,
     "bundled_app_runtime_source": "BD017 release build, rights source e879041; BD018 runtime packaging",
     "note": "Four CF-derived role XML files per provider validated byte-exact; remaining form rule unresolved. Full large configuration export not repeated."
+  },
+  "current_packaging": {
+    "version": "0.3.0-rc.1",
+    "performance_backend": {
+      "host_route_preserved": true,
+      "fast_docker": true,
+      "fast_helper_manifest": {
+        "bytes": 11559,
+        "sha256": "981fff1e7a02f3dbc25df17bc1b988a0220d365c21eba1ee7fbddd3e90be3117"
+      },
+      "rust_rebuilt_by_sealer": false,
+      "converter_source_unchanged": true,
+      "memory_policy": "Existing backend policy; sealer runs no converter or supervisor"
+    },
+    "accepted_binary_unchanged": true,
+    "converter_source_unchanged": true,
+    "validation": "release-validation.json",
+    "sealer_executed_runtime": false,
+    "prior_runtime_validation": "Historical fields above retain their original scope and are not new release runs"
   }
 }

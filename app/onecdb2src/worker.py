@@ -54,9 +54,15 @@ def integrity(config):
     from .nativecf.cf_source import CFSource
     from .sqlcf.export_cf import config_identity,cf_tree
     from . import profiles
-    import xml.etree.ElementTree as ET
+    from .xml.materialize import inspect_file
     from .xml.dump_info import long_path
     root=Path(config['root']);manifest=read(root/'_work/cf/manifest.json');result={}
+    fast=config.get('docker_mode','host')=='fast';limitations=[]
+    if fast:
+        require(config.get('runtime_backend')=='docker' and config.get('assembly_mode')=='adopt' and config.get('memory_controls') is False,'Invalid fast integrity policy')
+        # Neither side is verified while the other side is still producing.
+        for side in ('main','vendor'):
+            require(read(root/'_work'/('fast-'+side)/'result.json').get('status')=='CANDIDATE_GENERATED_REQUIRES_HOST_VERIFICATION','Both fast candidates must exist before final verification')
     for side,key in [('main','main_cf'),('vendor','supplier_cf')]:
         source=root/'_work/cf'/side/'source.cf';target=root/(side+'.cf')
         regular(source);require(not target.exists(),'Final CF already exists')
@@ -71,8 +77,20 @@ def integrity(config):
             require(all(identity[k]==expected_identity[k] for k in ('uuid','name','vendor','version')),'Final CF identity mismatch')
             entry_count=len(archive.catalog.entries)
         finally:archive.close()
-        final=long_path(root/side);receipt=read(final/'receipt.json')
         profile_path=root/'_work/profiles'/(side+'.json');profile=profiles.load(profile_path,source)
+        if fast:
+            from .xml.namespace_result import verify_fast_side
+            verified=verify_fast_side(config,side,workers=config.get('readback_workers',4))
+            require(verified.get('status')=='PASS_FAST_SIDE_REQUIRES_COMMON_CF_FINALIZATION','Fast namespace/file verification incomplete')
+            require(verified.get('cf')==expected and verified.get('profile')==profile,'Fast result host CF/profile binding mismatch')
+            require(fact(source)==fact(target)==expected,'Final CF changed during fast verification')
+            require(profiles.load(profile_path,source)==profile,'Host profile changed during fast verification')
+            result[side]={'cf':expected,'identity':identity,'profile':profile,'profile_receipt_sha256':fact(profile_path)['sha256'],'cf_entries':entry_count,**{k:verified[k] for k in ('xml_files','xml_bytes','bsl_files','opaque_unaccepted')},'fast_verification':verified}
+            limitations.extend(verified.get('limitations',[]))
+            if verified['opaque_unaccepted']:
+                limitations.append({'stage':'fast-'+side,'opaque':verified['native_policy'].get('opaque',[]),'opaque_unaccepted':verified['opaque_unaccepted'],'raw_native_policy':verified['native_policy']})
+            continue
+        final=long_path(root/side);receipt=read(final/'receipt.json')
         require(receipt.get('profile')==profile and receipt.get('profile_receipt')=={'path':str(profile_path.resolve()),'sha256':fact(profile_path)['sha256']},'Final profile lineage mismatch')
         require(receipt['status']=='CANDIDATE_POSTGEN_VERIFICATION_REQUIRED','Assembly incomplete')
         require(receipt['cf_sha256']==expected['sha256'],'Assembly/CF binding mismatch')
@@ -85,23 +103,26 @@ def integrity(config):
                 require(not rel.is_absolute() and '..' not in rel.parts and '\\' not in row['path'],'Unsafe output path')
                 require(row['path'] not in seen,'Duplicate assembly output')
                 seen.add(row['path']);p=final/'xml'/rel
-                regular(p);require(fact(p)=={k:row[k] for k in ('bytes','sha256')},'Final XML readback mismatch')
+                regular(p)
+                actual_fact,node=inspect_file(p,p.suffix=='.xml')
+                require(actual_fact=={k:row[k] for k in ('bytes','sha256')},'Final XML readback mismatch')
                 if p.suffix=='.xml':
-                    node=ET.parse(p).getroot()
                     if rel.as_posix()=='Configuration.xml':
                         require(node.tag=='{http://v8.1c.ru/8.3/MDClasses}MetaDataObject' and len(node.findall('{http://v8.1c.ru/8.3/MDClasses}Configuration'))==1,'Configuration metadata envelope missing')
                     if rel.as_posix()=='ConfigDumpInfo.xml':
                         require(node.tag=='{http://v8.1c.ru/8.3/xcf/dumpinfo}ConfigDumpInfo','DumpInfo envelope missing')
                     if node.tag in ('{http://v8.1c.ru/8.3/MDClasses}MetaDataObject','{http://v8.1c.ru/8.3/xcf/dumpinfo}ConfigDumpInfo'):
                         require(node.attrib.get('version')==profile['xml_version'],'Final metadata edition mismatch')
-                total+=p.stat().st_size;bsl+=p.suffix.lower()=='.bsl'
+                total+=actual_fact['bytes'];bsl+=p.suffix.lower()=='.bsl'
         actual=set()
         for base,dirs,files in os.walk(final/'xml',followlinks=False):
             for name in dirs:regular(Path(base)/name,True)
             for name in files:actual.add((Path(base)/name).relative_to(final/'xml').as_posix())
         require(actual==seen and len(seen)==receipt['files'] and {'Configuration.xml','ConfigDumpInfo.xml'}<=seen,'Final XML path set mismatch')
         result[side]={'cf':expected,'identity':identity,'profile':profile,'profile_receipt_sha256':fact(profile_path)['sha256'],'cf_entries':entry_count,'xml_files':len(seen),'xml_bytes':total,'bsl_files':bsl,'opaque_unaccepted':len(receipt['unaccepted_opaque_entries'])}
-    save(root/'_work/integrity.json',{'status':'PASS_OWN_RESULT_INTEGRITY','sides':result,'oracle_inputs':[]})
+    payload={'status':'PASS_OWN_RESULT_INTEGRITY','sides':result,'oracle_inputs':[]}
+    if fast:payload.update(limitations=limitations,memory_controls=False)
+    save(root/'_work/integrity.json',payload)
 
 def run(stage,config):
     root=Path(config['root']);work=root/'_work'
@@ -119,6 +140,11 @@ def run(stage,config):
         for side in ('main','vendor'):
             profile=profiles.select(work/'cf'/side/'source.cf',config['platform'])
             profiles.save_new(directory/(side+'.json'),profile)
+    elif stage.startswith('fast-'):
+        require(stage in ('fast-main','fast-vendor'),'Unknown fast side')
+        require(config.get('docker_mode')=='fast' and config.get('runtime_backend')=='docker' and config.get('assembly_mode')=='adopt' and config.get('memory_controls') is False,'Invalid fast producer policy')
+        from .xml.fast_docker import produce_fast_side
+        produce_fast_side(config,stage[5:])
     elif stage.startswith('native-'):
         if config.get('runtime_backend','docker')=='native':
             from .xml.export_local import export

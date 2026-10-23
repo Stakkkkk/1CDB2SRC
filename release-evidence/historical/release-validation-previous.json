@@ -1,0 +1,53 @@
+{
+  "version": "0.2.0",
+  "status": "PASS_WITH_DOCUMENTED_XML_LIMITATIONS",
+  "runtime_binary": {
+    "path": "/engine/ibcmd-rs",
+    "bytes": 65435328,
+    "sha256": "e4823a015f093e3e805da57f874793cf767d35675314baf58a13424f3f67a0df"
+  },
+  "packaging_checks": {
+    "windows_offline_install_seconds": 10.608578599989414,
+    "linux_offline_install_seconds": 69.82254976697732,
+    "python_windows": {
+      "total": 78,
+      "passed": 61,
+      "linux_only_skipped": 17
+    },
+    "python_linux": {
+      "total": 78,
+      "passed": 78
+    },
+    "saved_cf_replay": {
+      "windows_docker_seconds": 16.140930099994875,
+      "linux_native_seconds": 15.008484048012178,
+      "all_paths_and_bytes_equal": true,
+      "main_files": 9,
+      "vendor_files": 6,
+      "live_database_read": false
+    }
+  },
+  "prior_validation": {
+    "rust_integration_passed": 8,
+    "external_corpus_ignored": 1,
+    "full_large_configuration_repeated_for_packaging": false,
+    "DO_main_user_load_and_compare": {
+      "platform": "8.3.27; exact build not supplied",
+      "configuration_differences": 0
+    }
+  },
+  "historical_packaging_failure": {
+    "linux_tests_before_portability_fixes": {
+      "passed": 74,
+      "failed": 4
+    },
+    "cause": "Test assumptions: absent vs empty LD_LIBRARY_PATH, and nested fixture requesting a memory hard limit above its inherited outer hard limit. Only tests corrected; production process supervision unchanged."
+  },
+  "boundaries": [
+    "CF replay is not a new live DB-to-XML end-to-end run",
+    "Linux native checked in offline container harness, not bare metal",
+    "Platform8.5 roundtrip not accepted",
+    "XML2.21 picture sidecar representation and ERP tilde binding remain limited",
+    "Unavailable protected BSL is not recovered"
+  ]
+}

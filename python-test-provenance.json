@@ -1,13 +1,41 @@
 {
-  "scope": "0.2.0 portable tests: repository-relative app imports, neutral generated fixtures; no field CF/XML, credentials or DB access. Runtime process tests are Linux-only.",
+  "scope": "0.3.0-rc.1 portable test sources; current run results only in supplied release-validation evidence.",
   "files": {
-    "__init__.py": {
-      "bytes": 0,
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "fast_cf_fixture.py": {
+      "bytes": 2247,
+      "sha256": "361460d956d710333caeb89a9237bd3b3a489b0cb2b8a83d18d13fffcad2b1a3"
+    },
+    "fast_protocol_support.py": {
+      "bytes": 18043,
+      "sha256": "1ed2e48f3e92727a2c80e3aceba78a5ae7a3820bb8f461497353d1c2779bd558"
+    },
+    "test_cancel_drain.py": {
+      "bytes": 3267,
+      "sha256": "1ff816e074c90fdd0485bfcfc8ed5cd11b2bbb9e89735eb73c871d7c5f2b1f96"
+    },
+    "test_dumpinfo_single_pass.py": {
+      "bytes": 7335,
+      "sha256": "fe727b0bc566b28404548af2a8fca54b7fa3ee4ab1b648a6401b7a29a2889d4b"
     },
     "test_export_local.py": {
       "bytes": 9381,
       "sha256": "36e63c16251d346462b021c703758c23316845770f4e8318d69754dee8a7c3e4"
+    },
+    "test_fast_cli.py": {
+      "bytes": 13416,
+      "sha256": "1991e3d94e6735674aa24e84973d16fdbc4fac5fbefacb79026244bcd29fdac4"
+    },
+    "test_fast_docker.py": {
+      "bytes": 20211,
+      "sha256": "093fec7e9bc8f50a0446311ff1d3624a19d86f02c753384685f7b2b374bbeba3"
+    },
+    "test_fast_runtime.py": {
+      "bytes": 19414,
+      "sha256": "b0f43da6791e7c0718bdd9eee71a6ac8194437d75e132945888cfb2f6e287d39"
+    },
+    "test_fast_stream.py": {
+      "bytes": 12536,
+      "sha256": "49c67834dd7a5b8f443d7218f20f146566df882621035aa6c531b466af65ba84"
     },
     "test_integrity_long_paths.py": {
       "bytes": 3944,
@@ -17,9 +45,21 @@
       "bytes": 3166,
       "sha256": "c2f00dbb909c47f6b3ed81e0769d5b0dce630eff8f6a3e71a5f3d83a4e2e6fb7"
     },
+    "test_materialize.py": {
+      "bytes": 4352,
+      "sha256": "682f849ed28acc8ff7f06c922b088f1e015ff2e37ba4c62783627efb244594e9"
+    },
     "test_modern_signature.py": {
       "bytes": 3159,
       "sha256": "f00f3218ee02cd42528d5514877d9c05c7c56c0b9fe6273d27da585a7fff5f49"
+    },
+    "test_no_memory_fake.py": {
+      "bytes": 10254,
+      "sha256": "1b645e809e5f217664b14023005d41fd347cf8b8b5b11430326dfb5bd602e9d7"
+    },
+    "test_parallel_readback.py": {
+      "bytes": 7175,
+      "sha256": "cfc025b872d760f0d449bf7721b9a0b3c956cb4b72885c9c808e13aaecff5c66"
     },
     "test_posix_env_boundary.py": {
       "bytes": 4536,
@@ -40,6 +80,18 @@
     "test_runtime_identity.py": {
       "bytes": 5166,
       "sha256": "9063af1be6c37ba917cd0585201872b2af6c74c8115c29fd428a41625067632e"
+    },
+    "test_stream_tar.py": {
+      "bytes": 11764,
+      "sha256": "74894151fdf151d77bd64c1841cba632179fd316287f1be89ac81029f014f99e"
+    },
+    "test_worker_single_read.py": {
+      "bytes": 6899,
+      "sha256": "3ae7dde1b2e7d0f9eb2ded894919adc7a3f59099b6e4e2b82e3cf662cfd19620"
+    },
+    "__init__.py": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   },
   "changes": [
@@ -47,5 +99,6 @@
     "Neutral generated receipt/storage instead of saved CF and reports",
     "OCI test simulates bind/resource admission on both hosts",
     "Native command assertion checks executable names, not arbitrary parent paths"
-  ]
+  ],
+  "executed_by_sealer": false
 }

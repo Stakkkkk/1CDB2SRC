@@ -16,8 +16,9 @@ def require(condition,message):
 
 def run(argv,stdout_path,stderr_path,receipt_path,seconds,stdout_cap,stderr_cap,rss_cap=1073741824,env=None):
     require(sys.platform.startswith('linux'),'Linux /proc and prctl are required')
-    require(seconds>0 and stdout_cap>=0 and stderr_cap>=0 and rss_cap>0,'Invalid process bounds')
+    require(seconds>0 and stdout_cap>=0 and stderr_cap>=0 and (rss_cap is None or type(rss_cap) is int and rss_cap>0),'Invalid process bounds')
     require(isinstance(argv,(list,tuple)) and argv and all(isinstance(a,str) for a in argv),'Invalid process argv')
+    memory_enabled=rss_cap is not None
     target_env=None if env is None else dict(env)
     require(target_env is None or all(isinstance(k,str) and isinstance(v,str) for k,v in target_env.items()),'Invalid workload environment')
     bootstrap_env=None if target_env is None else dict(target_env)
@@ -34,14 +35,14 @@ def run(argv,stdout_path,stderr_path,receipt_path,seconds,stdout_cap,stderr_cap,
     require(len(set(paths))==3 and not any(p.exists() for p in paths),'Process output already exists or overlaps')
     started=time.monotonic();proc=None;bootstrap_token=None;threads=[];failure=None;status=None;interrupted=False;go_sent=False
     overflow=threading.Event();counts=[0,0];hashes=[hashlib.sha256(),hashlib.sha256()]
-    io_errors=[];cleanup_errors=[];observation_errors=[];actions=[];pipes_closed={};known={};peak=0;out=None;err=None
-    result=dict(argv=list(argv),backend='linux-posix',timeout_seconds=seconds,rss_limit_bytes=rss_cap,
+    io_errors=[];cleanup_errors=[];observation_errors=[];actions=[];pipes_closed={};known={};peak=0 if memory_enabled else None;out=None;err=None
+    result=dict(argv=list(argv),backend='linux-posix',timeout_seconds=seconds,rss_limit_bytes=rss_cap,memory_controls=memory_enabled,rss_monitoring=memory_enabled,
         stdout_cap=stdout_cap,stderr_cap=stderr_cap,exit_code=None,failure=None,
         hard_address_space_per_process_bytes=rss_cap,hard_cgroup_memory_bytes=None,hard_job_memory_bytes=None,
-        memory_scope='sampled_workload_descendants_excludes_bootstrap',rss_sampling_interval_seconds=.02,
+        memory_scope='sampled_workload_descendants_excludes_bootstrap' if memory_enabled else 'DISABLED',rss_sampling_interval_seconds=.02 if memory_enabled else None,
         oom_killed='UNKNOWN',windows_job_used=False,job_handle_kind='posix_process_tree_cleanup_no_windows_job',
         job_limits_verified=False,processgroups_closed=False,job_handle_closed=False,
-        rlimit_as_scope='each workload process; inherited by descendants; not aggregate RSS hard limit')
+        rlimit_as_scope='each workload process; inherited by descendants; not aggregate RSS hard limit' if memory_enabled else 'DISABLED')
     def update_status(path):
         nonlocal status,peak
         current=read_status(path)
@@ -53,7 +54,9 @@ def run(argv,stdout_path,stderr_path,receipt_path,seconds,stdout_cap,stderr_cap,
         for token in current['known_processes']:
             pid=token['pid']
             known[pid]=token
-        peak=max(peak,current.get('peak_sampled_tree_rss_bytes',0));status=current
+        require(current.get('memory_controls') is memory_enabled and current.get('rss_limit_bytes')==rss_cap,'Bootstrap memory policy mismatch')
+        if memory_enabled:peak=max(peak,current.get('peak_sampled_tree_rss_bytes',0))
+        status=current
     def signal_bootstrap(sig):
         if bootstrap_token and live(bootstrap_token):
             try:signal_process(bootstrap_token,sig);actions.append('signal_owned_bootstrap_'+str(sig))
@@ -66,7 +69,7 @@ def run(argv,stdout_path,stderr_path,receipt_path,seconds,stdout_cap,stderr_cap,
                      json.dumps(list(argv)),str(rss_cap),str(state_path),str(os.getpid())]
             proc=subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,
                                   start_new_session=True,env=bootstrap_env)
-            bootstrap_token=process(proc.pid)
+            bootstrap_token=process(proc.pid,include_rss=memory_enabled)
             require(bootstrap_token is not None,'Bootstrap exited before observation')
             def drain(stream,target,index,cap):
                 try:
@@ -161,7 +164,7 @@ def run(argv,stdout_path,stderr_path,receipt_path,seconds,stdout_cap,stderr_cap,
                 closed=False;failure=failure or 'CLEANUP_FAILURE'
             result.update(exit_code=status.get('target_exit') if status else None,failure=failure,seconds=time.monotonic()-started,
                 supervisor_exit=proc.returncode if proc else None,peak_job_rss_bytes=peak,peak_sampled_tree_rss_bytes=peak,
-                memory_peak_status='SAMPLED' if known else 'NOT_OBSERVED',observed_pids=sorted(known),
+                memory_peak_status=('SAMPLED' if known else 'NOT_OBSERVED') if memory_enabled else 'DISABLED',observed_pids=sorted(known),
                 surviving_pids=survivors if closed or survivors else None,known_surviving_pids=survivors,
                 observation_status='OBSERVED' if closed else 'UNKNOWN',observation_errors=observation_errors,
                 cleanup_errors=cleanup_errors,job_handle_closed=closed,processgroups_closed=closed,

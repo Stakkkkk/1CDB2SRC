@@ -6,11 +6,48 @@ PACKAGE=Path(__file__).resolve().parents[1]
 
 
 def stage_memory_budget(config,stage):
+    if is_fast(config):return None
     # Native children inherit RLIMIT_AS. Leave room for its supervisor and never
     # impose the ordinary Python 3GiB hard limit below an 8GiB native budget.
     if config.get('runtime_backend','docker')=='native' and stage.startswith('native-'):
         return max(3*1024**3,(config['native_memory_mib']+512)*1024**2)
     return 3*1024**3
+
+def is_fast(config):
+    return config.get('docker_mode','host')=='fast'
+
+def validate_modes(args):
+    require(args.docker_mode!='fast' or args.runtime=='docker','Fast mode requires Docker runtime')
+    require(args.docker_mode!='fast' or args.assembly_mode=='adopt','Fast mode requires --assembly-mode adopt')
+    require(args.docker_transfer!='stream' or args.runtime=='docker' and args.docker_mode=='fast','Stream transfer requires Docker fast mode')
+    require(args.docker_mode=='fast' or args.readback_workers is None,'--readback-workers is only valid for fast mode')
+    require(args.docker_mode!='fast' or args.native_memory_mib is None,'Fast mode disables memory controls; omit --native-memory-mib')
+
+def stage_plan(config):
+    stages=['capture','cf','profiles']
+    for side in ('main','vendor'):
+        stages += ['fast-'+side] if is_fast(config) else [kind+'-'+side for kind in ('native','dumpinfo','parents','assembly')]
+    return stages+['integrity']
+
+def stage_seconds(config,args,stage):
+    if stage=='capture':return args.capture_seconds
+    if is_fast(config):
+        if stage.startswith('fast-'):return config['fast_side_seconds']+45
+        if stage=='integrity':return 2*config['python_seconds']+180
+        return config['python_seconds']
+    return config['native_seconds']+90 if stage.startswith('native-') else args.python_seconds or (600 if args.profile=='small' or not stage.startswith('assembly-') else 2400)
+
+def require_stage_closure(job,stage,fast=False):
+    require(job['failure'] is None and job['job_handle_closed'] and job['surviving_pids']==[] and not job['cleanup_errors'] and job['observation_status']=='OBSERVED','Stage timeout/resource/process closure failure: '+stage)
+    require(job.get('io_errors')==[],'Stage output drain error: '+stage)
+    require(job.get('pipes_closed')=={'stdin':True,'stdout':True,'stderr':True},'Stage source pipes not closed: '+stage)
+    if job.get('backend')=='linux-posix':
+        require(job.get('processgroups_closed') is True,'Stage POSIX process groups not closed: '+stage)
+        # POSIX closes/join drains before its target context exits; the backend
+        # publishes pipes_closed/processgroups_closed, not Windows S2 fields.
+    else:
+        require(job.get('drains_joined') is True and job.get('target_streams_closed')=={'stdout':True,'stderr':True},'Stage Windows output lifetime unconfirmed: '+stage)
+    if fast:require(job.get('memory_controls') is False and job.get('rss_limit_bytes') is None,'Fast stage unexpectedly enabled memory controls')
 
 def parser():
     p=argparse.ArgumentParser(description='MS SQL/PostgreSQL → main.cf/vendor.cf + XML, без платформы 1С')
@@ -27,6 +64,9 @@ def parser():
     p.add_argument('--platform',choices=['auto','8.3.27','8.5.1'],default='auto',help='Проверенный профиль каждой CF; неизвестная/противоречивая структура отклоняется')
     p.add_argument('--assembly-mode',choices=['copy','adopt'],default='copy',help='copy: прежняя сборка; adopt: передать собственное дерево native без повторного копирования, с конечной проверкой')
     p.add_argument('--runtime',choices=['docker','native'],default='docker',help='Docker (Windows/Linux) либо закреплённый локальный конвертер (Linux x86-64)')
+    p.add_argument('--docker-mode',choices=['host','fast'],default='host',help='host: прежний маршрут; fast: обработка внутри Linux Docker, требует adopt')
+    p.add_argument('--docker-transfer',choices=['copy','stream'],default='copy',help='Перенос Docker результата; stream включается явно только в fast режиме')
+    p.add_argument('--readback-workers',type=int,choices=[1,4,8],help='Потоки независимой итоговой проверки fast (по умолчанию 4)')
     connection=p.add_mutually_exclusive_group()
     connection.add_argument('--docker-context',help='Локальный Docker context; Windows: desktop-linux')
     connection.add_argument('--docker-socket',help='Явный локальный Unix socket Docker на Linux; удалённые daemon не поддержаны')
@@ -74,15 +114,43 @@ def preflight(config):
     require(info_result.returncode==0,'Local Docker engine unavailable')
     info=json.loads(info_result.stdout);context=context_record()
     daemon_policy(context,info);image_policy(runtime['image_id'],json.loads(metadata.stdout)[0],'/engine/ibcmd-rs')
-    reserve=(config['native_memory_mib']/1024+2)*1024**3
-    memory=psutil.virtual_memory()
-    require(memory.available>=reserve and info['MemTotal']>=config['native_memory_mib']*1024**2,'Insufficient fresh host/Docker memory reserve')
+    if not is_fast(config):
+        reserve=(config['native_memory_mib']/1024+2)*1024**3
+        memory=psutil.virtual_memory()
+        require(memory.available>=reserve and info['MemTotal']>=config['native_memory_mib']*1024**2,'Insufficient fresh host/Docker memory reserve')
     disk=shutil.disk_usage(config['root'])
     require(disk.free>=2*1024**3,'Insufficient output disk space')
-    require(info.get('MemoryLimit') is True and info.get('CpuCfsQuota') is True and info.get('PidsLimit') is True,'Docker kernel memory/CPU/PID limits unavailable')
-    result={'host_available_bytes':memory.available,'docker_memory_bytes':info['MemTotal'],'disk_free_bytes':disk.free,'image_id':runtime['image_id'],'archive':fact(archive),'context':context,'oci_identity':identity,'kernel_limits':{key:info.get(key) for key in ('MemoryLimit','SwapLimit','CpuCfsQuota','PidsLimit')}}
-    if sys.platform=='linux':result['bind_visibility']=verify_bind_visibility(runtime['image_id'],config['root'])
+    require(info.get('CpuCfsQuota') is True and info.get('PidsLimit') is True,'Docker kernel CPU/PID limits unavailable')
+    if not is_fast(config):require(info.get('MemoryLimit') is True,'Docker kernel memory limit unavailable')
+    result={'disk_free_bytes':disk.free,'image_id':runtime['image_id'],'archive':fact(archive),'context':context,'oci_identity':identity,'kernel_limits':{key:info.get(key) for key in ('MemoryLimit','SwapLimit','CpuCfsQuota','PidsLimit')}}
+    if is_fast(config):
+        require(config.get('memory_controls') is False,'Fast memory policy must be explicit')
+        result['memory_controls']=False
+        result['cpu_admission']=fresh_fast_cpu_admission(config)
+        from .xml.fast_runtime import prepare_helper
+        config['fast_helper']=prepare_helper(config,PACKAGE)
+        helper=config['fast_helper']
+        require(isinstance(helper,dict) and all(helper.get(k) for k in ('manifest_path','manifest_sha256','selected_image_id')),'Fast helper provenance incomplete')
+        result['fast_helper']=helper
+        result['bind_visibility']='NOT_USED_FAST_OWN_VOLUME_PROTOCOL'
+    else:
+        result.update(host_available_bytes=memory.available,docker_memory_bytes=info['MemTotal'])
+        if sys.platform=='linux':result['bind_visibility']=verify_bind_visibility(runtime['image_id'],config['root'])
     return result
+
+def fresh_fast_cpu_admission(config):
+    """CPU-only observation: deliberately no memory query/reservation/threshold."""
+    import psutil,math
+    info_result=docker(['info','--format','{{json .}}'])
+    stats_result=docker(['stats','--no-stream','--format','{{.CPUPerc}}'])
+    require(info_result.returncode==stats_result.returncode==0,'Cannot observe Docker CPU resources')
+    info=json.loads(info_result.stdout);used=0.
+    for line in stats_result.stdout.splitlines():
+        load=float(line.strip().removesuffix('%'))/100
+        require(math.isfinite(load) and load>=0,'Invalid Docker CPU value');used+=load
+    host_cpu=psutil.cpu_percent(interval=.1);host_count=len(psutil.Process().cpu_affinity())
+    require(math.isfinite(host_cpu) and 0<=host_cpu<=100 and host_count*(1-host_cpu/100)>=2 and info['NCPU']-used>=2,'Insufficient fresh CPU headroom')
+    return {'observed_utc':utc(),'host_cpu_percent':host_cpu,'host_cpu_count':host_count,'docker_cpu_count':info['NCPU'],'docker_used_cores_estimate':used,'memory_controls':False}
 
 def fresh_native_admission(config):
     """Fresh numeric resource observation, with explicit Docker headroom estimate."""
@@ -127,6 +195,11 @@ def native_outcome(root,stage,job):
     return classify(receipt,report,stored_sizes,job['exit_code'],profile)
 
 def cleanup_native(root,config=None):
+    if is_fast(config or {}):
+        from .xml.fast_docker import cleanup_fast_owned
+        result=cleanup_fast_owned(config)
+        require(result.get('status')=='CONFIRMED_OWN_FAST_RESOURCES_ABSENT' and result.get('confirmed') is True,'Fast own resource cleanup unconfirmed')
+        return result
     if (config or {}).get('runtime_backend','docker')=='native':
         results=[]
         for path in (root/'_work').glob('native-*'):
@@ -155,6 +228,7 @@ def readable_report(root,report):
 def main(argv=None):
     args=parser().parse_args(argv);root=None;report=None;config=None;exitcode=1;clock=time.monotonic()
     try:
+        validate_modes(args)
         require(not(args.prompt_password and args.password_env),'Choose password prompt or env')
         require(args.provider=='mssql' or args.auth!='integrated','Integrated auth is MS SQL only')
         require(args.transport!='lpc' or args.provider=='mssql' and args.mssql_driver=='pyodbc','LPC requires explicit MS SQL pyodbc backend')
@@ -170,42 +244,46 @@ def main(argv=None):
         password=getpass.getpass('Пароль СУБД: ') if args.prompt_password else os.environ.get(args.password_env,'') if args.password_env else ''
         if args.password_env:require(args.password_env in os.environ,'Password environment variable absent')
         root.mkdir(parents=True);(root/'_work').mkdir();(root/'_work/jobs').mkdir()
-        config={'root':str(root),'supplier':args.supplier,'profile':args.profile,'platform':args.platform,'assembly_mode':args.assembly_mode,'runtime_backend':args.runtime,'docker_context':args.docker_context,'docker_socket':args.docker_socket,
+        config={'root':str(root),'supplier':args.supplier,'profile':args.profile,'platform':args.platform,'assembly_mode':args.assembly_mode,'runtime_backend':args.runtime,'docker_context':args.docker_context,'docker_socket':args.docker_socket,'docker_mode':args.docker_mode,'docker_transfer':args.docker_transfer,'readback_workers':args.readback_workers or 4,
                 'db':{'provider':args.provider,'host':args.host,'port':args.port or (1433 if args.provider=='mssql' else 5432),'database':args.database,'schema':args.schema or ('dbo' if args.provider=='mssql' else 'public'),'auth':args.auth,'user':args.user,'consistency':args.mssql_consistency,'statement_timeout':min(args.capture_seconds,600),'lock_timeout':3000,'driver':args.mssql_driver,'transport':args.transport,'odbc_driver':args.odbc_driver},
                 'runtime':read(PACKAGE/'runtime/manifest.json'),'native_seconds':args.native_seconds or (300 if args.profile=='small' else 2400),'native_memory_mib':args.native_memory_mib or (3072 if args.profile=='small' else 8192)}
         require(config['native_memory_mib']>=512,'Native memory must be at least512MiB')
+        if is_fast(config):
+            config.update(memory_controls=False,native_memory_mib=None,python_seconds=args.python_seconds or (600 if args.profile=='small' else 2400))
+            config['fast_transport_seconds']=config['python_seconds']
+            config['fast_side_seconds']=config['native_seconds']+4*config['python_seconds']+180
+            config['total_deadline_monotonic']=clock+args.total_seconds if args.total_seconds else None
         save(root/'_work/config.json',config)
         report={'status':'RUNNING','started_utc':utc(),'provider':args.provider,'database':args.database,'supplier':args.supplier,'stages':[],'limitations':[],'oracle_inputs':[]}
         save(root/'report.json',report)
         print('Проверка ресурсов и закреплённого runtime…',flush=True)
         tick=time.monotonic();report['preflight']=preflight(config);report['preflight_seconds']=time.monotonic()-tick
         save(root/'_work/config.json',config)
-        if config['runtime_backend']=='docker' and report['preflight']['kernel_limits']['SwapLimit'] is not True:
+        if not is_fast(config) and config['runtime_backend']=='docker' and report['preflight']['kernel_limits']['SwapLimit'] is not True:
             report['limitations'].append({'scope':'docker_swap_limit','enforcement':'NOT_AVAILABLE_ON_KERNEL','configured_memory_swap_is_not_proof_of_swap_enforcement':True})
         from .control.bounded_process import run
         env=dict(os.environ)
         for name in ('ONECDB2SRC_AUTH_PASSWORD','PGPASSWORD',args.password_env):
             if name:env.pop(name,None)
         env['PYTHONDONTWRITEBYTECODE']='1';env['PYTHONUTF8']='1'
-        stages=['capture','cf','profiles']
-        for side in ('main','vendor'):stages += [kind+'-'+side for kind in ('native','dumpinfo','parents','assembly')]
-        stages+=['integrity']
-        titles={'capture':'Согласованный снимок из СУБД','cf':'Восстановление двух CF','profiles':'Проверка структуры и выбор XML-профиля каждой CF','native':'XML независимым конвертером','dumpinfo':'Служебные версии XML','parents':'Вложенные поставки и их происхождение','assembly':'Сборка итогового XML','integrity':'Проверка CF и всех сформированных файлов'}
+        stages=stage_plan(config)
+        titles={'capture':'Согласованный снимок из СУБД','cf':'Восстановление двух CF','profiles':'Проверка структуры и выбор XML-профиля каждой CF','fast':'XML, служебные данные и сборка внутри Linux Docker','native':'XML независимым конвертером','dumpinfo':'Служебные версии XML','parents':'Вложенные поставки и их происхождение','assembly':'Сборка итогового XML','integrity':'Проверка CF и всех сформированных файлов'}
         for stage in stages:
             if args.total_seconds:require(time.monotonic()-clock<args.total_seconds,'Total E2E time cap exceeded')
-            seconds=args.capture_seconds if stage=='capture' else config['native_seconds']+90 if stage.startswith('native-') else args.python_seconds or (600 if args.profile=='small' or not stage.startswith('assembly-') else 2400)
+            seconds=stage_seconds(config,args,stage)
             if args.total_seconds:seconds=min(seconds,max(.1,args.total_seconds-(time.monotonic()-clock)))
             ledger={'stage':stage,'started_utc':utc(),'limit_seconds':seconds};report['stages'].append(ledger);save(root/'report.json',report)
             title=titles[stage.split('-')[0]]+(' — основная конфигурация' if stage.endswith('-main') else ' — поставщик' if stage.endswith('-vendor') else '')
             print(f'{title} ({stage}); предел {seconds:.0f} с.',flush=True)
             if stage.startswith('native-'):ledger['resource_admission']=fresh_native_admission(config)
+            if stage.startswith('fast-'):ledger['resource_admission']=fresh_fast_cpu_admission(config)
             childenv=dict(env)
             if stage=='capture':childenv['ONECDB2SRC_AUTH_PASSWORD']=password
             ledger['python_supervision_memory_bytes']=stage_memory_budget(config,stage)
             job=run([sys.executable,'-B',str(PACKAGE/'export_1c.py'),'--_worker',stage,str(root/'_work/config.json')],root/'_work/jobs'/(stage+'.stdout'),root/'_work/jobs'/(stage+'.stderr'),root/'_work/jobs'/(stage+'.json'),seconds,8*1024**2,8*1024**2,rss_cap=ledger['python_supervision_memory_bytes'],env=childenv)
-            ledger.update(finished_utc=utc(),seconds=job['seconds'],peak_rss_bytes=job['peak_job_rss_bytes'],exit_code=job['exit_code'],failure=job['failure'],supervisor_backend=job.get('backend','windows-job'),resource_semantics=job.get('rlimit_as_scope','Windows hard Job memory/CPU affinity'))
+            ledger.update(finished_utc=utc(),seconds=job['seconds'],peak_rss_bytes=job['peak_job_rss_bytes'],exit_code=job['exit_code'],failure=job['failure'],supervisor_backend=job.get('backend','windows-job'),resource_semantics=('owned process tree, CPU and timeout; memory controls disabled' if is_fast(config) else job.get('rlimit_as_scope','Windows hard Job memory/CPU affinity')))
             if job.get('cancelled') or job.get('failure')=='CANCELLED' or (job['failure'] or '').startswith('KeyboardInterrupt'):raise KeyboardInterrupt
-            require(job['failure'] is None and job['job_handle_closed'] and job['surviving_pids']==[] and not job['cleanup_errors'] and job['observation_status']=='OBSERVED','Stage timeout/resource/process closure failure: '+stage)
+            require_stage_closure(job,stage,is_fast(config))
             if stage.startswith('native-'):
                 ledger['native']=native_outcome(root,stage,job)
                 if ledger['native']['opaque']:report['limitations'].append({'stage':stage,'opaque':ledger['native']['opaque'],'raw_exit':2})
@@ -220,9 +298,14 @@ def main(argv=None):
                     reason=(diagnostic or {}).get('reason','')
                     raise ValueError('Stage refused input or failed: '+stage+('; '+reason if reason else ''))
             if stage.startswith('parents-') and (root/'_work'/stage/'unsupported.json').exists():report['limitations'].append(read(root/'_work'/stage/'unsupported.json'))
+            if stage.startswith('fast-'):
+                proof=read(root/'_work'/stage/'result.json')
+                require(proof.get('status')=='CANDIDATE_GENERATED_REQUIRES_HOST_VERIFICATION','Fast producer did not complete candidate')
+                ledger['fast_candidate']={'path':str(root/'_work'/stage/'result.json'),'sha256':fact(root/'_work'/stage/'result.json')['sha256']}
             ledger['status']='COMPLETED';save(root/'report.json',report)
             print(f'{title}: завершено за {job["seconds"]:.2f} с.',flush=True)
         report['integrity']=read(root/'_work/integrity.json')
+        if is_fast(config):report['limitations'].extend(report['integrity'].get('limitations',[]))
         report['limitations'].append({'scope':'experimental_native_serialization','platform_loading':'NOT_TESTED','arbitrary_configuration_semantic_equivalence':'NOT_ESTABLISHED'})
         report['status']='COMPLETE_WITH_LIMITATIONS' if any('opaque' in x or 'parents_inventory' in x for x in report['limitations']) else 'COMPLETE'
         exitcode=2 if report['status']=='COMPLETE_WITH_LIMITATIONS' else 0

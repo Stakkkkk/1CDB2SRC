@@ -1,0 +1,43 @@
+{
+  "schema": "1CDB2SRC_PUBLIC_UNIT_VALIDATION_V1",
+  "status": "PASS_WITH_LIMITATIONS",
+  "basis": "AS2_TEST_FIXTURE_OVERLAY",
+  "platform": "Windows",
+  "discovered_methods": 171,
+  "tests_run_methods": 171,
+  "successful_case_result_records": 153,
+  "skip_records": 19,
+  "total_case_result_records": 172,
+  "skip_breakdown": {
+    "POSIX_only_methods_not_run_on_Windows": 17,
+    "symlink_subcases_unavailable_privilege": 2
+  },
+  "failures": 0,
+  "errors": 0,
+  "wall_seconds": {
+    "unittest_suite": 8.454978100024164,
+    "tests_subprocess": 8.821577400085516,
+    "copy_preparation": 1.2767565000103787,
+    "whole_integration_caller": 35.02796690003015
+  },
+  "app_bytes_unchanged": true,
+  "source_and_candidate_unchanged_by_tests": true,
+  "helper_image_and_manifest_unchanged": true,
+  "source_closure_sha256": "a9d69b5a4647201304b16a1115da8a757f6652c63787528287b52f99d0e11b6c",
+  "memory_policy": {
+    "real_memory_caps_exercised": false,
+    "memory_cap_contract_checks_use_fakes": true
+  },
+  "evidence_sha256": {
+    "result": "b0efb228c4e48691be57bd4d0e915a4921d267d112c7a62f579eb1ada47905ea",
+    "test_records": "bc91101df6d06a14e41d3c590560cb879133f7ae389bc1cc8d9741668933edb5",
+    "log": "6239ed2af49624a4dd69cef4094f716a252d597384f758e4c7fcc25059742e83"
+  },
+  "limitations": [
+    "171 methods were discovered and run; this does not mean 171 passed.",
+    "Case-result records include subcases; 153 PASS plus 19 SKIP records are not distinct successful-method counts.",
+    "Seventeen POSIX methods were not run on Windows; two symlink subcases were skipped because the host lacked privilege.",
+    "This is a Windows unit result, not Linux actual, Docker export or DB capture.",
+    "Nested timing intervals must not be summed."
+  ]
+}

@@ -42,65 +42,72 @@ def rss(pid):
   return x.rss if P.GetProcessMemoryInfo(handle,ctypes.byref(x),x.cb) else 0
  finally:K.CloseHandle(handle)
 def run(argv,stdout_path,stderr_path,receipt_path,seconds,stdout_cap,stderr_cap,rss_cap=1073741824,env=None):
- require(seconds>0 and stdout_cap>=0 and stderr_cap>=0 and rss_cap>0,'Bounded process invariant failed')
+ require(seconds>0 and stdout_cap>=0 and stderr_cap>=0 and (rss_cap is None or type(rss_cap) is int and rss_cap>0),'Bounded process invariant failed')
  paths=[pathlib.Path(x) for x in (stdout_path,stderr_path,receipt_path)];require(len(set(paths))==3 and not any(p.exists() for p in paths),'Bounded process invariant failed')
+ memory_enabled=rss_cap is not None
  start=time.monotonic();job=None;assigned=False;go_sent=False;cleanup_actions=[]
- proc=None;threads=[];failure=None;overflow=threading.Event();io_errors=[];counts=[0,0];hashes=[hashlib.sha256(),hashlib.sha256()];peak=0;seen=set()
+ out=None;err=None
+ proc=None;threads=[];failure=None;overflow=threading.Event();io_errors=[];counts=[0,0];hashes=[hashlib.sha256(),hashlib.sha256()];peak=0 if memory_enabled else None;seen=set()
  observation_errors=[];cleanup_errors=[];observation_unknown=False;post_exit_samples=[]
  def observe(label):
   nonlocal observation_unknown
   try:return members(job) if job else []
   except BaseException as e:
    observation_unknown=True;observation_errors.append(dict(stage=label,error=type(e).__name__+': '+str(e)));raise
- result=dict(argv=argv,timeout_seconds=seconds,rss_limit_bytes=rss_cap,stdout_cap=stdout_cap,stderr_cap=stderr_cap,exit_code=None,failure=None,surviving_pids=[])
+ result=dict(argv=argv,timeout_seconds=seconds,rss_limit_bytes=rss_cap,memory_controls=memory_enabled,rss_monitoring=memory_enabled,stdout_cap=stdout_cap,stderr_cap=stderr_cap,exit_code=None,failure=None,surviving_pids=[])
  try:
   job=K.CreateJobObjectW(None,None);require(job,'Bounded process invariant failed')
   allowed=ctypes.c_size_t();system=ctypes.c_size_t()
   require(K.GetProcessAffinityMask(K.GetCurrentProcess(),ctypes.byref(allowed),ctypes.byref(system)),'Bounded process invariant failed')
   selected=[1<<i for i in range(ctypes.sizeof(ctypes.c_size_t)*8) if allowed.value & (1<<i)][:2];require(len(selected)==2,'Bounded process invariant failed')
-  limits=EXTENDED();limits.basic.flags=0x2000|0x100|0x200|0x10 # kill-on-close, process/job memory, affinity
-  limits.process_memory=rss_cap;limits.job_memory=rss_cap;limits.basic.affinity=sum(selected)
+  limits=EXTENDED();limits.basic.flags=0x2000|0x10 # kill-on-close and CPU affinity always
+  if memory_enabled:limits.basic.flags|=0x100|0x200 # explicit-cap contract only
+  limits.process_memory=rss_cap if memory_enabled else 0;limits.job_memory=rss_cap if memory_enabled else 0;limits.basic.affinity=sum(selected)
   result.update(cpu_affinity_mask=limits.basic.affinity,cpu_count=2,hard_job_memory_bytes=rss_cap)
   require(K.SetInformationJobObject(job,9,ctypes.byref(limits),ctypes.sizeof(limits)),ctypes.get_last_error())
   verified=EXTENDED();require(K.QueryInformationJobObject(job,9,ctypes.byref(verified),ctypes.sizeof(verified),None),'Bounded process invariant failed')
-  require(verified.basic.flags==limits.basic.flags and verified.basic.affinity==limits.basic.affinity and verified.job_memory==rss_cap and verified.process_memory==rss_cap,'Bounded process invariant failed')
+  require(verified.basic.flags==limits.basic.flags and verified.basic.affinity==limits.basic.affinity and verified.job_memory==limits.job_memory and verified.process_memory==limits.process_memory,'Bounded process invariant failed')
   result['job_limits_verified']=True
-  with paths[0].open('xb') as out,paths[1].open('xb') as err:
-   proc=subprocess.Popen([sys.executable,'-I','-B',str(pathlib.Path(__file__).with_name('bootstrap.py')),json.dumps(argv)],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env,creationflags=subprocess.CREATE_NO_WINDOW)
-   seen.add(proc.pid);assigned=bool(K.AssignProcessToJobObject(job,wt.HANDLE(int(proc._handle))))
-   require(assigned,ctypes.get_last_error())
-   def drain(stream,target,index,cap):
-    try:
-     while True:
-      data=stream.read(65536)
-      if not data:return
-      keep=data[:max(0,cap-counts[index])];target.write(keep);hashes[index].update(keep);counts[index]+=len(keep)
-      if len(keep)!=len(data):overflow.set();return
-    except BaseException as e:io_errors.append(repr(e));overflow.set()
-   threads=[threading.Thread(target=drain,args=(s,t,i,c),daemon=True) for i,(s,t,c) in enumerate(((proc.stdout,out,stdout_cap),(proc.stderr,err,stderr_cap)))]
-   for t in threads:t.start()
-   proc.stdin.write(b'GO\n');proc.stdin.flush();go_sent=True;proc.stdin.close()
-   while proc.poll() is None:
-    pids=observe('running');seen.update(pids);used=sum(rss(p) for p in pids);peak=max(peak,used)
+  out=paths[0].open('xb');err=paths[1].open('xb')
+  proc=subprocess.Popen([sys.executable,'-I','-B',str(pathlib.Path(__file__).with_name('bootstrap.py')),json.dumps(argv)],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env,creationflags=subprocess.CREATE_NO_WINDOW)
+  seen.add(proc.pid);assigned=bool(K.AssignProcessToJobObject(job,wt.HANDLE(int(proc._handle))))
+  require(assigned,ctypes.get_last_error())
+  def drain(stream,target,index,cap):
+   try:
+    while True:
+     data=stream.read(65536)
+     if not data:return
+     keep=data[:max(0,cap-counts[index])];target.write(keep);hashes[index].update(keep);counts[index]+=len(keep)
+     if len(keep)!=len(data):overflow.set();return
+   except BaseException as e:io_errors.append(repr(e));overflow.set()
+  threads=[threading.Thread(target=drain,args=(s,t,i,c),daemon=True) for i,(s,t,c) in enumerate(((proc.stdout,out,stdout_cap),(proc.stderr,err,stderr_cap)))]
+  for t in threads:t.start()
+  proc.stdin.write(b'GO\n');proc.stdin.flush();go_sent=True;proc.stdin.close()
+  while proc.poll() is None:
+   pids=observe('running');seen.update(pids)
+   if memory_enabled:
+    used=sum(rss(p) for p in pids);peak=max(peak,used)
     if used>rss_cap:failure='RSS_LIMIT'
-    if overflow.is_set():failure='OUTPUT_LIMIT_OR_IO'
-    if time.monotonic()-start>seconds:failure='TIMEOUT'
-    if failure:K.TerminateJobObject(job,124);proc.wait(5);break
-    time.sleep(.02)
-   grace_started=time.monotonic();grace_deadline=min(start+seconds,grace_started+.25)
-   while True:
-    post_exit_pids=observe('post_exit_grace');seen.update(post_exit_pids)
+   if overflow.is_set():failure='OUTPUT_LIMIT_OR_IO'
+   if time.monotonic()-start>seconds:failure='TIMEOUT'
+   if failure:K.TerminateJobObject(job,124);proc.wait(5);break
+   time.sleep(.02)
+  grace_started=time.monotonic();grace_deadline=min(start+seconds,grace_started+.25)
+  while True:
+   post_exit_pids=observe('post_exit_grace');seen.update(post_exit_pids)
+   used=None
+   if memory_enabled:
     used=sum(rss(p) for p in post_exit_pids);peak=max(peak,used)
-    post_exit_samples.append(dict(seconds=time.monotonic()-grace_started,pids=post_exit_pids,rss_bytes=used))
     if used>rss_cap:failure=failure or 'RSS_LIMIT'
-    if overflow.is_set():failure=failure or 'OUTPUT_LIMIT_OR_IO'
-    if not post_exit_pids:break
-    if failure or time.monotonic()>=grace_deadline:
-     failure=failure or 'SURVIVING_CHILDREN';K.TerminateJobObject(job,125);break
-    time.sleep(min(.02,max(0,grace_deadline-time.monotonic())))
-   for t in threads:t.join(5)
-   if any(t.is_alive() for t in threads):failure=failure or 'PIPE_NOT_CLOSED'
+   post_exit_samples.append(dict(seconds=time.monotonic()-grace_started,pids=post_exit_pids,rss_bytes=used))
    if overflow.is_set():failure=failure or 'OUTPUT_LIMIT_OR_IO'
+   if not post_exit_pids:break
+   if failure or time.monotonic()>=grace_deadline:
+    failure=failure or 'SURVIVING_CHILDREN';K.TerminateJobObject(job,125);break
+   time.sleep(min(.02,max(0,grace_deadline-time.monotonic())))
+  for t in threads:t.join(5)
+  if any(t.is_alive() for t in threads):failure=failure or 'PIPE_NOT_CLOSED'
+  if overflow.is_set():failure=failure or 'OUTPUT_LIMIT_OR_IO'
  except BaseException as e:
   failure=failure or type(e).__name__+': '+str(e)
  finally:
@@ -157,10 +164,24 @@ def run(argv,stdout_path,stderr_path,receipt_path,seconds,stdout_cap,stderr_cap,
        pipes_closed[name]=pipe.closed
       except BaseException as e:
        pipes_closed[name]=None;cleanup_errors.append(dict(action='close_'+name,error=repr(e)));failure=failure or 'CLEANUP_FAILURE'
+   # Drain targets must outlive the consumer threads, including cancellation.
+   # Job termination and source-pipe closure above unblock normal drains first.
+   for t in threads:cleanup_call('join_drain_after_pipe_close',lambda t=t:t.join(1))
+   drains_joined=not any(t.is_alive() for t in threads)
+   if not drains_joined:
+    failure=failure or 'PIPE_NOT_CLOSED'
+    cleanup_errors.append(dict(action='drain_target_lifetime',error='DRAIN_NOT_JOINED_TARGET_RETAINED_OPEN'))
+   target_streams_closed={}
+   for label,target in (('stdout',out),('stderr',err)):
+    if target is None:target_streams_closed[label]=True;continue
+    # Never close a target under a live writer. Unknown closure stays explicit.
+    if drains_joined and not target.closed:cleanup_call('close_'+label+'_target',target.close)
+    target_streams_closed[label]=target.closed
+   if not all(target_streams_closed.values()):failure=failure or 'PIPE_NOT_CLOSED'
    if observation_unknown or bootstrap_alive is None:
     failure=failure or 'PROCESS_OBSERVATION_UNKNOWN';survivors=None
    else:survivors=sorted(set(remaining or [])|({proc.pid} if bootstrap_alive else set()))
-   result.update(exit_code=proc.returncode if proc else None,failure=failure,seconds=time.monotonic()-start,peak_job_rss_bytes=peak,observed_pids=sorted(seen),surviving_pids=survivors,known_surviving_pids=sorted(set(remaining or [])|({proc.pid} if bootstrap_alive else set())),observation_status='UNKNOWN' if observation_unknown or bootstrap_alive is None else 'OBSERVED',observation_errors=observation_errors,post_exit_grace_limit_seconds=.25,post_exit_samples=post_exit_samples,cleanup_errors=cleanup_errors,job_handle_closed=job_closed,pipes_closed=pipes_closed,stdout=dict(bytes=counts[0],sha256=hashes[0].hexdigest()),stderr=dict(bytes=counts[1],sha256=hashes[1].hexdigest()),io_errors=io_errors,job_assigned_before_child_launch=assigned,go_sent=go_sent,bootstrap_pid=proc.pid if proc else None,bootstrap_survived=bootstrap_alive,cleanup_actions=cleanup_actions)
+   result.update(exit_code=proc.returncode if proc else None,failure=failure,seconds=time.monotonic()-start,peak_job_rss_bytes=peak,observed_pids=sorted(seen),surviving_pids=survivors,known_surviving_pids=sorted(set(remaining or [])|({proc.pid} if bootstrap_alive else set())),observation_status='UNKNOWN' if observation_unknown or bootstrap_alive is None else 'OBSERVED',observation_errors=observation_errors,post_exit_grace_limit_seconds=.25,post_exit_samples=post_exit_samples,cleanup_errors=cleanup_errors,job_handle_closed=job_closed,pipes_closed=pipes_closed,target_streams_closed=target_streams_closed,drains_joined=drains_joined,stdout=dict(bytes=counts[0],sha256=hashes[0].hexdigest()),stderr=dict(bytes=counts[1],sha256=hashes[1].hexdigest()),io_errors=io_errors,job_assigned_before_child_launch=assigned,go_sent=go_sent,bootstrap_pid=proc.pid if proc else None,bootstrap_survived=bootstrap_alive,cleanup_actions=cleanup_actions)
    with paths[2].open('x',encoding='utf-8') as f:json.dump(result,f,indent=2);f.write('\n')
 
  return result

@@ -151,14 +151,17 @@ def versions(source):
     return result
 
 
-def metadata_index(tree, version_ids, configuration_storage, configuration_identity):
+def metadata_index(tree, version_ids, configuration_storage, configuration_identity, xml_version=None):
     paths = []
     for base, dirs, files in os.walk(tree):
-        if 'Ext' in dirs and len(Path(base).relative_to(tree).parts) % 2 == 0:
+        if xml_version is None and 'Ext' in dirs and len(Path(base).relative_to(tree).parts) % 2 == 0:
             dirs.remove('Ext')
         paths.extend(Path(base) / name for name in files if name.endswith('.xml'))
     paths.sort(key=lambda path: (len(path.relative_to(tree).parts), path.relative_to(tree).as_posix()))
     path_names, canonical, children, owners, evidence = {}, {}, collections.defaultdict(dict), {}, []
+    envelope_count = 0
+    if xml_version is not None:
+        require(xml_version in ('2.20','2.21'), 'Unsupported metadata XML profile')
 
     def register(identity, name):
         require(identity not in canonical or canonical[identity] == name, 'Conflicting XML metadata identity')
@@ -192,6 +195,14 @@ def metadata_index(tree, version_ids, configuration_storage, configuration_ident
         node = ET.fromstring(raw)
         if node.tag != MD + 'MetaDataObject':
             continue
+        if xml_version is not None:
+            require(node.get('version') == xml_version, 'Generated MDClasses envelope profile mismatch')
+            envelope_count += 1
+            # Preserve the original metadata_index Ext pruning. Those XML
+            # documents still get the envelope/parse guard in this same pass.
+            if any(part == 'Ext' and index % 2 == 0
+                   for index, part in enumerate(path.relative_to(tree).parts[:-1])):
+                continue
         require(len(node) == 1 and node[0].tag.startswith(MD), 'Unsupported native metadata root')
         item = node[0]
         identity = str(uuid.UUID(item.attrib['uuid']))
@@ -214,6 +225,9 @@ def metadata_index(tree, version_ids, configuration_storage, configuration_ident
         require(storage_id in version_ids, 'Native metadata root absent from CF versions: ' + storage_id)
         descend(item, full_name, storage_id)
         evidence.append({'path': relative.as_posix(), 'source_cf': storage_id, 'sha256': hashlib.sha256(raw).hexdigest()})
+    if xml_version is not None:
+        require(envelope_count > 0, 'No generated MDClasses envelopes')
+        return canonical, children, evidence, envelope_count
     return canonical, children, evidence
 
 
@@ -322,7 +336,10 @@ def main():
     profile=profiles.load(args.profile_receipt,cf_path)
     source = CFSource(cf_path)
     route_source = Path(__file__).resolve().parent / 'data' / 'assets.rs'
-    cf_sha = digest(source.path)
+    # profiles.load immediately above already recomputed this whole-CF
+    # digest and closed-shape selection from current bytes. Reuse that fact;
+    # the independent end profiles.load below rechecks everything afresh.
+    cf_sha = profile['cf_sha256']
     receipt = {'status': 'CANDIDATE', 'cf': str(source.path), 'cf_sha256': cf_sha,
                'profile':profile,'profile_receipt':{'path':str(Path(args.profile_receipt).resolve()),'sha256':digest(args.profile_receipt)},
                'producer_sha256': digest(__file__), 'route_source_sha256': digest(route_source)}
@@ -331,7 +348,6 @@ def main():
         report = json.loads(Path(args.engine_report).read_text(encoding='utf-8'))
         validate_profile_run(profile,run,report)
         require(run['profile_receipt']==receipt['profile_receipt'],'Native/DumpInfo profile receipt mismatch')
-        receipt['metadata_envelope_count']=validate_metadata_envelopes(long_path(Path(args.generated).resolve(strict=True)),profile['xml_version'])
         require(run['source']['sha256'] == cf_sha == run['source']['sha256_after'], 'CF/run receipt digest mismatch')
         require(Path(run['source']['path']).resolve() == Path(source.path).resolve(), 'CF/run source path mismatch')
         require(Path(run['native_xml']).resolve() == Path(args.generated).resolve(), 'XML/run path mismatch')
@@ -356,7 +372,8 @@ def main():
                 'target_format': '2.20',
                 'naming': 'Configuration.<CF-name>.',
                 'limitation': 'Historical public example; target version requires independent post-generation verification'}
-        canonical, children, evidence = metadata_index(long_path(Path(args.generated).resolve(strict=True)), stamps, configuration_storage, configuration_identity)
+        canonical, children, evidence, envelope_count = metadata_index(long_path(Path(args.generated).resolve(strict=True)), stamps, configuration_storage, configuration_identity, profile['xml_version'])
+        receipt['metadata_envelope_count'] = envelope_count
         print(json.dumps({'stage': 'check-cf-children', 'metadata_roots': len(evidence)}), flush=True)
         report = json.loads(Path(args.engine_report).read_text(encoding='utf-8'))
         entries = report['export']['storage']['entries']
@@ -428,7 +445,9 @@ def main():
         raw = render(records,profile['xml_version'])
         (output / 'ConfigDumpInfo.xml').write_bytes(raw)
         receipt['output_sha256'] = hashlib.sha256(raw).hexdigest()
-        require(digest(source.path) == cf_sha, 'CF changed during generation')
+        # The next original profiles.load hashes all current CF bytes and
+        # redetects every profile guard. Equality to profile implies cf_sha
+        # equality; an immediately preceding independent digest duplicates it.
         require(profiles.load(args.profile_receipt,source.path)==profile,'Immutable DumpInfo profile changed')
         require(digest(args.profile_receipt)==receipt['profile_receipt']['sha256'],'DumpInfo profile receipt bytes changed')
         receipt['producer_sha256_after'] = digest(__file__)
