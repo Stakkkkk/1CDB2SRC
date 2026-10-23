@@ -25,6 +25,7 @@ def parser():
     p.add_argument('--transport',choices=['tcp','lpc'],default='tcp')
     p.add_argument('--odbc-driver',default='ODBC Driver 17 for SQL Server')
     p.add_argument('--platform',choices=['auto','8.3.27','8.5.1'],default='auto',help='Проверенный профиль каждой CF; неизвестная/противоречивая структура отклоняется')
+    p.add_argument('--assembly-mode',choices=['copy','adopt'],default='copy',help='copy: прежняя сборка; adopt: передать собственное дерево native без повторного копирования, с конечной проверкой')
     p.add_argument('--runtime',choices=['docker','native'],default='docker',help='Docker (Windows/Linux) либо закреплённый локальный конвертер (Linux x86-64)')
     connection=p.add_mutually_exclusive_group()
     connection.add_argument('--docker-context',help='Локальный Docker context; Windows: desktop-linux')
@@ -169,7 +170,7 @@ def main(argv=None):
         password=getpass.getpass('Пароль СУБД: ') if args.prompt_password else os.environ.get(args.password_env,'') if args.password_env else ''
         if args.password_env:require(args.password_env in os.environ,'Password environment variable absent')
         root.mkdir(parents=True);(root/'_work').mkdir();(root/'_work/jobs').mkdir()
-        config={'root':str(root),'supplier':args.supplier,'profile':args.profile,'platform':args.platform,'runtime_backend':args.runtime,'docker_context':args.docker_context,'docker_socket':args.docker_socket,
+        config={'root':str(root),'supplier':args.supplier,'profile':args.profile,'platform':args.platform,'assembly_mode':args.assembly_mode,'runtime_backend':args.runtime,'docker_context':args.docker_context,'docker_socket':args.docker_socket,
                 'db':{'provider':args.provider,'host':args.host,'port':args.port or (1433 if args.provider=='mssql' else 5432),'database':args.database,'schema':args.schema or ('dbo' if args.provider=='mssql' else 'public'),'auth':args.auth,'user':args.user,'consistency':args.mssql_consistency,'statement_timeout':min(args.capture_seconds,600),'lock_timeout':3000,'driver':args.mssql_driver,'transport':args.transport,'odbc_driver':args.odbc_driver},
                 'runtime':read(PACKAGE/'runtime/manifest.json'),'native_seconds':args.native_seconds or (300 if args.profile=='small' else 2400),'native_memory_mib':args.native_memory_mib or (3072 if args.profile=='small' else 8192)}
         require(config['native_memory_mib']>=512,'Native memory must be at least512MiB')

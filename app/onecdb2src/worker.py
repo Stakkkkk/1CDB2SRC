@@ -140,6 +140,7 @@ def run(stage,config):
         from .xml import complete_native_with_parents_r9 as module
         side=stage[9:];args=['--base-run',work/('native-'+side),'--dumpinfo',work/('dumpinfo-'+side),'--profile-receipt',work/'profiles'/(side+'.json'),'--output',root/side]
         if (work/('parents-'+side)/'receipt.json').exists():args+=['--parent-assets',work/('parents-'+side)]
+        if config.get('assembly_mode','copy')=='adopt':args+=['--adopt-native-tree']
         invoke(module,args)
     elif stage=='integrity':integrity(config)
     else:raise ValueError('Unknown fixed pipeline stage')

@@ -14,6 +14,8 @@ from pathlib import Path, PurePosixPath
 from .dump_info import CFSource, digest, long_path
 from . import dump_info_modern_r3 as signature_rules
 from .. import profiles
+from .materialize import inspect_file, adopt_tree, producer_closed
+from . import materialize
 
 
 class AssemblyValidationError(ValueError):
@@ -29,7 +31,7 @@ def load(path):
     return json.loads(Path(path).read_text(encoding='utf-8-sig'))
 
 
-def run_inputs(path,profile=None):
+def run_inputs(path,profile=None,check_envelopes=True):
     path = Path(path).resolve(strict=True)
     receipt = load(path / 'receipt.json')
     source = Path(receipt['source']['path']).resolve(strict=True)
@@ -41,7 +43,8 @@ def run_inputs(path,profile=None):
     if profile is not None:
         profiles.validate(profile,source)
         signature_rules.validate_profile_run(profile,receipt,report)
-        signature_rules.validate_metadata_envelopes(long_path(tree),profile['xml_version'])
+        if check_envelopes:
+            signature_rules.validate_metadata_envelopes(long_path(tree),profile['xml_version'])
     entries = report['export']['storage']['entries']
     require(len({row['logical_name'] for row in entries}) == len(entries), 'Duplicate report entry')
     archive = CFSource(source)
@@ -227,13 +230,17 @@ def main():
     parser.add_argument('--parent-assets')
     parser.add_argument('--output', required=True)
     parser.add_argument('--profile-receipt', required=True)
+    parser.add_argument('--adopt-native-tree', action='store_true',
+                        help='Consume a closed, owned native staging tree instead of copying it')
     args = parser.parse_args()
     # No supplement repairs are assigned in this bounded profile revision.
     require(not args.supplement_run and not args.supplement_entry,'Supplement profile not supported in this revision')
     initial=load(Path(args.base_run)/'receipt.json')
     profile=profiles.load(args.profile_receipt,initial['source']['path'])
     profile_receipt={'path':str(Path(args.profile_receipt).resolve()),'sha256':digest(args.profile_receipt)}
-    base, run, cf, tree, entries = run_inputs(args.base_run,profile)
+    base, run, cf, tree, entries = run_inputs(args.base_run,profile,not args.adopt_native_tree)
+    if args.adopt_native_tree:
+        require(producer_closed(run),'Adoption requires a closed native producer')
     require(run['profile_receipt']==profile_receipt,'Native/assembly profile receipt mismatch')
     component = Path(args.dumpinfo).resolve(strict=True)
     info = load(component / 'receipt.json')
@@ -345,8 +352,10 @@ def main():
     require(all(row['logical_name'] in repaired for row in entries if row['disposition'] == 'failed'),
             'Unrepaired failed CF entries')
     destination.mkdir(parents=True)
-    output_tree = long_path(destination / 'xml')
-    output_tree.mkdir()
+    final_tree = long_path(destination / 'xml')
+    output_tree = long_path(tree) if args.adopt_native_tree else final_tree
+    if not args.adopt_native_tree:
+        output_tree.mkdir()
     receipt = {'status': 'CANDIDATE_POSTGEN_VERIFICATION_REQUIRED', 'producer_sha256': digest(__file__),
                'profile':profile,'profile_receipt':profile_receipt,
                'base_run': str(base), 'base_receipt_sha256': digest(base / 'receipt.json'),
@@ -357,6 +366,9 @@ def main():
                'signature_input_validation': signature_gate,
                'parent_assets':parent_evidence,
                'oracle_inputs': [], 'unaccepted_opaque_entries': [row['logical_name'] for row in entries if row['disposition'] == 'opaque' and (not parent_evidence or row['logical_name'] not in parent_evidence['handled_opaque_entries'])]}
+    receipt['materialization']={'mode':'ADOPT_NATIVE_TREE' if args.adopt_native_tree else 'COPY',
+                                'native_tree_before':str(tree),'published':False,
+                                'materializer_sha256':digest(materialize.__file__)}
     count = 0
     seen_parent_base=set();seen_native_dumpinfo=False
     try:
@@ -368,12 +380,16 @@ def main():
                     info_stat = (directory / name).lstat()
                     require(stat.S_ISDIR(info_stat.st_mode) and not getattr(info_stat, 'st_file_attributes', 0) & 0x400,
                             'Nonregular/reparse directory')
-                    (output_tree / (directory / name).relative_to(root)).mkdir(parents=True, exist_ok=True)
+                    if not args.adopt_native_tree:
+                        (output_tree / (directory / name).relative_to(root)).mkdir(parents=True, exist_ok=True)
                 for name in files:
                     source = directory / name
                     relative = source.relative_to(root)
                     require(relative.as_posix() not in additions, 'Addition already exists in base')
-                    record = copy_file(source, output_tree / relative)
+                    if args.adopt_native_tree:
+                        record, parsed_node = inspect_file(source,relative.suffix.lower()=='.xml')
+                    else:
+                        record = copy_file(source, output_tree / relative)
                     key = relative.as_posix()
                     if key=='ConfigDumpInfo.xml':
                         require(reuse_dumpinfo and not seen_native_dumpinfo and record==dumpinfo_fact,
@@ -383,7 +399,9 @@ def main():
                         require(record==parent_evidence['expected_base_files'][key],'Copied parent list differs from source CF')
                         seen_parent_base.add(key)
                     if relative.suffix.lower()=='.xml' or key in metadata_hashes:
-                        node=ET.parse(output_tree/relative).getroot()
+                        node=parsed_node if args.adopt_native_tree else ET.parse(output_tree/relative).getroot()
+                        if node is None:
+                            node=ET.parse(output_tree/relative).getroot()
                         if node.tag==signature_rules.MD+'MetaDataObject':
                             require(key in metadata_hashes and record['sha256']==metadata_hashes[key],
                                     'Copied MDClasses metadata differs from DumpInfo inventory: '+key)
@@ -411,7 +429,7 @@ def main():
                 manifest.write(json.dumps({'path': relative, 'source': str(source), **record}, ensure_ascii=False) + '\n')
                 count += 1
         receipt.update(files=count, manifest_sha256=digest(destination / 'files.jsonl'), native_xml=str(destination / 'xml'))
-        receipt['metadata_envelope_count']=signature_rules.validate_metadata_envelopes(output_tree,profile['xml_version'])
+        receipt['metadata_envelope_count']=len(seen_metadata) if args.adopt_native_tree else signature_rules.validate_metadata_envelopes(output_tree,profile['xml_version'])
         require(profiles.load(args.profile_receipt,cf)==profile,'Immutable assembly profile changed')
         require(digest(args.profile_receipt)==profile_receipt['sha256'],'Assembly profile receipt bytes changed')
         require(digest(cf) == receipt['cf_sha256'], 'Base CF changed')
@@ -423,6 +441,11 @@ def main():
             require(all(digest(path)==sha for path,sha in parent_evidence['source_pins'].items()),'Parent dependency changed after validation')
         if signature_gate:
             require(digest(signature_rules.__file__) == signature_gate['fixed_profile_sha256'], 'Signature validator changed')
+        if args.adopt_native_tree:
+            require(digest(materialize.__file__)==receipt['materialization']['materializer_sha256'],'Materializer changed')
+            require(os.path.samefile(tree,output_tree),'Adoption source changed')
+            adopt_tree(Path(tree),Path(destination/'xml'))
+        receipt['materialization']['published']=True
     except Exception as error:
         receipt.update(status='FAILED', error=str(error))
         raise
