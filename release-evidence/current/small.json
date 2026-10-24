@@ -1,47 +1,44 @@
 {
   "status": "PASS_SAVED_CF_PAIR_EXACT_WITH_EXISTING_FORMAT_LIMITATIONS",
-  "scope": "Small two-CF fixture; auto profile",
+  "scope": "Saved SQL-derived CF pair -> public profile/fast pair/integrity workers; research caller; not fresh DB capture",
+  "profile_scope": "Automatic supported profile for each CF",
+  "side_scheduling": "transfer-overlap",
+  "default": "sequential",
   "live_DB_capture": false,
   "platform_used": false,
-  "pipeline": "saved SQL-derived CF pair -> public profile/fast worker/integrity stages; research caller",
-  "transfer": "stream",
-  "cf_transfer": "bind-copy",
-  "readback_workers": 8,
-  "whole_seconds": 48.08444259990938,
-  "operation_seconds": 45.018741200095974,
-  "started_utc": "2026-10-24T03:25:34.594957+00:00",
-  "finished_utc": "2026-10-24T03:26:22.679401+00:00",
+  "whole_seconds": 43.42716119997203,
+  "operation_seconds": 40.32971710001584,
+  "reference_seconds": 48.08444259990938,
+  "reference": "Accepted prior same-CF generated output, not perfect platform XML",
+  "reference_is_same_source_sequential": false,
+  "reference_source_scope": "Previous accepted sequential source; controlled same-source A/B recorded separately",
   "sides": {
     "main": {
       "files": 9,
-      "bsl_files": 1,
-      "missing": [],
-      "extra": [],
-      "different": []
+      "BSL": 1,
+      "bytes": 108840
     },
     "vendor": {
       "files": 6,
-      "bsl_files": 0,
-      "missing": [],
-      "extra": [],
-      "different": []
+      "BSL": 0,
+      "bytes": 24395
     }
   },
+  "vendor_native_overlaps_main_transfer_seconds": 0.0,
+  "complete_file_readback": true,
   "own_cleanup_confirmed": true,
   "memory_controls": false,
-  "reference": "Accepted prior generated same-CF result; not a claim of perfect platform XML",
+  "root_review": true,
+  "independent_review": false,
+  "format_and_opaque_limits_unchanged": true,
   "proof_facts": {
     "result": {
-      "bytes": 24270,
-      "sha256": "4de8db1a53fbaae1e8135d71a980fca782c180d87c59d8c24152c4a25a80236b"
+      "bytes": 22398,
+      "sha256": "2781fb33867fb482b5f91153f775d4d0ccd623134d48348cab15186a34222717"
     },
-    "comparison": {
-      "bytes": 812,
-      "sha256": "f07d659cc6d072ad8b8cf88d3ce7404fedfd0bb1a6df767071fdb48a0d758518"
-    },
-    "config": {
-      "bytes": 4647,
-      "sha256": "6fa2afacf906ad0f06ea1ce8d60c6e609e60e4b936032574407729097c23219f"
+    "review": {
+      "bytes": 1602,
+      "sha256": "4bc02b3376821343e81880a70685c0d8377e62c707eed20d021cb17c99169df3"
     }
   }
 }

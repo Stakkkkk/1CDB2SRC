@@ -1,47 +1,44 @@
 {
   "status": "PASS_SAVED_CF_PAIR_EXACT_WITH_EXISTING_FORMAT_LIMITATIONS",
-  "scope": "Document management; explicit research per-side profiles main8.3.27/vendor8.5.1, not ordinary single-profile CLI",
+  "scope": "Saved SQL-derived CF pair -> public profile/fast pair/integrity workers; research caller; not fresh DB capture",
+  "profile_scope": "Research explicit per-side main8.3.27/vendor8.5.1; not the ordinary single-profile override",
+  "side_scheduling": "transfer-overlap",
+  "default": "sequential",
   "live_DB_capture": false,
   "platform_used": false,
-  "pipeline": "saved SQL-derived CF pair -> public profile/fast worker/integrity stages; research caller",
-  "transfer": "stream",
-  "cf_transfer": "bind-copy",
-  "readback_workers": 8,
-  "whole_seconds": 432.9607548000058,
-  "operation_seconds": 428.5694695999846,
-  "started_utc": "2026-10-24T03:26:35.567276+00:00",
-  "finished_utc": "2026-10-24T03:33:48.528032+00:00",
+  "whole_seconds": 209.9112477999879,
+  "operation_seconds": 205.46500279998872,
+  "reference_seconds": 239.42831900005694,
+  "reference": "Accepted prior same-CF generated output, not perfect platform XML",
+  "reference_is_same_source_sequential": false,
+  "reference_source_scope": "Previous accepted sequential source; controlled same-source A/B recorded separately",
   "sides": {
     "main": {
       "files": 23466,
-      "bsl_files": 5905,
-      "missing": [],
-      "extra": [],
-      "different": []
+      "BSL": 5905,
+      "bytes": 610708896
     },
     "vendor": {
       "files": 23320,
-      "bsl_files": 5869,
-      "missing": [],
-      "extra": [],
-      "different": []
+      "BSL": 5869,
+      "bytes": 461214222
     }
   },
+  "vendor_native_overlaps_main_transfer_seconds": 18.076266,
+  "complete_file_readback": true,
   "own_cleanup_confirmed": true,
   "memory_controls": false,
-  "reference": "Accepted prior generated same-CF result; not a claim of perfect platform XML",
+  "root_review": true,
+  "independent_review": false,
+  "format_and_opaque_limits_unchanged": true,
   "proof_facts": {
     "result": {
-      "bytes": 24411,
-      "sha256": "3d907bf121640454a3fb92d4c3d46104aeb9ab686b140b9d981312a8545c72e5"
+      "bytes": 22557,
+      "sha256": "319101c99e2e6bb4575c55fa28ecc50ace5099cabe8804e4837885ec421476b8"
     },
-    "comparison": {
-      "bytes": 839,
-      "sha256": "ac9936d58ce79bffb34075e15ddcd437d62b9e3e7f134fb0735eabe767d5c45a"
-    },
-    "config": {
-      "bytes": 4646,
-      "sha256": "fb9549ee0dc1c974670d8f2f5728f468e8e6fa471705f703cd95008371fd6bdc"
+    "review": {
+      "bytes": 1630,
+      "sha256": "a76e6402f7ba39181ae705a8559ec8d3891e32aa57dc531de6b834080a60fa1e"
     }
   }
 }

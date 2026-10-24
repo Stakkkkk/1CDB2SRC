@@ -1,14 +1,10 @@
 {
-  "status": "PASS_ONE_LARGE_CF_BIND_COPY_DIAGNOSTIC",
-  "input_bytes": 3291511095,
-  "copy_cli_seconds": 18.376899100025184,
-  "whole_seconds": 26.601077000028454,
-  "source_unchanged": true,
-  "full_closed_target_hash_verified": true,
-  "own_cleanup_confirmed": true,
-  "limitations": "Only current Windows/Docker Desktop readable input; no universal Linux0600/rootless claim; default copy preserved",
-  "proof_fact": {
-    "bytes": 5577,
-    "sha256": "5a8628a958c2e92612a4a079087bcc32120926f7ade3a5a02eb85b92b76ca5d4"
-  }
+  "status": "PASS_CURRENT_PAIRED_CF_BIND_COPY_AND_FULL_RESULT_READBACK",
+  "scope": "CF staging exercised inside the current small/document/large saved-CF pair runs; not a separate CF-only timing trial",
+  "source_cf_transfer": "bind-copy",
+  "closed_copy_readback": true,
+  "all_pair_source_CF_identity_accepted": true,
+  "default": "copy",
+  "source_permissions_unchanged": true,
+  "limitations": "Current readable Windows/Docker Desktop inputs; no universal Linux0600/rootless claim"
 }

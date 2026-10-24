@@ -1,47 +1,44 @@
 {
   "status": "PASS_SAVED_CF_PAIR_EXACT_WITH_EXISTING_FORMAT_LIMITATIONS",
-  "scope": "Large ERP configuration; auto profile8.3.27/XML2.20, two large saved CF",
+  "scope": "Saved SQL-derived CF pair -> public profile/fast pair/integrity workers; research caller; not fresh DB capture",
+  "profile_scope": "Automatic supported profile for each CF",
+  "side_scheduling": "transfer-overlap",
+  "default": "sequential",
   "live_DB_capture": false,
   "platform_used": false,
-  "pipeline": "saved SQL-derived CF pair -> public profile/fast worker/integrity stages; research caller",
-  "transfer": "stream",
-  "cf_transfer": "bind-copy",
-  "readback_workers": 8,
-  "whole_seconds": 2358.7012367999414,
-  "operation_seconds": 2343.1087605999783,
-  "started_utc": "2026-10-24T03:34:28.339881+00:00",
-  "finished_utc": "2026-10-24T04:13:47.041119+00:00",
+  "whole_seconds": 2338.8461381000234,
+  "operation_seconds": 2322.716868500109,
+  "reference_seconds": 2358.7012367999414,
+  "reference": "Accepted prior same-CF generated output, not perfect platform XML",
+  "reference_is_same_source_sequential": false,
+  "reference_source_scope": "Previous accepted sequential source; controlled same-source A/B recorded separately",
   "sides": {
     "main": {
       "files": 139493,
-      "bsl_files": 29255,
-      "missing": [],
-      "extra": [],
-      "different": []
+      "BSL": 29255,
+      "bytes": 11328251898
     },
     "vendor": {
       "files": 137555,
-      "bsl_files": 28794,
-      "missing": [],
-      "extra": [],
-      "different": []
+      "BSL": 28794,
+      "bytes": 9529821333
     }
   },
+  "vendor_native_overlaps_main_transfer_seconds": 206.184855,
+  "complete_file_readback": true,
   "own_cleanup_confirmed": true,
   "memory_controls": false,
-  "reference": "Accepted prior generated same-CF result; not a claim of perfect platform XML",
+  "root_review": true,
+  "independent_review": false,
+  "format_and_opaque_limits_unchanged": true,
   "proof_facts": {
     "result": {
-      "bytes": 24419,
-      "sha256": "b3cfa898523dc14678d9eb054b79bc4cc79c138948b9429e89a0ebabe2b0757b"
+      "bytes": 22209,
+      "sha256": "f57c79199a0b8fc1c109f7205ab9dd236550eb5fda8d5d50b87d1c965377bf6c"
     },
-    "comparison": {
-      "bytes": 847,
-      "sha256": "6717631f0d22b223a9e623754caece0636d9c40a94412ff4fe662fff449ef2e1"
-    },
-    "config": {
-      "bytes": 4642,
-      "sha256": "a1012600ad9c1592dc676b0bbac9d0f55a239c86f5ef1714fee4199be5266bb2"
+    "review": {
+      "bytes": 1639,
+      "sha256": "c6e3cfc34ef5815170b811441f1423c9e6054bd43210676e1a765aa0835b761f"
     }
   }
 }

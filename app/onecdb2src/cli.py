@@ -17,6 +17,7 @@ def is_fast(config):
     return config.get('docker_mode','host')=='fast'
 
 def validate_modes(args):
+    require(args.side_scheduling=='sequential' or args.runtime=='docker' and args.docker_mode=='fast' and args.docker_transfer=='stream','Transfer overlap requires fast Docker stream mode')
     require(args.docker_cf_transfer!='bind-copy' or args.runtime=='docker' and args.docker_mode=='fast','bind-copy CF staging requires Docker fast mode')
     require(args.docker_mode!='fast' or args.runtime=='docker','Fast mode requires Docker runtime')
     require(args.docker_mode!='fast' or args.assembly_mode=='adopt','Fast mode requires --assembly-mode adopt')
@@ -26,6 +27,9 @@ def validate_modes(args):
 
 def stage_plan(config):
     stages=['capture','cf','profiles']
+    if config.get('side_scheduling','sequential')=='transfer-overlap':
+        require(is_fast(config),'Overlap requires fast mode')
+        return stages+['fast-pair','integrity']
     for side in ('main','vendor'):
         stages += ['fast-'+side] if is_fast(config) else [kind+'-'+side for kind in ('native','dumpinfo','parents','assembly')]
     return stages+['integrity']
@@ -33,6 +37,7 @@ def stage_plan(config):
 def stage_seconds(config,args,stage):
     if stage=='capture':return args.capture_seconds
     if is_fast(config):
+        if stage=='fast-pair':return 2*config['fast_side_seconds']+90
         if stage.startswith('fast-'):return config['fast_side_seconds']+45
         if stage=='integrity':return 2*config['python_seconds']+180
         return config['python_seconds']
@@ -66,6 +71,7 @@ def parser():
     p.add_argument('--assembly-mode',choices=['copy','adopt'],default='copy',help='copy: прежняя сборка; adopt: передать собственное дерево native без повторного копирования, с конечной проверкой')
     p.add_argument('--runtime',choices=['docker','native'],default='docker',help='Docker (Windows/Linux) либо закреплённый локальный конвертер (Linux x86-64)')
     p.add_argument('--docker-mode',choices=['host','fast'],default='host',help='host: прежний маршрут; fast: обработка внутри Linux Docker, требует adopt')
+    p.add_argument('--side-scheduling',choices=['sequential','transfer-overlap'],default='sequential',help='Перекрыть передачу основной XML обработкой поставщика; только fast Docker stream')
     p.add_argument('--docker-cf-transfer',choices=['copy','bind-copy'],default='copy',help='CF volume staging; bind-copy requires a source readable by the Docker root mapping, no fallback or source chmod')
     p.add_argument('--docker-transfer',choices=['copy','stream'],default='copy',help='Перенос Docker результата; stream включается явно только в fast режиме')
     p.add_argument('--readback-workers',type=int,choices=[1,4,8],help='Потоки независимой итоговой проверки fast (по умолчанию 4)')
@@ -151,8 +157,9 @@ def fresh_fast_cpu_admission(config):
         load=float(line.strip().removesuffix('%'))/100
         require(math.isfinite(load) and load>=0,'Invalid Docker CPU value');used+=load
     host_cpu=psutil.cpu_percent(interval=.1);host_count=len(psutil.Process().cpu_affinity())
-    require(math.isfinite(host_cpu) and 0<=host_cpu<=100 and host_count*(1-host_cpu/100)>=2 and info['NCPU']-used>=2,'Insufficient fresh CPU headroom')
-    return {'observed_utc':utc(),'host_cpu_percent':host_cpu,'host_cpu_count':host_count,'docker_cpu_count':info['NCPU'],'docker_used_cores_estimate':used,'memory_controls':False}
+    host_needed=4 if config.get('side_scheduling')=='transfer-overlap' else 2
+    require(math.isfinite(host_cpu) and 0<=host_cpu<=100 and host_count*(1-host_cpu/100)>=host_needed and info['NCPU']-used>=2,'Insufficient fresh CPU headroom')
+    return {'observed_utc':utc(),'host_cpu_percent':host_cpu,'host_cpu_count':host_count,'host_headroom_required':host_needed,'docker_cpu_count':info['NCPU'],'docker_used_cores_estimate':used,'memory_controls':False}
 
 def fresh_native_admission(config):
     """Fresh numeric resource observation, with explicit Docker headroom estimate."""
@@ -255,6 +262,7 @@ def main(argv=None):
             config['fast_transport_seconds']=config['python_seconds']
             config['fast_side_seconds']=config['native_seconds']+4*config['python_seconds']+180
             config['total_deadline_monotonic']=clock+args.total_seconds if args.total_seconds else None
+        config['side_scheduling']=args.side_scheduling
         save(root/'_work/config.json',config)
         report={'status':'RUNNING','started_utc':utc(),'provider':args.provider,'database':args.database,'supplier':args.supplier,'stages':[],'limitations':[],'oracle_inputs':[]}
         save(root/'report.json',report)
@@ -302,7 +310,8 @@ def main(argv=None):
             if stage.startswith('parents-') and (root/'_work'/stage/'unsupported.json').exists():report['limitations'].append(read(root/'_work'/stage/'unsupported.json'))
             if stage.startswith('fast-'):
                 proof=read(root/'_work'/stage/'result.json')
-                require(proof.get('status')=='CANDIDATE_GENERATED_REQUIRES_HOST_VERIFICATION','Fast producer did not complete candidate')
+                expected='PAIR_CANDIDATES_GENERATED_REQUIRES_FINAL_VERIFICATION' if stage=='fast-pair' else 'CANDIDATE_GENERATED_REQUIRES_HOST_VERIFICATION'
+                require(proof.get('status')==expected,'Fast producer did not complete candidate')
                 ledger['fast_candidate']={'path':str(root/'_work'/stage/'result.json'),'sha256':fact(root/'_work'/stage/'result.json')['sha256']}
             ledger['status']='COMPLETED';save(root/'report.json',report)
             print(f'{title}: завершено за {job["seconds"]:.2f} с.',flush=True)

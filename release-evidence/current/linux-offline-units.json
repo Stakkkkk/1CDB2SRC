@@ -1,24 +1,15 @@
 {
-  "status": "PASS_AUTHORIZED_LINUX_OFFLINE_UNIT_DISCOVERY",
-  "discovered": 190,
-  "passed": 169,
+  "status": "PASS_AUTHORIZED_LINUX_CONTAINER_OFFLINE_DISCOVERY",
+  "discovered": 212,
+  "passed": 191,
   "skipped": 21,
-  "failures": 0,
-  "errors": 0,
-  "skip_scope": "17 capped-memory tests excluded by current authorization,4 Windows tests",
-  "suite_seconds": 1.2034779920068104,
-  "whole_seconds": 9.69641880004201,
-  "source_unchanged": true,
+  "skip_scope": "17 memory-limit tests excluded by current authorization;4 Windows tests",
+  "seconds": 10.790634699980728,
+  "scope": "Offline install/full authorized discovery in Linux container, not native Linux host DB export",
   "own_container_absent": true,
-  "live_DB_or_export": false,
-  "proof_facts": {
-    "result": {
-      "bytes": 35767,
-      "sha256": "2a8d621f4c4e86d98910d4aebce6d818b7696e43f00638dfff1144042dfd49b3"
-    },
-    "proof": {
-      "bytes": 34299,
-      "sha256": "0fef822050d2cad7fb484baa665fae0dde794af0eb69614839ad9981c1c2167d"
-    }
+  "source_unchanged": true,
+  "proof_fact": {
+    "bytes": 38988,
+    "sha256": "d0b39d1649e5d621cfe93f68bff008c9edff40f56f37e0cc71700e9a9f5966d9"
   }
 }

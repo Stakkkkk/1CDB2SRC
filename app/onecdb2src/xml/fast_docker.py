@@ -408,6 +408,17 @@ def produce_fast_side(config, side):
         stage('linux-helpers', lambda: start(helpers, 'helpers', {0},float(config.get('python_seconds',2400))))
 
         def transfer():
+            if side=='main' and config.get('side_scheduling')=='transfer-overlap':
+                from ..fast_pair import READY_SCHEMA
+                # start() already observed helper exit0/Pid0. Marker opens
+                # scheduling only; final XML/profile/CF verification is unchanged.
+                closed=read(root/'helpers-container-after.json')['State']
+                require(closed['Running'] is False and closed['ExitCode']==0 and closed['Pid']==0,
+                        'Transfer readiness requires a closed successful helper')
+                save_new(root/'transfer-ready.json',{'schema':READY_SCHEMA,'side':'main','nonce':nonce,
+                    'status':'LINUX_HELPERS_CLOSED_READY_FOR_HOST_TRANSFER','cf':before,
+                    'contract':fact(root/'contract.json'),'helper':helper_binding,
+                    'helpers_after':fact(root/'helpers-container-after.json'),'ready_utc':utc()})
             end=time.monotonic()+float(config.get('fast_transport_seconds',2400))
             if config.get('docker_transfer','copy')=='stream':
                 from .fast_stream import make_stream_owner,transfer_fast_side
@@ -524,6 +535,34 @@ def verify_fast_side(config,side,workers=4):
     return verify(config,side,workers=workers)
 
 
+def require_pair_shutdown(config,product_root):
+    """A failed export may be cleaned only after the outer producer is closed.
+
+    Export success is deliberately not required: timeout/cancellation must also
+    recover owned containers, but unknown process closure must never do so.
+    """
+    if config.get('side_scheduling','sequential')!='transfer-overlap':return None
+    job=product_root/'_work/jobs/fast-pair.json'
+    activity=[job,job.with_suffix('.stdout'),job.with_suffix('.stderr'),
+              product_root/'_work/fast-pair/result.json']
+    activity.extend(product_root/'_work'/('fast-'+side)/'contract.json' for side in ('main','vendor'))
+    if not any(path.exists() for path in activity):return None
+    require(job.is_file() and job.stat().st_size<=2*1024*1024,'Pair shutdown receipt missing/oversized; cleanup refused')
+    value=read(job)
+    require(value.get('job_handle_closed') is True and value.get('observation_status')=='OBSERVED'
+            and value.get('surviving_pids')==[] and value.get('cleanup_errors')==[]
+            and value.get('io_errors')==[]
+            and value.get('pipes_closed')=={'stdin':True,'stdout':True,'stderr':True},
+            'Pair producer closure UNKNOWN; cleanup refused')
+    if value.get('backend')=='linux-posix':
+        require(value.get('processgroups_closed') is True,'Pair process groups closure UNKNOWN; cleanup refused')
+    else:
+        require(value.get('drains_joined') is True and value.get('bootstrap_survived') is False
+                and value.get('target_streams_closed')=={'stdout':True,'stderr':True},
+                'Pair process/stream closure UNKNOWN; cleanup refused')
+    return {'status':'OUTER_PAIR_PRODUCER_CLOSED','receipt':fact(job)}
+
+
 def cleanup_fast_owned(config):
     """Recover only this output's journaled resources after outer worker failure.
 
@@ -532,6 +571,7 @@ def cleanup_fast_owned(config):
     volumes retained for diagnosis can be removed here by the owning CLI finally.
     """
     product_root=Path(config['root']).resolve(strict=True)
+    shutdown=require_pair_shutdown(config,product_root)
     if not any((product_root/'_work'/('fast-'+side)).exists() for side in ('main','vendor')):
         return {'status':'CONFIRMED_OWN_FAST_RESOURCES_ABSENT','confirmed':True,'sides':{},'errors':[]}
     _,binding=load_helper_manifest(config)
@@ -539,7 +579,7 @@ def cleanup_fast_owned(config):
     export_native.configure(config.get('docker_context'),config.get('docker_socket'))
     env=export_native.docker_environment()
     deadline=time.monotonic()+float(config.get('fast_cleanup_seconds',45))
-    proof={'status':'RECOVERING','confirmed':False,'sides':{},'errors':[]}
+    proof={'status':'RECOVERING','confirmed':False,'sides':{},'errors':[],'pair_shutdown':shutdown}
     def docker(*parts):
         remaining=deadline-time.monotonic()
         require(remaining>0,'Outer fast cleanup deadline expired')

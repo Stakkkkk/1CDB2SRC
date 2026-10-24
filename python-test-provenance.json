@@ -1,5 +1,5 @@
 {
-  "scope": "0.3.0-rc.2 portable test sources; current run results only in supplied release-validation evidence.",
+  "scope": "0.3.0-rc.3 portable test sources; current run results only in supplied release-validation evidence.",
   "files": {
     "fast_cf_fixture.py": {
       "bytes": 2247,
@@ -18,8 +18,8 @@
       "sha256": "1ff816e074c90fdd0485bfcfc8ed5cd11b2bbb9e89735eb73c871d7c5f2b1f96"
     },
     "test_cf_copy.py": {
-      "bytes": 11064,
-      "sha256": "7c20ae53b2bd7d96c4c8f9c9e2e5e05043de363a9a335ad805e550fe9f5cdcca"
+      "bytes": 11378,
+      "sha256": "3e73efe5aeccdb0a11e91136688b289482901e713d6c658d5439592b85110211"
     },
     "test_dumpinfo_single_pass.py": {
       "bytes": 10522,
@@ -36,6 +36,10 @@
     "test_fast_docker.py": {
       "bytes": 20211,
       "sha256": "093fec7e9bc8f50a0446311ff1d3624a19d86f02c753384685f7b2b374bbeba3"
+    },
+    "test_fast_pair.py": {
+      "bytes": 18008,
+      "sha256": "771bd7cc6f5ca4794658289d0a1c4b9d3a5016c3c17ea5f00106aa3ab55e1d18"
     },
     "test_fast_runtime.py": {
       "bytes": 19414,

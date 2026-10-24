@@ -115,6 +115,9 @@ class CopyCoreTests(unittest.TestCase):
             if isinstance(node, ast.Constant) and isinstance(node.value, str)
             and any(ord(c) > 127 for c in node.value))
         # Frozen original UTF-8 literal inventory, including progress/report/password.
+        added='Перекрыть передачу основной XML обработкой поставщика; только fast Docker stream'
+        self.assertEqual(cli.parser()._option_string_actions['--side-scheduling'].help,added)
+        self.assertEqual(values.count(added),1);values.remove(added)
         self.assertEqual(len(values), 39)
         self.assertEqual(hashlib.sha256(json.dumps(values, ensure_ascii=True).encode()).hexdigest(),
             '7af231c2ab1b1137851a1c19c252e12d3c0d9cca264d8188ce5ab24de5a0f5d3')

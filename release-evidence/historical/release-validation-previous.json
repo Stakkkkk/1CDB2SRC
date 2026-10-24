@@ -1,64 +1,84 @@
 {
-  "version": "0.3.0-rc.1",
+  "version": "0.3.0-rc.2",
   "status": "PACKAGE_WITH_SUPPLIED_ACCEPTED_EVIDENCE",
   "scope": "Evidence copied and byte-verified, not validation executed by this sealer",
   "current_evidence": [
     {
-      "label": "small",
-      "path": "release-evidence/current/small.json",
+      "label": "cf-transfer",
+      "path": "release-evidence/current/cf-transfer.json",
       "fact": {
-        "bytes": 4770,
-        "sha256": "8a1a91cbc771b20437bcbb3ce234f4827878626c8187cce99d18112e689da45c"
+        "bytes": 543,
+        "sha256": "7e7c8fd6ce28033bc9cfe0052eb8417fe227758ad650e2e027a68daa7bd09ce0"
       },
-      "reported_status": "PASS_WITH_LIMITATIONS",
-      "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
-    },
-    {
-      "label": "large-fixture-1",
-      "path": "release-evidence/current/large-fixture-1.json",
-      "fact": {
-        "bytes": 4968,
-        "sha256": "9e7c10e6fd37b61ab39e509e474ded5df9e76594f34aa5ac6f2e71062be02553"
-      },
-      "reported_status": "PASS_WITH_LIMITATIONS",
+      "reported_status": "PASS_ONE_LARGE_CF_BIND_COPY_DIAGNOSTIC",
       "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     },
     {
       "label": "large-erp",
       "path": "release-evidence/current/large-erp.json",
       "fact": {
-        "bytes": 6011,
-        "sha256": "caf5bbfe0dbcd547a0416ebb120cb3504b7c46e910873c14aeab803f96f90ca4"
+        "bytes": 1485,
+        "sha256": "51a91ac297bf8b9330e7e3229f467768d1b23f3f814679547a1425507f4b9e92"
       },
-      "reported_status": "PASS_WITH_LIMITATIONS",
+      "reported_status": "PASS_SAVED_CF_PAIR_EXACT_WITH_EXISTING_FORMAT_LIMITATIONS",
       "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     },
     {
-      "label": "windows-units",
-      "path": "release-evidence/current/windows-units.json",
+      "label": "large-fixture-1-repeat",
+      "path": "release-evidence/current/large-fixture-1-repeat.json",
       "fact": {
-        "bytes": 1805,
-        "sha256": "658384be0c0408580da05497d8088c0be48e4b05d2f5bda3686c8a598d96826a"
+        "bytes": 1533,
+        "sha256": "c9e5eff390d9035145b0f2efe44e02eb7734dca8609ce8946866b17873d193c1"
       },
-      "reported_status": "PASS_WITH_LIMITATIONS",
+      "reported_status": "PASS_SAVED_CF_PAIR_EXACT_WITH_EXISTING_FORMAT_LIMITATIONS",
+      "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
+    },
+    {
+      "label": "large-fixture-1",
+      "path": "release-evidence/current/large-fixture-1.json",
+      "fact": {
+        "bytes": 1520,
+        "sha256": "3419f57908539bf6bbaafc4b6443ff0e8bd2b2321cc6cde8d12772616979d879"
+      },
+      "reported_status": "PASS_SAVED_CF_PAIR_EXACT_WITH_EXISTING_FORMAT_LIMITATIONS",
       "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     },
     {
       "label": "linux-offline-units",
       "path": "release-evidence/current/linux-offline-units.json",
       "fact": {
-        "bytes": 2851,
-        "sha256": "ba75a66f95a47c6ad4ea71db023abe9d71301fb8e41398869990c1ef7ab7a675"
+        "bytes": 710,
+        "sha256": "8c9f364f5a42672e04664672c05c3c8bcb9899628c4cc27dcbcf2a7a9f4d5e2b"
       },
-      "reported_status": "PASS_WITH_DECLARED_SKIPS",
+      "reported_status": "PASS_AUTHORIZED_LINUX_OFFLINE_UNIT_DISCOVERY",
+      "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
+    },
+    {
+      "label": "small",
+      "path": "release-evidence/current/small.json",
+      "fact": {
+        "bytes": 1429,
+        "sha256": "61e805aa9ff256823b68c1a4f3c936ade28e3806ac2c6719d2420a6471169c4f"
+      },
+      "reported_status": "PASS_SAVED_CF_PAIR_EXACT_WITH_EXISTING_FORMAT_LIMITATIONS",
+      "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
+    },
+    {
+      "label": "windows-units",
+      "path": "release-evidence/current/windows-units.json",
+      "fact": {
+        "bytes": 1603,
+        "sha256": "0c4cec21e279475e34fd8684cbd51f9ff91724d1e770752ce683d0747c893eee"
+      },
+      "reported_status": "PASS_BOUNDED_WINDOWS_NEUTRAL_SOURCE_REGRESSIONS",
       "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     }
   ],
   "historical_validation": {
     "path": "release-evidence/historical/release-validation-previous.json",
     "fact": {
-      "bytes": 1836,
-      "sha256": "52c25042e42214da3149d41d70efdfeec895f989c9673e2df39f0ac78cbaf7f9"
+      "bytes": 2891,
+      "sha256": "ed8983f4919b376136a03481a99d8fa0e6ca627fee6a374883b4a6fafbf81d78"
     },
     "current_release_claim": false
   },
@@ -66,8 +86,8 @@
     "host_route_preserved": true,
     "fast_docker": true,
     "fast_helper_manifest": {
-      "bytes": 11559,
-      "sha256": "981fff1e7a02f3dbc25df17bc1b988a0220d365c21eba1ee7fbddd3e90be3117"
+      "bytes": 11712,
+      "sha256": "b5a883351239a49f02b3ee8ff0d0b83c415b790d434ad8e5e9e6e4d94ca5b7f5"
     },
     "rust_rebuilt_by_sealer": false,
     "converter_source_unchanged": true,

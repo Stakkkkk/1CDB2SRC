@@ -14,7 +14,7 @@ from .posix_support import live,process,read_status,signal_process
 def require(condition,message):
     if not condition:raise ValueError(message)
 
-def run(argv,stdout_path,stderr_path,receipt_path,seconds,stdout_cap,stderr_cap,rss_cap=1073741824,env=None):
+def run(argv,stdout_path,stderr_path,receipt_path,seconds,stdout_cap,stderr_cap,rss_cap=1073741824,env=None,*,cancel_event=None):
     require(sys.platform.startswith('linux'),'Linux /proc and prctl are required')
     require(seconds>0 and stdout_cap>=0 and stderr_cap>=0 and (rss_cap is None or type(rss_cap) is int and rss_cap>0),'Invalid process bounds')
     require(isinstance(argv,(list,tuple)) and argv and all(isinstance(a,str) for a in argv),'Invalid process argv')
@@ -88,10 +88,12 @@ def run(argv,stdout_path,stderr_path,receipt_path,seconds,stdout_cap,stderr_cap,
             # installed its signal/subreaper guards and published identity.
             while status is None and proc.poll() is None:
                 update_status(state_path)
+                if cancel_event is not None and cancel_event.is_set():failure='CANCELLED';break
                 if time.monotonic()-started>seconds:
                     failure='TIMEOUT';break
                 if status is None:time.sleep(.02)
             if not failure and status is None:failure='BOOTSTRAP_START_FAILED'
+            if cancel_event is not None and cancel_event.is_set():failure=failure or 'CANCELLED'
             if not failure:
                 go_sent=True
                 # Bootstrap receives the cleaned loader environment. The exact
@@ -101,6 +103,7 @@ def run(argv,stdout_path,stderr_path,receipt_path,seconds,stdout_cap,stderr_cap,
             while failure is None and proc.poll() is None:
                 update_status(state_path)
                 if overflow.is_set():failure='OUTPUT_LIMIT_OR_IO'
+                if cancel_event is not None and cancel_event.is_set():failure=failure or 'CANCELLED'
                 if time.monotonic()-started>seconds:failure='TIMEOUT'
                 if failure:break
                 time.sleep(.02)

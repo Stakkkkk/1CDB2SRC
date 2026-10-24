@@ -1,41 +1,13 @@
 {
-  "status": "PASS_BOUNDED_WINDOWS_NEUTRAL_SOURCE_REGRESSIONS",
-  "scope": "Three changed modules: portable grammar, metadata index, CF copy; no Docker/DB/realCF; not the full Windows suite or a fresh DB export",
-  "methods": 28,
+  "status": "PASS_FOCUSED_WINDOWS_REGRESSIONS",
+  "methods": 78,
+  "seconds": 7.328934600111097,
   "failures": 0,
   "errors": 0,
-  "skipped": 0,
-  "seconds": 4.751238299999386,
-  "source_before_after": {
-    "app/onecdb2src/nativecf/brace.py": {
-      "bytes": 4325,
-      "sha256": "f47df27efc5ca5d961ab3a673e7fa03c0dbfa8762cbe375819a43032fa403fa5"
-    },
-    "app/onecdb2src/xml/dump_info_modern_r3.py": {
-      "bytes": 27855,
-      "sha256": "6de4a18ce3a11eadc80490eacd8df5a5f4dc6cf683a2a3776868ec6f317b732b"
-    },
-    "app/onecdb2src/xml/cf_copy.py": {
-      "bytes": 7635,
-      "sha256": "a7a9e4807702ccd0a170b539bc7c5bd2b78471c4d674dc9ac3c7bffc07f178de"
-    },
-    "tests/test_brace.py": {
-      "bytes": 5199,
-      "sha256": "07ffc323234f83e0f36db037aa2ef21ff604ee973cf0326d78cf776222d6e869"
-    },
-    "tests/test_dumpinfo_single_pass.py": {
-      "bytes": 10522,
-      "sha256": "5a12cd148b56f96d84e1cbc647d46f7b832c27af3f6581ec24fc8e3c84632d6f"
-    },
-    "tests/test_cf_copy.py": {
-      "bytes": 11064,
-      "sha256": "7c20ae53b2bd7d96c4c8f9c9e2e5e05043de363a9a335ad805e550fe9f5cdcca"
-    }
-  },
-  "full_linux_discovery_is_separate": true,
+  "scope": "Pair coordinator/cancellation/cleanup barrier/CLI/stream/CF copy/runtime mocks; not full Windows discovery or DB export",
+  "memory_controls": false,
   "proof_fact": {
-    "bytes": 1272,
-    "sha256": "b456c97e65be75a85eac2571d6f269ff26ff1438640ad94fa90b5f464e677acf"
-  },
-  "portable_install": "Separate final ZIP fresh offline installation result is outside archive to avoid self-referential archive hashes"
+    "bytes": 153,
+    "sha256": "80c3b9f3362c4f5d5697f9e2a0e5069b44b839e913670cae921b98302c25ec23"
+  }
 }

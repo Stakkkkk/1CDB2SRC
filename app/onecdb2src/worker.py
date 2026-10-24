@@ -140,6 +140,9 @@ def run(stage,config):
         for side in ('main','vendor'):
             profile=profiles.select(work/'cf'/side/'source.cf',config['platform'])
             profiles.save_new(directory/(side+'.json'),profile)
+    elif stage=='fast-pair':
+        from .fast_pair import produce_fast_pair
+        produce_fast_pair(config)
     elif stage.startswith('fast-'):
         require(stage in ('fast-main','fast-vendor'),'Unknown fast side')
         require(config.get('docker_mode')=='fast' and config.get('runtime_backend')=='docker' and config.get('assembly_mode')=='adopt' and config.get('memory_controls') is False,'Invalid fast producer policy')

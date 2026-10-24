@@ -1,0 +1,13 @@
+{
+  "status": "PASS_SMALL_REAL_TRANSFER_OVERLAP_DEFAULT_CF_COPY",
+  "seconds": 43.03793190000579,
+  "files": 15,
+  "BSL": 1,
+  "all_files_exact": true,
+  "scope": "Functional combination check, not a speed comparison; source/helper unchanged",
+  "own_cleanup_confirmed": true,
+  "proof_fact": {
+    "bytes": 1602,
+    "sha256": "1216ac99bbfde223136965e3221df32d52bdef35f6925d5f12b1736e6a7cc2aa"
+  }
+}

@@ -41,7 +41,7 @@ def rss(pid):
   x=PMC();x.cb=ctypes.sizeof(x)
   return x.rss if P.GetProcessMemoryInfo(handle,ctypes.byref(x),x.cb) else 0
  finally:K.CloseHandle(handle)
-def run(argv,stdout_path,stderr_path,receipt_path,seconds,stdout_cap,stderr_cap,rss_cap=1073741824,env=None):
+def run(argv,stdout_path,stderr_path,receipt_path,seconds,stdout_cap,stderr_cap,rss_cap=1073741824,env=None,*,cancel_event=None):
  require(seconds>0 and stdout_cap>=0 and stderr_cap>=0 and (rss_cap is None or type(rss_cap) is int and rss_cap>0),'Bounded process invariant failed')
  paths=[pathlib.Path(x) for x in (stdout_path,stderr_path,receipt_path)];require(len(set(paths))==3 and not any(p.exists() for p in paths),'Bounded process invariant failed')
  memory_enabled=rss_cap is not None
@@ -82,6 +82,8 @@ def run(argv,stdout_path,stderr_path,receipt_path,seconds,stdout_cap,stderr_cap,
    except BaseException as e:io_errors.append(repr(e));overflow.set()
   threads=[threading.Thread(target=drain,args=(s,t,i,c),daemon=True) for i,(s,t,c) in enumerate(((proc.stdout,out,stdout_cap),(proc.stderr,err,stderr_cap)))]
   for t in threads:t.start()
+  if cancel_event is not None and cancel_event.is_set():
+   failure='CANCELLED';raise InterruptedError('Shared cancellation requested before GO')
   proc.stdin.write(b'GO\n');proc.stdin.flush();go_sent=True;proc.stdin.close()
   while proc.poll() is None:
    pids=observe('running');seen.update(pids)
@@ -89,6 +91,7 @@ def run(argv,stdout_path,stderr_path,receipt_path,seconds,stdout_cap,stderr_cap,
     used=sum(rss(p) for p in pids);peak=max(peak,used)
     if used>rss_cap:failure='RSS_LIMIT'
    if overflow.is_set():failure='OUTPUT_LIMIT_OR_IO'
+   if cancel_event is not None and cancel_event.is_set():failure=failure or 'CANCELLED'
    if time.monotonic()-start>seconds:failure='TIMEOUT'
    if failure:K.TerminateJobObject(job,124);proc.wait(5);break
    time.sleep(.02)

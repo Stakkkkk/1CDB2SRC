@@ -1,0 +1,15 @@
+{
+  "status": "PASS_EXPECTED_TIMEOUT_PROCESS_CLOSURE_AND_OWN_RECOVERY",
+  "export_status": "FAILED_PRODUCT_SAVED_CF_REPLAY",
+  "ready_XML": false,
+  "seconds": 98.09980560000986,
+  "both_sides_started": true,
+  "outer_job_closed": true,
+  "cleanup_confirmed": true,
+  "root_review": true,
+  "independent_review": false,
+  "proof_fact": {
+    "bytes": 678,
+    "sha256": "5c63be26f939cee5fd7271f6ba805705b2a4781f2e350967933e2983d1671151"
+  }
+}

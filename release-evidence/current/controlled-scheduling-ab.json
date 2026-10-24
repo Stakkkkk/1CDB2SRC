@@ -1,0 +1,12 @@
+{
+  "status": "PASS_CONTROLLED_SAME_SOURCE_PAIR_SCHEDULING_COMPARISON",
+  "scope": "Same CF/profiles/source/helper A/B before the cleanup-only positive-closure barrier; historical precursor, not the final helper",
+  "sequential_seconds": 239.42831900005694,
+  "transfer_overlap_seconds": 210.08586700004525,
+  "gain_seconds": 29.34245200001169,
+  "gain_percent": 12.255213636614435,
+  "files": 46786,
+  "BSL": 11774,
+  "all_files_exact": true,
+  "independent_review": false
+}
