@@ -408,7 +408,7 @@ def produce_fast_side(config, side):
         stage('linux-helpers', lambda: start(helpers, 'helpers', {0},float(config.get('python_seconds',2400))))
 
         def transfer():
-            if side=='main' and config.get('side_scheduling')=='transfer-overlap':
+            if side=='main' and config.get('side_scheduling') in ('transfer-overlap','verify-overlap'):
                 from ..fast_pair import READY_SCHEMA
                 # start() already observed helper exit0/Pid0. Marker opens
                 # scheduling only; final XML/profile/CF verification is unchanged.
@@ -541,7 +541,7 @@ def require_pair_shutdown(config,product_root):
     Export success is deliberately not required: timeout/cancellation must also
     recover owned containers, but unknown process closure must never do so.
     """
-    if config.get('side_scheduling','sequential')!='transfer-overlap':return None
+    if config.get('side_scheduling','sequential') not in ('transfer-overlap','verify-overlap'):return None
     job=product_root/'_work/jobs/fast-pair.json'
     activity=[job,job.with_suffix('.stdout'),job.with_suffix('.stderr'),
               product_root/'_work/fast-pair/result.json']

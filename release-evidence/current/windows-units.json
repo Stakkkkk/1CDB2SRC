@@ -1,13 +1,13 @@
 {
-  "status": "PASS_FOCUSED_WINDOWS_REGRESSIONS",
-  "methods": 78,
-  "seconds": 7.328934600111097,
+  "status": "PASS_WINDOWS_FOCUSED_REGRESSIONS",
+  "methods": 103,
+  "skipped_subcases": 2,
   "failures": 0,
   "errors": 0,
-  "scope": "Pair coordinator/cancellation/cleanup barrier/CLI/stream/CF copy/runtime mocks; not full Windows discovery or DB export",
-  "memory_controls": false,
+  "seconds": 27.533975799917243,
+  "scope": "Neutral real bytes/process tests and fake Docker protocol;2 symlink subcases unavailable, not full Windows discovery",
   "proof_fact": {
-    "bytes": 153,
-    "sha256": "80c3b9f3362c4f5d5697f9e2a0e5069b44b839e913670cae921b98302c25ec23"
+    "bytes": 155,
+    "sha256": "9a5fede378694c27f33a036f576cd2a2e47c1a38788db7bbd2a108c39f1f2820"
   }
 }

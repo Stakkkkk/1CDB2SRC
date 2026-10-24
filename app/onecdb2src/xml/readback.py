@@ -129,7 +129,7 @@ def verify_file(tree, path, expected, xml_version):
             'bsl': file.suffix.lower() == '.bsl', 'metadata_envelope': bool(metadata)}
 
 
-def verify_xml_tree(tree, manifest, *, manifest_sha256, xml_version, workers=4):
+def _verify_xml_tree(tree, manifest, *, manifest_sha256, xml_version, workers=4, _read_file=None):
     """Read each actual payload afresh exactly once, regardless of thread count.
 
     Return is file verification only; caller must perform CF/profile/receipt
@@ -157,6 +157,7 @@ def verify_xml_tree(tree, manifest, *, manifest_sha256, xml_version, workers=4):
         actual = actual_paths(tree)
         require(actual == expected_paths, 'missing/extra files before readback')
         phase = 'payload'
+        read_file = verify_file if _read_file is None else _read_file
 
         def collect(path, result=None, error=None):
             if error is None:
@@ -167,7 +168,7 @@ def verify_xml_tree(tree, manifest, *, manifest_sha256, xml_version, workers=4):
         if workers == 1:
             for path, expected in rows.items():
                 try:
-                    collect(path, verify_file(tree, path, expected, xml_version))
+                    collect(path, read_file(tree, path, expected, xml_version))
                 except Exception as error:
                     collect(path, error=error)
                     break
@@ -184,7 +185,7 @@ def verify_xml_tree(tree, manifest, *, manifest_sha256, xml_version, workers=4):
                         except StopIteration:
                             exhausted = True
                             break
-                        future = executor.submit(verify_file, tree, path, expected, xml_version)
+                        future = executor.submit(read_file, tree, path, expected, xml_version)
                         pending[future] = path
                     if not pending:
                         break
@@ -226,3 +227,8 @@ def verify_xml_tree(tree, manifest, *, manifest_sha256, xml_version, workers=4):
             proof.update(missing_count=len(expected_paths-actual), extra_count=len(actual-expected_paths),
                 missing_examples=sorted(expected_paths-actual)[:20], extra_examples=sorted(actual-expected_paths)[:20])
         raise ReadbackFailure(proof) from error
+
+
+def verify_xml_tree(tree, manifest, *, manifest_sha256, xml_version, workers=4):
+    """Full fresh bytes/XML readback; caller still authenticates lineage."""
+    return _verify_xml_tree(tree,manifest,manifest_sha256=manifest_sha256,xml_version=xml_version,workers=workers)

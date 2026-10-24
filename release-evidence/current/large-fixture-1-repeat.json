@@ -1,12 +1,40 @@
 {
-  "status": "PASS_FINAL_CLOSURE_BARRIER_DOCUMENT_PAIR_CONFIRMATION",
-  "scope": "Final helper repeats the earlier accepted overlap document-management case after cleanup-only barrier change",
-  "seconds": 209.9112477999879,
-  "files": 46786,
-  "BSL": 11774,
-  "all_files_exact": true,
-  "proof_fact": {
-    "bytes": 1630,
-    "sha256": "a76e6402f7ba39181ae705a8559ec8d3891e32aa57dc531de6b834080a60fa1e"
+  "status": "PASS_SAVED_CF_PAIR_ALL_FILES_EXACT",
+  "source_revision": "r1 before path-case guard fix",
+  "side_scheduling": "verify-overlap",
+  "whole_seconds": 373.6761363000842,
+  "operation_seconds": 366.39916390005965,
+  "scope": "Saved SQL-derived CF pair -> public profile/fast worker/integrity stages via research caller; no new DB capture or platform",
+  "profile_scope": "Research per-side main8.3.27/vendor8.5.1, not ordinary single override",
+  "sides": {
+    "main": {
+      "files": 23466,
+      "bsl_files": 5905,
+      "missing": [],
+      "extra": [],
+      "different": []
+    },
+    "vendor": {
+      "files": 23320,
+      "bsl_files": 5869,
+      "missing": [],
+      "extra": [],
+      "different": []
+    }
+  },
+  "reference": "Accepted prior generated same-CF XML, not a perfect platform XML claim",
+  "full_final_payload_hash_readback": true,
+  "root_review": true,
+  "independent_review": false,
+  "own_cleanup_confirmed": true,
+  "proof_facts": {
+    "result": {
+      "bytes": 22898,
+      "sha256": "31957bc1d2e999d3c6598a279be3f399bb6c89402ab07bfb03ae04130dc37a55"
+    },
+    "comparison": {
+      "bytes": 839,
+      "sha256": "f4be1ca40fdd1307f9dd7baeb2306e00d297d4f0ca36bc3b8121d83ffb1bfd89"
+    }
   }
 }

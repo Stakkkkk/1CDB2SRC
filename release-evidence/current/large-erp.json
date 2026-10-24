@@ -1,44 +1,13 @@
 {
-  "status": "PASS_SAVED_CF_PAIR_EXACT_WITH_EXISTING_FORMAT_LIMITATIONS",
-  "scope": "Saved SQL-derived CF pair -> public profile/fast pair/integrity workers; research caller; not fresh DB capture",
-  "profile_scope": "Automatic supported profile for each CF",
-  "side_scheduling": "transfer-overlap",
-  "default": "sequential",
-  "live_DB_capture": false,
-  "platform_used": false,
-  "whole_seconds": 2338.8461381000234,
-  "operation_seconds": 2322.716868500109,
-  "reference_seconds": 2358.7012367999414,
-  "reference": "Accepted prior same-CF generated output, not perfect platform XML",
-  "reference_is_same_source_sequential": false,
-  "reference_source_scope": "Previous accepted sequential source; controlled same-source A/B recorded separately",
-  "sides": {
-    "main": {
-      "files": 139493,
-      "BSL": 29255,
-      "bytes": 11328251898
-    },
-    "vendor": {
-      "files": 137555,
-      "BSL": 28794,
-      "bytes": 9529821333
-    }
-  },
-  "vendor_native_overlaps_main_transfer_seconds": 206.184855,
-  "complete_file_readback": true,
-  "own_cleanup_confirmed": true,
-  "memory_controls": false,
-  "root_review": true,
-  "independent_review": false,
-  "format_and_opaque_limits_unchanged": true,
-  "proof_facts": {
-    "result": {
-      "bytes": 22209,
-      "sha256": "f57c79199a0b8fc1c109f7205ab9dd236550eb5fda8d5d50b87d1c965377bf6c"
-    },
-    "review": {
-      "bytes": 1639,
-      "sha256": "c6e3cfc34ef5815170b811441f1423c9e6054bd43210676e1a765aa0835b761f"
-    }
+  "status": "ACCEPTED_ERP_TIMING_STOP_NO_NEW_EXPORT",
+  "timing_comparison": "NOT_ESTABLISHED",
+  "limit_seconds": 900,
+  "scope": "Diagnostic two reads of already accepted ERP main XML under rc3 code, not new verify-overlap generation; timed out",
+  "current_mode_large_export": "NOT_RUN",
+  "new_ERP_speed_claim": false,
+  "process_closed": true,
+  "proof_fact": {
+    "bytes": 1695,
+    "sha256": "7ef13eba06edf27bade44d2f8463b266fcd9cf422ce84230e1587e23997f0300"
   }
 }

@@ -7,7 +7,7 @@ READY_SCHEMA='1CDB2SRC_TRANSFER_READY_V1'
 PAIR_STATUS='PAIR_CANDIDATES_GENERATED_REQUIRES_FINAL_VERIFICATION'
 
 
-def coordinate(run_side,ready,admit,deadline,emit=lambda event:None):
+def coordinate(run_side,ready,admit,deadline,emit=lambda event:None,verify_main=None):
     """Only main thread writes events. Every launched supervisor is joined."""
     stop=threading.Event();threads={};done={};results={};errors={}
     def check_errors():
@@ -17,11 +17,11 @@ def coordinate(run_side,ready,admit,deadline,emit=lambda event:None):
     def launch(side):
         done[side]=threading.Event()
         def target():
-            try:results[side]=run_side(side,stop)
+            try:results[side]=(verify_main if side=='preverify-main' else run_side)(side,stop)
             except BaseException as error:
                 errors[side]=error;stop.set()
             finally:done[side].set()
-        emit({'event':'side-started','side':side,'monotonic':time.monotonic(),'utc':utc()})
+        emit({'event':'verification-started' if side=='preverify-main' else 'side-started','side':side,'monotonic':time.monotonic(),'utc':utc()})
         thread=threading.Thread(target=target,name='xml-'+side,daemon=False)
         threads[side]=thread;thread.start()
     try:
@@ -39,7 +39,9 @@ def coordinate(run_side,ready,admit,deadline,emit=lambda event:None):
                     launch('vendor')
                 elif done['main'].is_set():
                     raise ValueError('Main exited without a bound transfer-ready marker')
-            if len(done)==2 and all(event.is_set() for event in done.values()):
+            if verify_main is not None and done['main'].is_set() and 'preverify-main' not in threads:
+                check_errors();launch('preverify-main')
+            if len(done)==(3 if verify_main is not None else 2) and all(event.is_set() for event in done.values()):
                 check_errors()
                 return results
             time.sleep(.02)
@@ -109,34 +111,38 @@ def produce_fast_pair(config):
     from .control.bounded_process import run
     from .xml import export_native
     from .xml._fast_contract import fact,read
-    require(config.get('side_scheduling')=='transfer-overlap' and cli.is_fast(config)
+    require(config.get('side_scheduling') in ('transfer-overlap','verify-overlap') and cli.is_fast(config)
             and config.get('runtime_backend')=='docker' and config.get('docker_transfer')=='stream'
             and config.get('assembly_mode')=='adopt' and config.get('memory_controls') is False,'Invalid pair policy')
     root=Path(config['root']);out=root/'_work/fast-pair';out.mkdir()
     started=time.monotonic();deadline=min(config.get('total_deadline_monotonic') or float('inf'),
-                                        started+2*config['fast_side_seconds']+90)
+                                        started+2*config['fast_side_seconds']+90+(config['python_seconds']+45 if config['side_scheduling']=='verify-overlap' else 0))
     export_native.configure(config.get('docker_context'),config.get('docker_socket'))
     journal={'schema':'1CDB2SRC_TRANSFER_OVERLAP_PAIR_V1','status':'RUNNING','started_utc':utc(),
-             'memory_controls':False,'events':[],'cleanup_owner':'outer CLI after all side supervisors close'}
+             'memory_controls':False,'side_scheduling':config['side_scheduling'],'events':[],'cleanup_owner':'outer CLI after all side supervisors close'}
     save(out/'result.json',journal)
     def emit(event):
         journal['events'].append(event);save(out/'result.json',journal)
     env={key:value for key,value in os.environ.items() if key not in ('PGPASSWORD','ONECDB2SRC_AUTH_PASSWORD','PYTHONOPTIMIZE')}
     env.update(PYTHONUTF8='1',PYTHONDONTWRITEBYTECODE='1')
     def run_side(side,stop):
-        seconds=min(config['fast_side_seconds']+45,deadline-time.monotonic())
+        early=side=='preverify-main'
+        seconds=min((config['python_seconds'] if early else config['fast_side_seconds'])+45,deadline-time.monotonic())
         require(seconds>0,'No pair side time remains')
-        stage='fast-'+side;path=root/'_work/jobs'/stage
+        stage=side if early else 'fast-'+side;path=root/'_work/jobs'/stage
         job=run([sys.executable,'-B',str(cli.PACKAGE/'export_1c.py'),'--_worker',stage,str(root/'_work/config.json')],
             path.with_suffix('.stdout'),path.with_suffix('.stderr'),path.with_suffix('.json'),seconds,
             8*1024**2,8*1024**2,rss_cap=None,env=env,cancel_event=stop)
         cli.require_stage_closure(job,stage,True)
         require(job['exit_code']==0,'Pair side process exit failed: '+side)
-        candidate=root/'_work'/stage/'result.json'
-        require(read(candidate).get('status')=='CANDIDATE_GENERATED_REQUIRES_HOST_VERIFICATION','Pair side candidate incomplete')
+        candidate=root/'_work/fast-main/early-verification.json' if early else root/'_work'/stage/'result.json'
+        expected='PASS_FAST_SIDE_REQUIRES_COMMON_CF_FINALIZATION' if early else 'CANDIDATE_GENERATED_REQUIRES_HOST_VERIFICATION'
+        require(read(candidate).get('status')==expected,'Pair side candidate incomplete')
         return {'job':job,'candidate':fact(candidate)}
     try:
-        journal['sides']=coordinate(run_side,lambda:transfer_ready(config),lambda:docker_admission(config,deadline),deadline,emit)
+        journal['sides']=coordinate(run_side,lambda:transfer_ready(config),lambda:docker_admission(config,deadline),deadline,emit,
+            verify_main=run_side if config['side_scheduling']=='verify-overlap' else None)
+        if 'preverify-main' in journal['sides']:journal['early_main']=journal['sides'].pop('preverify-main')
         journal['status']=PAIR_STATUS
     except BaseException as error:
         journal.update(status='FAILED',error_type=type(error).__name__,

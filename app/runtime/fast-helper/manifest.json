@@ -1,22 +1,22 @@
 {
   "schema": "1CDB2SRC_FAST_HELPER_V1",
   "status": "SEALED_OFFLINE_HELPER_REQUIRES_PRODUCT_ACTUAL",
-  "image_id": "sha256:95d720a82e2ecf2bc9452571ce7d6924bd14684109f8f264696c3747561805e7",
+  "image_id": "sha256:dc0dd7174bea499ef6b16d8a997b6ac5d119dbc1120887242a1658a52e5a204c",
   "image_identity": {
     "archive_format": "OCI_DIRECT_MANIFEST",
-    "provenance_image_id": "sha256:95d720a82e2ecf2bc9452571ce7d6924bd14684109f8f264696c3747561805e7",
-    "platform_manifest_id": "sha256:95d720a82e2ecf2bc9452571ce7d6924bd14684109f8f264696c3747561805e7",
-    "classic_config_image_id": "sha256:24d9064d9401d9ed98b486da7f8092dea4c4aded8e83910a40fce8d3a404b2a4",
+    "provenance_image_id": "sha256:dc0dd7174bea499ef6b16d8a997b6ac5d119dbc1120887242a1658a52e5a204c",
+    "platform_manifest_id": "sha256:dc0dd7174bea499ef6b16d8a997b6ac5d119dbc1120887242a1658a52e5a204c",
+    "classic_config_image_id": "sha256:3af8d2334ba9dcb80cfbc5f2e42a8aab842363f45985f6d5c3b56d345beff4f9",
     "allowed_image_ids": [
-      "sha256:95d720a82e2ecf2bc9452571ce7d6924bd14684109f8f264696c3747561805e7",
-      "sha256:24d9064d9401d9ed98b486da7f8092dea4c4aded8e83910a40fce8d3a404b2a4"
+      "sha256:dc0dd7174bea499ef6b16d8a997b6ac5d119dbc1120887242a1658a52e5a204c",
+      "sha256:3af8d2334ba9dcb80cfbc5f2e42a8aab842363f45985f6d5c3b56d345beff4f9"
     ],
     "rootfs_diff_ids": [
       "sha256:e58989146fcec76699871403b9897b5c014af1ccd85f5a9300a215e7975525d7",
       "sha256:ba0f973ad05d82f20d8dd8dc79a9d1b71e9d90ab48380d8c0912fad39dda5ced",
       "sha256:8664c9b18215e1141ccc8fa3cbc7483f4cd16fb5230b570fa7c744da58251da3",
       "sha256:c167899be569aee196241ae0905aeed34708881d5a8784be3de0ed9bf9db7200",
-      "sha256:d8ef35bb06f55e7cd0d93152532953247ada938a2df4974f7cac604b73260255"
+      "sha256:6296de79b08d6c000426772c4acb00612d4b0d4aaa66f38322cf82660dceb357"
     ]
   },
   "entrypoint": [
@@ -36,8 +36,8 @@
   ],
   "archive": {
     "file": "helper-image.tar.gz",
-    "bytes": 69622905,
-    "sha256": "c1e0fc31b8b60e1473941e4e276ff1f48a4f988cbf89ef401237e3389e94d697"
+    "bytes": 69626551,
+    "sha256": "fe3a6411f47313fbbc290d539a1f71f95781968e77b17621dd6f64f2fa56d1ec"
   },
   "source_files": {
     "onecdb2src/__init__.py": {
@@ -45,8 +45,8 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     "onecdb2src/cli.py": {
-      "bytes": 29448,
-      "sha256": "53852c7cffc89a29d90422a07fc76a884527dba80f2d5a2581edcbbeb8bb47b2"
+      "bytes": 29595,
+      "sha256": "a24dc270f5421f9402553e05b92c72a86bc315279fcbd9d5cfce9cea82ed0c75"
     },
     "onecdb2src/control/__init__.py": {
       "bytes": 44,
@@ -101,8 +101,8 @@
       "sha256": "ba60d52330fb69d696f7d3b4889bdd44ccb2a710323284115e1614165018b468"
     },
     "onecdb2src/fast_pair.py": {
-      "bytes": 8551,
-      "sha256": "8bfe90ad1c4d8dd5583cf0cfc83688234ff99b7e4e8f60cbc5b2a5216e92bb9d"
+      "bytes": 9609,
+      "sha256": "4eb0d2b6da78df58674e2e85778df8c263b73060d86011e986407ca359a8fc14"
     },
     "onecdb2src/native_policy.py": {
       "bytes": 4957,
@@ -157,8 +157,8 @@
       "sha256": "ab71d4c5cf4f8619c0a85a8290f63881c631b03680b52d7c926ce061af66e53c"
     },
     "onecdb2src/worker.py": {
-      "bytes": 14072,
-      "sha256": "0324fdf361de6693d98d85672c1d5ab0eed522f3e1a88e563602f483cca0b7fa"
+      "bytes": 14847,
+      "sha256": "de1b76d70a17a372e514b4e3c4c34364cad22c06ae7f7fb6c689bd078f7c6858"
     },
     "onecdb2src/xml/__init__.py": {
       "bytes": 43,
@@ -188,6 +188,10 @@
       "bytes": 27855,
       "sha256": "6de4a18ce3a11eadc80490eacd8df5a5f4dc6cf683a2a3776868ec6f317b732b"
     },
+    "onecdb2src/xml/early_lineage.py": {
+      "bytes": 3612,
+      "sha256": "4d3dcebe509cee576fa51392b2d9791b270d11784c9a0e3996f248956cc4d8c3"
+    },
     "onecdb2src/xml/export_local.py": {
       "bytes": 11167,
       "sha256": "5dfea6d7baee74728d7b1630029e819ddccf6e7f14192267cfcd44425ac55233"
@@ -201,8 +205,8 @@
       "sha256": "397f1fef455c522e6946485d57c501748974f15362c6fba26e958f5e43453cad"
     },
     "onecdb2src/xml/fast_docker.py": {
-      "bytes": 47101,
-      "sha256": "7f90d2d8ba0540a93e775dbab518f213fdf6217dee5fd2003f9cfd378db46b70"
+      "bytes": 47147,
+      "sha256": "5cd171d2b90c22099a0074336a2157a53ebbaf2bd659b7d56f14f3901bc65f92"
     },
     "onecdb2src/xml/fast_runtime.py": {
       "bytes": 20556,
@@ -211,6 +215,10 @@
     "onecdb2src/xml/fast_stream.py": {
       "bytes": 36641,
       "sha256": "feceb35ab4c7c06866530da84977829993cf6fda00611209305ad2f804a85713"
+    },
+    "onecdb2src/xml/late_readback.py": {
+      "bytes": 3797,
+      "sha256": "490a172f93db095a276b82234a5bd1f0a2eb2029bf02fa7a425df66d41e6f3e0"
     },
     "onecdb2src/xml/linux_helpers.py": {
       "bytes": 6624,
@@ -221,16 +229,16 @@
       "sha256": "fbae3bfe0bf76118f096020f38f339e6720955888bda3ef6a7167417b6d17f02"
     },
     "onecdb2src/xml/namespace_result.py": {
-      "bytes": 22228,
-      "sha256": "44c3437948dcf89cd1aa5ef8def77ab141cab6b415804f6721751f3814d451e0"
+      "bytes": 23813,
+      "sha256": "aadedea821c810bd45b252614e7f64d0bb8d7fe91cf967ca10f7d64f38f4ee19"
     },
     "onecdb2src/xml/parent_v8container_r1.py": {
       "bytes": 7059,
       "sha256": "198e023d07f50163ca9377f88c921d8cd930a98d70468d10c552b1f2b5912279"
     },
     "onecdb2src/xml/readback.py": {
-      "bytes": 10812,
-      "sha256": "cffa7b06df06fd99469a8709324c773a8837ccedcb5ced16dd9e0a277b6457a5"
+      "bytes": 11405,
+      "sha256": "a62a5439d78629665e58ee0631e37003284814989480d9339cb505ac7d888f3e"
     },
     "onecdb2src/xml/runtime_identity.py": {
       "bytes": 1867,
@@ -279,14 +287,14 @@
     "base_source": "python:3.13-slim-bookworm",
     "base_image": "sha256:a1165e272e578941b84abc79e4ab38a0305cd12803a5c4247979ac7655f4d641",
     "assembly": {
-      "bytes": 7378,
-      "sha256": "79eeaa35adeb66945c303e8c87335e814e6f0c521baa6a41bdb387d77b78e7b8"
+      "bytes": 7379,
+      "sha256": "765289d873cebb3e8ab956765f0b578d6a069de4b79c6ae685a1ad745534a817"
     },
     "context_manifest": {
-      "bytes": 27884,
-      "sha256": "e0663686af43c8ecb83be13ee881d0ad23c9975d1d6b6b3c607e42a668a18d3e"
+      "bytes": 29000,
+      "sha256": "18c9b415c9ab89cca9258ac3416716adda92501db8a4cb392e56f89a2e30ad54"
     },
-    "accepted_image_id": "sha256:95d720a82e2ecf2bc9452571ce7d6924bd14684109f8f264696c3747561805e7",
+    "accepted_image_id": "sha256:dc0dd7174bea499ef6b16d8a997b6ac5d119dbc1120887242a1658a52e5a204c",
     "seal_producer": {
       "bytes": 16581,
       "sha256": "03b08e531b730df943733bdb20cf7e27a7ca4665ec84eb6ed8dfb35c32385615"

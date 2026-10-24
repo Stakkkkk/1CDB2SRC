@@ -1,12 +1,12 @@
 {
-  "status": "PASS_CONTROLLED_SAME_SOURCE_PAIR_SCHEDULING_COMPARISON",
-  "scope": "Same CF/profiles/source/helper A/B before the cleanup-only positive-closure barrier; historical precursor, not the final helper",
-  "sequential_seconds": 239.42831900005694,
-  "transfer_overlap_seconds": 210.08586700004525,
-  "gain_seconds": 29.34245200001169,
-  "gain_percent": 12.255213636614435,
+  "status": "PASS_SAME_SOURCE_TRANSFER_VS_VERIFY_OVERLAP_COMPARISON",
+  "transfer_seconds": 401.0243288000347,
+  "verify_seconds": 373.6761363000842,
+  "gain_seconds": 27.348192499950528,
+  "gain_percent": 6.819584383267513,
   "files": 46786,
   "BSL": 11774,
-  "all_files_exact": true,
-  "independent_review": false
+  "scope": "One same-source/helper r1 comparison; busy Windows host, not statistical evidence or an ERP result",
+  "final_source_delta": "Only platform-aware supervisor config-path case guard and test; final r2 small E2E passed, medium speed not rerun after this guard fix",
+  "new_ERP_export": false
 }

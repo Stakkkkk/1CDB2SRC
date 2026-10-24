@@ -1,10 +1,7 @@
 {
-  "status": "PASS_CURRENT_PAIRED_CF_BIND_COPY_AND_FULL_RESULT_READBACK",
-  "scope": "CF staging exercised inside the current small/document/large saved-CF pair runs; not a separate CF-only timing trial",
-  "source_cf_transfer": "bind-copy",
-  "closed_copy_readback": true,
-  "all_pair_source_CF_identity_accepted": true,
+  "status": "PASS_UNCHANGED_CF_TRANSPORT_PROTOCOL_IN_NEW_SCHEDULING",
+  "scope": "bind-copy in r1 medium/small and copy in final r2 small; CF staging algorithms unchanged",
+  "current_CF_only_speed_trial": false,
   "default": "copy",
-  "source_permissions_unchanged": true,
-  "limitations": "Current readable Windows/Docker Desktop inputs; no universal Linux0600/rootless claim"
+  "source_permissions_changed": false
 }

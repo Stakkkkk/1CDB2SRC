@@ -1,15 +1,14 @@
 {
-  "status": "PASS_EXPECTED_TIMEOUT_PROCESS_CLOSURE_AND_OWN_RECOVERY",
-  "export_status": "FAILED_PRODUCT_SAVED_CF_REPLAY",
+  "status": "PASS_CONTROLLED_THREE_TASK_CANCELLATION_AND_OWN_RECOVERY",
+  "failure": "CANCELLED",
   "ready_XML": false,
-  "seconds": 98.09980560000986,
-  "both_sides_started": true,
-  "outer_job_closed": true,
-  "cleanup_confirmed": true,
-  "root_review": true,
-  "independent_review": false,
+  "seconds": 178.56673279998358,
+  "scope": "Owned outer cancellation 3 seconds after early verifier supervisor startup; not an XML export",
+  "three_tasks_started": true,
+  "outer_tree_closed": true,
+  "own_resources_absent": true,
   "proof_fact": {
-    "bytes": 678,
-    "sha256": "5c63be26f939cee5fd7271f6ba805705b2a4781f2e350967933e2983d1671151"
+    "bytes": 601,
+    "sha256": "8dca40a9859f15912dc7c810dac8aad09bbf9c6bc6d13972297032d4c488b9bb"
   }
 }

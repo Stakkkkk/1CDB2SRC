@@ -1,44 +1,40 @@
 {
-  "status": "PASS_SAVED_CF_PAIR_EXACT_WITH_EXISTING_FORMAT_LIMITATIONS",
-  "scope": "Saved SQL-derived CF pair -> public profile/fast pair/integrity workers; research caller; not fresh DB capture",
-  "profile_scope": "Research explicit per-side main8.3.27/vendor8.5.1; not the ordinary single-profile override",
+  "status": "PASS_SAVED_CF_PAIR_ALL_FILES_EXACT",
+  "source_revision": "r1 before path-case guard fix",
   "side_scheduling": "transfer-overlap",
-  "default": "sequential",
-  "live_DB_capture": false,
-  "platform_used": false,
-  "whole_seconds": 209.9112477999879,
-  "operation_seconds": 205.46500279998872,
-  "reference_seconds": 239.42831900005694,
-  "reference": "Accepted prior same-CF generated output, not perfect platform XML",
-  "reference_is_same_source_sequential": false,
-  "reference_source_scope": "Previous accepted sequential source; controlled same-source A/B recorded separately",
+  "whole_seconds": 401.0243288000347,
+  "operation_seconds": 393.42127600009553,
+  "scope": "Saved SQL-derived CF pair -> public profile/fast worker/integrity stages via research caller; no new DB capture or platform",
+  "profile_scope": "Research per-side main8.3.27/vendor8.5.1, not ordinary single override",
   "sides": {
     "main": {
       "files": 23466,
-      "BSL": 5905,
-      "bytes": 610708896
+      "bsl_files": 5905,
+      "missing": [],
+      "extra": [],
+      "different": []
     },
     "vendor": {
       "files": 23320,
-      "BSL": 5869,
-      "bytes": 461214222
+      "bsl_files": 5869,
+      "missing": [],
+      "extra": [],
+      "different": []
     }
   },
-  "vendor_native_overlaps_main_transfer_seconds": 18.076266,
-  "complete_file_readback": true,
-  "own_cleanup_confirmed": true,
-  "memory_controls": false,
+  "reference": "Accepted prior generated same-CF XML, not a perfect platform XML claim",
+  "full_final_payload_hash_readback": true,
   "root_review": true,
   "independent_review": false,
-  "format_and_opaque_limits_unchanged": true,
+  "own_cleanup_confirmed": true,
   "proof_facts": {
     "result": {
-      "bytes": 22557,
-      "sha256": "319101c99e2e6bb4575c55fa28ecc50ace5099cabe8804e4837885ec421476b8"
+      "bytes": 22678,
+      "sha256": "bc9a16404e333f145573c835c00913b00e6284559fd33e8e782839fa1d44818c"
     },
-    "review": {
-      "bytes": 1630,
-      "sha256": "a76e6402f7ba39181ae705a8559ec8d3891e32aa57dc531de6b834080a60fa1e"
+    "comparison": {
+      "bytes": 839,
+      "sha256": "ac9936d58ce79bffb34075e15ddcd437d62b9e3e7f134fb0735eabe767d5c45a"
     }
   }
 }

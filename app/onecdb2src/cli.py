@@ -27,7 +27,7 @@ def validate_modes(args):
 
 def stage_plan(config):
     stages=['capture','cf','profiles']
-    if config.get('side_scheduling','sequential')=='transfer-overlap':
+    if config.get('side_scheduling','sequential') in ('transfer-overlap','verify-overlap'):
         require(is_fast(config),'Overlap requires fast mode')
         return stages+['fast-pair','integrity']
     for side in ('main','vendor'):
@@ -37,7 +37,7 @@ def stage_plan(config):
 def stage_seconds(config,args,stage):
     if stage=='capture':return args.capture_seconds
     if is_fast(config):
-        if stage=='fast-pair':return 2*config['fast_side_seconds']+90
+        if stage=='fast-pair':return 2*config['fast_side_seconds']+90+(config['python_seconds']+45 if config.get('side_scheduling')=='verify-overlap' else 0)
         if stage.startswith('fast-'):return config['fast_side_seconds']+45
         if stage=='integrity':return 2*config['python_seconds']+180
         return config['python_seconds']
@@ -71,7 +71,7 @@ def parser():
     p.add_argument('--assembly-mode',choices=['copy','adopt'],default='copy',help='copy: прежняя сборка; adopt: передать собственное дерево native без повторного копирования, с конечной проверкой')
     p.add_argument('--runtime',choices=['docker','native'],default='docker',help='Docker (Windows/Linux) либо закреплённый локальный конвертер (Linux x86-64)')
     p.add_argument('--docker-mode',choices=['host','fast'],default='host',help='host: прежний маршрут; fast: обработка внутри Linux Docker, требует adopt')
-    p.add_argument('--side-scheduling',choices=['sequential','transfer-overlap'],default='sequential',help='Перекрыть передачу основной XML обработкой поставщика; только fast Docker stream')
+    p.add_argument('--side-scheduling',choices=['sequential','transfer-overlap','verify-overlap'],default='sequential',help='Перекрыть передачу основной XML обработкой поставщика; только fast Docker stream')
     p.add_argument('--docker-cf-transfer',choices=['copy','bind-copy'],default='copy',help='CF volume staging; bind-copy requires a source readable by the Docker root mapping, no fallback or source chmod')
     p.add_argument('--docker-transfer',choices=['copy','stream'],default='copy',help='Перенос Docker результата; stream включается явно только в fast режиме')
     p.add_argument('--readback-workers',type=int,choices=[1,4,8],help='Потоки независимой итоговой проверки fast (по умолчанию 4)')
@@ -157,7 +157,7 @@ def fresh_fast_cpu_admission(config):
         load=float(line.strip().removesuffix('%'))/100
         require(math.isfinite(load) and load>=0,'Invalid Docker CPU value');used+=load
     host_cpu=psutil.cpu_percent(interval=.1);host_count=len(psutil.Process().cpu_affinity())
-    host_needed=4 if config.get('side_scheduling')=='transfer-overlap' else 2
+    host_needed=4 if config.get('side_scheduling') in ('transfer-overlap','verify-overlap') else 2
     require(math.isfinite(host_cpu) and 0<=host_cpu<=100 and host_count*(1-host_cpu/100)>=host_needed and info['NCPU']-used>=2,'Insufficient fresh CPU headroom')
     return {'observed_utc':utc(),'host_cpu_percent':host_cpu,'host_cpu_count':host_count,'host_headroom_required':host_needed,'docker_cpu_count':info['NCPU'],'docker_used_cores_estimate':used,'memory_controls':False}
 

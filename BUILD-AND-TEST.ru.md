@@ -1,6 +1,23 @@
-# Сборка и проверки 1CDB2SRC 0.3.0-rc.3
+# Сборка и проверки 1CDB2SRC 0.3.0-rc.4
 
-## Дополнение 0.3.0-rc.3
+## Дополнение 0.3.0-rc.4
+
+Добавлен optional verify-overlap: закрытый main producer → ранняя полная XML V,
+одновременно vendor generation → общая final CF/profile/raw lineage и полное
+новое чтение main SHA без повторного XML parsing → прежняя полная vendor V.
+Early evidence не является final PASS; проверяются закрытый supervisor,
+его invocation, CF/profile/source/helper/raw snapshot и hash chain. Поздний
+readback не заменяется stat/mtime. Перенос CF, Rust и XML-сериализация прежние.
+
+Окончательная r2 отличается от A/B source r1 только проверкой регистра пути
+config по правилам ОС и её тестом. Оба source/helper сохранены раздельно.
+Windows focused103 метода без ошибок,2 symlink subcases SKIP; Linux229методов:
+208PASS/21SKIP(17 memory-limit по запрету,4Windows). Это root review, не independent.
+Малый final E2E с mixed-case Windows config path и CF copy принят; medium A/B
+проведён на r1, ERP нового режима NOT_RUN. Helper пересобран и запечатан заново;
+Rust/ELF не пересобирались. Факты и scope — release-validation.json.
+
+## Историческое дополнение 0.3.0-rc.3
 
 Явный `--side-scheduling transfer-overlap` перекрывает перенос готовой основной
 XML с обработкой поставщика. Default sequential, native и остальные маршруты

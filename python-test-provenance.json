@@ -1,5 +1,5 @@
 {
-  "scope": "0.3.0-rc.3 portable test sources; current run results only in supplied release-validation evidence.",
+  "scope": "0.3.0-rc.4 portable test sources; current run results only in supplied release-validation evidence.",
   "files": {
     "fast_cf_fixture.py": {
       "bytes": 2247,
@@ -24,6 +24,14 @@
     "test_dumpinfo_single_pass.py": {
       "bytes": 10522,
       "sha256": "5a12cd148b56f96d84e1cbc647d46f7b832c27af3f6581ec24fc8e3c84632d6f"
+    },
+    "test_early_pipeline.py": {
+      "bytes": 9132,
+      "sha256": "31f37504762210f78ef55985d48b3d625e638c2d14e8461804d4c610271cdc26"
+    },
+    "test_early_readback.py": {
+      "bytes": 5475,
+      "sha256": "db35c85e0f1890e3322d8f92b73857ed69699e89eecb5bec793fa1887e16a1a9"
     },
     "test_export_local.py": {
       "bytes": 9381,

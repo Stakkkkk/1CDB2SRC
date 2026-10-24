@@ -60,7 +60,8 @@ def integrity(config):
     fast=config.get('docker_mode','host')=='fast';limitations=[]
     if fast:
         require(config.get('runtime_backend')=='docker' and config.get('assembly_mode')=='adopt' and config.get('memory_controls') is False,'Invalid fast integrity policy')
-        # Neither side is verified while the other side is still producing.
+        # Final acceptance follows both producers; optional early XML validation
+        # is authenticated here and followed by fresh final payload hashes.
         for side in ('main','vendor'):
             require(read(root/'_work'/('fast-'+side)/'result.json').get('status')=='CANDIDATE_GENERATED_REQUIRES_HOST_VERIFICATION','Both fast candidates must exist before final verification')
     for side,key in [('main','main_cf'),('vendor','supplier_cf')]:
@@ -140,6 +141,12 @@ def run(stage,config):
         for side in ('main','vendor'):
             profile=profiles.select(work/'cf'/side/'source.cf',config['platform'])
             profiles.save_new(directory/(side+'.json'),profile)
+    elif stage=='preverify-main':
+        require(config.get('side_scheduling')=='verify-overlap' and config.get('docker_mode')=='fast'
+                and config.get('runtime_backend')=='docker' and config.get('assembly_mode')=='adopt'
+                and config.get('memory_controls') is False,'Early verification mode differs')
+        from .xml.namespace_result import verify_fast_side
+        verify_fast_side(config,'main',workers=config.get('readback_workers',4),early=True)
     elif stage=='fast-pair':
         from .fast_pair import produce_fast_pair
         produce_fast_pair(config)

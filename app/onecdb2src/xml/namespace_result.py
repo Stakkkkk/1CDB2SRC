@@ -242,14 +242,30 @@ def bind_fast_side(config, side):
             'linux_profile': linux_profile, 'assembly': assembly, 'classification': classification}
 
 
-def verify_fast_side(config, side, workers=4):
+def verify_fast_side(config, side, workers=4, *, early=False):
     from .readback import verify_xml_tree
     bound = bind_fast_side(config, side)
-    proof_root = bound['proof_root']
-    require(not (proof_root / 'verification.json').exists() and not (proof_root / 'namespace-map.json').exists(),
+    proof_root = bound['proof_root'];prefix='early-' if early else '';early_binding=None
+    from .early_lineage import closed_stage,early_main_for_final,EARLY
+    if early:
+        require(side=='main' and config.get('side_scheduling')=='verify-overlap'
+                and config.get('docker_mode')=='fast' and config.get('runtime_backend')=='docker'
+                and config.get('docker_transfer')=='stream' and config.get('assembly_mode')=='adopt'
+                and config.get('memory_controls') is False,'Early validation is only assigned to fast stream main')
+        closed_stage(config,'fast-main')
+    require(not (proof_root / (prefix+'verification.json')).exists() and not (proof_root / (prefix+'namespace-map.json')).exists(),
             'Fresh fast verification receipt required')
-    files = verify_xml_tree(bound['output'] / 'xml', bound['output'] / 'files.jsonl',
-        manifest_sha256=bound['assembly']['manifest_sha256'], xml_version=bound['linux_profile']['xml_version'], workers=workers)
+    if not early and side=='main' and config.get('side_scheduling')=='verify-overlap':
+        from .late_readback import verify_unchanged_xml_tree,STATUS
+        prior,early_binding=early_main_for_final(config,bound)
+        files=verify_unchanged_xml_tree(bound['output']/'xml',bound['output']/'files.jsonl',
+            manifest_sha256=bound['assembly']['manifest_sha256'],xml_version=bound['linux_profile']['xml_version'],prior=prior,workers=workers)
+        require(files['status']==STATUS,'Late fresh byte verification incomplete')
+        # This caller has authenticated the full earlier XML validation above.
+        files['status']='FILES_VERIFIED_REQUIRES_CALLER_LINEAGE'
+    else:
+        files = verify_xml_tree(bound['output'] / 'xml', bound['output'] / 'files.jsonl',
+            manifest_sha256=bound['assembly']['manifest_sha256'], xml_version=bound['linux_profile']['xml_version'], workers=workers)
     require(files['status'] == 'FILES_VERIFIED_REQUIRES_CALLER_LINEAGE'
             and files['files'] == bound['assembly']['files'], 'Independent verifier incomplete')
     require(fact(bound['cf_path']) == bound['cf'], 'Host CF changed during independent verification')
@@ -262,13 +278,13 @@ def verify_fast_side(config, side, workers=4):
         'differences': [key for key in ('cf_path', 'profile_id') if bound['linux_profile'][key] != bound['host_profile'][key]],
         'originals_rewritten': False, 'native_policy': bound['classification'],
         'file_facts_sha256': files['facts_sha256'], 'helper_manifest_binding': bound['helper_binding']}
-    save_new(proof_root / 'namespace-map.json', namespace_map)
-    save_new(proof_root / 'file-verification.json', files)
+    save_new(proof_root / (prefix+'namespace-map.json'), namespace_map)
+    save_new(proof_root / (prefix+'file-verification.json'), files)
     result = {'status': 'PASS_FAST_SIDE_REQUIRES_COMMON_CF_FINALIZATION', 'side': side, 'cf': bound['cf'],
         'profile': bound['host_profile'], 'linux_profile': bound['linux_profile'],
         'xml_files': files['files'], 'xml_bytes': files['bytes'], 'bsl_files': files['bsl_files'],
         'opaque_unaccepted': len(bound['assembly']['unaccepted_opaque_entries']), 'workers': workers,
-        'files_proof': fact(proof_root / 'file-verification.json'), 'namespace_map': fact(proof_root / 'namespace-map.json'),
+        'files_proof': fact(proof_root / (prefix+'file-verification.json')), 'namespace_map': fact(proof_root / (prefix+'namespace-map.json')),
         'native_policy': bound['classification'], 'oracle_inputs': [],
         'limitations': list(bound['assembly'].get('limitations', []))}
     if result['opaque_unaccepted']:
@@ -281,5 +297,7 @@ def verify_fast_side(config, side, workers=4):
             'operation':parents['operation'],'raw_asset_status':parents['raw_asset_status'],
             'internal_metadata_decode':parents['internal_metadata_decode'],
             'all_declared_parent_assets':parents['all_declared_parent_assets']})
-    save_new(proof_root / 'verification.json', result)
+    if early:result.update(readback_phase=EARLY,lineage_snapshot=dict(bound['metadata']))
+    if early_binding:result.update(readback_phase='FINAL_FRESH_HASH_AFTER_EARLY_XML',early_full_verification=early_binding)
+    save_new(proof_root / (prefix+'verification.json'), result)
     return result
