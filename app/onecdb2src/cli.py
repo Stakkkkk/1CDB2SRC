@@ -17,6 +17,8 @@ def is_fast(config):
     return config.get('docker_mode','host')=='fast'
 
 def validate_modes(args):
+    require(args.final_verification=='sequential' or args.runtime=='docker' and args.docker_mode=='fast'
+            and args.readback_workers==8,'Parallel final verification requires fast Docker and 8 readback workers')
     require(args.side_scheduling=='sequential' or args.runtime=='docker' and args.docker_mode=='fast' and args.docker_transfer=='stream','Transfer overlap requires fast Docker stream mode')
     require(args.docker_cf_transfer!='bind-copy' or args.runtime=='docker' and args.docker_mode=='fast','bind-copy CF staging requires Docker fast mode')
     require(args.docker_mode!='fast' or args.runtime=='docker','Fast mode requires Docker runtime')
@@ -72,6 +74,7 @@ def parser():
     p.add_argument('--runtime',choices=['docker','native'],default='docker',help='Docker (Windows/Linux) либо закреплённый локальный конвертер (Linux x86-64)')
     p.add_argument('--docker-mode',choices=['host','fast'],default='host',help='host: прежний маршрут; fast: обработка внутри Linux Docker, требует adopt')
     p.add_argument('--side-scheduling',choices=['sequential','transfer-overlap','verify-overlap'],default='sequential',help='Перекрыть передачу основной XML обработкой поставщика; только fast Docker stream')
+    p.add_argument('--final-verification',choices=['sequential','parallel'],default='sequential',help='Проверять две готовые конфигурации одновременно; только fast, общий бюджет 8 потоков (2+6)')
     p.add_argument('--docker-cf-transfer',choices=['copy','bind-copy'],default='copy',help='CF volume staging; bind-copy requires a source readable by the Docker root mapping, no fallback or source chmod')
     p.add_argument('--docker-transfer',choices=['copy','stream'],default='copy',help='Перенос Docker результата; stream включается явно только в fast режиме')
     p.add_argument('--readback-workers',type=int,choices=[1,4,8],help='Потоки независимой итоговой проверки fast (по умолчанию 4)')
@@ -263,6 +266,7 @@ def main(argv=None):
             config['fast_side_seconds']=config['native_seconds']+4*config['python_seconds']+180
             config['total_deadline_monotonic']=clock+args.total_seconds if args.total_seconds else None
         config['side_scheduling']=args.side_scheduling
+        config['final_verification']=args.final_verification
         save(root/'_work/config.json',config)
         report={'status':'RUNNING','started_utc':utc(),'provider':args.provider,'database':args.database,'supplier':args.supplier,'stages':[],'limitations':[],'oracle_inputs':[]}
         save(root/'report.json',report)

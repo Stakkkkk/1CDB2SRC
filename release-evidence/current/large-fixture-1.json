@@ -1,11 +1,13 @@
 {
-  "status": "PASS_SAVED_CF_PAIR_ALL_FILES_EXACT",
-  "source_revision": "r1 before path-case guard fix",
-  "side_scheduling": "transfer-overlap",
-  "whole_seconds": 401.0243288000347,
-  "operation_seconds": 393.42127600009553,
-  "scope": "Saved SQL-derived CF pair -> public profile/fast worker/integrity stages via research caller; no new DB capture or platform",
-  "profile_scope": "Research per-side main8.3.27/vendor8.5.1, not ordinary single override",
+  "status": "PASS_FINAL_R2_SAVED_CF_PAIR_ALL_FILES_EXACT",
+  "source_revision": "BD-034 asymmetric source",
+  "final_verification": "sequential",
+  "side_scheduling": "verify-overlap",
+  "whole_seconds": 408.21282449993305,
+  "operation_seconds": 400.9151441999711,
+  "scope": "Saved SQL CF pair -> profile/producer/final verification stages with research caller; no new DB capture or platform",
+  "profiles": "per-side research targets main8.3.27/vendor8.5.1",
+  "reference": "Previous accepted generated same-CF output; not perfect platform XML",
   "sides": {
     "main": {
       "files": 23466,
@@ -22,19 +24,11 @@
       "different": []
     }
   },
-  "reference": "Accepted prior generated same-CF XML, not a perfect platform XML claim",
-  "full_final_payload_hash_readback": true,
-  "root_review": true,
-  "independent_review": false,
+  "full_final_payload_hashes": true,
   "own_cleanup_confirmed": true,
-  "proof_facts": {
-    "result": {
-      "bytes": 22678,
-      "sha256": "bc9a16404e333f145573c835c00913b00e6284559fd33e8e782839fa1d44818c"
-    },
-    "comparison": {
-      "bytes": 839,
-      "sha256": "ac9936d58ce79bffb34075e15ddcd437d62b9e3e7f134fb0735eabe767d5c45a"
-    }
+  "independent_review": false,
+  "proof": {
+    "bytes": 22790,
+    "sha256": "ec9e7fdb2dad7c578913a71d378320faee9c56887d40d612bb20bba243535d7f"
   }
 }

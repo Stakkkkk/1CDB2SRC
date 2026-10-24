@@ -10,7 +10,7 @@ from onecdb2src.xml import readback,late_readback as late
 class EarlyReadbackTests(unittest.TestCase):
     def test_all_bytes_read_again_without_reparsing_both_editions(self):
         for edition in ('2.20','2.21'):
-            for workers in (1,4,8):
+            for workers in (1,2,4,6,8):
                 with self.subTest(edition=edition,workers=workers),tempfile.TemporaryDirectory() as tmp:
                     tree,manifest,digest,expected=fixture(Path(tmp),edition)
                     full=readback.verify_xml_tree(tree,manifest,manifest_sha256=digest,xml_version=edition,workers=workers)
@@ -25,7 +25,7 @@ class EarlyReadbackTests(unittest.TestCase):
                     self.assertEqual(sorted(calls),[(name,False) for name in sorted(expected)])
 
     def test_same_size_changed_payload_with_restored_mtime_is_rejected(self):
-        for workers in (1,8):
+        for workers in (1,2,6,8):
             with self.subTest(workers=workers),tempfile.TemporaryDirectory() as tmp:
                 tree,manifest,digest,_=fixture(Path(tmp));full=readback.verify_xml_tree(tree,manifest,manifest_sha256=digest,xml_version='2.20')
                 target=tree/'Catalogs/A/Ext/Form.xml';state=target.stat();raw=target.read_bytes();target.write_bytes(raw.replace(b'Neutral',b'Changed'))

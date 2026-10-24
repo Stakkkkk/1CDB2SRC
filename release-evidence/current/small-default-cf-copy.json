@@ -1,14 +1,9 @@
 {
-  "status": "PASS_FINAL_SMALL_DEFAULT_CF_COPY_AND_WINDOWS_PATH_CASE",
-  "scope": "Same single final small run as small.json; not an independent second export or speed test",
-  "seconds": 67.1584083000198,
+  "status": "PASS_FINAL_SMALL_DEFAULT_CF_COPY",
+  "same_single_run_as": "small.json",
+  "scope": "Not an independent second export or speed comparison",
+  "seconds": 71.51797080005053,
   "files": 15,
   "BSL": 1,
-  "cf_transfer": "copy",
-  "config_root": "mixed case",
-  "all_files_exact": true,
-  "proof_fact": {
-    "bytes": 1797,
-    "sha256": "cdc1ca190fff1391aec0b7e78d86fa5c196d132c0f6c601ea752c2c837a9538e"
-  }
+  "cf_transfer": "copy"
 }

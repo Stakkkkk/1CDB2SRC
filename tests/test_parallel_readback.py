@@ -58,7 +58,7 @@ class ParallelReadbackTests(unittest.TestCase):
             with self.subTest(edition=edition), tempfile.TemporaryDirectory() as directory:
                 tree, manifest, digest, expected = fixture(Path(directory), edition)
                 results = [verify_xml_tree(tree, manifest, manifest_sha256=digest,
-                    xml_version=edition, workers=workers) for workers in (1, 4, 8)]
+                    xml_version=edition, workers=workers) for workers in (1, 2, 4, 6, 8)]
                 for result in results:
                     self.assertEqual(result['status'], 'FILES_VERIFIED_REQUIRES_CALLER_LINEAGE')
                     self.assertEqual(result['caller_lineage'], 'NOT_CHECKED')
@@ -76,7 +76,7 @@ class ParallelReadbackTests(unittest.TestCase):
     def test_all_serial_and_parallel_negatives_have_error_proof_never_success(self):
         defects = ('malformed', 'edition', 'envelope', 'changed', 'extra', 'missing',
                    'hardlink', 'manifest-hardlink', 'duplicate', 'duplicate-key', 'path')
-        for workers in (1, 4, 8):
+        for workers in (1, 2, 4, 6, 8):
             for defect in defects:
                 with self.subTest(workers=workers, defect=defect), tempfile.TemporaryDirectory() as directory:
                     tree, manifest, digest, ignored = fixture(Path(directory), defect=defect)
@@ -114,7 +114,7 @@ class ParallelReadbackTests(unittest.TestCase):
     def test_invalid_workers_and_wrong_manifest_digest_refuse(self):
         with tempfile.TemporaryDirectory() as directory:
             tree, manifest, digest, ignored = fixture(Path(directory))
-            for workers in (0, 2, 16, True):
+            for workers in (0, -1, 3, 16, True):
                 with self.subTest(workers=workers), self.assertRaises(ReadbackFailure):
                     verify_xml_tree(tree, manifest, manifest_sha256=digest, xml_version='2.20', workers=workers)
             with self.assertRaises(ReadbackFailure):

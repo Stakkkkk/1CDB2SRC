@@ -1,7 +1,5 @@
 {
-  "status": "PASS_UNCHANGED_CF_TRANSPORT_PROTOCOL_IN_NEW_SCHEDULING",
-  "scope": "bind-copy in r1 medium/small and copy in final r2 small; CF staging algorithms unchanged",
-  "current_CF_only_speed_trial": false,
-  "default": "copy",
-  "source_permissions_changed": false
+  "status": "PASS_UNCHANGED_CF_TRANSPORT_WITH_PARALLEL_FINAL_V",
+  "scope": "Final tiny copy; final medium bind-copy; CF transport code unchanged; no CF-only speed trial",
+  "default": "copy"
 }

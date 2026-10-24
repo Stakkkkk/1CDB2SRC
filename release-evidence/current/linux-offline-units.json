@@ -1,14 +1,13 @@
 {
-  "status": "PASS_LINUX_AUTHORIZED_CONTAINER_DISCOVERY",
-  "discovered": 229,
-  "passed": 208,
+  "status": "PASS_LINUX_AUTHORIZED_DISCOVERY",
+  "discovered": 241,
+  "passed": 220,
   "skipped": 21,
-  "failures": 0,
   "errors": 0,
-  "scope": "17 memory-limit tests excluded by authorization;4 Windows tests;not native Linux host E2E",
-  "seconds": 22.770446600043215,
-  "proof_fact": {
-    "bytes": 41683,
-    "sha256": "6daeed6da4b1dbf208d6a28ef3245e6f66e95e250659347643d0b1ccde269dbd"
+  "failures": 0,
+  "scope": "17 memory-limit tests excluded by authorization;4 Windows tests; container unit suite, not native Linux DB E2E",
+  "proof": {
+    "bytes": 43473,
+    "sha256": "eb25dc88cb1dfb45dfe6395c3cfe970b2d493e7ce6f9b553c799778f3c7cfefb"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "scope": "0.3.0-rc.4 portable test sources; current run results only in supplied release-validation evidence.",
+  "scope": "0.3.0-rc.5 portable test sources; current run results only in supplied release-validation evidence.",
   "files": {
     "fast_cf_fixture.py": {
       "bytes": 2247,
@@ -18,8 +18,8 @@
       "sha256": "1ff816e074c90fdd0485bfcfc8ed5cd11b2bbb9e89735eb73c871d7c5f2b1f96"
     },
     "test_cf_copy.py": {
-      "bytes": 11378,
-      "sha256": "3e73efe5aeccdb0a11e91136688b289482901e713d6c658d5439592b85110211"
+      "bytes": 11741,
+      "sha256": "454bf40fe827dddba232f5b53f8cf466b181f3af8728b4f71000b3418f62b4eb"
     },
     "test_dumpinfo_single_pass.py": {
       "bytes": 10522,
@@ -30,8 +30,8 @@
       "sha256": "31f37504762210f78ef55985d48b3d625e638c2d14e8461804d4c610271cdc26"
     },
     "test_early_readback.py": {
-      "bytes": 5475,
-      "sha256": "db35c85e0f1890e3322d8f92b73857ed69699e89eecb5bec793fa1887e16a1a9"
+      "bytes": 5553,
+      "sha256": "6eb988c55e69ab70161dd8cd5f816d0961a424670a604b92e78432a0c82053d1"
     },
     "test_export_local.py": {
       "bytes": 9381,
@@ -57,6 +57,10 @@
       "bytes": 12536,
       "sha256": "49c67834dd7a5b8f443d7218f20f146566df882621035aa6c531b466af65ba84"
     },
+    "test_final_pair.py": {
+      "bytes": 10491,
+      "sha256": "1fdfde365261730ea3807708c7bea309ca3d0a37f7e53842620b37f7c468d6f4"
+    },
     "test_integrity_long_paths.py": {
       "bytes": 3944,
       "sha256": "832c8312d694cc74eeae9bb9aec5f3875d1fb19da70bab7a96ae000c3df219c4"
@@ -78,8 +82,8 @@
       "sha256": "1b645e809e5f217664b14023005d41fd347cf8b8b5b11430326dfb5bd602e9d7"
     },
     "test_parallel_readback.py": {
-      "bytes": 7175,
-      "sha256": "cfc025b872d760f0d449bf7721b9a0b3c956cb4b72885c9c808e13aaecff5c66"
+      "bytes": 7316,
+      "sha256": "543cbed5833ec6660641e781dbed224a4d077da2cecefdf7c20378cb1b884c6e"
     },
     "test_posix_env_boundary.py": {
       "bytes": 4536,

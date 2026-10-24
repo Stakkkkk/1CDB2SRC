@@ -141,7 +141,7 @@ def _verify_xml_tree(tree, manifest, *, manifest_sha256, xml_version, workers=4,
     proof = {'status': 'FAILED_FILE_READBACK', 'caller_lineage': 'NOT_CHECKED',
              'oracle_inputs': [], 'workers': workers}
     try:
-        require(type(workers) is int and workers in (1, 4, 8), 'workers must be 1, 4 or 8')
+        require(type(workers) is int and workers in (1, 2, 4, 6, 8), 'workers must be 1, 2, 4, 6 or 8')
         require(xml_version in ('2.20', '2.21'), 'unsupported XML edition')
         require(type(manifest_sha256) is str and re.fullmatch('[0-9a-f]{64}', manifest_sha256),
                 'expected manifest SHA256 required')

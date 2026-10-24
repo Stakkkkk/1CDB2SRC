@@ -118,6 +118,9 @@ class CopyCoreTests(unittest.TestCase):
         added='Перекрыть передачу основной XML обработкой поставщика; только fast Docker stream'
         self.assertEqual(cli.parser()._option_string_actions['--side-scheduling'].help,added)
         self.assertEqual(values.count(added),1);values.remove(added)
+        final_help='Проверять две готовые конфигурации одновременно; только fast, общий бюджет 8 потоков (2+6)'
+        self.assertEqual(cli.parser()._option_string_actions['--final-verification'].help,final_help)
+        self.assertEqual(values.count(final_help),1);values.remove(final_help)
         self.assertEqual(len(values), 39)
         self.assertEqual(hashlib.sha256(json.dumps(values, ensure_ascii=True).encode()).hexdigest(),
             '7af231c2ab1b1137851a1c19c252e12d3c0d9cca264d8188ce5ab24de5a0f5d3')

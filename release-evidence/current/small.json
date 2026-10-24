@@ -1,11 +1,13 @@
 {
-  "status": "PASS_SAVED_CF_PAIR_ALL_FILES_EXACT",
-  "source_revision": "final r2 case guard",
+  "status": "PASS_FINAL_R2_SAVED_CF_PAIR_ALL_FILES_EXACT",
+  "source_revision": "BD-034 asymmetric source",
+  "final_verification": "parallel",
   "side_scheduling": "verify-overlap",
-  "whole_seconds": 67.1584083000198,
-  "operation_seconds": 62.572746200021356,
-  "scope": "Saved SQL-derived CF pair -> public profile/fast worker/integrity stages via research caller; no new DB capture or platform",
-  "profile_scope": "auto",
+  "whole_seconds": 71.51797080005053,
+  "operation_seconds": 66.55938120000064,
+  "scope": "Saved SQL CF pair -> profile/producer/final verification stages with research caller; no new DB capture or platform",
+  "profiles": "auto",
+  "reference": "Previous accepted generated same-CF output; not perfect platform XML",
   "sides": {
     "main": {
       "files": 9,
@@ -22,19 +24,11 @@
       "different": []
     }
   },
-  "reference": "Accepted prior generated same-CF XML, not a perfect platform XML claim",
-  "full_final_payload_hash_readback": true,
-  "root_review": true,
-  "independent_review": false,
+  "full_final_payload_hashes": true,
   "own_cleanup_confirmed": true,
-  "proof_facts": {
-    "result": {
-      "bytes": 22487,
-      "sha256": "ab70d5394487836359c24647c6f6a4d12d65dfd415f53876ebc5e043f86dd428"
-    },
-    "comparison": {
-      "bytes": 812,
-      "sha256": "f9ebf0cd8a5de3ba4bc9aebfe878b5ef1509b70d9bc857bb2d2f188447544707"
-    }
+  "independent_review": false,
+  "proof": {
+    "bytes": 22476,
+    "sha256": "866720bea95ed7d309405f2eb11df724fda33fc1b4a153c6bc874b40ca99428f"
   }
 }

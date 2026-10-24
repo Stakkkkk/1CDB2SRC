@@ -50,80 +50,104 @@ def parents(config,side):
     finally:source.close()
     invoke(producer,['--cf',cf,'--expected-sha256',fact(cf)['sha256'],'--output',output])
 
-def integrity(config):
+def integrity_side(config,side,workers=None,*,manifest=None):
     from .nativecf.cf_source import CFSource
     from .sqlcf.export_cf import config_identity,cf_tree
     from . import profiles
     from .xml.materialize import inspect_file
     from .xml.dump_info import long_path
-    root=Path(config['root']);manifest=read(root/'_work/cf/manifest.json');result={}
-    fast=config.get('docker_mode','host')=='fast';limitations=[]
+    require(side in ('main','vendor'),'Invalid integrity side')
+    key='main_cf' if side=='main' else 'supplier_cf'
+    root=Path(config['root']);result={};limitations=[]
+    if manifest is None:manifest=read(root/'_work/cf/manifest.json')
+    fast=config.get('docker_mode','host')=='fast'
+    if fast:validate_fast_candidates(config)
+    source=root/'_work/cf'/side/'source.cf';target=root/(side+'.cf')
+    regular(source);require(not target.exists(),'Final CF already exists')
+    shutil.copyfile(source,target)
+    expected={k:manifest[key][k] for k in ('bytes','sha256')}
+    require(fact(source)==fact(target)==expected,'Final CF lineage mismatch')
+    archive=CFSource(target)
+    try:
+        root_id=str(cf_tree(archive.catalog,'root')[1])
+        identity=config_identity(cf_tree(archive.catalog,root_id))
+        expected_identity=manifest['main_identity' if side=='main' else 'supplier_identity']
+        require(all(identity[k]==expected_identity[k] for k in ('uuid','name','vendor','version')),'Final CF identity mismatch')
+        entry_count=len(archive.catalog.entries)
+    finally:archive.close()
+    profile_path=root/'_work/profiles'/(side+'.json');profile=profiles.load(profile_path,source)
     if fast:
-        require(config.get('runtime_backend')=='docker' and config.get('assembly_mode')=='adopt' and config.get('memory_controls') is False,'Invalid fast integrity policy')
-        # Final acceptance follows both producers; optional early XML validation
-        # is authenticated here and followed by fresh final payload hashes.
+        from .xml.namespace_result import verify_fast_side
+        verified=verify_fast_side(config,side,workers=workers if workers is not None else config.get('readback_workers',4))
+        require(verified.get('status')=='PASS_FAST_SIDE_REQUIRES_COMMON_CF_FINALIZATION','Fast namespace/file verification incomplete')
+        require(verified.get('cf')==expected and verified.get('profile')==profile,'Fast result host CF/profile binding mismatch')
+        require(fact(source)==fact(target)==expected,'Final CF changed during fast verification')
+        require(profiles.load(profile_path,source)==profile,'Host profile changed during fast verification')
+        result[side]={'cf':expected,'identity':identity,'profile':profile,'profile_receipt_sha256':fact(profile_path)['sha256'],'cf_entries':entry_count,**{k:verified[k] for k in ('xml_files','xml_bytes','bsl_files','opaque_unaccepted')},'fast_verification':verified}
+        limitations.extend(verified.get('limitations',[]))
+        if verified['opaque_unaccepted']:
+            limitations.append({'stage':'fast-'+side,'opaque':verified['native_policy'].get('opaque',[]),'opaque_unaccepted':verified['opaque_unaccepted'],'raw_native_policy':verified['native_policy']})
+        return result[side],limitations
+    final=long_path(root/side);receipt=read(final/'receipt.json')
+    require(receipt.get('profile')==profile and receipt.get('profile_receipt')=={'path':str(profile_path.resolve()),'sha256':fact(profile_path)['sha256']},'Final profile lineage mismatch')
+    require(receipt['status']=='CANDIDATE_POSTGEN_VERIFICATION_REQUIRED','Assembly incomplete')
+    require(receipt['cf_sha256']==expected['sha256'],'Assembly/CF binding mismatch')
+    require(fact(final/'files.jsonl')['sha256']==receipt['manifest_sha256'],'Assembly manifest changed')
+    require((final/'xml/Configuration.xml').is_file(),'Complete XML configuration missing')
+    seen=set();total=0;bsl=0
+    with (final/'files.jsonl').open(encoding='utf-8') as f:
+        for line in f:
+            row=json.loads(line);rel=PurePosixPath(row['path'])
+            require(not rel.is_absolute() and '..' not in rel.parts and '\\' not in row['path'],'Unsafe output path')
+            require(row['path'] not in seen,'Duplicate assembly output')
+            seen.add(row['path']);p=final/'xml'/rel
+            regular(p)
+            actual_fact,node=inspect_file(p,p.suffix=='.xml')
+            require(actual_fact=={k:row[k] for k in ('bytes','sha256')},'Final XML readback mismatch')
+            if p.suffix=='.xml':
+                if rel.as_posix()=='Configuration.xml':
+                    require(node.tag=='{http://v8.1c.ru/8.3/MDClasses}MetaDataObject' and len(node.findall('{http://v8.1c.ru/8.3/MDClasses}Configuration'))==1,'Configuration metadata envelope missing')
+                if rel.as_posix()=='ConfigDumpInfo.xml':
+                    require(node.tag=='{http://v8.1c.ru/8.3/xcf/dumpinfo}ConfigDumpInfo','DumpInfo envelope missing')
+                if node.tag in ('{http://v8.1c.ru/8.3/MDClasses}MetaDataObject','{http://v8.1c.ru/8.3/xcf/dumpinfo}ConfigDumpInfo'):
+                    require(node.attrib.get('version')==profile['xml_version'],'Final metadata edition mismatch')
+            total+=actual_fact['bytes'];bsl+=p.suffix.lower()=='.bsl'
+    actual=set()
+    for base,dirs,files in os.walk(final/'xml',followlinks=False):
+        for name in dirs:regular(Path(base)/name,True)
+        for name in files:actual.add((Path(base)/name).relative_to(final/'xml').as_posix())
+    require(actual==seen and len(seen)==receipt['files'] and {'Configuration.xml','ConfigDumpInfo.xml'}<=seen,'Final XML path set mismatch')
+    result[side]={'cf':expected,'identity':identity,'profile':profile,'profile_receipt_sha256':fact(profile_path)['sha256'],'cf_entries':entry_count,'xml_files':len(seen),'xml_bytes':total,'bsl_files':bsl,'opaque_unaccepted':len(receipt['unaccepted_opaque_entries'])}
+    return result[side],limitations
+
+
+def validate_fast_candidates(config):
+    root=Path(config['root'])
+    require(config.get('runtime_backend')=='docker' and config.get('assembly_mode')=='adopt'
+            and config.get('memory_controls') is False,'Invalid fast integrity policy')
+    for side in ('main','vendor'):
+        require(read(root/'_work'/('fast-'+side)/'result.json').get('status')=='CANDIDATE_GENERATED_REQUIRES_HOST_VERIFICATION',
+                'Both fast candidates must exist before final verification')
+
+
+def integrity(config):
+    root=Path(config['root']);fast=config.get('docker_mode','host')=='fast'
+    mode=config.get('final_verification','sequential');result={};limitations=[]
+    manifest_path=root/'_work/cf/manifest.json';manifest_fact=fact(manifest_path);manifest=read(manifest_path)
+    require(fact(manifest_path)==manifest_fact,'Common CF manifest changed before verification')
+    require(mode in ('sequential','parallel'),'Unknown final verification mode')
+    if fast:validate_fast_candidates(config)
+    if mode=='parallel':
+        from .final_pair import verify_pair
+        result,limitations=verify_pair(config)
+    else:
         for side in ('main','vendor'):
-            require(read(root/'_work'/('fast-'+side)/'result.json').get('status')=='CANDIDATE_GENERATED_REQUIRES_HOST_VERIFICATION','Both fast candidates must exist before final verification')
-    for side,key in [('main','main_cf'),('vendor','supplier_cf')]:
-        source=root/'_work/cf'/side/'source.cf';target=root/(side+'.cf')
-        regular(source);require(not target.exists(),'Final CF already exists')
-        shutil.copyfile(source,target)
-        expected={k:manifest[key][k] for k in ('bytes','sha256')}
-        require(fact(source)==fact(target)==expected,'Final CF lineage mismatch')
-        archive=CFSource(target)
-        try:
-            root_id=str(cf_tree(archive.catalog,'root')[1])
-            identity=config_identity(cf_tree(archive.catalog,root_id))
-            expected_identity=manifest['main_identity' if side=='main' else 'supplier_identity']
-            require(all(identity[k]==expected_identity[k] for k in ('uuid','name','vendor','version')),'Final CF identity mismatch')
-            entry_count=len(archive.catalog.entries)
-        finally:archive.close()
-        profile_path=root/'_work/profiles'/(side+'.json');profile=profiles.load(profile_path,source)
-        if fast:
-            from .xml.namespace_result import verify_fast_side
-            verified=verify_fast_side(config,side,workers=config.get('readback_workers',4))
-            require(verified.get('status')=='PASS_FAST_SIDE_REQUIRES_COMMON_CF_FINALIZATION','Fast namespace/file verification incomplete')
-            require(verified.get('cf')==expected and verified.get('profile')==profile,'Fast result host CF/profile binding mismatch')
-            require(fact(source)==fact(target)==expected,'Final CF changed during fast verification')
-            require(profiles.load(profile_path,source)==profile,'Host profile changed during fast verification')
-            result[side]={'cf':expected,'identity':identity,'profile':profile,'profile_receipt_sha256':fact(profile_path)['sha256'],'cf_entries':entry_count,**{k:verified[k] for k in ('xml_files','xml_bytes','bsl_files','opaque_unaccepted')},'fast_verification':verified}
-            limitations.extend(verified.get('limitations',[]))
-            if verified['opaque_unaccepted']:
-                limitations.append({'stage':'fast-'+side,'opaque':verified['native_policy'].get('opaque',[]),'opaque_unaccepted':verified['opaque_unaccepted'],'raw_native_policy':verified['native_policy']})
-            continue
-        final=long_path(root/side);receipt=read(final/'receipt.json')
-        require(receipt.get('profile')==profile and receipt.get('profile_receipt')=={'path':str(profile_path.resolve()),'sha256':fact(profile_path)['sha256']},'Final profile lineage mismatch')
-        require(receipt['status']=='CANDIDATE_POSTGEN_VERIFICATION_REQUIRED','Assembly incomplete')
-        require(receipt['cf_sha256']==expected['sha256'],'Assembly/CF binding mismatch')
-        require(fact(final/'files.jsonl')['sha256']==receipt['manifest_sha256'],'Assembly manifest changed')
-        require((final/'xml/Configuration.xml').is_file(),'Complete XML configuration missing')
-        seen=set();total=0;bsl=0
-        with (final/'files.jsonl').open(encoding='utf-8') as f:
-            for line in f:
-                row=json.loads(line);rel=PurePosixPath(row['path'])
-                require(not rel.is_absolute() and '..' not in rel.parts and '\\' not in row['path'],'Unsafe output path')
-                require(row['path'] not in seen,'Duplicate assembly output')
-                seen.add(row['path']);p=final/'xml'/rel
-                regular(p)
-                actual_fact,node=inspect_file(p,p.suffix=='.xml')
-                require(actual_fact=={k:row[k] for k in ('bytes','sha256')},'Final XML readback mismatch')
-                if p.suffix=='.xml':
-                    if rel.as_posix()=='Configuration.xml':
-                        require(node.tag=='{http://v8.1c.ru/8.3/MDClasses}MetaDataObject' and len(node.findall('{http://v8.1c.ru/8.3/MDClasses}Configuration'))==1,'Configuration metadata envelope missing')
-                    if rel.as_posix()=='ConfigDumpInfo.xml':
-                        require(node.tag=='{http://v8.1c.ru/8.3/xcf/dumpinfo}ConfigDumpInfo','DumpInfo envelope missing')
-                    if node.tag in ('{http://v8.1c.ru/8.3/MDClasses}MetaDataObject','{http://v8.1c.ru/8.3/xcf/dumpinfo}ConfigDumpInfo'):
-                        require(node.attrib.get('version')==profile['xml_version'],'Final metadata edition mismatch')
-                total+=actual_fact['bytes'];bsl+=p.suffix.lower()=='.bsl'
-        actual=set()
-        for base,dirs,files in os.walk(final/'xml',followlinks=False):
-            for name in dirs:regular(Path(base)/name,True)
-            for name in files:actual.add((Path(base)/name).relative_to(final/'xml').as_posix())
-        require(actual==seen and len(seen)==receipt['files'] and {'Configuration.xml','ConfigDumpInfo.xml'}<=seen,'Final XML path set mismatch')
-        result[side]={'cf':expected,'identity':identity,'profile':profile,'profile_receipt_sha256':fact(profile_path)['sha256'],'cf_entries':entry_count,'xml_files':len(seen),'xml_bytes':total,'bsl_files':bsl,'opaque_unaccepted':len(receipt['unaccepted_opaque_entries'])}
+            result[side],side_limits=integrity_side(config,side,manifest=manifest);limitations.extend(side_limits)
+    require(fact(manifest_path)==manifest_fact,'Common CF manifest changed during verification')
     payload={'status':'PASS_OWN_RESULT_INTEGRITY','sides':result,'oracle_inputs':[]}
     if fast:payload.update(limitations=limitations,memory_controls=False)
     save(root/'_work/integrity.json',payload)
+
 
 def run(stage,config):
     root=Path(config['root']);work=root/'_work'
@@ -178,6 +202,11 @@ def run(stage,config):
         if (work/('parents-'+side)/'receipt.json').exists():args+=['--parent-assets',work/('parents-'+side)]
         if config.get('assembly_mode','copy')=='adopt':args+=['--adopt-native-tree']
         invoke(module,args)
+    elif stage in ('integrity-main','integrity-vendor'):
+        from .final_pair import side_workers,SIDE_STATUS
+        result,limits=integrity_side(config,stage[10:],workers=side_workers(config,stage[10:]))
+        save(work/'final-pair'/(stage[10:]+'.json'),{'status':SIDE_STATUS,'side':stage[10:],
+            'result':result,'limitations':limits,'oracle_inputs':[]})
     elif stage=='integrity':integrity(config)
     else:raise ValueError('Unknown fixed pipeline stage')
 
@@ -206,7 +235,7 @@ def main(argv):
                 pass
             else:
                 assembly_reason=isinstance(error,AssemblyValidationError)
-        if isinstance(error,CaptureError) or isinstance(error,ValueError) and stage in ('cf','integrity') or profile_reason or assembly_reason:
+        if isinstance(error,CaptureError) or isinstance(error,ValueError) and (stage in ('cf','integrity') or stage.startswith('integrity-')) or profile_reason or assembly_reason:
             diagnostic['reason']=str(error)[:512]
         print(json.dumps(diagnostic,ensure_ascii=False),file=sys.stderr,flush=True)
         return 1

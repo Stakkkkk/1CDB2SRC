@@ -1,13 +1,7 @@
 {
-  "status": "ACCEPTED_ERP_TIMING_STOP_NO_NEW_EXPORT",
-  "timing_comparison": "NOT_ESTABLISHED",
-  "limit_seconds": 900,
-  "scope": "Diagnostic two reads of already accepted ERP main XML under rc3 code, not new verify-overlap generation; timed out",
-  "current_mode_large_export": "NOT_RUN",
-  "new_ERP_speed_claim": false,
-  "process_closed": true,
-  "proof_fact": {
-    "bytes": 1695,
-    "sha256": "7ef13eba06edf27bade44d2f8463b266fcd9cf422ce84230e1587e23997f0300"
-  }
+  "status": "ACCEPTED_SCOPE_ERP_NOT_RUN",
+  "current_ERP_speed_claim": false,
+  "scope": "No ERP export or new ERP diagnostic in this iteration; historical rc4 timing STOP remains history",
+  "actual_ERP_export": "NOT_RUN",
+  "actual_ERP_timing": "NOT_ESTABLISHED"
 }

@@ -1,6 +1,16 @@
-# Сборка и проверки 1CDB2SRC 0.3.0-rc.4
+# Сборка и проверки 1CDB2SRC 0.3.0-rc.5
 
-## Дополнение 0.3.0-rc.4
+## Дополнение0.3.0-rc.5
+
+Generic readback принимает2/6 с прежними SHA/kind/path/XML checks. Final main2/
+vendor6 — два вложенных OS supervisor, общая отмена/join, outer2CPU/aggregate8.
+Общий CF manifest before/after; закрытые side receipts проверяются до common PASS.
+Windows115 и Linux241 приняты. Два heavy medium прогона сверены целиком со
+свежим sequential и balanced; source/helper одинаковы. Факты и границы измерений
+в release-validation.json. Helper sealed заново; Rust и XML сериализация прежние.
+Root review не является independent. Live DB E2E и ERP в этой итерации не повторяли.
+
+## Историческое дополнение 0.3.0-rc.4
 
 Добавлен optional verify-overlap: закрытый main producer → ранняя полная XML V,
 одновременно vendor generation → общая final CF/profile/raw lineage и полное

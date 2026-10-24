@@ -1,13 +1,13 @@
 {
   "status": "PASS_WINDOWS_FOCUSED_REGRESSIONS",
-  "methods": 103,
+  "methods": 115,
   "skipped_subcases": 2,
-  "failures": 0,
   "errors": 0,
-  "seconds": 27.533975799917243,
-  "scope": "Neutral real bytes/process tests and fake Docker protocol;2 symlink subcases unavailable, not full Windows discovery",
-  "proof_fact": {
+  "failures": 0,
+  "seconds": 34.486833499977365,
+  "scope": "Neutral bytes/process tests and fake protocol; not full Windows discovery",
+  "proof": {
     "bytes": 155,
-    "sha256": "9a5fede378694c27f33a036f576cd2a2e47c1a38788db7bbd2a108c39f1f2820"
+    "sha256": "1bcbe7cbbd9ea9c79c4aaa0384ea9ea4da03f47b1aeb1d4f8a3f49d03b654f24"
   }
 }
