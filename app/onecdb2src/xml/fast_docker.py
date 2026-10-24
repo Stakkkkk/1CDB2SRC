@@ -74,10 +74,13 @@ def produce_fast_side(config, side):
     volume = 'onecdb2src-fast-' + nonce
     cf_volume=volume+'-cf'
     cf_transport=config.get('fast_cf_transport','volume')
+    cf_method=config.get('docker_cf_transfer','copy')
+    require(cf_method in ('copy','bind-copy') and (cf_method!='bind-copy' or cf_transport=='volume' and config.get('docker_mode')=='fast'),'Invalid CF staging method')
     require(cf_transport in ('volume','bind'),'Unknown fast CF transport')
     journal = {'schema': 1, 'status': 'RUNNING', 'started_utc': utc(), 'volume': volume,
                'nonce': nonce, 'containers': [], 'stages': [], 'memory_controls': False,
                'source_cf': {'host_path': str(cf), **before}, 'oracle_inputs': []}
+    journal['cf_stage_method']=cf_method
     journal['cf_transport']='STAGED_OWN_READONLY_VOLUME' if cf_transport=='volume' else 'HOST_READONLY_BIND'
     if cf_transport=='volume':journal['cf_volume']=cf_volume
     save(root / 'result.json', journal)
@@ -140,12 +143,14 @@ def produce_fast_side(config, side):
         journal['containers'] = containers
         snapshot()  # Recoverable unique name exists BEFORE Docker request.
         argv = ['create', '--name', name, '--label', label + '=' + nonce, '--network', 'none',
-                '--read-only', '--user', '0:0' if role == 'owner-init' else '65532:65532', '--cap-drop', 'ALL',
+                '--read-only', '--user', '0:0' if role in ('owner-init','cf-copy') else '65532:65532', '--cap-drop', 'ALL',
                 '--security-opt', 'no-new-privileges', '--cpus', '2',
-                '--mount', ('type=volume,source='+cf_volume+',target=/cf,volume-nocopy') if role=='cf-stage'
+                '--mount', ('type=volume,source='+cf_volume+',target=/cf,volume-nocopy') if role in ('cf-stage','cf-copy')
                             else ('type=volume,source=' + volume + ',target=/job,volume-nocopy')]
-        if role == 'owner-init':
+        if role in ('owner-init','cf-copy'):
             argv += ['--cap-add', 'CHOWN']
+        if role=='cf-copy':
+            argv += ['--mount','type=bind,source='+str(cf)+',target=/source.cf,readonly']
         if source_bind:
             if cf_transport=='volume':
                 argv += ['--mount','type=volume,source='+cf_volume+',target=/job/_work/cf/'+args.side+',readonly,volume-nocopy']
@@ -153,11 +158,14 @@ def produce_fast_side(config, side):
                 argv += ['--mount', 'type=bind,source=' + str(cf) + ',target=/job/_work/cf/' + args.side + '/source.cf,readonly']
         if role in ('prepare', 'helpers'):
             argv += ['--mount', 'type=bind,source=' + str(root / 'contract.json') + ',target=/contract.json,readonly']
-        elif role == 'owner-init':
+        elif role in ('owner-init','cf-copy'):
             argv += ['--entrypoint', 'python']
         else:
             argv += ['--entrypoint', '/usr/bin/env']
         argv += [image, *command]
+        row['argv']=argv
+        if role=='cf-copy':row['source_bind_request']=str(cf)
+        snapshot()
         cid = docker(*argv).decode('ascii').strip()
         require(re.fullmatch('[a-f0-9]{64}', cid), 'Invalid created CID')
         row.update(cid=cid, created=True, argv=argv)
@@ -176,22 +184,27 @@ def produce_fast_side(config, side):
         require(data['HostConfig']['Memory'] == 0, 'Unexpected memory cap')
         require(data['HostConfig']['NetworkMode'] == 'none' and data['HostConfig']['ReadonlyRootfs'] is True,
                 'Container isolation changed')
-        require(data['Config']['User'] == ('0:0' if row['role'] == 'owner-init' else '65532:65532')
+        require(data['Config']['User'] == ('0:0' if row['role'] in ('owner-init','cf-copy') else '65532:65532')
                 and data['HostConfig']['NanoCpus'] == 2 * 10**9
                 and capabilities(data['HostConfig']['CapDrop']) == ['ALL']
                 and any(option == 'no-new-privileges' or option == 'no-new-privileges:true'
                         for option in data['HostConfig']['SecurityOpt']), 'Container user/CPU/capabilities changed')
-        require(capabilities(data['HostConfig'].get('CapAdd') or []) == (['CHOWN'] if row['role'] == 'owner-init' else []),
+        require(capabilities(data['HostConfig'].get('CapAdd') or []) == (['CHOWN'] if row['role'] in ('owner-init','cf-copy') else []),
                 'Unexpected additional capabilities')
         jobs = [mount for mount in data['Mounts'] if mount['Destination'] == '/job']
-        if row['role']=='cf-stage':
+        if row['role'] in ('cf-stage','cf-copy'):
             cfs=[mount for mount in data['Mounts'] if mount['Destination']=='/cf']
-            require(len(data['Mounts'])==len(cfs)==1 and cfs[0]['Type']=='volume'
+            require(len(cfs)==1 and len(data['Mounts'])==(2 if row['role']=='cf-copy' else 1) and cfs[0]['Type']=='volume'
                     and cfs[0]['Name']==cf_volume and cfs[0]['RW'] is True,'Own CF staging mount differs')
+            if row['role']=='cf-copy':
+                sources=[m for m in data['Mounts'] if m['Destination']=='/source.cf']
+                require(len(sources)==1 and sources[0]['Type']=='bind' and sources[0]['RW'] is False,'CF copy source must be one readonly file bind')
+                require(row.get('source_bind_source',sources[0]['Source'])==sources[0]['Source'],'CF copy source bind changed')
+                row['source_bind_source']=sources[0]['Source']
         else:
             require(len(jobs) == 1 and jobs[0]['Type'] == 'volume' and jobs[0]['Name'] == volume
                     and jobs[0]['RW'] is True, 'Owned job volume mount changed')
-        if row['role'] not in ('init', 'owner-init','cf-stage'):
+        if row['role'] not in ('init', 'owner-init','cf-stage','cf-copy'):
             if cf_transport=='volume':
                 cfs=[mount for mount in data['Mounts'] if mount['Destination']=='/job/_work/cf/'+args.side]
                 require(len(cfs)==1 and cfs[0]['Type']=='volume' and cfs[0]['Name']==cf_volume
@@ -316,12 +329,27 @@ def produce_fast_side(config, side):
                 info=json.loads(docker('volume','inspect',cf_volume))[0]
                 require(info['Name']==cf_volume and info['Labels'].get(label)==nonce
                         and info['Labels'].get('onecdb2src.fast.volume_role')=='cf','CF volume owner/role mismatch')
-                view=create('cf-stage',args.engine_image,['-i',binary,'--version'])
-                save_new(root/'cf-stage-container-before.json',inspect(view))
-                docker('cp',str(cf),view['cid']+':/cf/source.cf',timeout=float(config.get('fast_transport_seconds',2400)))
-                require(fact(cf)==before,'Host CF changed during one-time CF staging')
-                save_new(root/'cf-stage-container-after.json',inspect(view))
-                remove(view)
+                if cf_method=='copy':
+                    view=create('cf-stage',args.engine_image,['-i',binary,'--version'])
+                    save_new(root/'cf-stage-container-before.json',inspect(view))
+                    docker('cp',str(cf),view['cid']+':/cf/source.cf',timeout=float(config.get('fast_transport_seconds',2400)))
+                    require(fact(cf)==before,'Host CF changed during one-time CF staging')
+                    save_new(root/'cf-stage-container-after.json',inspect(view))
+                    remove(view)
+                else:
+                    copier=create('cf-copy',args.helper_image,['-I','-S','-B','/opt/app/onecdb2src/xml/cf_copy.py',
+                        '--nonce',nonce,'--side',side,'--bytes',str(before['bytes']),'--sha256',before['sha256']])
+                    stage('cf-bind-copy',lambda:start(copier,'cf-copy',{0},float(config.get('fast_transport_seconds',2400))))
+                    proof=read(root/'cf-copy.stdout')
+                    require(proof['schema']=='1CDB2SRC_CF_BIND_COPY_V1' and proof['status']=='CF_COPY_COMPLETE'
+                        and proof['nonce']==nonce and proof['side']==side and proof['expected']==before
+                        and proof['copied']==before and proof['fresh_target_readback']==before
+                        and proof['source_identity_stable'] is True and proof['exclusive_target'] is True
+                        and proof['source_permissions_changed'] is False and proof['memory_controls'] is False
+                        and proof['normalization']=={'uid':65532,'gid':65532,'file_mode':'0o444','directory_mode':'0o755'},'CF bind-copy proof differs')
+                    require(fact(cf)==before,'Host CF changed during bind-copy staging')
+                    journal['cf_bind_copy_proof']=fact(root/'cf-copy.stdout')
+                    remove(copier)
                 journal['cf_copy_source']=before
             stage('cf-volume-staging',stage_cf_volume)
         prepare = create('prepare', args.helper_image, ['prepare', '--side', args.side, '--contract', '/contract.json'], source_bind=True)
@@ -545,12 +573,15 @@ def cleanup_fast_owned(config):
                     and re.fullmatch('[a-f0-9]{64}',source['sha256'])
                     and contract['cf']=={key:source[key] for key in ('bytes','sha256')}
                     and contract['provider']==config['db']['provider'], 'Outer cleanup output/CF/provider binding changed')
+            method=result.get('cf_stage_method','copy')
+            require(method in ('copy','bind-copy') and method==config.get('docker_cf_transfer','copy'),'Outer CF staging method changed')
             rows=result['containers']
             require(type(rows) is list and len(rows)<=6 and len({row['role'] for row in rows})==len(rows),
                     'Ambiguous owned cleanup roles')
             for row in reversed(rows):
                 role=row['role'];name=volume+'-'+role
-                require(role in ('init','owner-init','prepare','engine','helpers','cf-stage')
+                require(role not in (('cf-stage',) if method=='bind-copy' else ('cf-copy',)),'Unexpected CF staging cleanup role')
+                require(role in ('init','owner-init','prepare','engine','helpers','cf-stage','cf-copy')
                         and row['name']==name and row['image']==(engine if role in ('init','engine','cf-stage') else helper),
                         'Unexpected cleanup role/name/image')
                 names=docker('ps','-a','--format','{{.Names}}','--filter','name=^/'+name+'$').decode().split()
@@ -567,10 +598,15 @@ def cleanup_fast_owned(config):
                 own_mounts=[mount for mount in mounts if mount['Type']=='volume']
                 require(own_mounts and all(mount['Name'] in (volume,volume+'-cf') for mount in own_mounts),
                         'Foreign volume cleanup refused')
-                if role=='cf-stage':
-                    require(len(mounts)==1 and own_mounts[0]['Name']==volume+'-cf'
+                if role in ('cf-stage','cf-copy'):
+                    require(len(mounts)==(2 if role=='cf-copy' else 1) and own_mounts[0]['Name']==volume+'-cf'
                             and own_mounts[0]['Destination']=='/cf' and own_mounts[0]['RW'] is True,
                             'CF staging cleanup mount differs')
+                    if role=='cf-copy':
+                        sources=[m for m in mounts if m['Destination']=='/source.cf']
+                        require(len(sources)==1 and sources[0]['Type']=='bind' and sources[0]['RW'] is False
+                            and row.get('source_bind_request')==source['host_path']
+                            and row.get('source_bind_source',sources[0]['Source'])==sources[0]['Source'],'CF copy cleanup source differs')
                 else:
                     jobs=[mount for mount in mounts if mount['Destination']=='/job']
                     require(len(jobs)==1 and jobs[0]['Name']==volume and jobs[0]['RW'] is True,

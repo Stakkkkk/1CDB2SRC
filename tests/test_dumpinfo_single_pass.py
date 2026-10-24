@@ -136,6 +136,50 @@ class SinglePassTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'No generated MDClasses'):
                 new.metadata_index(root, {}, ROOT_ID, {'name': 'Neutral', 'uuid': ROOT_ID}, '2.20')
 
+    def test_foreign_uuid_wrapper_does_not_own_children_or_block_recursion(self):
+        for edition in ('2.20', '2.21'):
+            with self.subTest(edition=edition), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                body = ('<Foreign xmlns="urn:neutral-foreign" uuid="not-a-metadata-uuid">'
+                    f'<Attribute xmlns="{MD}" uuid="{CHILD_ID}">'
+                    '<Properties><Name>Nested</Name></Properties></Attribute></Foreign>')
+                (root/'Catalog.xml').write_bytes(envelope('Catalog', CAT_ID, 'A', body, edition))
+                canonical, children, evidence, count = new.metadata_index(root, {CAT_ID:'c'}, ROOT_ID,
+                    {'name':'Neutral','uuid':ROOT_ID}, edition)
+                self.assertEqual(canonical[CHILD_ID], 'Catalog.A.Attribute.Nested')
+                self.assertEqual(children, {CAT_ID:{CHILD_ID:'Catalog.A.Attribute.Nested'}})
+                self.assertEqual((len(evidence), count), (1, 1))
+
+    def test_no_uuid_wrapper_ignores_own_name_but_recurses_to_metadata(self):
+        for edition in ('2.20', '2.21'):
+            with self.subTest(edition=edition), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                body = ('<Unversioned><Properties><Name>Ignored.Dotted.Name</Name></Properties>'
+                    f'<Attribute uuid="{CHILD_ID}"><Properties><Name>Deep</Name></Properties>'
+                    '</Attribute></Unversioned>')
+                (root/'Catalog.xml').write_bytes(envelope('Catalog', CAT_ID, 'A', body, edition))
+                canonical, children, evidence, count = new.metadata_index(root, {CAT_ID:'c'}, ROOT_ID,
+                    {'name':'Neutral','uuid':ROOT_ID}, edition)
+                self.assertEqual(canonical, {CAT_ID:'Catalog.A', CHILD_ID:'Catalog.A.Attribute.Deep'})
+                self.assertEqual(children, {CAT_ID:{CHILD_ID:'Catalog.A.Attribute.Deep'}})
+                self.assertEqual((len(evidence), count), (1, 1))
+
+    def test_uuid_metadata_name_refusals_still_apply_inside_ignored_wrappers(self):
+        for edition in ('2.20', '2.21'):
+            for name, reason in ((None, 'UUID metadata child has no Properties/Name'),
+                                 ('', 'Invalid native metadata child name'),
+                                 ('A.B', 'Invalid native metadata child name')):
+                with self.subTest(edition=edition, name=name), tempfile.TemporaryDirectory() as directory:
+                    root = Path(directory)
+                    name_xml = '' if name is None else '<Name>'+name+'</Name>'
+                    body = ('<Ignored><Properties><Name>Do.Not.Validate.Me</Name></Properties>'
+                        f'<Attribute uuid="{CHILD_ID}"><Properties>'+name_xml+
+                        '</Properties></Attribute></Ignored>')
+                    (root/'Catalog.xml').write_bytes(envelope('Catalog', CAT_ID, 'A', body, edition))
+                    with self.assertRaisesRegex(ValueError, '^'+reason+'$'):
+                        new.metadata_index(root, {CAT_ID:'c'}, ROOT_ID,
+                            {'name':'Neutral','uuid':ROOT_ID}, edition)
+
     def test_fresh_full_profile_load_detects_same_size_same_mtime_cf_change(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

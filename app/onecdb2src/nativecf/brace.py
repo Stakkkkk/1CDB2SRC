@@ -1,5 +1,8 @@
 """Bounded parser for 1C brace serialization, retaining quoted-vs-atom tokens."""
 from pathlib import Path
+import re
+
+_ATOM_DELIMITER=re.compile(r'[,{}]')
 
 class Atom(str):
     def __new__(cls,value,*,quoted=False,start=0,end=0):
@@ -64,7 +67,8 @@ class Reader:
                     if any(0xd800<=ord(c)<=0xdfff for c in value):
                         value=value.encode('utf-16-le','surrogatepass').decode('utf-16-le')
                     return Atom(value,quoted=True,start=start,end=self.pos)
-        while self.pos<len(self.text) and self.text[self.pos] not in ',{}': self.pos+=1
+        delimiter=_ATOM_DELIMITER.search(self.text,self.pos)
+        self.pos=delimiter.start() if delimiter is not None else len(self.text)
         if self.pos==start: raise ValueError('Invalid atom')
         return Atom(self.text[start:self.pos].strip(),start=start,end=self.pos)
 

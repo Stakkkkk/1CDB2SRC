@@ -1,43 +1,41 @@
 {
-  "schema": "1CDB2SRC_PUBLIC_UNIT_VALIDATION_V1",
-  "status": "PASS_WITH_LIMITATIONS",
-  "basis": "AS2_TEST_FIXTURE_OVERLAY",
-  "platform": "Windows",
-  "discovered_methods": 171,
-  "tests_run_methods": 171,
-  "successful_case_result_records": 153,
-  "skip_records": 19,
-  "total_case_result_records": 172,
-  "skip_breakdown": {
-    "POSIX_only_methods_not_run_on_Windows": 17,
-    "symlink_subcases_unavailable_privilege": 2
-  },
+  "status": "PASS_BOUNDED_WINDOWS_NEUTRAL_SOURCE_REGRESSIONS",
+  "scope": "Three changed modules: portable grammar, metadata index, CF copy; no Docker/DB/realCF; not the full Windows suite or a fresh DB export",
+  "methods": 28,
   "failures": 0,
   "errors": 0,
-  "wall_seconds": {
-    "unittest_suite": 8.454978100024164,
-    "tests_subprocess": 8.821577400085516,
-    "copy_preparation": 1.2767565000103787,
-    "whole_integration_caller": 35.02796690003015
+  "skipped": 0,
+  "seconds": 4.751238299999386,
+  "source_before_after": {
+    "app/onecdb2src/nativecf/brace.py": {
+      "bytes": 4325,
+      "sha256": "f47df27efc5ca5d961ab3a673e7fa03c0dbfa8762cbe375819a43032fa403fa5"
+    },
+    "app/onecdb2src/xml/dump_info_modern_r3.py": {
+      "bytes": 27855,
+      "sha256": "6de4a18ce3a11eadc80490eacd8df5a5f4dc6cf683a2a3776868ec6f317b732b"
+    },
+    "app/onecdb2src/xml/cf_copy.py": {
+      "bytes": 7635,
+      "sha256": "a7a9e4807702ccd0a170b539bc7c5bd2b78471c4d674dc9ac3c7bffc07f178de"
+    },
+    "tests/test_brace.py": {
+      "bytes": 5199,
+      "sha256": "07ffc323234f83e0f36db037aa2ef21ff604ee973cf0326d78cf776222d6e869"
+    },
+    "tests/test_dumpinfo_single_pass.py": {
+      "bytes": 10522,
+      "sha256": "5a12cd148b56f96d84e1cbc647d46f7b832c27af3f6581ec24fc8e3c84632d6f"
+    },
+    "tests/test_cf_copy.py": {
+      "bytes": 11064,
+      "sha256": "7c20ae53b2bd7d96c4c8f9c9e2e5e05043de363a9a335ad805e550fe9f5cdcca"
+    }
   },
-  "app_bytes_unchanged": true,
-  "source_and_candidate_unchanged_by_tests": true,
-  "helper_image_and_manifest_unchanged": true,
-  "source_closure_sha256": "a9d69b5a4647201304b16a1115da8a757f6652c63787528287b52f99d0e11b6c",
-  "memory_policy": {
-    "real_memory_caps_exercised": false,
-    "memory_cap_contract_checks_use_fakes": true
+  "full_linux_discovery_is_separate": true,
+  "proof_fact": {
+    "bytes": 1272,
+    "sha256": "b456c97e65be75a85eac2571d6f269ff26ff1438640ad94fa90b5f464e677acf"
   },
-  "evidence_sha256": {
-    "result": "b0efb228c4e48691be57bd4d0e915a4921d267d112c7a62f579eb1ada47905ea",
-    "test_records": "bc91101df6d06a14e41d3c590560cb879133f7ae389bc1cc8d9741668933edb5",
-    "log": "6239ed2af49624a4dd69cef4094f716a252d597384f758e4c7fcc25059742e83"
-  },
-  "limitations": [
-    "171 methods were discovered and run; this does not mean 171 passed.",
-    "Case-result records include subcases; 153 PASS plus 19 SKIP records are not distinct successful-method counts.",
-    "Seventeen POSIX methods were not run on Windows; two symlink subcases were skipped because the host lacked privilege.",
-    "This is a Windows unit result, not Linux actual, Docker export or DB capture.",
-    "Nested timing intervals must not be summed."
-  ]
+  "portable_install": "Separate final ZIP fresh offline installation result is outside archive to avoid self-referential archive hashes"
 }

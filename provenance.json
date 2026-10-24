@@ -354,13 +354,13 @@
     "note": "Four CF-derived role XML files per provider validated byte-exact; remaining form rule unresolved. Full large configuration export not repeated."
   },
   "current_packaging": {
-    "version": "0.3.0-rc.1",
+    "version": "0.3.0-rc.2",
     "performance_backend": {
       "host_route_preserved": true,
       "fast_docker": true,
       "fast_helper_manifest": {
-        "bytes": 11559,
-        "sha256": "981fff1e7a02f3dbc25df17bc1b988a0220d365c21eba1ee7fbddd3e90be3117"
+        "bytes": 11712,
+        "sha256": "b5a883351239a49f02b3ee8ff0d0b83c415b790d434ad8e5e9e6e4d94ca5b7f5"
       },
       "rust_rebuilt_by_sealer": false,
       "converter_source_unchanged": true,

@@ -1,151 +1,47 @@
 {
-  "schema": "1CDB2SRC_PUBLIC_VALIDATION_V1",
-  "status": "PASS_WITH_LIMITATIONS",
-  "validation_kind": "PRODUCT_SAVED_SQL_CF_PAIR_TO_XML",
-  "database_capture": "NOT_RUN",
-  "platform_1C_used_for_conversion": false,
-  "backend": {
-    "runtime": "docker-fast",
-    "transfer": "stream",
-    "CF_transport": "own_readonly_volume",
-    "assembly": "adopt"
-  },
-  "helper": {
-    "manifest_sha256": "981fff1e7a02f3dbc25df17bc1b988a0220d365c21eba1ee7fbddd3e90be3117",
-    "source_files": 48,
-    "runtime_files": 8,
-    "source_closure_sha256": "a9d69b5a4647201304b16a1115da8a757f6652c63787528287b52f99d0e11b6c",
-    "source_closure_digest_encoding": "SHA256 of UTF-8 JSON: sort_keys=true, ensure_ascii=false, compact separators, no newline",
-    "source_runtime_before_after_verified": true,
-    "loaded_from_local_archive_this_run": false
-  },
-  "claims_excluded": [
-    "new database capture",
-    "universal configuration support",
-    "general speedup ratio",
-    "opaque or closed internals decoded",
-    "unqualified equality to all platform versions"
-  ],
-  "timing_notes": [
-    "Wall-clock observations on one Windows Docker Desktop host, not estimates or portable performance guarantees.",
-    "Operation, preparation and total are separately measured intervals; nested stage times must not be added again.",
-    "Baseline comparison follows the full final integrity readback and compares fresh file facts, without another complete XML payload read.",
-    "Helper image was cached in this run; cold offline loading was established by the separate small fixture."
-  ],
-  "resource_policy": {
-    "CPU_cores_per_worker": 2,
-    "memory_controls": false,
-    "all_4_worker_jobs_closed": true,
-    "own_containers_recorded_absent": 12,
-    "own_volumes_recorded_absent": 4,
-    "cleanup_errors": 0,
-    "worker_IO_errors": 0
-  },
-  "fixture_id": "large-ERP-fixture",
-  "evidence_sha256": {
-    "actual_result": "a6559252530a2a6d8f489ac58fe3b331eb399e4471a44b511f9c4530a21c888e",
-    "comparison": "6717631f0d22b223a9e623754caece0636d9c40a94412ff4fe662fff449ef2e1",
-    "final_integrity": "9e761abb8f31930ae06a57efa527d4a70fd14856733ee8a594652a87f29ab365",
-    "independent_review": "8b9e849c812478b647903f3e2b005e46013fceba9f80db506202ec90707fd691",
-    "independent_checks": "4354daedeab13910b8e6e37df75a27ee01b6c8d4a5ede1b4ed780bd20b7bb91c"
-  },
-  "profile_selection": {
-    "ordinary_public_global_profile_stage_used": true,
-    "requested": "auto",
-    "per_side_explicit_research_targets": false
-  },
-  "baseline": {
-    "kind": "PREVIOUS_ACCEPTED_GENERATED_XML_FILE_FACTS",
-    "independent_full_fact_join": "ALL_EXACT",
-    "native_platform_XML_oracle_compared_this_run": false,
-    "manifest_sha256": {
-      "main": "05e2e111d2b19b349ec6fd488049424aa40a56bface5259e845e550719f1c22b",
-      "vendor": "b8a04c627e7c7111deb2ef77bb31e76a4c1cdf7e05ec9abeb714c0ec9052a1f6"
-    }
-  },
+  "status": "PASS_SAVED_CF_PAIR_EXACT_WITH_EXISTING_FORMAT_LIMITATIONS",
+  "scope": "Large ERP configuration; auto profile8.3.27/XML2.20, two large saved CF",
+  "live_DB_capture": false,
+  "platform_used": false,
+  "pipeline": "saved SQL-derived CF pair -> public profile/fast worker/integrity stages; research caller",
+  "transfer": "stream",
+  "cf_transfer": "bind-copy",
+  "readback_workers": 8,
+  "whole_seconds": 2358.7012367999414,
+  "operation_seconds": 2343.1087605999783,
+  "started_utc": "2026-10-24T03:34:28.339881+00:00",
+  "finished_utc": "2026-10-24T04:13:47.041119+00:00",
   "sides": {
     "main": {
       "files": 139493,
-      "bytes": 11328251898,
-      "BSL_files": 29255,
-      "missing": 0,
-      "extra": 0,
-      "different": 0,
-      "platform_profile": "8.3.27",
-      "XML_version": "2.20",
-      "raw_native_opaque": 181,
-      "opaque_unaccepted": 177,
-      "native_raw_exit": 2,
-      "native_policy": "NATIVE_OPAQUE_ONLY",
-      "parent_CF": {
-        "declared_count": 4,
-        "raw_preservation": "EXACT",
-        "internal_metadata_decode": "UNKNOWN"
-      }
+      "bsl_files": 29255,
+      "missing": [],
+      "extra": [],
+      "different": []
     },
     "vendor": {
       "files": 137555,
-      "bytes": 9529821333,
-      "BSL_files": 28794,
-      "missing": 0,
-      "extra": 0,
-      "different": 0,
-      "platform_profile": "8.3.27",
-      "XML_version": "2.20",
-      "raw_native_opaque": 329,
-      "opaque_unaccepted": 329,
-      "native_raw_exit": 2,
-      "native_policy": "NATIVE_OPAQUE_ONLY",
-      "parent_CF": {
-        "declared_count": 0,
-        "raw_preservation": "NOT_APPLICABLE",
-        "internal_metadata_decode": "NOT_APPLICABLE"
-      }
+      "bsl_files": 28794,
+      "missing": [],
+      "extra": [],
+      "different": []
     }
   },
-  "totals": {
-    "files": 277048,
-    "bytes": 20858073231,
-    "BSL_files": 58049,
-    "missing": 0,
-    "extra": 0,
-    "different": 0
-  },
-  "wall_seconds": {
-    "saved_CF_preparation": 11.386665900005028,
-    "product_operation": 2561.5427333000116,
-    "whole_research_caller": 2578.006878999993,
-    "stages": {
-      "saved-cf-preparation": 11.384204900008626,
-      "product-preflight": 5.493286600103602,
-      "profiles": 8.947931500035338,
-      "fast-main": 1047.5835505999858,
-      "fast-vendor": 878.4430293999612,
-      "integrity": 621.0673738000914,
-      "post-generation-baseline-comparison": 1.9495532000437379
+  "own_cleanup_confirmed": true,
+  "memory_controls": false,
+  "reference": "Accepted prior generated same-CF result; not a claim of perfect platform XML",
+  "proof_facts": {
+    "result": {
+      "bytes": 24419,
+      "sha256": "b3cfa898523dc14678d9eb054b79bc4cc79c138948b9429e89a0ebabe2b0757b"
     },
-    "generation_before_final_integrity": 1951.858537
-  },
-  "historical_generation_comparison": {
-    "earlier_generation_seconds": 3409.691,
-    "current_generation_seconds": 1951.858537,
-    "earlier_final_verification_outcome": "TIMEOUT_PRESERVED",
-    "successful_complete_end_to_end_pair_comparison": false,
-    "general_speedup_ratio_claimed": false
-  },
-  "review_scope": {
-    "full_product_fresh_XML_readback": true,
-    "all_canonical_file_facts_digests_and_pathsets_independently_checked": true,
-    "independent_full_baseline_fact_join": true,
-    "second_full_XML_payload_read_by_reviewer": false,
-    "large_CF_or_runtime_rehash_by_reviewer": false,
-    "source_files_independently_hashed": 48
-  },
-  "limitations": [
-    "Native opaque entries remain limitations despite exact equality to accepted generated outputs.",
-    "Four main parent CF assets are preserved exactly as raw bytes; their internal metadata decoding remains UNKNOWN.",
-    "Main raw native opaque181 and final unaccepted177 are different counts because four parent assets are separately preserved.",
-    "Saved SQL CF replay excludes new database connection/capture and supplier selection.",
-    "Equality to generated baseline files is not a new native-platform XML equivalence or load-back claim."
-  ]
+    "comparison": {
+      "bytes": 847,
+      "sha256": "6717631f0d22b223a9e623754caece0636d9c40a94412ff4fe662fff449ef2e1"
+    },
+    "config": {
+      "bytes": 4642,
+      "sha256": "a1012600ad9c1592dc676b0bbac9d0f55a239c86f5ef1714fee4199be5266bb2"
+    }
+  }
 }

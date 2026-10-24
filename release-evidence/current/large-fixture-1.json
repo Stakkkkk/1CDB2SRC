@@ -1,128 +1,47 @@
 {
-  "schema": "1CDB2SRC_PUBLIC_VALIDATION_V1",
-  "status": "PASS_WITH_LIMITATIONS",
-  "validation_kind": "PRODUCT_SAVED_SQL_CF_PAIR_TO_XML",
-  "database_capture": "NOT_RUN",
-  "platform_1C_used_for_conversion": false,
-  "backend": {
-    "runtime": "docker-fast",
-    "transfer": "stream",
-    "CF_transport": "own_readonly_volume",
-    "assembly": "adopt"
-  },
-  "helper": {
-    "manifest_sha256": "981fff1e7a02f3dbc25df17bc1b988a0220d365c21eba1ee7fbddd3e90be3117",
-    "source_files": 48,
-    "runtime_files": 8,
-    "source_closure_sha256": "a9d69b5a4647201304b16a1115da8a757f6652c63787528287b52f99d0e11b6c",
-    "source_closure_digest_encoding": "SHA256 of UTF-8 JSON: sort_keys=true, ensure_ascii=false, compact separators, no newline",
-    "source_runtime_before_after_verified": true,
-    "loaded_from_local_archive_this_run": false
-  },
-  "claims_excluded": [
-    "new database capture",
-    "universal configuration support",
-    "general speedup ratio",
-    "opaque or closed internals decoded",
-    "unqualified equality to all platform versions"
-  ],
-  "timing_notes": [
-    "Wall-clock observations on one Windows Docker Desktop host, not estimates or portable performance guarantees.",
-    "Operation, preparation and total are separately measured intervals; nested stage times must not be added again.",
-    "Baseline comparison follows the full final integrity readback and compares fresh file facts, without another complete XML payload read.",
-    "Helper image was cached in this run; cold offline loading was established by the separate small fixture."
-  ],
-  "resource_policy": {
-    "CPU_cores_per_worker": 2,
-    "memory_controls": false,
-    "all_4_worker_jobs_closed": true,
-    "own_containers_recorded_absent": 12,
-    "own_volumes_recorded_absent": 4,
-    "cleanup_errors": 0,
-    "worker_IO_errors": 0
-  },
-  "fixture_id": "large-fixture-1",
-  "evidence_sha256": {
-    "actual_result": "f60aa594f3e8794ca1c12f605fd8a19021bf8cb8f53b10e25c18677df0a85962",
-    "comparison": "ac9936d58ce79bffb34075e15ddcd437d62b9e3e7f134fb0735eabe767d5c45a",
-    "final_integrity": "204bc445e7815e006062771a49b6e21f04704b21ca0e5e28a62cb35e7a0be1f2",
-    "independent_review": "b1c78ef7d2ce14b0f5a5eed1803a1016a23c8eeddcc062a67f7ba3316e6ba28f",
-    "independent_checks": "f9c29becbe996f2898497a470fce298d28c64c9a915f16f7f103fc6c52ef1d4e"
-  },
-  "profile_selection": {
-    "ordinary_public_global_profile_stage_used": false,
-    "per_side_explicit_research_targets": true,
-    "note": "Research caller explicitly selected separate main/vendor targets using product profile selection. The ordinary public global profile stage was not exercised."
-  },
+  "status": "PASS_SAVED_CF_PAIR_EXACT_WITH_EXISTING_FORMAT_LIMITATIONS",
+  "scope": "Document management; explicit research per-side profiles main8.3.27/vendor8.5.1, not ordinary single-profile CLI",
+  "live_DB_capture": false,
+  "platform_used": false,
+  "pipeline": "saved SQL-derived CF pair -> public profile/fast worker/integrity stages; research caller",
+  "transfer": "stream",
+  "cf_transfer": "bind-copy",
+  "readback_workers": 8,
+  "whole_seconds": 432.9607548000058,
+  "operation_seconds": 428.5694695999846,
+  "started_utc": "2026-10-24T03:26:35.567276+00:00",
+  "finished_utc": "2026-10-24T03:33:48.528032+00:00",
   "sides": {
     "main": {
       "files": 23466,
-      "bytes": 610708896,
-      "BSL_files": 5905,
-      "missing": 0,
-      "extra": 0,
-      "different": 0,
-      "platform_profile": "8.3.27",
-      "XML_version": "2.20",
-      "opaque_unaccepted": 6,
-      "native_raw_exit": 2,
-      "native_policy": "NATIVE_OPAQUE_ONLY",
-      "parent_CF": {
-        "declared_count": 1,
-        "raw_preservation": "EXACT",
-        "internal_metadata_decode": "UNKNOWN"
-      }
+      "bsl_files": 5905,
+      "missing": [],
+      "extra": [],
+      "different": []
     },
     "vendor": {
       "files": 23320,
-      "bytes": 461214222,
-      "BSL_files": 5869,
-      "missing": 0,
-      "extra": 0,
-      "different": 0,
-      "platform_profile": "8.5.1",
-      "XML_version": "2.21",
-      "opaque_unaccepted": 5,
-      "native_raw_exit": 2,
-      "native_policy": "NATIVE_OPAQUE_ONLY",
-      "parent_CF": {
-        "declared_count": 0,
-        "raw_preservation": "NOT_APPLICABLE",
-        "internal_metadata_decode": "NOT_APPLICABLE"
-      }
+      "bsl_files": 5869,
+      "missing": [],
+      "extra": [],
+      "different": []
     }
   },
-  "totals": {
-    "files": 46786,
-    "bytes": 1071923118,
-    "BSL_files": 11774,
-    "missing": 0,
-    "extra": 0,
-    "different": 0
-  },
-  "wall_seconds": {
-    "saved_CF_preparation": 1.0833341999677941,
-    "product_operation": 251.6788553999504,
-    "whole_research_caller": 256.07188279996626,
-    "stages": {
-      "saved-cf-preparation": 1.0813260999275371,
-      "product-preflight": 5.411836999934167,
-      "profiles": 1.2285965000046417,
-      "fast-main": 96.631198600051,
-      "fast-vendor": 84.31507639994379,
-      "integrity": 64.08486459997948,
-      "post-generation-baseline-comparison": 0.2598783998982981
+  "own_cleanup_confirmed": true,
+  "memory_controls": false,
+  "reference": "Accepted prior generated same-CF result; not a claim of perfect platform XML",
+  "proof_facts": {
+    "result": {
+      "bytes": 24411,
+      "sha256": "3d907bf121640454a3fb92d4c3d46104aeb9ab686b140b9d981312a8545c72e5"
+    },
+    "comparison": {
+      "bytes": 839,
+      "sha256": "ac9936d58ce79bffb34075e15ddcd437d62b9e3e7f134fb0735eabe767d5c45a"
+    },
+    "config": {
+      "bytes": 4646,
+      "sha256": "fb9549ee0dc1c974670d8f2f5728f468e8e6fa471705f703cd95008371fd6bdc"
     }
-  },
-  "review_scope": {
-    "full_product_fresh_XML_readback": true,
-    "independent_review_of_all_canonical_file_facts_and_chain": true,
-    "second_full_XML_payload_read_by_reviewer": false,
-    "second_baseline_comparison_by_reviewer": false
-  },
-  "limitations": [
-    "Native opaque entries are retained as unaccepted limits despite exact equality to the selected XML baseline.",
-    "One main parent CF is preserved exactly as a raw asset; internal metadata decoding remains UNKNOWN.",
-    "Saved CF replay excludes new database connection/capture and supplier selection."
-  ]
+  }
 }

@@ -1,0 +1,47 @@
+{
+  "status": "PASS_SAVED_CF_PAIR_EXACT_WITH_EXISTING_FORMAT_LIMITATIONS",
+  "scope": "One repeat for unexplained host transfer timing variance; first slower observation retained; same explicit research profiles",
+  "live_DB_capture": false,
+  "platform_used": false,
+  "pipeline": "saved SQL-derived CF pair -> public profile/fast worker/integrity stages; research caller",
+  "transfer": "stream",
+  "cf_transfer": "bind-copy",
+  "readback_workers": 8,
+  "whole_seconds": 235.3319310999941,
+  "operation_seconds": 230.99617870000657,
+  "started_utc": "2026-10-24T04:14:06.546043+00:00",
+  "finished_utc": "2026-10-24T04:18:01.877973+00:00",
+  "sides": {
+    "main": {
+      "files": 23466,
+      "bsl_files": 5905,
+      "missing": [],
+      "extra": [],
+      "different": []
+    },
+    "vendor": {
+      "files": 23320,
+      "bsl_files": 5869,
+      "missing": [],
+      "extra": [],
+      "different": []
+    }
+  },
+  "own_cleanup_confirmed": true,
+  "memory_controls": false,
+  "reference": "Accepted prior generated same-CF result; not a claim of perfect platform XML",
+  "proof_facts": {
+    "result": {
+      "bytes": 24602,
+      "sha256": "d6e86e53f47432ecb9b7a68b7bc878aedae769ebcc233d708996445a738ae61e"
+    },
+    "comparison": {
+      "bytes": 839,
+      "sha256": "ac9936d58ce79bffb34075e15ddcd437d62b9e3e7f134fb0735eabe767d5c45a"
+    },
+    "config": {
+      "bytes": 4648,
+      "sha256": "8bea103f31144e1a47e137eee88a982bb83d93148b8285a978d4d2961f899fa5"
+    }
+  }
+}

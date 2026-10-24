@@ -1,85 +1,24 @@
 {
-  "schema": "1CDB2SRC_PUBLIC_LINUX_OFFLINE_UNIT_CHECK_V1",
-  "status": "PASS_WITH_DECLARED_SKIPS",
-  "scope": "Offline installation and unit discovery in an isolated Linux container; not a standalone Linux host DB/export end-to-end test",
-  "environment": {
-    "python": "3.13.16",
-    "kernel_family": "WSL2 Linux x86_64",
-    "glibc": "2.36",
-    "container_uid": 65532,
-    "container_gid": 65532,
-    "network": "none",
-    "readonly_root": true,
-    "cpu_limit": 2,
-    "memory_limit_bytes": 0
-  },
-  "installation": {
-    "offline_wheels": true,
-    "pip_no_index": true,
-    "pip_require_hashes": true,
-    "imported": [
-      "psutil",
-      "psycopg",
-      "pytds",
-      "tzdata"
-    ],
-    "psycopg_implementation": "binary"
-  },
-  "tests": {
-    "discovered": 171,
-    "tests_run": 171,
-    "executed": 150,
-    "passed": 150,
-    "failures": 0,
-    "errors": 0,
-    "skips": 21,
-    "authorization_skips": 17,
-    "authorization_skip_reason": "Current user authorization disables real memory-limit tests",
-    "authorization_skip_modules": {
-      "test_posix_process": 14,
-      "test_posix_env_boundary": 3
+  "status": "PASS_AUTHORIZED_LINUX_OFFLINE_UNIT_DISCOVERY",
+  "discovered": 190,
+  "passed": 169,
+  "skipped": 21,
+  "failures": 0,
+  "errors": 0,
+  "skip_scope": "17 capped-memory tests excluded by current authorization,4 Windows tests",
+  "suite_seconds": 1.2034779920068104,
+  "whole_seconds": 9.69641880004201,
+  "source_unchanged": true,
+  "own_container_absent": true,
+  "live_DB_or_export": false,
+  "proof_facts": {
+    "result": {
+      "bytes": 35767,
+      "sha256": "2a8d621f4c4e86d98910d4aebce6d818b7696e43f00638dfff1144042dfd49b3"
     },
-    "other_skips": [
-      {
-        "case": "test_cancel_drain.CancelDrainTests.test_cancel_keeps_targets_open_until_drained",
-        "reason": "Windows supervisor definitions; OS calls remain fake"
-      },
-      {
-        "case": "test_no_memory_fake.WindowsFakeTests.test_explicit_cap_contract_is_preserved_with_fake_memory_api_only",
-        "reason": "Windows module/API definitions required; APIs are faked"
-      },
-      {
-        "case": "test_no_memory_fake.WindowsFakeTests.test_none_keeps_job_cpu_handshake_cleanup_without_memory_flags_or_rss",
-        "reason": "Windows module/API definitions required; APIs are faked"
-      },
-      {
-        "case": "test_no_memory_fake.WindowsFakeTests.test_none_observation_failure_still_terminates_and_closes_owned_job",
-        "reason": "Windows module/API definitions required; APIs are faked"
-      }
-    ],
-    "real_memory_limit_tests_executed": 0
-  },
-  "timing_seconds": {
-    "whole_operation": 10.122344400035217,
-    "container_operation": 7.493532199994661,
-    "container_entry": 6.990734847000567,
-    "unit_suite": 1.1964807640033541,
-    "writable_copy": 0.8500807789969258,
-    "stages": {
-      "venv": 1.6786328029993456,
-      "offline-install": 0.922003619998577,
-      "installed-imports": 0.3232784209976671,
-      "authorized-unittest-discovery": 1.5893487830035156
+    "proof": {
+      "bytes": 34299,
+      "sha256": "0fef822050d2cad7fb484baa665fae0dde794af0eb69614839ad9981c1c2167d"
     }
-  },
-  "validation": {
-    "input_files": 87,
-    "input_bytes_unchanged": true,
-    "own_container_absent_confirmed": true,
-    "docker_actual_inside_unit_tests": false,
-    "db_connection": false,
-    "cf_export": false,
-    "native_export": false,
-    "image_build": false
   }
 }

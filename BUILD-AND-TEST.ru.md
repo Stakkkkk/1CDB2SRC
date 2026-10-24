@@ -1,4 +1,17 @@
-# Сборка и проверки 1CDB2SRC 0.3.0-rc.1
+# Сборка и проверки 1CDB2SRC 0.3.0-rc.2
+
+## Дополнение 0.3.0-rc.2
+
+Оптимизации затрагивают только поиск некавыченных токенов brace.py и отложенное
+чтение Properties/Name у нужных MDClasses UUID. Обход вложенных XML и владельцы
+сохранены. Новый cf_copy.py копирует ровно один RO CF в новый own volume;
+закрытый результат независимо хешируется. Только новый target нормализуется
+для UID 65532; права исходника не меняются. Роль cf-copy: UID 0, только CHOWN,
+2 CPU, без лимита памяти и сети, корень только для чтения, два точных mount. Условия UID/rootless — в README.
+После изменения app sources требуется полный rebuild/seal helper по процедуре
+ниже; вручную заменять отдельный hash нельзя. Rust build не требуется.
+Нейтральные регрессии добавлены в test_brace.py, test_dumpinfo_single_pass.py,
+test_cf_copy.py. Новые unit/E2E границы — в release-validation.json.
 
 ## Что изменилось в 0.3
 
@@ -82,7 +95,12 @@ python tools/seal_helper_image.py --app app --assembly helper-assembly/result.js
 app/.venv/Scripts/python.exe -B -m unittest discover -s tests -v
 ```
 
-Текущий discovery содержит **171 метод**, а не 51. На Windows проверен один
+В текущем кандидате Linux: 190 методов — 169 прошли, 21 пропущен (17 с лимитами памяти и
+4 Windows), ошибок 0; тесты 1,203 с, контейнерная операция 7,407 с. Отдельно на Windows
+прошли 28 нейтральных методов трёх изменённых модулей за 4,751 с; полный Windows
+discovery в этой итерации не повторялся.
+
+Историческая проверка 0.3.0-rc.1: discovery **171 метод**. На Windows проверен один
 полный прогон: failures 0, errors 0; 17 методов Linux-process/environment
 пропущены как `real Linux required`, ещё два subcase одного symlink-теста —
 из-за отсутствия права создавать symlink. Это не означает 171 выполненный

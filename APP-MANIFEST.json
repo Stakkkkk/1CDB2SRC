@@ -1,6 +1,6 @@
 {
-  "release": "0.3.0-rc.1",
-  "source_package": "1CDB2SRC-0.3.0-rc.1",
+  "release": "0.3.0-rc.2",
+  "source_package": "1CDB2SRC-0.3.0-rc.2",
   "application": "CF/XML extractor; explicit fast Docker backend with documented validation boundaries.",
   "runtime_upstream": "https://github.com/Untru/ibcmd-rs",
   "runtime_upstream_revision": "04e833e535602560cf0bc1b439f5a070db8ca936",
@@ -98,12 +98,12 @@
       "sha256": "799805dee0470b5366d1bec11ecdd80cdc22e39b712d64056aafced5a36ca8af"
     },
     "runtime/fast-helper/helper-image.tar.gz": {
-      "bytes": 69615016,
-      "sha256": "72ec3b902aaf03eb2c6710c56e23fbfceb3fd98a18e8b37354e849a60185c45b"
+      "bytes": 69618529,
+      "sha256": "fc34e85e764b38463b96c648851d388a0df37fb306da28aa449f9ba4bf8a89bf"
     },
     "runtime/fast-helper/manifest.json": {
-      "bytes": 11559,
-      "sha256": "981fff1e7a02f3dbc25df17bc1b988a0220d365c21eba1ee7fbddd3e90be3117"
+      "bytes": 11712,
+      "sha256": "b5a883351239a49f02b3ee8ff0d0b83c415b790d434ad8e5e9e6e4d94ca5b7f5"
     },
     "runtime/fast-helper/THIRD-PARTY-NOTICES.txt": {
       "bytes": 710,
@@ -142,8 +142,8 @@
       "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
     },
     "onecdb2src/cli.py": {
-      "bytes": 27725,
-      "sha256": "7fd10d7e60cd730f2c7772f6f2bc7ef5e5570b01b6c090dfd7ae19e6a74817b5"
+      "bytes": 28459,
+      "sha256": "2b11d6ba844d23965f0383dde00121e85676ab9d9fea1eb5dec7ed635a0a1069"
     },
     "onecdb2src/native_policy.py": {
       "bytes": 4957,
@@ -218,8 +218,8 @@
       "sha256": "330af1a3f439df14df3e4cce085b8b41f4636fd6d904aa4929bfa85e364b6c16"
     },
     "onecdb2src/nativecf/brace.py": {
-      "bytes": 4224,
-      "sha256": "e75d4a301c5b583f9c64f0d19e0f41dd52b06dfc530b1e7cf50af6bebedd7f8a"
+      "bytes": 4325,
+      "sha256": "f47df27efc5ca5d961ab3a673e7fa03c0dbfa8762cbe375819a43032fa403fa5"
     },
     "onecdb2src/nativecf/cf_source.py": {
       "bytes": 2044,
@@ -257,6 +257,10 @@
       "bytes": 43,
       "sha256": "fe3b6922e8c75ccb4ce594f87795e32cdbf1e839f869990a4a001ca3ef6d6990"
     },
+    "onecdb2src/xml/cf_copy.py": {
+      "bytes": 7635,
+      "sha256": "a7a9e4807702ccd0a170b539bc7c5bd2b78471c4d674dc9ac3c7bffc07f178de"
+    },
     "onecdb2src/xml/complete_native_with_parents_r9.py": {
       "bytes": 31020,
       "sha256": "e8585df92561b45c52087b8e98accabc9163a8754ae9223156e683bf1cf4aa15"
@@ -266,8 +270,8 @@
       "sha256": "b8b52f7b94ba8c1b62f3e98583de36b5430654ddd6521ad9fafd4a6f348dfc53"
     },
     "onecdb2src/xml/dump_info_modern_r3.py": {
-      "bytes": 27827,
-      "sha256": "7190899bdf744e4ae9b6c3c9121fe89e76fd120b7713dcc56b81b569a682341f"
+      "bytes": 27855,
+      "sha256": "6de4a18ce3a11eadc80490eacd8df5a5f4dc6cf683a2a3776868ec6f317b732b"
     },
     "onecdb2src/xml/export_local.py": {
       "bytes": 11167,
@@ -282,8 +286,8 @@
       "sha256": "397f1fef455c522e6946485d57c501748974f15362c6fba26e958f5e43453cad"
     },
     "onecdb2src/xml/fast_docker.py": {
-      "bytes": 40980,
-      "sha256": "5affc81b81174bb930291a55b034202e23002d4d6a994f014e148a53a0e74b60"
+      "bytes": 44324,
+      "sha256": "f7c1a600031c6a17eec8bc557acb14e757536dc5da3fe97a68aaca8a465bcd96"
     },
     "onecdb2src/xml/fast_runtime.py": {
       "bytes": 20556,
@@ -302,8 +306,8 @@
       "sha256": "fbae3bfe0bf76118f096020f38f339e6720955888bda3ef6a7167417b6d17f02"
     },
     "onecdb2src/xml/namespace_result.py": {
-      "bytes": 19864,
-      "sha256": "87a408bf10e4f61d66583d4ec88d3dfa32064e6cd8f170e0802c334a8c8286fc"
+      "bytes": 22228,
+      "sha256": "44c3437948dcf89cd1aa5ef8def77ab141cab6b415804f6721751f3814d451e0"
     },
     "onecdb2src/xml/parent_v8container_r1.py": {
       "bytes": 7059,
@@ -382,8 +386,8 @@
     "host_route_preserved": true,
     "fast_docker": true,
     "fast_helper_manifest": {
-      "bytes": 11559,
-      "sha256": "981fff1e7a02f3dbc25df17bc1b988a0220d365c21eba1ee7fbddd3e90be3117"
+      "bytes": 11712,
+      "sha256": "b5a883351239a49f02b3ee8ff0d0b83c415b790d434ad8e5e9e6e4d94ca5b7f5"
     },
     "rust_rebuilt_by_sealer": false,
     "converter_source_unchanged": true,

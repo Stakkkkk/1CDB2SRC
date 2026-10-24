@@ -17,6 +17,7 @@ def is_fast(config):
     return config.get('docker_mode','host')=='fast'
 
 def validate_modes(args):
+    require(args.docker_cf_transfer!='bind-copy' or args.runtime=='docker' and args.docker_mode=='fast','bind-copy CF staging requires Docker fast mode')
     require(args.docker_mode!='fast' or args.runtime=='docker','Fast mode requires Docker runtime')
     require(args.docker_mode!='fast' or args.assembly_mode=='adopt','Fast mode requires --assembly-mode adopt')
     require(args.docker_transfer!='stream' or args.runtime=='docker' and args.docker_mode=='fast','Stream transfer requires Docker fast mode')
@@ -65,6 +66,7 @@ def parser():
     p.add_argument('--assembly-mode',choices=['copy','adopt'],default='copy',help='copy: прежняя сборка; adopt: передать собственное дерево native без повторного копирования, с конечной проверкой')
     p.add_argument('--runtime',choices=['docker','native'],default='docker',help='Docker (Windows/Linux) либо закреплённый локальный конвертер (Linux x86-64)')
     p.add_argument('--docker-mode',choices=['host','fast'],default='host',help='host: прежний маршрут; fast: обработка внутри Linux Docker, требует adopt')
+    p.add_argument('--docker-cf-transfer',choices=['copy','bind-copy'],default='copy',help='CF volume staging; bind-copy requires a source readable by the Docker root mapping, no fallback or source chmod')
     p.add_argument('--docker-transfer',choices=['copy','stream'],default='copy',help='Перенос Docker результата; stream включается явно только в fast режиме')
     p.add_argument('--readback-workers',type=int,choices=[1,4,8],help='Потоки независимой итоговой проверки fast (по умолчанию 4)')
     connection=p.add_mutually_exclusive_group()
@@ -244,7 +246,7 @@ def main(argv=None):
         password=getpass.getpass('Пароль СУБД: ') if args.prompt_password else os.environ.get(args.password_env,'') if args.password_env else ''
         if args.password_env:require(args.password_env in os.environ,'Password environment variable absent')
         root.mkdir(parents=True);(root/'_work').mkdir();(root/'_work/jobs').mkdir()
-        config={'root':str(root),'supplier':args.supplier,'profile':args.profile,'platform':args.platform,'assembly_mode':args.assembly_mode,'runtime_backend':args.runtime,'docker_context':args.docker_context,'docker_socket':args.docker_socket,'docker_mode':args.docker_mode,'docker_transfer':args.docker_transfer,'readback_workers':args.readback_workers or 4,
+        config={'root':str(root),'supplier':args.supplier,'profile':args.profile,'platform':args.platform,'assembly_mode':args.assembly_mode,'runtime_backend':args.runtime,'docker_context':args.docker_context,'docker_socket':args.docker_socket,'docker_mode':args.docker_mode,'docker_transfer':args.docker_transfer,'docker_cf_transfer':args.docker_cf_transfer,'readback_workers':args.readback_workers or 4,
                 'db':{'provider':args.provider,'host':args.host,'port':args.port or (1433 if args.provider=='mssql' else 5432),'database':args.database,'schema':args.schema or ('dbo' if args.provider=='mssql' else 'public'),'auth':args.auth,'user':args.user,'consistency':args.mssql_consistency,'statement_timeout':min(args.capture_seconds,600),'lock_timeout':3000,'driver':args.mssql_driver,'transport':args.transport,'odbc_driver':args.odbc_driver},
                 'runtime':read(PACKAGE/'runtime/manifest.json'),'native_seconds':args.native_seconds or (300 if args.profile=='small' else 2400),'native_memory_mib':args.native_memory_mib or (3072 if args.profile=='small' else 8192)}
         require(config['native_memory_mib']>=512,'Native memory must be at least512MiB')

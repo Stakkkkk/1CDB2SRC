@@ -171,8 +171,9 @@ def metadata_index(tree, version_ids, configuration_storage, configuration_ident
         for child in node:
             current_name, current_owner = parent_name, version_owner
             identity = child.get('uuid')
-            name = child.findtext(MD + 'Properties/' + MD + 'Name')
+            name = None
             if identity is not None and child.tag.startswith(MD):
+                name = child.findtext(MD + 'Properties/' + MD + 'Name')
                 require(name is not None, 'UUID metadata child has no Properties/Name')
             if identity is not None and name is not None and child.tag.startswith(MD):
                 identity = str(uuid.UUID(identity))

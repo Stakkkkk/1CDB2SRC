@@ -22,7 +22,7 @@ def _container(value, row, result, side, exited):
     config, host = value['Config'], value['HostConfig']
     require(config['Image'] == row['image'] and config['Labels'].get('onecdb2src.fast.nonce') == result['nonce'],
             'Raw container image/owner mismatch')
-    root_role = row['role'] == 'owner-init'
+    root_role = row['role'] in ('owner-init','cf-copy')
     require(config['User'] == ('0:0' if root_role else '65532:65532')
             and host['Memory'] == 0 and host['NetworkMode'] == 'none' and host['ReadonlyRootfs'] is True
             and host['NanoCpus'] == 2 * 10**9 and _caps(host['CapDrop']) == ['ALL']
@@ -31,16 +31,21 @@ def _container(value, row, result, side, exited):
             'Raw process resource/isolation contract differs')
     jobs = [mount for mount in value['Mounts'] if mount['Destination'] == '/job']
     staged=result['cf_transport']=='STAGED_OWN_READONLY_VOLUME'
-    if row['role']=='cf-stage':
+    if row['role'] in ('cf-stage','cf-copy'):
         cfs=[mount for mount in value['Mounts'] if mount['Destination']=='/cf']
-        require(len(cfs)==len(value['Mounts'])==1 and cfs[0]['Type']=='volume'
+        require(len(cfs)==1 and len(value['Mounts'])==(2 if row['role']=='cf-copy' else 1) and cfs[0]['Type']=='volume'
                 and cfs[0]['Name']==result['cf_volume'] and cfs[0]['RW'] is True,'Raw CF staging mount differs')
+        if row['role']=='cf-copy':
+            sources=[m for m in value['Mounts'] if m['Destination']=='/source.cf']
+            require(len(sources)==1 and sources[0]['Type']=='bind' and sources[0]['RW'] is False
+                and sources[0]['Source']==row['source_bind_source'],'Raw CF copy source differs')
+            require('type=bind,source='+result['source_cf']['host_path']+',target=/source.cf,readonly' in row['argv'], 'CF copy source request differs')
     else:
         require(len(jobs) == 1 and jobs[0]['Type'] == 'volume' and jobs[0]['Name'] == result['volume']
                 and jobs[0]['RW'] is True, 'Raw job volume differs')
-    if root_role:
+    if row['role']=='owner-init':
         require(len(value['Mounts']) == 1, 'Owner initialization had unexpected bind')
-    elif row['role']!='cf-stage':
+    elif row['role'] not in ('cf-stage','cf-copy'):
         cfs=[mount for mount in value['Mounts'] if mount['Destination']==('/job/_work/cf/'+side if staged
                 else '/job/_work/cf/'+side+'/source.cf')]
         require(len(cfs)==1 and cfs[0]['RW'] is False
@@ -93,6 +98,9 @@ def bind_fast_side(config, side):
     staged=result['cf_transport']=='STAGED_OWN_READONLY_VOLUME'
     require(result['cf_transport'] in ('STAGED_OWN_READONLY_VOLUME','HOST_READONLY_BIND')
             and staged==(config.get('fast_cf_transport','volume')=='volume'),'CF transport changed')
+    method=result.get('cf_stage_method','copy')
+    require(method==config.get('docker_cf_transfer','copy') and method in ('copy','bind-copy')
+            and (method!='bind-copy' or staged),'CF staging method changed')
     if staged:
         require(result['cf_volume']==result['volume']+'-cf' and result['cf_copy_source']==cf_fact
                 and result['cf_volume_removed'] is True,'Own staged CF cleanup/source incomplete')
@@ -101,7 +109,8 @@ def bind_fast_side(config, side):
                 and cf_absence['reference']==result['cf_volume']
                 and cf_absence['operation']==['volume','inspect',result['cf_volume']]
                 and re.fullmatch('[a-f0-9]{64}',cf_absence['stderr_sha256']),'CF volume absence proof missing')
-        for filename in ('cf-stage-container-before.json','cf-stage-container-after.json'):
+        stem='cf-copy' if method=='bind-copy' else 'cf-stage'
+        for filename in (stem+'-container-before.json',stem+'-container-after.json'):
             metadata[str(proof_root/filename)]=fact(proof_root/filename)
     absence = result['volume_absence_confirmation']
     require(absence['kind'] == 'EXACT_NAMED_DOCKER_MISSING_DIAGNOSTIC'
@@ -137,17 +146,31 @@ def bind_fast_side(config, side):
             and native['producer_sha256'] == helper['source_files']['onecdb2src/xml/fast_docker.py']['sha256'],
             'Native source/runtime/profile bindings differ')
     rows = result['containers']
-    expected_roles={'init','owner-init','prepare','engine','helpers'}|({'cf-stage'} if staged else set())
+    expected_roles={'init','owner-init','prepare','engine','helpers'}|({('cf-copy' if method=='bind-copy' else 'cf-stage')} if staged else set())
     require(len(rows) == len(expected_roles) and {row['role'] for row in rows} == expected_roles
             and all(row['created'] is True and row['removed'] is True for row in rows), 'Owned roles cleanup incomplete')
     roles = {row['role']: row for row in rows}
-    if staged:
+    if staged and method=='copy':
         row=roles['cf-stage']
         require(row['image']==config['runtime']['image_id'] and 'seconds' not in row,'CF staging unexpectedly ran a payload')
         for filename in ('cf-stage-container-before.json','cf-stage-container-after.json'):
             value=read(proof_root/filename);_container(value,row,result,side,False)
             require(value['State']['Status']=='created' and value['State']['Pid']==0
                     and value['State']['StartedAt'].startswith('0001'),'CF staging view was started')
+    if staged and method=='bind-copy':
+        row=roles['cf-copy']
+        require(row['image']==helper_binding['selected_image_id'],'CF copier image differs')
+        for ending,exited in (('before',False),('after',True)):
+            _container(read(proof_root/('cf-copy-container-'+ending+'.json')),row,result,side,exited)
+        proof_path=proof_root/'cf-copy.stdout';proof=read(proof_path)
+        require(fact(proof_path)==result['cf_bind_copy_proof'] and proof['schema']=='1CDB2SRC_CF_BIND_COPY_V1'
+            and proof['status']=='CF_COPY_COMPLETE' and proof['nonce']==result['nonce'] and proof['side']==side
+            and proof['source']=='/source.cf' and proof['target']=='/cf/source.cf'
+            and proof['expected']==proof['copied']==proof['fresh_target_readback']==cf_fact
+            and proof['source_identity_stable'] is True and proof['exclusive_target'] is True
+            and proof['source_permissions_changed'] is False and proof['memory_controls'] is False
+            and proof['normalization']=={'uid':65532,'gid':65532,'file_mode':'0o444','directory_mode':'0o755'},'CF copy receipt differs')
+        metadata[str(proof_path)]=fact(proof_path)
     for role, stem in (('owner-init', 'owner-init'), ('prepare', 'prepare'), ('engine', 'native'), ('helpers', 'helpers')):
         row = roles[role]
         require(row['image'] == (config['runtime']['image_id'] if role == 'engine' else helper_binding['selected_image_id']),

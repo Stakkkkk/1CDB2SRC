@@ -1,5 +1,5 @@
 {
-  "scope": "0.3.0-rc.1 portable test sources; current run results only in supplied release-validation evidence.",
+  "scope": "0.3.0-rc.2 portable test sources; current run results only in supplied release-validation evidence.",
   "files": {
     "fast_cf_fixture.py": {
       "bytes": 2247,
@@ -9,13 +9,21 @@
       "bytes": 18043,
       "sha256": "1ed2e48f3e92727a2c80e3aceba78a5ae7a3820bb8f461497353d1c2779bd558"
     },
+    "test_brace.py": {
+      "bytes": 5199,
+      "sha256": "07ffc323234f83e0f36db037aa2ef21ff604ee973cf0326d78cf776222d6e869"
+    },
     "test_cancel_drain.py": {
       "bytes": 3267,
       "sha256": "1ff816e074c90fdd0485bfcfc8ed5cd11b2bbb9e89735eb73c871d7c5f2b1f96"
     },
+    "test_cf_copy.py": {
+      "bytes": 11064,
+      "sha256": "7c20ae53b2bd7d96c4c8f9c9e2e5e05043de363a9a335ad805e550fe9f5cdcca"
+    },
     "test_dumpinfo_single_pass.py": {
-      "bytes": 7335,
-      "sha256": "fe727b0bc566b28404548af2a8fca54b7fa3ee4ab1b648a6401b7a29a2889d4b"
+      "bytes": 10522,
+      "sha256": "5a12cd148b56f96d84e1cbc647d46f7b832c27af3f6581ec24fc8e3c84632d6f"
     },
     "test_export_local.py": {
       "bytes": 9381,
