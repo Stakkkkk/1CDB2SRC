@@ -1,38 +1,21 @@
 {
-  "status": "PASS_REPEATED_ASYMMETRIC_GAIN_VS_FRESH_SEQUENTIAL",
-  "sequential_seconds": 408.21282449993305,
-  "final_verification_seconds": {
-    "sequential": 102.44305000000168,
-    "balanced": 112.15354180010036,
-    "heavy": [
-      91.13730820000637,
-      86.64529650006443
-    ]
-  },
-  "aggregate_readback_workers": 8,
-  "parallel_workers_per_side": {
-    "main": 2,
-    "vendor": 6
-  },
-  "shared_outer_CPU": 2,
-  "scope": "One fresh sequential, one balanced and two heavy runs on same source/helper, external host load uncontrolled; bounded confirmation, not statistical proof",
-  "no_new_DB_capture": true,
-  "ERP_current_mode_NOT_RUN": true,
-  "balanced_seconds": 437.29245139996056,
-  "heavy_seconds": [
-    393.6355380000314,
-    370.15625969995745
+  "status": "PASS_REUSED_EXACT_PARSER_CORE_FULL_ERP_FILE_READBACK",
+  "source_reuse": "EnvelopeParser and expanded AST exact; readback/materialize/late_readback bytes exact; only root accessor added",
+  "new_XML_export": false,
+  "files": 277048,
+  "BSL": 58049,
+  "bytes": 20858073231,
+  "sequential_stream_seconds": [
+    224.0534575,
+    297.4742491
   ],
-  "heavy_final_seconds": [
-    91.13730820000637,
-    86.64529650006443
+  "previous_seconds": [
+    315.6034735,
+    313.3583746
   ],
-  "sequential_final_seconds": 102.44305000000168,
-  "balanced_final_seconds": 112.15354180010036,
-  "mean_gain_seconds": 26.31692564993864,
-  "mean_gain_percent": 6.446864005847263,
-  "acceptance_rule": "Two complete heavy runs each >5s whole and >3s final faster than fresh same-source sequential, all files exact; pragmatic margin, not statistical proof",
-  "repeat_vs_sequential_gain_seconds": 38.056564799975604,
-  "repeat_vs_sequential_gain_percent": 9.322726410321742,
-  "repeat_seconds": 370.15625969995745
+  "median_wall_gain_percent": 17.0811857,
+  "median_CPU_gain_percent": 13.4735542,
+  "all_facts_exact": true,
+  "shared_executor_not_shipped": true,
+  "micro_batching_not_shipped": true
 }

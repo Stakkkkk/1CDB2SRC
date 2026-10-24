@@ -1,9 +1,14 @@
 {
-  "status": "PASS_FINAL_SMALL_DEFAULT_CF_COPY",
-  "same_single_run_as": "small.json",
-  "scope": "Not an independent second export or speed comparison",
-  "seconds": 71.51797080005053,
-  "files": 15,
-  "BSL": 1,
-  "cf_transfer": "copy"
+  "status": "ACCEPTED_HISTORICAL_RC5_NOT_RERUN",
+  "scope": "Historical evidence for unchanged functionality, not current final-source actual",
+  "original": {
+    "status": "PASS_FINAL_SMALL_DEFAULT_CF_COPY",
+    "same_single_run_as": "small.json",
+    "scope": "Not an independent second export or speed comparison",
+    "seconds": 71.51797080005053,
+    "files": 15,
+    "BSL": 1,
+    "cf_transfer": "copy"
+  },
+  "current_release_actual": false
 }

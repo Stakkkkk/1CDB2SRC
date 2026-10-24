@@ -1,13 +1,14 @@
 {
-  "status": "PASS_LINUX_AUTHORIZED_DISCOVERY",
-  "discovered": 241,
-  "passed": 220,
+  "status": "PASS_FINAL_LINUX_SOURCE_OFFLINE_TESTS",
+  "tests": 254,
+  "passed": 233,
   "skipped": 21,
-  "errors": 0,
+  "skip_reasons": {
+    "forbidden_memory_limit_tests": 17,
+    "Windows_only": 4
+  },
   "failures": 0,
-  "scope": "17 memory-limit tests excluded by authorization;4 Windows tests; container unit suite, not native Linux DB E2E",
-  "proof": {
-    "bytes": 43473,
-    "sha256": "eb25dc88cb1dfb45dfe6395c3cfe970b2d493e7ce6f9b553c799778f3c7cfefb"
-  }
+  "errors": 0,
+  "seconds": 5.674655959010124,
+  "memory_controls": false
 }

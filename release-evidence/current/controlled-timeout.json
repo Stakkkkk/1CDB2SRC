@@ -1,10 +1,15 @@
 {
-  "status": "PASS_NEUTRAL_FINAL_PAIR_TIMEOUT_CANCEL_AND_PROCESS_CLOSURE_TESTS",
-  "scope": "Neutral real child processes in Windows/Linux unit tests; not a generated configuration export cancellation",
-  "common_success_on_failure": false,
-  "memory_controls": false,
-  "proof": {
-    "bytes": 155,
-    "sha256": "1bcbe7cbbd9ea9c79c4aaa0384ea9ea4da03f47b1aeb1d4f8a3f49d03b654f24"
-  }
+  "status": "ACCEPTED_HISTORICAL_RC5_NOT_RERUN",
+  "scope": "Historical evidence for unchanged functionality, not current final-source actual",
+  "original": {
+    "status": "PASS_NEUTRAL_FINAL_PAIR_TIMEOUT_CANCEL_AND_PROCESS_CLOSURE_TESTS",
+    "scope": "Neutral real child processes in Windows/Linux unit tests; not a generated configuration export cancellation",
+    "common_success_on_failure": false,
+    "memory_controls": false,
+    "proof": {
+      "bytes": 155,
+      "sha256": "1bcbe7cbbd9ea9c79c4aaa0384ea9ea4da03f47b1aeb1d4f8a3f49d03b654f24"
+    }
+  },
+  "current_release_actual": false
 }

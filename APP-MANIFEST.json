@@ -1,6 +1,6 @@
 {
-  "release": "0.3.0-rc.5",
-  "source_package": "1CDB2SRC-0.3.0-rc.5",
+  "release": "0.3.0-rc.6",
+  "source_package": "1CDB2SRC-0.3.0-rc.6",
   "application": "CF/XML extractor; explicit fast Docker backend with documented validation boundaries.",
   "runtime_upstream": "https://github.com/Untru/ibcmd-rs",
   "runtime_upstream_revision": "04e833e535602560cf0bc1b439f5a070db8ca936",
@@ -98,12 +98,12 @@
       "sha256": "799805dee0470b5366d1bec11ecdd80cdc22e39b712d64056aafced5a36ca8af"
     },
     "runtime/fast-helper/helper-image.tar.gz": {
-      "bytes": 69628135,
-      "sha256": "8f161e1b94d8d378815e978767d3aea797324ba2b93a16f401380f5bb31534bb"
+      "bytes": 69628797,
+      "sha256": "5f02240618f37775b1375f412e7d684f164e1735a0020d7e14342b7310fae049"
     },
     "runtime/fast-helper/manifest.json": {
-      "bytes": 12333,
-      "sha256": "5e4e71b2c807ef895e01dfa9ebf6b685447fb500d33c1891dc2918e8ac29072e"
+      "bytes": 12487,
+      "sha256": "a215940d12ef799b04cff7fa8467b2ed69500236288d2f676db31bbd52170230"
     },
     "runtime/fast-helper/THIRD-PARTY-NOTICES.txt": {
       "bytes": 710,
@@ -166,8 +166,8 @@
       "sha256": "ab71d4c5cf4f8619c0a85a8290f63881c631b03680b52d7c926ce061af66e53c"
     },
     "onecdb2src/worker.py": {
-      "bytes": 16124,
-      "sha256": "fbfc636037dc29b5f044a7a1f48b732bddde9a34dd69b562e44354edc5b0c61b"
+      "bytes": 16343,
+      "sha256": "9eb37aca1864d61e4885b169659ae1224849423be5bb8e288d6b6835af477d76"
     },
     "onecdb2src/__init__.py": {
       "bytes": 0,
@@ -270,8 +270,8 @@
       "sha256": "a7a9e4807702ccd0a170b539bc7c5bd2b78471c4d674dc9ac3c7bffc07f178de"
     },
     "onecdb2src/xml/complete_native_with_parents_r9.py": {
-      "bytes": 31020,
-      "sha256": "e8585df92561b45c52087b8e98accabc9163a8754ae9223156e683bf1cf4aa15"
+      "bytes": 31094,
+      "sha256": "f9a9da6eb91fee3c3cb1d89fc97f8a82406dfb9f46de295e17ead334608ef8eb"
     },
     "onecdb2src/xml/dump_info.py": {
       "bytes": 17002,
@@ -284,6 +284,10 @@
     "onecdb2src/xml/early_lineage.py": {
       "bytes": 3612,
       "sha256": "4d3dcebe509cee576fa51392b2d9791b270d11784c9a0e3996f248956cc4d8c3"
+    },
+    "onecdb2src/xml/envelope.py": {
+      "bytes": 2984,
+      "sha256": "62ab384c24c60d49676d522e90d9a1cb0e4a0517602c7a913104e2512911f926"
     },
     "onecdb2src/xml/export_local.py": {
       "bytes": 11167,
@@ -318,8 +322,8 @@
       "sha256": "db1d3a134a60e5653eb848b1eb82955804e1cebe93e146dbf88f3c9bf1e203b7"
     },
     "onecdb2src/xml/materialize.py": {
-      "bytes": 3377,
-      "sha256": "fbae3bfe0bf76118f096020f38f339e6720955888bda3ef6a7167417b6d17f02"
+      "bytes": 3506,
+      "sha256": "1086e1f1561b768831def00c98efc94cb1bda40069c146c00b5c07bc4ec387d9"
     },
     "onecdb2src/xml/namespace_result.py": {
       "bytes": 23813,
@@ -330,8 +334,8 @@
       "sha256": "198e023d07f50163ca9377f88c921d8cd930a98d70468d10c552b1f2b5912279"
     },
     "onecdb2src/xml/readback.py": {
-      "bytes": 11417,
-      "sha256": "550bb4d82f4d5c7e47cb9bf0d8ab37320bd7370b9e7514d405fcdf18ecc51885"
+      "bytes": 11724,
+      "sha256": "53fe4536c19d7d1249e17f538b87130b2d8499dd7af68776f284f835ac36b0dd"
     },
     "onecdb2src/xml/runtime_identity.py": {
       "bytes": 1867,
@@ -402,8 +406,8 @@
     "host_route_preserved": true,
     "fast_docker": true,
     "fast_helper_manifest": {
-      "bytes": 12333,
-      "sha256": "5e4e71b2c807ef895e01dfa9ebf6b685447fb500d33c1891dc2918e8ac29072e"
+      "bytes": 12487,
+      "sha256": "a215940d12ef799b04cff7fa8467b2ed69500236288d2f676db31bbd52170230"
     },
     "rust_rebuilt_by_sealer": false,
     "converter_source_unchanged": true,

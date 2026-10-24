@@ -1,5 +1,5 @@
 {
-  "scope": "0.3.0-rc.5 portable test sources; current run results only in supplied release-validation evidence.",
+  "scope": "0.3.0-rc.6 portable test sources; current run results only in supplied release-validation evidence.",
   "files": {
     "fast_cf_fixture.py": {
       "bytes": 2247,
@@ -105,6 +105,10 @@
       "bytes": 5166,
       "sha256": "9063af1be6c37ba917cd0585201872b2af6c74c8115c29fd428a41625067632e"
     },
+    "test_stream_parity.py": {
+      "bytes": 3526,
+      "sha256": "6a1d36303a7de8eaf3bd3b5038fceb2e15e607f10155658177a4c4013b035431"
+    },
     "test_stream_tar.py": {
       "bytes": 11764,
       "sha256": "74894151fdf151d77bd64c1841cba632179fd316287f1be89ac81029f014f99e"
@@ -112,6 +116,10 @@
     "test_worker_single_read.py": {
       "bytes": 6899,
       "sha256": "3ae7dde1b2e7d0f9eb2ded894919adc7a3f59099b6e4e2b82e3cf662cfd19620"
+    },
+    "test_xml_envelope.py": {
+      "bytes": 6198,
+      "sha256": "3c8686fb968bbc144857b235841231b4f50e9263b457bcc252a91475d313ed39"
     },
     "__init__.py": {
       "bytes": 0,

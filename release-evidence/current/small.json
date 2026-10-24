@@ -1,34 +1,10 @@
 {
-  "status": "PASS_FINAL_R2_SAVED_CF_PAIR_ALL_FILES_EXACT",
-  "source_revision": "BD-034 asymmetric source",
-  "final_verification": "parallel",
-  "side_scheduling": "verify-overlap",
-  "whole_seconds": 71.51797080005053,
-  "operation_seconds": 66.55938120000064,
-  "scope": "Saved SQL CF pair -> profile/producer/final verification stages with research caller; no new DB capture or platform",
-  "profiles": "auto",
-  "reference": "Previous accepted generated same-CF output; not perfect platform XML",
-  "sides": {
-    "main": {
-      "files": 9,
-      "bsl_files": 1,
-      "missing": [],
-      "extra": [],
-      "different": []
-    },
-    "vendor": {
-      "files": 6,
-      "bsl_files": 0,
-      "missing": [],
-      "extra": [],
-      "different": []
-    }
-  },
-  "full_final_payload_hashes": true,
+  "status": "PASS_TINY_FINAL_ASSEMBLY_STREAM_SOURCE_CF_TO_TWO_XML",
+  "seconds": 73.82836909999605,
+  "files": 15,
+  "BSL": 1,
+  "all_file_facts_exact": true,
+  "new_DB_capture": false,
   "own_cleanup_confirmed": true,
-  "independent_review": false,
-  "proof": {
-    "bytes": 22476,
-    "sha256": "866720bea95ed7d309405f2eb11df724fda33fc1b4a153c6bc874b40ca99428f"
-  }
+  "memory_controls": false
 }

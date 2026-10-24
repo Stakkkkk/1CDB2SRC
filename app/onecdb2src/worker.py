@@ -102,15 +102,19 @@ def integrity_side(config,side,workers=None,*,manifest=None):
             require(row['path'] not in seen,'Duplicate assembly output')
             seen.add(row['path']);p=final/'xml'/rel
             regular(p)
-            actual_fact,node=inspect_file(p,p.suffix=='.xml')
+            options={}
+            if p.suffix=='.xml':
+                from .xml.envelope import EnvelopeParser
+                options['_xml_parser_factory']=lambda:EnvelopeParser(count_configurations=rel.as_posix()=='Configuration.xml')
+            actual_fact,node=inspect_file(p,p.suffix=='.xml',**options)
             require(actual_fact=={k:row[k] for k in ('bytes','sha256')},'Final XML readback mismatch')
             if p.suffix=='.xml':
                 if rel.as_posix()=='Configuration.xml':
-                    require(node.tag=='{http://v8.1c.ru/8.3/MDClasses}MetaDataObject' and len(node.findall('{http://v8.1c.ru/8.3/MDClasses}Configuration'))==1,'Configuration metadata envelope missing')
+                    require(node.tag=='{http://v8.1c.ru/8.3/MDClasses}MetaDataObject' and node.direct_configurations==1,'Configuration metadata envelope missing')
                 if rel.as_posix()=='ConfigDumpInfo.xml':
                     require(node.tag=='{http://v8.1c.ru/8.3/xcf/dumpinfo}ConfigDumpInfo','DumpInfo envelope missing')
                 if node.tag in ('{http://v8.1c.ru/8.3/MDClasses}MetaDataObject','{http://v8.1c.ru/8.3/xcf/dumpinfo}ConfigDumpInfo'):
-                    require(node.attrib.get('version')==profile['xml_version'],'Final metadata edition mismatch')
+                    require(node.attributes.get('version')==profile['xml_version'],'Final metadata edition mismatch')
             total+=actual_fact['bytes'];bsl+=p.suffix.lower()=='.bsl'
     actual=set()
     for base,dirs,files in os.walk(final/'xml',followlinks=False):

@@ -15,6 +15,7 @@ from .dump_info import CFSource, digest, long_path
 from . import dump_info_modern_r3 as signature_rules
 from .. import profiles
 from .materialize import inspect_file, adopt_tree, producer_closed
+from .envelope import EnvelopeParser
 from . import materialize
 
 
@@ -387,7 +388,7 @@ def main():
                     relative = source.relative_to(root)
                     require(relative.as_posix() not in additions, 'Addition already exists in base')
                     if args.adopt_native_tree:
-                        record, parsed_node = inspect_file(source,relative.suffix.lower()=='.xml')
+                        record, parsed_node = inspect_file(source,relative.suffix.lower()=='.xml', _xml_parser_factory=EnvelopeParser)
                     else:
                         record = copy_file(source, output_tree / relative)
                     key = relative.as_posix()

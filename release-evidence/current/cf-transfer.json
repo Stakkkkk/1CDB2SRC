@@ -1,5 +1,17 @@
 {
-  "status": "PASS_UNCHANGED_CF_TRANSPORT_WITH_PARALLEL_FINAL_V",
-  "scope": "Final tiny copy; final medium bind-copy; CF transport code unchanged; no CF-only speed trial",
-  "default": "copy"
+  "status": "PASS_CURRENT_REAL_CF_CAPTURE_CONTENTS_IDENTICAL",
+  "current_captures": 4,
+  "intermediate_captures": 4,
+  "CF": {
+    "main": {
+      "bytes": 281711106,
+      "sha256": "ab7fe6313fce085284d05b9076050742937ff6033dd85f858cf98fbcb7bc4a5e"
+    },
+    "vendor": {
+      "bytes": 144964372,
+      "sha256": "1cf503bbbb94c5f23c58a3c527a2a9623b4016c4686052fbc8a69fd5fc3f98ce"
+    }
+  },
+  "all_inputs_identical": true,
+  "capture_algorithm_unchanged": true
 }

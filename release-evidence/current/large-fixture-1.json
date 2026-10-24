@@ -1,34 +1,354 @@
 {
-  "status": "PASS_FINAL_R2_SAVED_CF_PAIR_ALL_FILES_EXACT",
-  "source_revision": "BD-034 asymmetric source",
-  "final_verification": "sequential",
-  "side_scheduling": "verify-overlap",
-  "whole_seconds": 408.21282449993305,
-  "operation_seconds": 400.9151441999711,
-  "scope": "Saved SQL CF pair -> profile/producer/final verification stages with research caller; no new DB capture or platform",
-  "profiles": "per-side research targets main8.3.27/vendor8.5.1",
-  "reference": "Previous accepted generated same-CF output; not perfect platform XML",
+  "status": "PASS_FINAL_LIVE_POSTGRESQL_OLD_NEW_FULL_FILE_MAPS",
+  "cases": [
+    {
+      "case": "A-old",
+      "new_source": false,
+      "status": "PASS_ACTUAL_READONLY_DB_CF_XML_PAIR",
+      "total_seconds": 418.1490386000369,
+      "stages": [
+        {
+          "stage": "capture",
+          "seconds": 44.743708099937066,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "cf",
+          "seconds": 5.66609640000388,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "profiles",
+          "seconds": 1.977671999949962,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "fast-main",
+          "seconds": 151.89430079993326,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "fast-vendor",
+          "seconds": 129.06659780000336,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "integrity",
+          "seconds": 66.479299300001,
+          "status": "COMPLETED"
+        }
+      ],
+      "CF": {
+        "main": {
+          "bytes": 281711106,
+          "sha256": "ab7fe6313fce085284d05b9076050742937ff6033dd85f858cf98fbcb7bc4a5e"
+        },
+        "vendor": {
+          "bytes": 144964372,
+          "sha256": "1cf503bbbb94c5f23c58a3c527a2a9623b4016c4686052fbc8a69fd5fc3f98ce"
+        }
+      },
+      "closed_jobs": 6,
+      "limitations_count": 6
+    },
+    {
+      "case": "B-final",
+      "new_source": true,
+      "status": "PASS_ACTUAL_READONLY_DB_CF_XML_PAIR",
+      "total_seconds": 406.0017904000124,
+      "stages": [
+        {
+          "stage": "capture",
+          "seconds": 49.05390419997275,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "cf",
+          "seconds": 9.677049100049771,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "profiles",
+          "seconds": 1.6352588000008836,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "fast-main",
+          "seconds": 139.08532489999197,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "fast-vendor",
+          "seconds": 127.6832798999967,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "integrity",
+          "seconds": 60.510844900039956,
+          "status": "COMPLETED"
+        }
+      ],
+      "CF": {
+        "main": {
+          "bytes": 281711106,
+          "sha256": "ab7fe6313fce085284d05b9076050742937ff6033dd85f858cf98fbcb7bc4a5e"
+        },
+        "vendor": {
+          "bytes": 144964372,
+          "sha256": "1cf503bbbb94c5f23c58a3c527a2a9623b4016c4686052fbc8a69fd5fc3f98ce"
+        }
+      },
+      "closed_jobs": 6,
+      "limitations_count": 6
+    },
+    {
+      "case": "B2-final",
+      "new_source": true,
+      "status": "PASS_ACTUAL_READONLY_DB_CF_XML_PAIR",
+      "total_seconds": 414.5527352000354,
+      "stages": [
+        {
+          "stage": "capture",
+          "seconds": 45.649072500062175,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "cf",
+          "seconds": 5.601960200001486,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "profiles",
+          "seconds": 1.571203500032425,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "fast-main",
+          "seconds": 144.24301109998487,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "fast-vendor",
+          "seconds": 138.6282492999453,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "integrity",
+          "seconds": 59.75255420000758,
+          "status": "COMPLETED"
+        }
+      ],
+      "CF": {
+        "main": {
+          "bytes": 281711106,
+          "sha256": "ab7fe6313fce085284d05b9076050742937ff6033dd85f858cf98fbcb7bc4a5e"
+        },
+        "vendor": {
+          "bytes": 144964372,
+          "sha256": "1cf503bbbb94c5f23c58a3c527a2a9623b4016c4686052fbc8a69fd5fc3f98ce"
+        }
+      },
+      "closed_jobs": 6,
+      "limitations_count": 6
+    },
+    {
+      "case": "A2-old",
+      "new_source": false,
+      "status": "PASS_ACTUAL_READONLY_DB_CF_XML_PAIR",
+      "total_seconds": 444.5246620000107,
+      "stages": [
+        {
+          "stage": "capture",
+          "seconds": 46.602271000039764,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "cf",
+          "seconds": 6.876976299914531,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "profiles",
+          "seconds": 1.6778285999316722,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "fast-main",
+          "seconds": 154.9285392999882,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "fast-vendor",
+          "seconds": 140.61638740007766,
+          "status": "COMPLETED"
+        },
+        {
+          "stage": "integrity",
+          "seconds": 74.39664869999979,
+          "status": "COMPLETED"
+        }
+      ],
+      "CF": {
+        "main": {
+          "bytes": 281711106,
+          "sha256": "ab7fe6313fce085284d05b9076050742937ff6033dd85f858cf98fbcb7bc4a5e"
+        },
+        "vendor": {
+          "bytes": 144964372,
+          "sha256": "1cf503bbbb94c5f23c58a3c527a2a9623b4016c4686052fbc8a69fd5fc3f98ce"
+        }
+      },
+      "closed_jobs": 6,
+      "limitations_count": 6
+    }
+  ],
   "sides": {
     "main": {
       "files": 23466,
-      "bsl_files": 5905,
-      "missing": [],
-      "extra": [],
-      "different": []
+      "BSL": 5905,
+      "bytes": 610708896,
+      "facts_sha256": "6164a88e2416576e9d3f690383df75bb40fe8501aed49a1d7f9798ec3ddf8ebd"
     },
     "vendor": {
       "files": 23320,
-      "bsl_files": 5869,
-      "missing": [],
-      "extra": [],
-      "different": []
+      "BSL": 5869,
+      "bytes": 459556745,
+      "facts_sha256": "57ff8ecf9b6fb923590e6c0025eab5961510450728662f9ec36641f051cdace3"
     }
   },
-  "full_final_payload_hashes": true,
-  "own_cleanup_confirmed": true,
-  "independent_review": false,
-  "proof": {
-    "bytes": 22790,
-    "sha256": "ec9e7fdb2dad7c578913a71d378320faee9c56887d40d612bb20bba243535d7f"
-  }
+  "files": 46786,
+  "BSL": 11774,
+  "all_CF_inputs_identical": true,
+  "all_file_facts_exact": true,
+  "final_source_contains_assembly_stream_extension": true,
+  "side_scheduling": "sequential",
+  "final_verification": "sequential",
+  "single_comparison_not_a_guarantee": false,
+  "whole_gain_percent": 4.882399332528986,
+  "old_median_seconds": 431.3368503000238,
+  "new_median_seconds": 410.2772628000239,
+  "linux_helper_steps": {
+    "A-old": {
+      "main": [
+        {
+          "seconds": 16.3558536490018,
+          "stage": "dumpinfo-main"
+        },
+        {
+          "seconds": 3.6534367529966403,
+          "stage": "parents-main"
+        },
+        {
+          "seconds": 13.669832181010861,
+          "stage": "assembly-main"
+        }
+      ],
+      "vendor": [
+        {
+          "seconds": 13.971753620979143,
+          "stage": "dumpinfo-vendor"
+        },
+        {
+          "seconds": 0.641763345018262,
+          "stage": "parents-vendor"
+        },
+        {
+          "seconds": 8.160269734973554,
+          "stage": "assembly-vendor"
+        }
+      ]
+    },
+    "B-final": {
+      "main": [
+        {
+          "seconds": 14.882030734996079,
+          "stage": "dumpinfo-main"
+        },
+        {
+          "seconds": 3.5176766160002444,
+          "stage": "parents-main"
+        },
+        {
+          "seconds": 8.578932047006674,
+          "stage": "assembly-main"
+        }
+      ],
+      "vendor": [
+        {
+          "seconds": 14.056721369997831,
+          "stage": "dumpinfo-vendor"
+        },
+        {
+          "seconds": 0.6274515939876437,
+          "stage": "parents-vendor"
+        },
+        {
+          "seconds": 5.484757029014872,
+          "stage": "assembly-vendor"
+        }
+      ]
+    },
+    "B2-final": {
+      "main": [
+        {
+          "seconds": 14.878017987997737,
+          "stage": "dumpinfo-main"
+        },
+        {
+          "seconds": 3.713288806990022,
+          "stage": "parents-main"
+        },
+        {
+          "seconds": 8.638241588021629,
+          "stage": "assembly-main"
+        }
+      ],
+      "vendor": [
+        {
+          "seconds": 16.38412998599233,
+          "stage": "dumpinfo-vendor"
+        },
+        {
+          "seconds": 0.6066052839742042,
+          "stage": "parents-vendor"
+        },
+        {
+          "seconds": 5.766470448026666,
+          "stage": "assembly-vendor"
+        }
+      ]
+    },
+    "A2-old": {
+      "main": [
+        {
+          "seconds": 16.869185685995035,
+          "stage": "dumpinfo-main"
+        },
+        {
+          "seconds": 3.8502543040085584,
+          "stage": "parents-main"
+        },
+        {
+          "seconds": 13.095340834988747,
+          "stage": "assembly-main"
+        }
+      ],
+      "vendor": [
+        {
+          "seconds": 14.751305481011514,
+          "stage": "dumpinfo-vendor"
+        },
+        {
+          "seconds": 0.5320810410194099,
+          "stage": "parents-vendor"
+        },
+        {
+          "seconds": 8.548228030995233,
+          "stage": "assembly-vendor"
+        }
+      ]
+    }
+  },
+  "known_limits_unchanged": true,
+  "independent_reviewer": false
 }

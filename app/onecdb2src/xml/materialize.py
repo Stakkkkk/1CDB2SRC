@@ -12,13 +12,13 @@ def token(info):
     return info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns
 
 
-def inspect_file(path, parse_xml=False):
+def inspect_file(path, parse_xml=False, *, _xml_parser_factory=None):
     """Hash and optionally parse the same bytes; caller still verifies final output."""
     path = Path(path)
     before = path.lstat()
     if not stat.S_ISREG(before.st_mode) or getattr(before, 'st_file_attributes', 0) & 0x400 or before.st_nlink != 1:
         raise ValueError('Adoption requires a regular unlinked native file')
-    parser = ET.XMLParser() if parse_xml else None
+    parser = (_xml_parser_factory or ET.XMLParser)() if parse_xml else None
     digest = hashlib.sha256()
     with path.open('rb') as stream:
         if token(os.fstat(stream.fileno())) != token(before):

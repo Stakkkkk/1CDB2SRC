@@ -1,7 +1,37 @@
 {
-  "status": "ACCEPTED_SCOPE_ERP_NOT_RUN",
-  "current_ERP_speed_claim": false,
-  "scope": "No ERP export or new ERP diagnostic in this iteration; historical rc4 timing STOP remains history",
-  "actual_ERP_export": "NOT_RUN",
-  "actual_ERP_timing": "NOT_ESTABLISHED"
+  "status": "ACCEPTED_ERP_SCOPE_AND_UNISOLATED_TIMING_RECORD",
+  "published_control_seconds": 2188.8039623999503,
+  "published_control_XML_files": 277048,
+  "published_control_BSL": 58049,
+  "readback_only_trial_status": "FAILED_PRODUCT_SAVED_CF_REPLAY",
+  "readback_only_trial_seconds": 3018.0442436999874,
+  "readback_only_trial_stages": [
+    {
+      "stage": "saved-cf-preparation",
+      "status": "PASS",
+      "seconds": 11.810810499940999
+    },
+    {
+      "stage": "product-preflight",
+      "status": "PASS",
+      "seconds": 5.802521000034176
+    },
+    {
+      "stage": "profiles",
+      "status": "PASS",
+      "seconds": 8.818911100039259
+    },
+    {
+      "stage": "fast-pair",
+      "status": "FAIL",
+      "seconds": 2973.5894784999546
+    }
+  ],
+  "readback_only_trial_cleanup_confirmed": true,
+  "host_CPU_measured_percent": 84.9,
+  "timing_is_not_isolated_speed_proof": true,
+  "small_other_source_tests_during_unisolated_run": true,
+  "final_assembly_source_full_ERP_generation": "NOT_RUN_THIS_WINDOW",
+  "final_source_ERP_full_export_speed_claim": false,
+  "prior_full_ERP_parser_core_file_validation_reused": true
 }

@@ -1,22 +1,22 @@
 {
   "schema": "1CDB2SRC_FAST_HELPER_V1",
   "status": "SEALED_OFFLINE_HELPER_REQUIRES_PRODUCT_ACTUAL",
-  "image_id": "sha256:b36688609a1fa87ad52347c0a26d71ccc321f7d0cf304ba4b91ad682292f77d0",
+  "image_id": "sha256:d70fac009f48060186ec613326abecb8a33c027c9bf8757fd10b94ca7ac97d5e",
   "image_identity": {
     "archive_format": "OCI_DIRECT_MANIFEST",
-    "provenance_image_id": "sha256:b36688609a1fa87ad52347c0a26d71ccc321f7d0cf304ba4b91ad682292f77d0",
-    "platform_manifest_id": "sha256:b36688609a1fa87ad52347c0a26d71ccc321f7d0cf304ba4b91ad682292f77d0",
-    "classic_config_image_id": "sha256:8f9b941aefff9a2ba3314e4167f884bed8f0b807b1aceb594d4a53d7736d54c7",
+    "provenance_image_id": "sha256:d70fac009f48060186ec613326abecb8a33c027c9bf8757fd10b94ca7ac97d5e",
+    "platform_manifest_id": "sha256:d70fac009f48060186ec613326abecb8a33c027c9bf8757fd10b94ca7ac97d5e",
+    "classic_config_image_id": "sha256:9d4d6bbbb30ab807eb1c126d8f7baf8b7e8eb724e95ff1f1f972e3e60ad616ab",
     "allowed_image_ids": [
-      "sha256:b36688609a1fa87ad52347c0a26d71ccc321f7d0cf304ba4b91ad682292f77d0",
-      "sha256:8f9b941aefff9a2ba3314e4167f884bed8f0b807b1aceb594d4a53d7736d54c7"
+      "sha256:d70fac009f48060186ec613326abecb8a33c027c9bf8757fd10b94ca7ac97d5e",
+      "sha256:9d4d6bbbb30ab807eb1c126d8f7baf8b7e8eb724e95ff1f1f972e3e60ad616ab"
     ],
     "rootfs_diff_ids": [
       "sha256:e58989146fcec76699871403b9897b5c014af1ccd85f5a9300a215e7975525d7",
       "sha256:ba0f973ad05d82f20d8dd8dc79a9d1b71e9d90ab48380d8c0912fad39dda5ced",
       "sha256:8664c9b18215e1141ccc8fa3cbc7483f4cd16fb5230b570fa7c744da58251da3",
       "sha256:c167899be569aee196241ae0905aeed34708881d5a8784be3de0ed9bf9db7200",
-      "sha256:7859119d711f8b1604c3fc1f714c2526a762492bf42cf283b98e9d28e0a10472"
+      "sha256:e4d627527e8deb9b105b18a350124803f25a43d6e3f05e46dd401ed881599f84"
     ]
   },
   "entrypoint": [
@@ -36,8 +36,8 @@
   ],
   "archive": {
     "file": "helper-image.tar.gz",
-    "bytes": 69628135,
-    "sha256": "8f161e1b94d8d378815e978767d3aea797324ba2b93a16f401380f5bb31534bb"
+    "bytes": 69628797,
+    "sha256": "5f02240618f37775b1375f412e7d684f164e1735a0020d7e14342b7310fae049"
   },
   "source_files": {
     "onecdb2src/__init__.py": {
@@ -161,8 +161,8 @@
       "sha256": "ab71d4c5cf4f8619c0a85a8290f63881c631b03680b52d7c926ce061af66e53c"
     },
     "onecdb2src/worker.py": {
-      "bytes": 16124,
-      "sha256": "fbfc636037dc29b5f044a7a1f48b732bddde9a34dd69b562e44354edc5b0c61b"
+      "bytes": 16343,
+      "sha256": "9eb37aca1864d61e4885b169659ae1224849423be5bb8e288d6b6835af477d76"
     },
     "onecdb2src/xml/__init__.py": {
       "bytes": 43,
@@ -177,8 +177,8 @@
       "sha256": "a7a9e4807702ccd0a170b539bc7c5bd2b78471c4d674dc9ac3c7bffc07f178de"
     },
     "onecdb2src/xml/complete_native_with_parents_r9.py": {
-      "bytes": 31020,
-      "sha256": "e8585df92561b45c52087b8e98accabc9163a8754ae9223156e683bf1cf4aa15"
+      "bytes": 31094,
+      "sha256": "f9a9da6eb91fee3c3cb1d89fc97f8a82406dfb9f46de295e17ead334608ef8eb"
     },
     "onecdb2src/xml/data/assets.rs": {
       "bytes": 66467,
@@ -195,6 +195,10 @@
     "onecdb2src/xml/early_lineage.py": {
       "bytes": 3612,
       "sha256": "4d3dcebe509cee576fa51392b2d9791b270d11784c9a0e3996f248956cc4d8c3"
+    },
+    "onecdb2src/xml/envelope.py": {
+      "bytes": 2984,
+      "sha256": "62ab384c24c60d49676d522e90d9a1cb0e4a0517602c7a913104e2512911f926"
     },
     "onecdb2src/xml/export_local.py": {
       "bytes": 11167,
@@ -229,8 +233,8 @@
       "sha256": "db1d3a134a60e5653eb848b1eb82955804e1cebe93e146dbf88f3c9bf1e203b7"
     },
     "onecdb2src/xml/materialize.py": {
-      "bytes": 3377,
-      "sha256": "fbae3bfe0bf76118f096020f38f339e6720955888bda3ef6a7167417b6d17f02"
+      "bytes": 3506,
+      "sha256": "1086e1f1561b768831def00c98efc94cb1bda40069c146c00b5c07bc4ec387d9"
     },
     "onecdb2src/xml/namespace_result.py": {
       "bytes": 23813,
@@ -241,8 +245,8 @@
       "sha256": "198e023d07f50163ca9377f88c921d8cd930a98d70468d10c552b1f2b5912279"
     },
     "onecdb2src/xml/readback.py": {
-      "bytes": 11417,
-      "sha256": "550bb4d82f4d5c7e47cb9bf0d8ab37320bd7370b9e7514d405fcdf18ecc51885"
+      "bytes": 11724,
+      "sha256": "53fe4536c19d7d1249e17f538b87130b2d8499dd7af68776f284f835ac36b0dd"
     },
     "onecdb2src/xml/runtime_identity.py": {
       "bytes": 1867,
@@ -291,14 +295,14 @@
     "base_source": "python:3.13-slim-bookworm",
     "base_image": "sha256:a1165e272e578941b84abc79e4ab38a0305cd12803a5c4247979ac7655f4d641",
     "assembly": {
-      "bytes": 7368,
-      "sha256": "9f1824e531e57ae45f2beffe5de40e79792ed9df87ea96904ab284abd95a843e"
+      "bytes": 7378,
+      "sha256": "9409bd0fbda6dfa143dbaef465bd8b7325e78572a517aa7074a3678b61f2fea9"
     },
     "context_manifest": {
-      "bytes": 29260,
-      "sha256": "453294ea96be97c08afbd16b61e460b30c235013d5a8e1883ed5bcb8650f6bc9"
+      "bytes": 29712,
+      "sha256": "cc9fb27e6bd0600308a8ce52c10df18fb5955f4b7e4d126f9c17062215c31ca9"
     },
-    "accepted_image_id": "sha256:b36688609a1fa87ad52347c0a26d71ccc321f7d0cf304ba4b91ad682292f77d0",
+    "accepted_image_id": "sha256:d70fac009f48060186ec613326abecb8a33c027c9bf8757fd10b94ca7ac97d5e",
     "seal_producer": {
       "bytes": 16581,
       "sha256": "03b08e531b730df943733bdb20cf7e27a7ca4665ec84eb6ed8dfb35c32385615"

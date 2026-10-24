@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0-rc.5",
+  "version": "0.3.0-rc.6",
   "status": "PACKAGE_WITH_SUPPLIED_ACCEPTED_EVIDENCE",
   "scope": "Evidence copied and byte-verified, not validation executed by this sealer",
   "current_evidence": [
@@ -7,108 +7,118 @@
       "label": "cf-transfer",
       "path": "release-evidence/current/cf-transfer.json",
       "fact": {
-        "bytes": 201,
-        "sha256": "f06aaf7c81198208c20d205ca05442b1c3892fad946ecd4a903e92f22311e9f0"
+        "bytes": 485,
+        "sha256": "712b538122b2a18a4771a7463445b16ade691d59ede2a530f9420cabfe17b490"
       },
-      "reported_status": "PASS_UNCHANGED_CF_TRANSPORT_WITH_PARALLEL_FINAL_V",
+      "reported_status": "PASS_CURRENT_REAL_CF_CAPTURE_CONTENTS_IDENTICAL",
       "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     },
     {
       "label": "controlled-scheduling-ab",
       "path": "release-evidence/current/controlled-scheduling-ab.json",
       "fact": {
-        "bytes": 1401,
-        "sha256": "c7ee11c1e609fbb3c24bde1688f1be3e29c4cdcfe7806a10ce8edc760cf289a6"
+        "bytes": 631,
+        "sha256": "ef1789180bf4e224f30c5bcf3cec650b20810c4ce8182d3b852e2df6559fa8c6"
       },
-      "reported_status": "PASS_REPEATED_ASYMMETRIC_GAIN_VS_FRESH_SEQUENTIAL",
+      "reported_status": "PASS_REUSED_EXACT_PARSER_CORE_FULL_ERP_FILE_READBACK",
       "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     },
     {
       "label": "controlled-timeout",
       "path": "release-evidence/current/controlled-timeout.json",
       "fact": {
-        "bytes": 398,
-        "sha256": "e1e8dae31730dcd9cf35ba80d40b49225485fc747a7594f4bf406a6cec5d0a26"
+        "bytes": 618,
+        "sha256": "b424fe88157a33acd601ba6f3b040f72a0763908da7f1580450f2e9412611028"
       },
-      "reported_status": "PASS_NEUTRAL_FINAL_PAIR_TIMEOUT_CANCEL_AND_PROCESS_CLOSURE_TESTS",
+      "reported_status": "ACCEPTED_HISTORICAL_RC5_NOT_RERUN",
+      "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
+    },
+    {
+      "label": "helper",
+      "path": "release-evidence/current/helper.json",
+      "fact": {
+        "bytes": 1391,
+        "sha256": "3d4bec6e295312dc2313b881ed2fc9f0e8ffeb713402c26ebc647d14f074bb0c"
+      },
+      "reported_status": "PASS_FINAL_HELPER_REBUILT_SOURCE_SEALED",
       "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     },
     {
       "label": "large-erp",
       "path": "release-evidence/current/large-erp.json",
       "fact": {
-        "bytes": 276,
-        "sha256": "df1804548154faa3487cb9b7175b80de6ccad8f44367fb6af0a4b7b624688d7c"
+        "bytes": 1180,
+        "sha256": "b6f4731dcd27ccb6324fee44ae6351415e7ada4881e9cb1e85938a3ceab53bf1"
       },
-      "reported_status": "ACCEPTED_SCOPE_ERP_NOT_RUN",
+      "reported_status": "ACCEPTED_ERP_SCOPE_AND_UNISOLATED_TIMING_RECORD",
       "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     },
     {
       "label": "large-fixture-1-repeat",
       "path": "release-evidence/current/large-fixture-1-repeat.json",
       "fact": {
-        "bytes": 1083,
-        "sha256": "e7ee521008970c2fb3a36f90f455af8d3e8d8d0fd1c25f1fca781a009ccc2d48"
+        "bytes": 10936,
+        "sha256": "7c08545b9bffa75568732a693b72a2fbcc2cc257d749f3d4c0f4ad397188145b"
       },
-      "reported_status": "PASS_FINAL_R2_SAVED_CF_PAIR_ALL_FILES_EXACT",
+      "reported_status": "PASS_FINAL_LIVE_POSTGRESQL_REVERSE_REPEAT",
       "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     },
     {
       "label": "large-fixture-1",
       "path": "release-evidence/current/large-fixture-1.json",
       "fact": {
-        "bytes": 1085,
-        "sha256": "1caca1214aa08145046cec53dece68b98c0e6d17420d9ff90eff33321c161fb2"
+        "bytes": 9140,
+        "sha256": "f94f6246b344cd34d8804375f11b5e16eeec77d664c91ac7eed6b3fac7264b49"
       },
-      "reported_status": "PASS_FINAL_R2_SAVED_CF_PAIR_ALL_FILES_EXACT",
+      "reported_status": "PASS_FINAL_LIVE_POSTGRESQL_OLD_NEW_FULL_FILE_MAPS",
       "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     },
     {
       "label": "linux-offline-units",
       "path": "release-evidence/current/linux-offline-units.json",
       "fact": {
-        "bytes": 394,
-        "sha256": "3269c0b9d9b43ce3a2014bdc26f157faf8ac3dd84dc41e8f1082d3108a1af044"
+        "bytes": 299,
+        "sha256": "3d02ec4a8046f10a73b8a3fd75318f76dd2b380313804b6dadd2354216cdbbfd"
       },
-      "reported_status": "PASS_LINUX_AUTHORIZED_DISCOVERY",
+      "reported_status": "PASS_FINAL_LINUX_SOURCE_OFFLINE_TESTS",
       "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     },
     {
       "label": "small-default-cf-copy",
       "path": "release-evidence/current/small-default-cf-copy.json",
       "fact": {
-        "bytes": 249,
-        "sha256": "501c721e34bbb6a72702533dddb333b56f4697cd74e66649e66baa31456aee6c"
+        "bytes": 467,
+        "sha256": "c232b07f0b8aed3190cc05c5c6dd2acc6c1d2bf3c829a8836c360884e1f4c275"
       },
-      "reported_status": "PASS_FINAL_SMALL_DEFAULT_CF_COPY",
+      "reported_status": "ACCEPTED_HISTORICAL_RC5_NOT_RERUN",
       "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     },
     {
       "label": "small",
       "path": "release-evidence/current/small.json",
       "fact": {
-        "bytes": 1024,
-        "sha256": "da8120be48f13fb7cb19e6024c29ee3bff0c9aa5f038b0699fe5a919cbae2d2f"
+        "bytes": 260,
+        "sha256": "292e6447fcaa5fe7f9aff4156ec2e6eea7e8a4aa0513ef788327f8dd5ec54328"
       },
-      "reported_status": "PASS_FINAL_R2_SAVED_CF_PAIR_ALL_FILES_EXACT",
+      "reported_status": "PASS_TINY_FINAL_ASSEMBLY_STREAM_SOURCE_CF_TO_TWO_XML",
       "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     },
     {
       "label": "windows-units",
       "path": "release-evidence/current/windows-units.json",
       "fact": {
-        "bytes": 377,
-        "sha256": "42c7b70d38c31ff67f10a00ac4ae5f9dbfae4b7a29b041cad7056a834300ed23"
+        "bytes": 1328,
+        "sha256": "589727e6617a90a963d9099c7ec52dc51e5c141a45aeeb9d4a770bd2d4834023"
       },
-      "reported_status": "PASS_WINDOWS_FOCUSED_REGRESSIONS",
+      "reported_status": "PASS_FINAL_WINDOWS_SOURCE_TESTS",
       "basis": "supplied accepted summary; sealer did not execute or reinterpret its scope"
     }
   ],
   "historical_validation": {
     "path": "release-evidence/historical/release-validation-previous.json",
     "fact": {
-      "bytes": 5119,
-      "sha256": "a85863e72fd34846f05904453ce425cba36c9b11e6c7ff34770bfb42ecaffe9f"
+      "bytes": 5101,
+      "sha256": "b5f6844a1ac379a65f69142f9a06db783dfb31e93471ab7cd5ebc188d849d458"
     },
     "current_release_claim": false
   },
@@ -116,8 +126,8 @@
     "host_route_preserved": true,
     "fast_docker": true,
     "fast_helper_manifest": {
-      "bytes": 12333,
-      "sha256": "5e4e71b2c807ef895e01dfa9ebf6b685447fb500d33c1891dc2918e8ac29072e"
+      "bytes": 12487,
+      "sha256": "a215940d12ef799b04cff7fa8467b2ed69500236288d2f676db31bbd52170230"
     },
     "rust_rebuilt_by_sealer": false,
     "converter_source_unchanged": true,

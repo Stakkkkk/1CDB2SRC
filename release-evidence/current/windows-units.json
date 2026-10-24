@@ -1,13 +1,39 @@
 {
-  "status": "PASS_WINDOWS_FOCUSED_REGRESSIONS",
-  "methods": 115,
+  "status": "PASS_FINAL_WINDOWS_SOURCE_TESTS",
+  "tests": 138,
   "skipped_subcases": 2,
-  "errors": 0,
   "failures": 0,
-  "seconds": 34.486833499977365,
-  "scope": "Neutral bytes/process tests and fake protocol; not full Windows discovery",
-  "proof": {
-    "bytes": 155,
-    "sha256": "1bcbe7cbbd9ea9c79c4aaa0384ea9ea4da03f47b1aeb1d4f8a3f49d03b654f24"
-  }
+  "errors": 0,
+  "seconds": 17.43132340000011,
+  "source": {
+    "app/onecdb2src/worker.py": {
+      "bytes": 16343,
+      "sha256": "9eb37aca1864d61e4885b169659ae1224849423be5bb8e288d6b6835af477d76"
+    },
+    "app/onecdb2src/xml/complete_native_with_parents_r9.py": {
+      "bytes": 31094,
+      "sha256": "f9a9da6eb91fee3c3cb1d89fc97f8a82406dfb9f46de295e17ead334608ef8eb"
+    },
+    "app/onecdb2src/xml/envelope.py": {
+      "bytes": 2984,
+      "sha256": "62ab384c24c60d49676d522e90d9a1cb0e4a0517602c7a913104e2512911f926"
+    },
+    "app/onecdb2src/xml/materialize.py": {
+      "bytes": 3506,
+      "sha256": "1086e1f1561b768831def00c98efc94cb1bda40069c146c00b5c07bc4ec387d9"
+    },
+    "app/onecdb2src/xml/readback.py": {
+      "bytes": 11724,
+      "sha256": "53fe4536c19d7d1249e17f538b87130b2d8499dd7af68776f284f835ac36b0dd"
+    },
+    "tests/test_stream_parity.py": {
+      "bytes": 3526,
+      "sha256": "6a1d36303a7de8eaf3bd3b5038fceb2e15e607f10155658177a4c4013b035431"
+    },
+    "tests/test_xml_envelope.py": {
+      "bytes": 6198,
+      "sha256": "3c8686fb968bbc144857b235841231b4f50e9263b457bcc252a91475d313ed39"
+    }
+  },
+  "memory_controls": false
 }

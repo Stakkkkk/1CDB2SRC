@@ -12,6 +12,7 @@ import re
 import stat
 
 from onecdb2src.xml.materialize import inspect_file
+from onecdb2src.xml.envelope import EnvelopeParser
 from onecdb2src.xml.dump_info import long_path
 
 MD = '{http://v8.1c.ru/8.3/MDClasses}'
@@ -115,14 +116,17 @@ def actual_paths(tree):
 def verify_file(tree, path, expected, xml_version):
     relative = safe_path(path)
     file = tree.joinpath(*relative.parts)
-    fact, node = inspect_file(file, parse_xml=file.suffix.lower() == '.xml')
+    options={}
+    if file.suffix.lower()=='.xml':
+        options['_xml_parser_factory']=lambda:EnvelopeParser(count_configurations=path=='Configuration.xml')
+    fact, node = inspect_file(file, parse_xml=file.suffix.lower() == '.xml', **options)
     require(fact == expected, 'actual file bytes/hash mismatch')
     metadata = node is not None and node.tag in (MD+'MetaDataObject', DI+'ConfigDumpInfo')
     if metadata:
-        require(node.get('version') == xml_version, 'actual metadata XML edition mismatch')
+        require(node.attributes.get('version') == xml_version, 'actual metadata XML edition mismatch')
     if path == 'Configuration.xml':
         require(node is not None and node.tag == MD+'MetaDataObject'
-                and len(node.findall(MD+'Configuration')) == 1, 'Configuration envelope missing')
+                and node.direct_configurations == 1, 'Configuration envelope missing')
     if path == 'ConfigDumpInfo.xml':
         require(node is not None and node.tag == DI+'ConfigDumpInfo', 'DumpInfo envelope missing')
     return {'path': path, 'kind': 'file', **fact,
@@ -231,4 +235,6 @@ def _verify_xml_tree(tree, manifest, *, manifest_sha256, xml_version, workers=4,
 
 def verify_xml_tree(tree, manifest, *, manifest_sha256, xml_version, workers=4):
     """Full fresh bytes/XML readback; caller still authenticates lineage."""
-    return _verify_xml_tree(tree,manifest,manifest_sha256=manifest_sha256,xml_version=xml_version,workers=workers)
+    result=_verify_xml_tree(tree,manifest,manifest_sha256=manifest_sha256,xml_version=xml_version,workers=workers)
+    result['xml_validation']='EXPAT_ENVELOPE_FULL_STREAM'
+    return result
