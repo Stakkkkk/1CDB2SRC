@@ -66,8 +66,8 @@
         "sha256": "47a76d00255e49d5b7dc67bbaedb180e70485891f1027f6c5b6635881cdbc891"
       },
       "published": {
-        "bytes": 1922507,
-        "sha256": "b8d20f17ab2369922bde90cd967ae82ec963fb90cd3169710e4322848145702e"
+        "bytes": 1922660,
+        "sha256": "be61e7280ca2c797f78debdb65295d385ac316a74b33a1c8541c5d46bbd22c28"
       }
     },
     "src/mssql_dump/mod.rs": {
@@ -198,7 +198,7 @@
       "upstream": null,
       "published": {
         "bytes": 5694,
-        "sha256": "43a67303a8605eb3172d72f562574043ffb5bc0034a72a475a4b996864ee80c6"
+        "sha256": "0c10527d1030673cf9ceecfa72cf11e7717c75fc2b449f84bd20b14910ab4564"
       }
     },
     "tests/native_rights_order.rs": {
@@ -212,7 +212,7 @@
       "upstream": null,
       "published": {
         "bytes": 1939,
-        "sha256": "2ea9acb85e7c6bea5df3b66349c5ec730aacd067e547410c4ace671496d5c94b"
+        "sha256": "612d787b827e85e1be4aca358b2bd49517a11dfe817b97a5b4148c27650c5022"
       }
     },
     "docs/form-binding-scope.md": {
@@ -354,23 +354,26 @@
     "note": "Four CF-derived role XML files per provider validated byte-exact; remaining form rule unresolved. Full large configuration export not repeated."
   },
   "current_packaging": {
-    "version": "0.3.0-rc.7",
+    "version": "0.3.0-rc.8",
     "performance_backend": {
       "host_route_preserved": true,
       "fast_docker": true,
       "fast_helper_manifest": {
-        "bytes": 12487,
-        "sha256": "5bc970913c2320ee4dca4a3eef76a66ab9337e3145d4f34ca19bbc85c5b1585b"
+        "bytes": 12322,
+        "sha256": "091f076ac18a10111cda3319c0be55a3b0d059cc610fa53f2430ee6048bf5918"
       },
       "rust_rebuilt_by_sealer": false,
-      "converter_source_unchanged": true,
-      "memory_policy": "Existing backend policy; sealer runs no converter or supervisor"
+      "converter_source_unchanged": false,
+      "memory_policy": "Existing backend policy; sealer runs no converter or supervisor",
+      "converter_production_logic_unchanged": true
     },
     "accepted_binary_unchanged": true,
-    "converter_source_unchanged": true,
+    "converter_source_unchanged": false,
     "validation": "release-validation.json",
     "sealer_executed_runtime": false,
     "prior_runtime_validation": "Historical fields above retain their original scope and are not new release runs",
-    "validation_scope": "Exact current app/helper used by accepted full MSSQL and PostgreSQL public CLI runs; Linux new regressions only. See release-validation.json."
+    "validation_scope": "Renamed Python package/environment/labels, OCI metadata-only rewrite, unchanged ELF. Full Windows/Linux units and small saved CF pair; no new full live DB run.",
+    "converter_production_logic_unchanged": true,
+    "source_naming_note": "Rust comments and two test action expectations neutralized; historical binary provenance remains as originally built. Test-only source changes not recompiled in this release."
   }
 }

@@ -1,133 +1,133 @@
 {
-  "scope": "0.3.0-rc.7 portable test sources; current and historical execution scopes in release-validation.json.",
+  "scope": "0.3.0-rc.8 renamed portable Python tests; current execution scopes in release-validation.json.",
   "files": {
     "__init__.py": {
       "bytes": 0,
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     "fast_cf_fixture.py": {
-      "bytes": 2247,
-      "sha256": "361460d956d710333caeb89a9237bd3b3a489b0cb2b8a83d18d13fffcad2b1a3"
+      "bytes": 2238,
+      "sha256": "e02b612360a52d2007c4b72e35365a5dda972d402b16e8ea18b94486fa24aa26"
     },
     "fast_protocol_support.py": {
-      "bytes": 18043,
-      "sha256": "1ed2e48f3e92727a2c80e3aceba78a5ae7a3820bb8f461497353d1c2779bd558"
+      "bytes": 18042,
+      "sha256": "449effbd7fa288ecc5fa85d99354f45b56fb552d376aa446d8d70b993a2ec316"
     },
     "test_brace.py": {
-      "bytes": 5199,
-      "sha256": "07ffc323234f83e0f36db037aa2ef21ff604ee973cf0326d78cf776222d6e869"
+      "bytes": 5196,
+      "sha256": "dbf1218045f3fc47ef640f886e471d2a78e54eaa41adc4014fab993468d7f802"
     },
     "test_cancel_drain.py": {
-      "bytes": 3267,
-      "sha256": "1ff816e074c90fdd0485bfcfc8ed5cd11b2bbb9e89735eb73c871d7c5f2b1f96"
+      "bytes": 3264,
+      "sha256": "22b61930028d8ec52e0ad10dc5846362d55fecb375bdbb94fb9260dc0844d48e"
     },
     "test_cf_copy.py": {
-      "bytes": 11741,
-      "sha256": "454bf40fe827dddba232f5b53f8cf466b181f3af8728b4f71000b3418f62b4eb"
+      "bytes": 11735,
+      "sha256": "eecc68edb801a09c32b739f1e2521b3dc83975577cce01d208394a0f0a7d71d9"
     },
     "test_db_connection_regressions.py": {
-      "bytes": 4106,
-      "sha256": "4aec82521257c94b845c211a33d793ea9724af0bb285bd5349083f24324e036a"
+      "bytes": 4094,
+      "sha256": "a40abfdde6be5db579806677156d202a77c655f41c1a61ef03cb7efec8c33ff4"
     },
     "test_dumpinfo_single_pass.py": {
-      "bytes": 10522,
-      "sha256": "5a12cd148b56f96d84e1cbc647d46f7b832c27af3f6581ec24fc8e3c84632d6f"
+      "bytes": 10516,
+      "sha256": "59459e0f2d65de04e9a72c0ee1074e32ed21cf4c763b63764bdbfcccde50d931"
     },
     "test_early_pipeline.py": {
-      "bytes": 9132,
-      "sha256": "31f37504762210f78ef55985d48b3d625e638c2d14e8461804d4c610271cdc26"
+      "bytes": 9120,
+      "sha256": "142080161b99d4ce76ea9d9a6804e5e92e7792f4846cc76969e03e71d9b7650c"
     },
     "test_early_readback.py": {
-      "bytes": 5553,
-      "sha256": "6eb988c55e69ab70161dd8cd5f816d0961a424670a604b92e78432a0c82053d1"
+      "bytes": 5550,
+      "sha256": "144423481b0d1da15613081fc4110e3a24208dae3a9d5fb7297d3c61a3660473"
     },
     "test_export_local.py": {
-      "bytes": 9381,
-      "sha256": "36e63c16251d346462b021c703758c23316845770f4e8318d69754dee8a7c3e4"
+      "bytes": 9366,
+      "sha256": "d8c7ef372b603e0b6bded68fe14e0aa3bc6979cdceec8229b47a5a7e8e9c7080"
     },
     "test_fast_cli.py": {
-      "bytes": 13416,
-      "sha256": "1991e3d94e6735674aa24e84973d16fdbc4fac5fbefacb79026244bcd29fdac4"
+      "bytes": 13362,
+      "sha256": "60e1315e7c03b71866d8cb771961badd97394a5483c4f13d51655fab18fb257a"
     },
     "test_fast_docker.py": {
-      "bytes": 20211,
-      "sha256": "093fec7e9bc8f50a0446311ff1d3624a19d86f02c753384685f7b2b374bbeba3"
+      "bytes": 20175,
+      "sha256": "3d82ced9ec3b02383a6f24ad250c3a14a751b8d6f2364b9abedff43591912448"
     },
     "test_fast_pair.py": {
-      "bytes": 18008,
-      "sha256": "771bd7cc6f5ca4794658289d0a1c4b9d3a5016c3c17ea5f00106aa3ab55e1d18"
+      "bytes": 17969,
+      "sha256": "dacf64bc18a0561ad340017ece92113b768c0fba43a6e12bb9935fddbe8c19f5"
     },
     "test_fast_runtime.py": {
-      "bytes": 19414,
-      "sha256": "b0f43da6791e7c0718bdd9eee71a6ac8194437d75e132945888cfb2f6e287d39"
+      "bytes": 19384,
+      "sha256": "0149ba3d9fc3906076ab52c353ed8b4596f02bbb90f48fe1e171f11ab79ef0a5"
     },
     "test_fast_stream.py": {
-      "bytes": 12536,
-      "sha256": "49c67834dd7a5b8f443d7218f20f146566df882621035aa6c531b466af65ba84"
+      "bytes": 12512,
+      "sha256": "d0b1941abbb584930ce321b766bc9f8443f3485b17b4384b69b70befd5cfdcfb"
     },
     "test_final_pair.py": {
-      "bytes": 10491,
-      "sha256": "1fdfde365261730ea3807708c7bea309ca3d0a37f7e53842620b37f7c468d6f4"
+      "bytes": 10482,
+      "sha256": "71374885a7ffc20ddd93e17958ae5f0907a94cb1224cfc6daf9cdc5a266ecddc"
     },
     "test_integrity_long_paths.py": {
-      "bytes": 3944,
-      "sha256": "832c8312d694cc74eeae9bb9aec5f3875d1fb19da70bab7a96ae000c3df219c4"
+      "bytes": 3929,
+      "sha256": "70fedd50f46b712464762befb23b4d59bdd52c5c98d1386b8b5a34f88f77bbb3"
     },
     "test_legacy67.py": {
-      "bytes": 3166,
-      "sha256": "c2f00dbb909c47f6b3ed81e0769d5b0dce630eff8f6a3e71a5f3d83a4e2e6fb7"
+      "bytes": 3160,
+      "sha256": "b1c28cde49eaa3b2382597bde91fb5c68167eaaca440ff0dada92be0673af143"
     },
     "test_materialize.py": {
-      "bytes": 4352,
-      "sha256": "682f849ed28acc8ff7f06c922b088f1e015ff2e37ba4c62783627efb244594e9"
+      "bytes": 4343,
+      "sha256": "6fd2e8e6c9e15cf5c15020f002652720e37d61c205bb43b6e608a5deb1855c0a"
     },
     "test_modern_signature.py": {
-      "bytes": 3159,
-      "sha256": "f00f3218ee02cd42528d5514877d9c05c7c56c0b9fe6273d27da585a7fff5f49"
+      "bytes": 3153,
+      "sha256": "0df90ecaeb1365591d7a84523786d105f431279a2977652fd2aab1131e3a5116"
     },
     "test_no_memory_fake.py": {
-      "bytes": 10254,
-      "sha256": "1b645e809e5f217664b14023005d41fd347cf8b8b5b11430326dfb5bd602e9d7"
+      "bytes": 10242,
+      "sha256": "f5fa5b0bc4e344efd3183e5bd47aa3040eb526fb205bf6159c1b9d500599b871"
     },
     "test_parallel_readback.py": {
-      "bytes": 7316,
-      "sha256": "543cbed5833ec6660641e781dbed224a4d077da2cecefdf7c20378cb1b884c6e"
+      "bytes": 7310,
+      "sha256": "20632294e3ec8f3fb6f8504e9c4bc2b95f9f65e2df213e6a140e4ec5a35460f8"
     },
     "test_posix_env_boundary.py": {
-      "bytes": 4536,
-      "sha256": "246f5e577aa86f61322d6d3bb72e70056eaf09e8c93467ad3de2503111270a4a"
+      "bytes": 4541,
+      "sha256": "23885e05ff3c4a63307011a7d886dffed86555db8812ebc4050e0dbffd0641b3"
     },
     "test_posix_process.py": {
-      "bytes": 11793,
-      "sha256": "f8d90ee0b2c46f89ba922894a15fe1288ed8b6592d8c7568222b7263e9b29966"
+      "bytes": 11785,
+      "sha256": "d5cf69fae4c64b4901226deb6732ae931c1c9f0554371cdce9b7d7f6a9500046"
     },
     "test_profiles.py": {
-      "bytes": 9018,
-      "sha256": "f4d44dc81cddd26b81ae9150b76a1a1f992ff3b803bf6b87d1f2b845a99e1fc2"
+      "bytes": 9009,
+      "sha256": "067b78b84517873b50769277fd24f676abb8238cfa90eb2a3ba5b6751df90b71"
     },
     "test_runtime_boundaries.py": {
-      "bytes": 4842,
-      "sha256": "79a28b943545b7579d56fc79604edbd1dd800a68df2429c9cc0126fb9755b8e3"
+      "bytes": 4839,
+      "sha256": "0679d19f44f7654d8248d91b2e1b6bfe504368ea4136247d27596d706ba0fa05"
     },
     "test_runtime_identity.py": {
-      "bytes": 5166,
-      "sha256": "9063af1be6c37ba917cd0585201872b2af6c74c8115c29fd428a41625067632e"
+      "bytes": 5154,
+      "sha256": "0a8e82e1d4444c7f104655fbb20b2743403a600a3963197fbf0805108c553f74"
     },
     "test_stream_parity.py": {
-      "bytes": 3526,
-      "sha256": "6a1d36303a7de8eaf3bd3b5038fceb2e15e607f10155658177a4c4013b035431"
+      "bytes": 3523,
+      "sha256": "c950c5cb80398cf7d2618a5733d73996f96630a17b00c7d9fe6214df76519e5d"
     },
     "test_stream_tar.py": {
-      "bytes": 11764,
-      "sha256": "74894151fdf151d77bd64c1841cba632179fd316287f1be89ac81029f014f99e"
+      "bytes": 11761,
+      "sha256": "049ad5e6bc0309b3621a7e680b02479c294379ec130bf58237c1b8e87ea0e79b"
     },
     "test_worker_single_read.py": {
-      "bytes": 6899,
-      "sha256": "3ae7dde1b2e7d0f9eb2ded894919adc7a3f59099b6e4e2b82e3cf662cfd19620"
+      "bytes": 6881,
+      "sha256": "cc1d6d2eafadfda9555850e92bd3087742e8950a2d38f1eee706f8de496adfbf"
     },
     "test_xml_envelope.py": {
-      "bytes": 6198,
-      "sha256": "3c8686fb968bbc144857b235841231b4f50e9263b457bcc252a91475d313ed39"
+      "bytes": 6195,
+      "sha256": "be1209ca723654591e90821c004288a0d2dcd7a7a94e5ab44e52a71425d69753"
     }
   },
   "changes": [
@@ -135,7 +135,8 @@
     "Neutral generated receipt/storage instead of saved CF and reports",
     "OCI test simulates bind/resource admission on both hosts",
     "Native command assertion checks executable names, not arbitrary parent paths",
-    "rc.7: neutral real pinned TDS bytearray regression and public default/custom capture budget tests; previous tests preserved."
+    "rc.7: neutral real pinned TDS bytearray regression and public default/custom capture budget tests; previous tests preserved.",
+    "rc.8: package and environment names renamed consistently; no test expectation relaxed for the Python rename."
   ],
   "executed_by_sealer": false
 }

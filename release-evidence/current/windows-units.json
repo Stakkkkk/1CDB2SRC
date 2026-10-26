@@ -1,10 +1,9 @@
 {
-  "status": "PASS_CURRENT_WINDOWS_UNIT_SUITE",
+  "status": "PASS_WINDOWS_UNIT_SUITE",
   "tests_run": 258,
   "passed": 239,
   "skipped": 19,
-  "seconds": 6.54872690000002,
-  "finished_utc": "2026-10-25T15:55:42.533584+00:00",
-  "live_DB": false,
-  "scope": "Exact tested app and test bytes; platform-specific skipped tests retained."
+  "seconds": 9.286802099995839,
+  "finished_utc": "2026-10-26T03:58:30.974074+00:00",
+  "new_DB_capture": false
 }

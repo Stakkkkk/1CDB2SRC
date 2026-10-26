@@ -1,37 +1,13 @@
 {
-  "release": "0.3.0-rc.7",
-  "source_package": "1CDB2SRC-0.3.0-rc.7",
+  "release": "0.3.0-rc.8",
+  "source_package": "1CDB2SRC-0.3.0-rc.8",
   "application": "CF/XML extractor; explicit fast Docker backend with documented validation boundaries.",
   "runtime_upstream": "https://github.com/Untru/ibcmd-rs",
   "runtime_upstream_revision": "04e833e535602560cf0bc1b439f5a070db8ca936",
   "files": {
     "export_1c.py": {
-      "bytes": 634,
-      "sha256": "03304ccc42a81f18ade2172976c326cc821b33d96b48191b0d9cb20cc54f4902"
-    },
-    "licenses/python-linux/psutil/psutil-7.2.2.dist-info/LICENSE": {
-      "bytes": 1548,
-      "sha256": "b89c063b3786e28e0c0a38f1931db61fed35e69dd2a2966fbecffee0f46c8d10"
-    },
-    "licenses/python-linux/psycopg-binary/psycopg_binary-3.3.6.dist-info/licenses/LICENSE.txt": {
-      "bytes": 7652,
-      "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118"
-    },
-    "licenses/python-linux/psycopg/psycopg-3.3.6.dist-info/licenses/LICENSE.txt": {
-      "bytes": 7652,
-      "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118"
-    },
-    "licenses/python-linux/python-tds/python_tds-1.17.1.dist-info/licenses/LICENSE.txt": {
-      "bytes": 1105,
-      "sha256": "cd57e8ac0a040a5d039cd9666994a1ce15bb6395cb655c16f2842affccdc2108"
-    },
-    "licenses/python-linux/tzdata/tzdata-2026.5.dist-info/licenses/LICENSE": {
-      "bytes": 625,
-      "sha256": "df58f69ea88683035d720b5375bcef0cf5aeaa98a1d098d572e0992c378deb46"
-    },
-    "licenses/python-linux/tzdata/tzdata-2026.5.dist-info/licenses/licenses/LICENSE_APACHE": {
-      "bytes": 11357,
-      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      "bytes": 628,
+      "sha256": "d30f6efc4f468459702ab478610a72b8380da59bf6377886be21fcfb9408b9c7"
     },
     "licenses/python/psutil/LICENSE": {
       "bytes": 1577,
@@ -61,85 +37,49 @@
       "bytes": 11357,
       "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
     },
+    "licenses/python-linux/psutil/psutil-7.2.2.dist-info/LICENSE": {
+      "bytes": 1548,
+      "sha256": "b89c063b3786e28e0c0a38f1931db61fed35e69dd2a2966fbecffee0f46c8d10"
+    },
+    "licenses/python-linux/psycopg/psycopg-3.3.6.dist-info/licenses/LICENSE.txt": {
+      "bytes": 7652,
+      "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118"
+    },
+    "licenses/python-linux/psycopg-binary/psycopg_binary-3.3.6.dist-info/licenses/LICENSE.txt": {
+      "bytes": 7652,
+      "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118"
+    },
+    "licenses/python-linux/python-tds/python_tds-1.17.1.dist-info/licenses/LICENSE.txt": {
+      "bytes": 1105,
+      "sha256": "cd57e8ac0a040a5d039cd9666994a1ce15bb6395cb655c16f2842affccdc2108"
+    },
+    "licenses/python-linux/tzdata/tzdata-2026.5.dist-info/licenses/LICENSE": {
+      "bytes": 625,
+      "sha256": "df58f69ea88683035d720b5375bcef0cf5aeaa98a1d098d572e0992c378deb46"
+    },
+    "licenses/python-linux/tzdata/tzdata-2026.5.dist-info/licenses/licenses/LICENSE_APACHE": {
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
     "licenses/runtime/GPL-3.txt": {
       "bytes": 35149,
       "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
-    },
-    "licenses/runtime/LGPL-2.1.txt": {
-      "bytes": 26530,
-      "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
     },
     "licenses/runtime/ibcmd-rs-MIT.txt": {
       "bytes": 1099,
       "sha256": "866a167ccd074fe0b81754c777f0587d7fb3fd27c605fb06c1f50a50dd061b92"
     },
-    "requirements-linux.txt": {
-      "bytes": 485,
-      "sha256": "29572d5b58ccbe451f83cb5204780dde9fbee7bf57dd46260bdf89b6fd643492"
-    },
-    "requirements.txt": {
-      "bytes": 579,
-      "sha256": "af24de2f30d9fb2a03c7f72be6d896c37a5ae33a19dbc2fe98c00f47f094653a"
-    },
-    "runtime/fast-helper/THIRD-PARTY-NOTICES.txt": {
-      "bytes": 710,
-      "sha256": "45eecb24f86a0894c2663e73d2bdebbe5b8a4f6ad3ac4f4218d5e43110314478"
-    },
-    "runtime/fast-helper/helper-image.tar.gz": {
-      "bytes": 69629001,
-      "sha256": "7bb869e5ae6787445a1c033c0d2974a4647e14ce70efe048037813581be1fa4a"
-    },
-    "runtime/fast-helper/manifest.json": {
-      "bytes": 12487,
-      "sha256": "5bc970913c2320ee4dca4a3eef76a66ab9337e3145d4f34ca19bbc85c5b1585b"
-    },
-    "runtime/local/ibcmd-rs": {
-      "bytes": 65435328,
-      "sha256": "e4823a015f093e3e805da57f874793cf767d35675314baf58a13424f3f67a0df"
-    },
-    "runtime/local/ld-linux-x86-64.so.2": {
-      "bytes": 215000,
-      "sha256": "02bcda52c1a5dfc236f94d9e5255b4a0e26347d8a372a5223b650e31f291ce3c"
-    },
-    "runtime/local/lib/libc.so.6": {
-      "bytes": 1926232,
-      "sha256": "6b4a45352fd0c540a9c7c718f35ce8c8e46a4e482f9d3885a910c32d1a0e1421"
-    },
-    "runtime/local/lib/libgcc_s.so.1": {
-      "bytes": 125312,
-      "sha256": "2bd1552c47799ef67e701e81d4383061fd76059868e446e63560f0dd0d5ec14e"
-    },
-    "runtime/local/licenses/GPL-3.txt": {
-      "bytes": 35149,
-      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
-    },
-    "runtime/local/licenses/LGPL-2.1.txt": {
+    "licenses/runtime/LGPL-2.1.txt": {
       "bytes": 26530,
       "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
-    },
-    "runtime/local/licenses/ibcmd-rs-MIT.txt": {
-      "bytes": 1099,
-      "sha256": "866a167ccd074fe0b81754c777f0587d7fb3fd27c605fb06c1f50a50dd061b92"
-    },
-    "runtime/local/manifest.json": {
-      "bytes": 2734,
-      "sha256": "53bb5322d6fd59fb0bbcfc97366991a1cc31ff556934d88fc3f2a8485c5fae67"
-    },
-    "runtime/manifest.json": {
-      "bytes": 1013,
-      "sha256": "54b95244dd1eafb369b62b989ff2a1a6f48e52e56fa228c7b89f5b94c140d9d2"
-    },
-    "runtime/runtime-image.tar": {
-      "bytes": 23070720,
-      "sha256": "799805dee0470b5366d1bec11ecdd80cdc22e39b712d64056aafced5a36ca8af"
     },
     "onecdb2src/__init__.py": {
       "bytes": 0,
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     "onecdb2src/cli.py": {
-      "bytes": 30135,
-      "sha256": "7bdd677d6ea99fd0e2038e7477465c17c9b5acaedb76af9491df0fe05b6c4506"
+      "bytes": 30129,
+      "sha256": "fb63e7b2272df7dbebeb8fa5d6a640e3964a848d11b38fa9a420357c4c9115f1"
     },
     "onecdb2src/control/__init__.py": {
       "bytes": 44,
@@ -154,8 +94,8 @@
       "sha256": "38f3e086652e1f9d9b5777f3dec58902f5abf8da0595411ad8e30c24dca32a71"
     },
     "onecdb2src/control/bounded_posix.py": {
-      "bytes": 12537,
-      "sha256": "761e81a6481ba1aedcf5d900aecc01956c87be692e1ad0751c121235f3800037"
+      "bytes": 12541,
+      "sha256": "c3c802356be41e27883cfd2ea7c5f53e6742786398be44210f405e85c96d488d"
     },
     "onecdb2src/control/bounded_process.py": {
       "bytes": 713,
@@ -182,24 +122,24 @@
       "sha256": "978262badd951a213bd11cb72b6df07c32baba5a184403431d8c48bc61fd952e"
     },
     "onecdb2src/db/mssql.py": {
-      "bytes": 7360,
-      "sha256": "c17a0de57b4886d9dd56937d7cbb8e17dd019bf63abfd6741b37adbebed0437b"
+      "bytes": 7355,
+      "sha256": "1f44240af9548335b4cad61c0eb49b843070d4673189a0d88652f499ee9376a3"
     },
     "onecdb2src/db/odbc.py": {
-      "bytes": 5935,
-      "sha256": "50f2f3f8f61f9abcc00bb190ce87b8a8a963f0dfd9f43e2944cd3af5fce05dda"
+      "bytes": 5930,
+      "sha256": "01bc2cfc33d61d83c9a12ae6082d3f3343c853c5e04f308d36fe194d91018ce9"
     },
     "onecdb2src/db/postgresql.py": {
-      "bytes": 16305,
-      "sha256": "ba60d52330fb69d696f7d3b4889bdd44ccb2a710323284115e1614165018b468"
+      "bytes": 16304,
+      "sha256": "c936ac6741f65c959ef239d49fbb1fcabdad9f62f671806ff946064717890b05"
     },
     "onecdb2src/fast_pair.py": {
-      "bytes": 9609,
-      "sha256": "4eb0d2b6da78df58674e2e85778df8c263b73060d86011e986407ca359a8fc14"
+      "bytes": 9606,
+      "sha256": "1ce9a3587bd9efe171f6f492255e2ca667da1e9ef52a90b16dc51919b30c471e"
     },
     "onecdb2src/final_pair.py": {
-      "bytes": 6465,
-      "sha256": "45212731f4eb187315f894df66e646b211a570788817396a3737f5e81172dee9"
+      "bytes": 6462,
+      "sha256": "d9bbefc847b483f741e6a37bf11b52c49ed47e503f0d90a0974412394add0122"
     },
     "onecdb2src/native_policy.py": {
       "bytes": 4957,
@@ -254,16 +194,16 @@
       "sha256": "ab71d4c5cf4f8619c0a85a8290f63881c631b03680b52d7c926ce061af66e53c"
     },
     "onecdb2src/worker.py": {
-      "bytes": 16343,
-      "sha256": "9eb37aca1864d61e4885b169659ae1224849423be5bb8e288d6b6835af477d76"
+      "bytes": 16340,
+      "sha256": "9083ecd868bdce7577fbb99c14a6c255eb3f7874025bb7d873898275843f17a8"
     },
     "onecdb2src/xml/__init__.py": {
       "bytes": 43,
       "sha256": "fe3b6922e8c75ccb4ce594f87795e32cdbf1e839f869990a4a001ca3ef6d6990"
     },
     "onecdb2src/xml/_fast_contract.py": {
-      "bytes": 5447,
-      "sha256": "444fd61ea6832497508ac95dc4482568a4640c190e8a9acc180635a962af47f2"
+      "bytes": 5438,
+      "sha256": "8cbd02c119e7be45fbdc2a5da918d555d003a8d253f4f6310628610989233c17"
     },
     "onecdb2src/xml/cf_copy.py": {
       "bytes": 7635,
@@ -295,51 +235,51 @@
     },
     "onecdb2src/xml/export_local.py": {
       "bytes": 11167,
-      "sha256": "5dfea6d7baee74728d7b1630029e819ddccf6e7f14192267cfcd44425ac55233"
+      "sha256": "f53a8f539e0d3854032a11e86d91703c0f87b7e5c2ad33b891bed032107ff721"
     },
     "onecdb2src/xml/export_native.py": {
-      "bytes": 22379,
-      "sha256": "8e6aa7029d28274e2839844e18bf94f226275f462187e66a6fc04b12c094c9da"
+      "bytes": 22408,
+      "sha256": "d12b55a765525fc74a07c1685a3c92e10e13d926353e3aa017498a7d3c62c4b2"
     },
     "onecdb2src/xml/extract_parent_assets_r8.py": {
-      "bytes": 15425,
-      "sha256": "397f1fef455c522e6946485d57c501748974f15362c6fba26e958f5e43453cad"
+      "bytes": 15416,
+      "sha256": "c4ec6cac7efccd4438babefc30d9887c02fb8c35a6f3a21d05ac60a7fbb38252"
     },
     "onecdb2src/xml/fast_docker.py": {
-      "bytes": 47147,
-      "sha256": "5cd171d2b90c22099a0074336a2157a53ebbaf2bd659b7d56f14f3901bc65f92"
+      "bytes": 47141,
+      "sha256": "aea45dcc38746712ae1bf39649648d04a7202044408aec032e9f88f898429436"
     },
     "onecdb2src/xml/fast_runtime.py": {
-      "bytes": 20556,
-      "sha256": "892bf366edc462c8bd8aa9490f01725634a91d5be89d08af9e8d7c5cc23d012b"
+      "bytes": 20538,
+      "sha256": "0677cb51ff8212daab1177ac034b5e91eef0d10584c127b5823f639bf72786c1"
     },
     "onecdb2src/xml/fast_stream.py": {
-      "bytes": 36641,
-      "sha256": "feceb35ab4c7c06866530da84977829993cf6fda00611209305ad2f804a85713"
+      "bytes": 36623,
+      "sha256": "de40a316c31bead0e50553bd2da6b0c776db702d4ea411caf420fe60b85be82c"
     },
     "onecdb2src/xml/late_readback.py": {
       "bytes": 3797,
       "sha256": "490a172f93db095a276b82234a5bd1f0a2eb2029bf02fa7a425df66d41e6f3e0"
     },
     "onecdb2src/xml/linux_helpers.py": {
-      "bytes": 6624,
-      "sha256": "db1d3a134a60e5653eb848b1eb82955804e1cebe93e146dbf88f3c9bf1e203b7"
+      "bytes": 6603,
+      "sha256": "25dbd1860f4487e05950b51dc053ab85fcf4b9921fbc0ce851e1b5d18c41f152"
     },
     "onecdb2src/xml/materialize.py": {
       "bytes": 3506,
       "sha256": "1086e1f1561b768831def00c98efc94cb1bda40069c146c00b5c07bc4ec387d9"
     },
     "onecdb2src/xml/namespace_result.py": {
-      "bytes": 23813,
-      "sha256": "aadedea821c810bd45b252614e7f64d0bb8d7fe91cf967ca10f7d64f38f4ee19"
+      "bytes": 23810,
+      "sha256": "de9eaac4e6592d94e9c33d047e15b23213697d6efb6bc747d752dbff16b96779"
     },
     "onecdb2src/xml/parent_v8container_r1.py": {
       "bytes": 7059,
       "sha256": "198e023d07f50163ca9377f88c921d8cd930a98d70468d10c552b1f2b5912279"
     },
     "onecdb2src/xml/readback.py": {
-      "bytes": 11724,
-      "sha256": "53fe4536c19d7d1249e17f538b87130b2d8499dd7af68776f284f835ac36b0dd"
+      "bytes": 11715,
+      "sha256": "2d04905e1ce5a77e0aa4fe3070048d3424137a8f9d205db672abdf2c8fdc8fa9"
     },
     "onecdb2src/xml/runtime_identity.py": {
       "bytes": 1867,
@@ -349,6 +289,66 @@
       "bytes": 11750,
       "sha256": "84367146ad2ecc49e43135dadd00f97c00bb86724f5778a5e199394e56253fc1"
     },
+    "requirements-linux.txt": {
+      "bytes": 485,
+      "sha256": "29572d5b58ccbe451f83cb5204780dde9fbee7bf57dd46260bdf89b6fd643492"
+    },
+    "requirements.txt": {
+      "bytes": 579,
+      "sha256": "af24de2f30d9fb2a03c7f72be6d896c37a5ae33a19dbc2fe98c00f47f094653a"
+    },
+    "runtime/fast-helper/helper-image.tar.gz": {
+      "bytes": 69632156,
+      "sha256": "02dff2f79559a7f40b042a29f5a1ea4a610ced5c2d9c97275523d5f85701be19"
+    },
+    "runtime/fast-helper/manifest.json": {
+      "bytes": 12322,
+      "sha256": "091f076ac18a10111cda3319c0be55a3b0d059cc610fa53f2430ee6048bf5918"
+    },
+    "runtime/fast-helper/THIRD-PARTY-NOTICES.txt": {
+      "bytes": 710,
+      "sha256": "45eecb24f86a0894c2663e73d2bdebbe5b8a4f6ad3ac4f4218d5e43110314478"
+    },
+    "runtime/local/ibcmd-rs": {
+      "bytes": 65435328,
+      "sha256": "e4823a015f093e3e805da57f874793cf767d35675314baf58a13424f3f67a0df"
+    },
+    "runtime/local/ld-linux-x86-64.so.2": {
+      "bytes": 215000,
+      "sha256": "02bcda52c1a5dfc236f94d9e5255b4a0e26347d8a372a5223b650e31f291ce3c"
+    },
+    "runtime/local/lib/libc.so.6": {
+      "bytes": 1926232,
+      "sha256": "6b4a45352fd0c540a9c7c718f35ce8c8e46a4e482f9d3885a910c32d1a0e1421"
+    },
+    "runtime/local/lib/libgcc_s.so.1": {
+      "bytes": 125312,
+      "sha256": "2bd1552c47799ef67e701e81d4383061fd76059868e446e63560f0dd0d5ec14e"
+    },
+    "runtime/local/licenses/GPL-3.txt": {
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    "runtime/local/licenses/ibcmd-rs-MIT.txt": {
+      "bytes": 1099,
+      "sha256": "866a167ccd074fe0b81754c777f0587d7fb3fd27c605fb06c1f50a50dd061b92"
+    },
+    "runtime/local/licenses/LGPL-2.1.txt": {
+      "bytes": 26530,
+      "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
+    },
+    "runtime/local/manifest.json": {
+      "bytes": 2734,
+      "sha256": "b9be050b4ae59f2228493847f49c7bdc7824652586d1ccc5df363caff71c6210"
+    },
+    "runtime/manifest.json": {
+      "bytes": 1013,
+      "sha256": "f5d89d46e609685ba9126eaae8a1763c3480da6a5c015a6eb0e3a8b20b6bb2c6"
+    },
+    "runtime/runtime-image.tar": {
+      "bytes": 23070720,
+      "sha256": "1cce922f24cf27674ed5422ba15b65848a8a86fbb5d9a9f49573c12c70805877"
+    },
     "wheel-manifest-linux.json": {
       "bytes": 3774,
       "sha256": "23036afc92a3de4e4a2d1718335561330650ea263fbf922a000ed7ea0df4f9ee"
@@ -356,26 +356,6 @@
     "wheel-manifest.json": {
       "bytes": 1056,
       "sha256": "280fb2effa2c70616811c30e74616a66ef514f849b1327a20ede5b9f087e0e84"
-    },
-    "wheels-linux/psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl": {
-      "bytes": 155560,
-      "sha256": "076a2d2f923fd4821644f5ba89f059523da90dc9014e85f8e45a5774ca5bc6f9"
-    },
-    "wheels-linux/psycopg-3.3.6-py3-none-any.whl": {
-      "bytes": 215490,
-      "sha256": "a1db9f7148b06a28606767efaca51fa6f9398c5c0a3810519be69d7000bdb631"
-    },
-    "wheels-linux/psycopg_binary-3.3.6-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl": {
-      "bytes": 5237855,
-      "sha256": "cec5ea900390897d0b46130f60bc2883bf19c314f9044235217c8be88b0ef269"
-    },
-    "wheels-linux/python_tds-1.17.1-py3-none-any.whl": {
-      "bytes": 86635,
-      "sha256": "35cb210b1a54e5ccc91570a83d4e9a2a16682cbeb00bede06fd6cdf9afa9762f"
-    },
-    "wheels-linux/tzdata-2026.5-py2.py3-none-any.whl": {
-      "bytes": 347996,
-      "sha256": "b683bd1b6659ddcd810ff02ad09ba821d4bf1065072805063eb35c49617905ac"
     },
     "wheels/psutil-7.2.2-cp37-abi3-win_amd64.whl": {
       "bytes": 137737,
@@ -400,18 +380,39 @@
     "wheels/tzdata-2026.5-py2.py3-none-any.whl": {
       "bytes": 347996,
       "sha256": "b683bd1b6659ddcd810ff02ad09ba821d4bf1065072805063eb35c49617905ac"
+    },
+    "wheels-linux/psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl": {
+      "bytes": 155560,
+      "sha256": "076a2d2f923fd4821644f5ba89f059523da90dc9014e85f8e45a5774ca5bc6f9"
+    },
+    "wheels-linux/psycopg-3.3.6-py3-none-any.whl": {
+      "bytes": 215490,
+      "sha256": "a1db9f7148b06a28606767efaca51fa6f9398c5c0a3810519be69d7000bdb631"
+    },
+    "wheels-linux/psycopg_binary-3.3.6-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl": {
+      "bytes": 5237855,
+      "sha256": "cec5ea900390897d0b46130f60bc2883bf19c314f9044235217c8be88b0ef269"
+    },
+    "wheels-linux/python_tds-1.17.1-py3-none-any.whl": {
+      "bytes": 86635,
+      "sha256": "35cb210b1a54e5ccc91570a83d4e9a2a16682cbeb00bede06fd6cdf9afa9762f"
+    },
+    "wheels-linux/tzdata-2026.5-py2.py3-none-any.whl": {
+      "bytes": 347996,
+      "sha256": "b683bd1b6659ddcd810ff02ad09ba821d4bf1065072805063eb35c49617905ac"
     }
   },
   "performance_backend": {
     "host_route_preserved": true,
     "fast_docker": true,
     "fast_helper_manifest": {
-      "bytes": 12487,
-      "sha256": "5bc970913c2320ee4dca4a3eef76a66ab9337e3145d4f34ca19bbc85c5b1585b"
+      "bytes": 12322,
+      "sha256": "091f076ac18a10111cda3319c0be55a3b0d059cc610fa53f2430ee6048bf5918"
     },
     "rust_rebuilt_by_sealer": false,
-    "converter_source_unchanged": true,
-    "memory_policy": "Existing backend policy; sealer runs no converter or supervisor"
+    "converter_source_unchanged": false,
+    "memory_policy": "Existing backend policy; sealer runs no converter or supervisor",
+    "converter_production_logic_unchanged": true
   },
   "validation": "release-validation.json"
 }

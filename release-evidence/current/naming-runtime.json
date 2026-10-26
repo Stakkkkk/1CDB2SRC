@@ -1,0 +1,27 @@
+{
+  "status": "PASS_NAMING_AND_RUNTIME_METADATA",
+  "Python_package": "onecdb2src",
+  "helper_manifest": {
+    "bytes": 12322,
+    "sha256": "091f076ac18a10111cda3319c0be55a3b0d059cc610fa53f2430ee6048bf5918"
+  },
+  "helper_image": "sha256:f26a53e9cc7693999bd610697d4bcd73360a32eb5af3340171f1cfc795fce6fc",
+  "runtime_manifest": {
+    "bytes": 1013,
+    "sha256": "f5d89d46e609685ba9126eaae8a1763c3480da6a5c015a6eb0e3a8b20b6bb2c6"
+  },
+  "runtime_image": "sha256:389afccd9cca1579e1c4a44c14a75320675d4e3fbb746a513d750d0315f9edc9",
+  "runtime_archive": {
+    "bytes": 23070720,
+    "sha256": "1cce922f24cf27674ed5422ba15b65848a8a86fbb5d9a9f49573c12c70805877"
+  },
+  "Rust_ELF_unchanged": true,
+  "Rust_source_changes": "Comments plus neutral test action names only; production converter logic unchanged; no new Cargo build/tests.",
+  "runtime_filesystem_layers_unchanged": true,
+  "OCI_labels_and_history_renamed": true,
+  "attribution": "https://github.com/Untru/ibcmd-rs",
+  "upstream_author": "Untru",
+  "MIT_notice_preserved": true,
+  "fork_network_changed": false,
+  "Git_history_rewritten": false
+}

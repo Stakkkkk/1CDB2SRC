@@ -1666,56 +1666,6 @@
       "status": "OMITTED_LEGACY_TEST_FIXTURE"
     },
     {
-      "source": "src/mssql_dump/form_body.rs",
-      "line": 42164,
-      "macro": "include_str",
-      "expression": "\"../../tests/fixtures/bd008-command.txt\"",
-      "scope": "legacy_test",
-      "resource": "tests/fixtures/bd008-command.txt",
-      "original_exists": true,
-      "status": "OMITTED_LEGACY_TEST_FIXTURE"
-    },
-    {
-      "source": "src/mssql_dump/form_body.rs",
-      "line": 42171,
-      "macro": "include_str",
-      "expression": "\"../../tests/fixtures/bd008-command.txt\"",
-      "scope": "legacy_test",
-      "resource": "tests/fixtures/bd008-command.txt",
-      "original_exists": true,
-      "status": "OMITTED_LEGACY_TEST_FIXTURE"
-    },
-    {
-      "source": "src/mssql_dump/form_body.rs",
-      "line": 42179,
-      "macro": "include_str",
-      "expression": "\"../../tests/fixtures/bd008-command.txt\"",
-      "scope": "legacy_test",
-      "resource": "tests/fixtures/bd008-command.txt",
-      "original_exists": true,
-      "status": "OMITTED_LEGACY_TEST_FIXTURE"
-    },
-    {
-      "source": "src/mssql_dump/form_body.rs",
-      "line": 42195,
-      "macro": "include_bytes",
-      "expression": "\"../../tests/fixtures/bd008-auto-fields-catalog.bin\"",
-      "scope": "legacy_test",
-      "resource": "tests/fixtures/bd008-auto-fields-catalog.bin",
-      "original_exists": true,
-      "status": "OMITTED_LEGACY_TEST_FIXTURE"
-    },
-    {
-      "source": "src/mssql_dump/form_body.rs",
-      "line": 42221,
-      "macro": "include_str",
-      "expression": "\"../../tests/fixtures/bd008-prefixed-addition.txt\"",
-      "scope": "legacy_test",
-      "resource": "tests/fixtures/bd008-prefixed-addition.txt",
-      "original_exists": true,
-      "status": "OMITTED_LEGACY_TEST_FIXTURE"
-    },
-    {
       "source": "src/mssql_dump/moxel.rs",
       "line": 7433,
       "macro": "include_str",
@@ -6856,6 +6806,46 @@
       "resource": "tests/fixtures/cf/format16-clean-room.cf.b64",
       "original_exists": true,
       "status": "OMITTED_LEGACY_TEST_FIXTURE"
+    },
+    {
+      "source": "src/mssql_dump/form_body.rs",
+      "line": 42164,
+      "macro": "include_str",
+      "expression": "\"../../tests/fixtures/bd008-command.txt\"",
+      "scope": "legacy_test",
+      "resource": "tests/fixtures/bd008-command.txt",
+      "original_exists": true,
+      "status": "OMITTED_LEGACY_TEST_FIXTURE"
+    },
+    {
+      "source": "src/mssql_dump/form_body.rs",
+      "line": 42185,
+      "macro": "include_str",
+      "expression": "\"../../tests/fixtures/bd008-command.txt\"",
+      "scope": "legacy_test",
+      "resource": "tests/fixtures/bd008-command.txt",
+      "original_exists": true,
+      "status": "OMITTED_LEGACY_TEST_FIXTURE"
+    },
+    {
+      "source": "src/mssql_dump/form_body.rs",
+      "line": 42201,
+      "macro": "include_bytes",
+      "expression": "\"../../tests/fixtures/bd008-auto-fields-catalog.bin\"",
+      "scope": "legacy_test",
+      "resource": "tests/fixtures/bd008-auto-fields-catalog.bin",
+      "original_exists": true,
+      "status": "OMITTED_LEGACY_TEST_FIXTURE"
+    },
+    {
+      "source": "src/mssql_dump/form_body.rs",
+      "line": 42227,
+      "macro": "include_str",
+      "expression": "\"../../tests/fixtures/bd008-prefixed-addition.txt\"",
+      "scope": "legacy_test",
+      "resource": "tests/fixtures/bd008-prefixed-addition.txt",
+      "original_exists": true,
+      "status": "OMITTED_LEGACY_TEST_FIXTURE"
     }
   ],
   "cargo_manifests": [
@@ -7202,5 +7192,6 @@
   "limits": [
     "Static macro/path audit, not a Rust build or cargo test",
     "Runtime data reads use caller paths; upstream corpus/test oracle paths intentionally unavailable"
-  ]
+  ],
+  "naming_revision": "Static source-line locations refreshed after neutral test helper extraction; production include resources and withheld fixture policy unchanged. No Rust rebuild."
 }

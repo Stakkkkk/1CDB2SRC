@@ -1,0 +1,15 @@
+{
+  "status": "PASS_FULL_LINUX_UNITS_WITH_DECLARED_SKIPS",
+  "tests_run": 258,
+  "passed": 237,
+  "skipped": 21,
+  "seconds": 16.90956620000361,
+  "finished_utc": "2026-10-26T03:58:48.215863+00:00",
+  "cleanup_confirmed": true,
+  "offline_install": true,
+  "network": "none",
+  "test_UID": 0,
+  "skip_scope": "17 real memory-capped process tests and four Windows-only tests; bodies and expectations preserved.",
+  "new_DB_capture": false,
+  "native_Linux_E2E": false
+}

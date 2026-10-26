@@ -4,7 +4,7 @@ from pathlib import Path
 from .. import profiles
 
 RUNTIME_ROOT=Path(__file__).resolve().parents[2]/'runtime/local'
-IMAGE='sha256:40e04a9a6ef3d30217c30ead631e2cdd3c53fe4767ef7ae070d046df3ef72b83'
+IMAGE='sha256:389afccd9cca1579e1c4a44c14a75320675d4e3fbb746a513d750d0315f9edc9'
 EXPECTED={
  'ibcmd-rs':(65435328,'e4823a015f093e3e805da57f874793cf767d35675314baf58a13424f3f67a0df'),
  'ld-linux-x86-64.so.2':(215000,'02bcda52c1a5dfc236f94d9e5255b4a0e26347d8a372a5223b650e31f291ce3c'),

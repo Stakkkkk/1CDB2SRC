@@ -1,8 +1,8 @@
 {
-  "image_id": "sha256:40e04a9a6ef3d30217c30ead631e2cdd3c53fe4767ef7ae070d046df3ef72b83",
+  "image_id": "sha256:389afccd9cca1579e1c4a44c14a75320675d4e3fbb746a513d750d0315f9edc9",
   "archive": {
     "bytes": 23070720,
-    "sha256": "799805dee0470b5366d1bec11ecdd80cdc22e39b712d64056aafced5a36ca8af"
+    "sha256": "1cce922f24cf27674ed5422ba15b65848a8a86fbb5d9a9f49573c12c70805877"
   },
   "binary": {
     "path": "/engine/ibcmd-rs",

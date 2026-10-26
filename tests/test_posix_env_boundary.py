@@ -17,8 +17,8 @@ from onecdb2src.control.bounded_process import run
 class BootstrapEnvTests(unittest.TestCase):
     def exercise(self,mode):
         token='DUMMY_ONLY_CAPTURE_SENTINEL_'+os.urandom(12).hex()
-        key='onecdb2src_DUMMY_CAPTURE_PASSWORD'
-        parent_only='onecdb2src_DUMMY_PARENT_OTHER'
+        key='ONECDB2SRC_DUMMY_CAPTURE_PASSWORD'
+        parent_only='ONECDB2SRC_DUMMY_PARENT_OTHER'
         baseline={k:os.environ[k] for k in ('PATH','LD_LIBRARY_PATH','PYTHONHOME','LANG','LC_ALL','TMPDIR') if k in os.environ}
         baseline.update({key:token,parent_only:'dummy_parent_only'})
         capture=mode=='capture'

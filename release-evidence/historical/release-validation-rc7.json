@@ -1,0 +1,71 @@
+{
+  "version": "0.3.0-rc.7",
+  "status": "PACKAGE_WITH_ACCEPTED_LIVE_DB_EVIDENCE",
+  "scope": "Sanitized summaries of completed checks; publication does not rerun exports. App/helper bytes match the accepted live candidate.",
+  "current_evidence": [
+    {
+      "label": "helper",
+      "path": "release-evidence/historical/rc7/helper.json",
+      "fact": {
+        "bytes": 655,
+        "sha256": "6d7b8b2ea06350aa1002c2dde70d8302609dbbbb6560ede82b7d5c32c9ef5051"
+      },
+      "reported_status": "PASS_HELPER_EXACT_SOURCE_AND_ACCEPTED_LIVE_USE"
+    },
+    {
+      "label": "large-erp-db-e2e",
+      "path": "release-evidence/historical/rc7/large-erp-db-e2e.json",
+      "fact": {
+        "bytes": 3985,
+        "sha256": "58e3eea5d677fbb91a4d2d2b48e697e54d9e0c0749bc0925523faeb8c0a17a84"
+      },
+      "reported_status": "FOUR_LOCAL_XML_COMPLETE_ALL_FILES_EXACT"
+    },
+    {
+      "label": "linux-focused",
+      "path": "release-evidence/historical/rc7/linux-focused.json",
+      "fact": {
+        "bytes": 929,
+        "sha256": "85d5337b5d650eba3baac437118d7b525947fce3c8b39ea140fae95932e0b191"
+      },
+      "reported_status": "PASS_RELATED_LINUX_FOUR_TESTS"
+    },
+    {
+      "label": "windows-units",
+      "path": "release-evidence/historical/rc7/windows-units.json",
+      "fact": {
+        "bytes": 298,
+        "sha256": "ae7e6b5d1e30a5658c482d717438fab8a83a8e07e987401254aa4db2da27d790"
+      },
+      "reported_status": "PASS_CURRENT_WINDOWS_UNIT_SUITE"
+    }
+  ],
+  "historical_validation": {
+    "path": "release-evidence/historical/release-validation-rc6.json",
+    "fact": {
+      "bytes": 5815,
+      "sha256": "0f81096a2518b3e6e9281b9e0170bda83bd8272c96992a94cd76bc3ff41126b4"
+    },
+    "current_release_claim": false,
+    "archived_path_map": {
+      "release-evidence/current/": "release-evidence/historical/rc6/"
+    },
+    "note": "Original metadata and evidence preserved byte-for-byte; relative old current paths use this archive mapping."
+  },
+  "performance_backend": {
+    "host_route_preserved": true,
+    "fast_docker": true,
+    "fast_helper_manifest": {
+      "bytes": 12487,
+      "sha256": "5bc970913c2320ee4dca4a3eef76a66ab9337e3145d4f34ca19bbc85c5b1585b"
+    },
+    "rust_rebuilt_by_sealer": false,
+    "converter_source_unchanged": true,
+    "memory_policy": "Existing backend policy; sealer runs no converter or supervisor"
+  },
+  "new_platform_roundtrip": false,
+  "Rust_rebuilt": false,
+  "full_Linux_suite_rerun": false,
+  "native_Linux_E2E_rerun": false,
+  "display_copy_note": "Public display copy with project identifiers and old naming redacted. Embedded source hashes describe original historical artifacts, not current renamed sources. Original documents remain in Git history."
+}

@@ -1,0 +1,15 @@
+{
+  "status": "PASS_SAVED_SMALL_PAIR_PAYLOAD_AND_CLEANUP",
+  "files": 15,
+  "BSL": 1,
+  "all_files_exact": true,
+  "cleanup_confirmed": true,
+  "payload_program_seconds": 35.51301899999089,
+  "saved_acceptance_seconds": 2.9095868000003975,
+  "new_DB_capture": false,
+  "platform_roundtrip": false,
+  "source": "Two previously captured small CF; no XML bodies used as generation input.",
+  "comparison": "All output path/size/SHA facts compared to the accepted previous small result.",
+  "original_wrapper_error_preserved": true,
+  "wrapper_correction": "Completed worker receipts were initially saved outside the expected jobs directory. Exact receipt copies restored the expected location; saved result verified and product cleanup confirmed; no conversion replay."
+}

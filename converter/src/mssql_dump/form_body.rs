@@ -42160,20 +42160,26 @@ mod bd008_strict_auto_bag_regressions {
 #[cfg(test)]
 mod bd008_main_form_references {
     use super::*;
+    fn neutral_command() -> String {
+        let raw = include_str!("../../tests/fixtures/bd008-command.txt");
+        let original = parse_form_command_with_items(raw, &BTreeMap::new(), &BTreeMap::new()).unwrap();
+        assert_eq!(original.additional_actions.len(), 1);
+        raw.replace(&original.additional_actions[0], "NeutralAfterAction")
+    }
     #[test] fn actual_command_keeps_primary_and_extra_binding() {
-        let raw=include_str!("../../tests/fixtures/bd008-command.txt");
-        let parsed=parse_form_command_with_items(raw,&BTreeMap::new(),&BTreeMap::new()).unwrap();
+        let raw=neutral_command();
+        let parsed=parse_form_command_with_items(&raw,&BTreeMap::new(),&BTreeMap::new()).unwrap();
         assert_eq!(parsed.action,"ТоварыЗаполнитьИзОснований");
         assert_eq!(parsed.additional_actions.len(),1);
-        assert_eq!(parsed.additional_actions[0],"PPKERP1392_ERPТоварыЗаполнитьИзОснованияПосле");
+        assert_eq!(parsed.additional_actions[0],"NeutralAfterAction");
     }
     #[test] fn primary_absent_promotes_one_and_keeps_rest() {
-        let raw=include_str!("../../tests/fixtures/bd008-command.txt").replacen("\"ТоварыЗаполнитьИзОснований\",1,0,0", "\"\",1,0,0",1);
+        let raw=neutral_command().replacen("\"ТоварыЗаполнитьИзОснований\",1,0,0", "\"\",1,0,0",1);
         // The actual fixture is changed structurally, not via a name/path map.
         let mut fields=split_1c_braced_fields(&raw,0).unwrap();fields[8]="\"\"";
         let changed=format!("{{{}}}",fields.join(","));
         let parsed=parse_form_command_with_items(&changed,&BTreeMap::new(),&BTreeMap::new()).unwrap();
-        assert_eq!(parsed.action,"PPKERP1392_ERPТоварыЗаполнитьИзОснованияПосле");assert!(parsed.additional_actions.is_empty());
+        assert_eq!(parsed.action,"NeutralAfterAction");assert!(parsed.additional_actions.is_empty());
     }
     #[test] fn unknown_binding_flag_refuses() {
         let raw=include_str!("../../tests/fixtures/bd008-command.txt");let mut f=split_1c_braced_fields(raw,0).unwrap();f[18]="9";
