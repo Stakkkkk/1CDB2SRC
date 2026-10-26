@@ -374,6 +374,7 @@
     "prior_runtime_validation": "Historical fields above retain their original scope and are not new release runs",
     "validation_scope": "Renamed Python package/environment/labels, OCI metadata-only rewrite, unchanged ELF. Full Windows/Linux units and small saved CF pair; no new full live DB run.",
     "converter_production_logic_unchanged": true,
-    "source_naming_note": "Rust comments and two test action expectations neutralized; historical binary provenance remains as originally built. Test-only source changes not recompiled in this release."
+    "source_naming_note": "Rust comments and two test action expectations neutralized; historical binary provenance remains as originally built. Test-only source changes not recompiled in this release.",
+    "history_cleanup": "HISTORY.md: sanitized source history, original authors retained, accepted current application/runtime bytes unchanged."
   }
 }

@@ -134,5 +134,5 @@
     "memory_policy": "Existing backend policy; sealer runs no converter or supervisor"
   },
   "live_DB_or_platform_run_by_sealer": false,
-  "display_copy_note": "Public display copy with project identifiers and old naming redacted. Embedded source hashes describe original historical artifacts, not current renamed sources. Original documents remain in Git history."
+  "display_copy_note": "Public display copy with project identifiers and old naming redacted. Embedded source hashes describe original historical artifacts, not current renamed sources. Original documents retained only in a private offline backup after history cleanup."
 }

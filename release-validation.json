@@ -38,13 +38,22 @@
         "sha256": "6983d9afc37971d1ef374667b0e6642415888c1387a668d957afd2755c7c6785"
       },
       "reported_status": "PASS_WINDOWS_UNIT_SUITE"
+    },
+    {
+      "label": "history-cleanup",
+      "path": "release-evidence/current/history-cleanup.json",
+      "fact": {
+        "bytes": 1035,
+        "sha256": "ffe07839c978cfafb3d889023a900dd4842b217cf6caf9471962e7d285cff571"
+      },
+      "reported_status": "PASS_REWRITTEN_HISTORY_CURRENT_APPLICATION_UNCHANGED"
     }
   ],
   "historical_validation": {
     "path": "release-evidence/historical/release-validation-rc7.json",
     "fact": {
-      "bytes": 2806,
-      "sha256": "c83b86aa54ded476b913484a99f0855cdb395dcb47340487245fd217e1329cfd"
+      "bytes": 2848,
+      "sha256": "b2669702b7c506f73412652bc8268151395a898e3e6ccc378c436eade9e07b43"
     },
     "current_release_claim": false,
     "display_identifiers_redacted": true
@@ -65,5 +74,11 @@
   "Rust_ELF_unchanged": true,
   "new_Cargo_build": false,
   "new_platform_roundtrip": false,
-  "native_Linux_E2E": false
+  "native_Linux_E2E": false,
+  "history_cleanup": {
+    "completed": true,
+    "application_bytes_unchanged": true,
+    "details": "HISTORY.md",
+    "prior_history_flags_scope": "As of their original validation run, before this separate operation."
+  }
 }

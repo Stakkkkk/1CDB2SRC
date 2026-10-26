@@ -16,6 +16,10 @@
       "bytes": 31690,
       "sha256": "605ced53a7462a95e5ac3fb51462ebdb882781648b71f897ba20c1c42a272110"
     },
+    "HISTORY.md": {
+      "bytes": 3193,
+      "sha256": "2cb214b2239e8ae7b7ec6f943a6376623001c243e6935cee8c40072d53e24048"
+    },
     "NOTICE.md": {
       "bytes": 2856,
       "sha256": "efc6ba7c970883e97881b31589376e4487dcceb991ce9317fdbe9b38b1062fca"
@@ -25,12 +29,12 @@
       "sha256": "600b4f40eed83a672b2e6dd85c1f1f99881b4802bf4a7cad175d772f834bd032"
     },
     "README.md": {
-      "bytes": 27285,
-      "sha256": "100b3f14f7db9ab4c82f8992bd0d9ad946f3005e59ef535026eac96ff805647d"
+      "bytes": 27497,
+      "sha256": "1aa19c5a019b1e6c9ea5f19aa587be3874ec96a4d35585c8e17c71be56e2673b"
     },
     "RELEASE-NOTES.ru.md": {
-      "bytes": 23339,
-      "sha256": "26cfa9aa7cbca1e0c45053d9d21b4bece21a20405e6694f72636319a6a0c7b2b"
+      "bytes": 23750,
+      "sha256": "fb2e9c413608506de687aaa77f7c11aed905834e48dd3fb8cc634f53fa5be714"
     },
     "VERSION": {
       "bytes": 12,
@@ -5957,12 +5961,16 @@
       "sha256": "014a570d7b780689bbb2a03cb168d249d80062f2dfc22a3c6d876b99c9d44481"
     },
     "provenance.json": {
-      "bytes": 15087,
-      "sha256": "bf1bd63f0a890fdc5ad2b3931ff486e91ef994372e677bad25fb75800e42473e"
+      "bytes": 15233,
+      "sha256": "cb56ba0867ad0377cae8e0532736c75ee10da57108ac153e8959f5f0c4db7a1e"
     },
     "python-test-provenance.json": {
       "bytes": 5377,
       "sha256": "b605b250c7996f0ecfc8a6caa95ff8bcf444016a3af08af6bf65e5789c8fef9b"
+    },
+    "release-evidence/current/history-cleanup.json": {
+      "bytes": 1035,
+      "sha256": "ffe07839c978cfafb3d889023a900dd4842b217cf6caf9471962e7d285cff571"
     },
     "release-evidence/current/linux-units.json": {
       "bytes": 484,
@@ -5981,8 +5989,8 @@
       "sha256": "6983d9afc37971d1ef374667b0e6642415888c1387a668d957afd2755c7c6785"
     },
     "release-evidence/historical/README.md": {
-      "bytes": 826,
-      "sha256": "52bdb6c53a7a21c4309f47cae56b15c7b4c875a8df42ced1e08c06335f9ac3a2"
+      "bytes": 951,
+      "sha256": "d8529ecd60e4d178a4c1a9c3d27df72f0aedc0cd0d84913fd0f2fd79b2d1bedd"
     },
     "release-evidence/historical/rc6/cf-transfer.json": {
       "bytes": 485,
@@ -6049,16 +6057,16 @@
       "sha256": "b5f6844a1ac379a65f69142f9a06db783dfb31e93471ab7cd5ebc188d849d458"
     },
     "release-evidence/historical/release-validation-rc6.json": {
-      "bytes": 5815,
-      "sha256": "0f81096a2518b3e6e9281b9e0170bda83bd8272c96992a94cd76bc3ff41126b4"
+      "bytes": 5857,
+      "sha256": "ffb10d44c474dd4501fa4d879cd1892d8473dce62a792f3243af2046cd5b98bf"
     },
     "release-evidence/historical/release-validation-rc7.json": {
-      "bytes": 2806,
-      "sha256": "c83b86aa54ded476b913484a99f0855cdb395dcb47340487245fd217e1329cfd"
+      "bytes": 2848,
+      "sha256": "b2669702b7c506f73412652bc8268151395a898e3e6ccc378c436eade9e07b43"
     },
     "release-validation.json": {
-      "bytes": 2452,
-      "sha256": "7d76790497c2f51503ce3617724ffc52d07ae30a0b985aaa1a8ed590cbafd5ff"
+      "bytes": 3015,
+      "sha256": "572caf69c2f91604971bce7259ec61839a52008e94f0d02221aeb4012eda5fde"
     },
     "tests/__init__.py": {
       "bytes": 0,
@@ -7258,5 +7266,5 @@
     }
   },
   "scope": "Current package source/app/test/docs/notices facts; own source-manifest excluded to avoid self-reference.",
-  "source_status": "0.3.0-rc.8: neutral names, explicit upstream attribution, renamed Python/helper and metadata-only OCI rewrite; current tests and small pair accepted; full DB benchmark historical."
+  "source_status": "0.3.0-rc.8 application/runtime bytes preserved; source history sanitized; documentation and current package facts refreshed without new exports or test runs."
 }

@@ -1,0 +1,27 @@
+{
+  "status": "PASS_REWRITTEN_HISTORY_CURRENT_APPLICATION_UNCHANGED",
+  "date": "2026-10-26",
+  "original_commits_preserved": 15,
+  "authors_and_dates_preserved": true,
+  "history_rewrite_seconds": 5.727163100003963,
+  "text_blob_versions_cleaned": 152,
+  "historical_artifact_blob_versions_removed": 12,
+  "historical_objects_scanned": {
+    "commit": 15,
+    "tag": 1,
+    "tree": 390,
+    "blob": 1847
+  },
+  "historical_tree_paths_scanned": 26552,
+  "identifier_hits": 0,
+  "current_pre_documentation_tree_byte_exact": true,
+  "current_application_files_unchanged": 99,
+  "current_archives_and_ELF_byte_exact": true,
+  "upstream_notices_preserved": true,
+  "new_DB_export": false,
+  "new_Cargo_build": false,
+  "new_unit_execution": false,
+  "backup": "Verified complete private bundle outside the repository.",
+  "server_cache_purge_claim": false,
+  "notes": "Application checks remain those of 0.3.0-rc.8; existing history flags in earlier validation records describe their original execution time."
+}

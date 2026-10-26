@@ -43,8 +43,8 @@
   "historical_validation": {
     "path": "release-evidence/historical/release-validation-rc6.json",
     "fact": {
-      "bytes": 5815,
-      "sha256": "0f81096a2518b3e6e9281b9e0170bda83bd8272c96992a94cd76bc3ff41126b4"
+      "bytes": 5857,
+      "sha256": "ffb10d44c474dd4501fa4d879cd1892d8473dce62a792f3243af2046cd5b98bf"
     },
     "current_release_claim": false,
     "archived_path_map": {
@@ -67,5 +67,5 @@
   "Rust_rebuilt": false,
   "full_Linux_suite_rerun": false,
   "native_Linux_E2E_rerun": false,
-  "display_copy_note": "Public display copy with project identifiers and old naming redacted. Embedded source hashes describe original historical artifacts, not current renamed sources. Original documents remain in Git history."
+  "display_copy_note": "Public display copy with project identifiers and old naming redacted. Embedded source hashes describe original historical artifacts, not current renamed sources. Original documents retained only in a private offline backup after history cleanup."
 }
