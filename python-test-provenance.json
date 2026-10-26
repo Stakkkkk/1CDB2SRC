@@ -1,6 +1,10 @@
 {
-  "scope": "0.3.0-rc.6 portable test sources; current run results only in supplied release-validation evidence.",
+  "scope": "0.3.0-rc.7 portable test sources; current and historical execution scopes in release-validation.json.",
   "files": {
+    "__init__.py": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
     "fast_cf_fixture.py": {
       "bytes": 2247,
       "sha256": "361460d956d710333caeb89a9237bd3b3a489b0cb2b8a83d18d13fffcad2b1a3"
@@ -20,6 +24,10 @@
     "test_cf_copy.py": {
       "bytes": 11741,
       "sha256": "454bf40fe827dddba232f5b53f8cf466b181f3af8728b4f71000b3418f62b4eb"
+    },
+    "test_db_connection_regressions.py": {
+      "bytes": 4106,
+      "sha256": "4aec82521257c94b845c211a33d793ea9724af0bb285bd5349083f24324e036a"
     },
     "test_dumpinfo_single_pass.py": {
       "bytes": 10522,
@@ -120,17 +128,14 @@
     "test_xml_envelope.py": {
       "bytes": 6198,
       "sha256": "3c8686fb968bbc144857b235841231b4f50e9263b457bcc252a91475d313ed39"
-    },
-    "__init__.py": {
-      "bytes": 0,
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   },
   "changes": [
     "Repository-relative app imports",
     "Neutral generated receipt/storage instead of saved CF and reports",
     "OCI test simulates bind/resource admission on both hosts",
-    "Native command assertion checks executable names, not arbitrary parent paths"
+    "Native command assertion checks executable names, not arbitrary parent paths",
+    "rc.7: neutral real pinned TDS bytearray regression and public default/custom capture budget tests; previous tests preserved."
   ],
   "executed_by_sealer": false
 }

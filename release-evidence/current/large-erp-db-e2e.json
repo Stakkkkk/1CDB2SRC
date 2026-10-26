@@ -1,0 +1,110 @@
+{
+  "status": "FOUR_LOCAL_XML_COMPLETE_ALL_FILES_EXACT",
+  "accepted_utc": "2026-10-25T17:15:49.644360+00:00",
+  "scope": "One full public CLI run per provider, same large modified ERP configuration and selected supplier; all compute local, remote server only hosts DB.",
+  "machine": "Windows, Ryzen 9 9900X 12 cores/24 threads; Linux Docker backend with 6 CPUs available.",
+  "mode": {
+    "docker": "fast",
+    "assembly": "adopt",
+    "transfer": "stream",
+    "cf_transfer": "bind-copy",
+    "side_scheduling": "verify-overlap",
+    "final_verification": "parallel",
+    "readback_workers": 8,
+    "final_worker_split": "2+6",
+    "capture_seconds": 1800
+  },
+  "providers": {
+    "mssql": {
+      "status": "COMPLETE_WITH_LIMITATIONS",
+      "program_seconds": 2247.6870811999997,
+      "stages_seconds": {
+        "preflight": 5.106690800000024,
+        "capture": 685.2573847000001,
+        "cf": 24.799561799999992,
+        "profiles": 8.328074099999867,
+        "fast-pair": 1323.1643186000001,
+        "integrity": 195.71613500000058,
+        "postflight": 2.7519406000001254,
+        "total": 2247.6870811999997
+      },
+      "files": 277048,
+      "available_BSL": 58049,
+      "missing": 0,
+      "extra": 0,
+      "different": 0,
+      "errors": 0,
+      "comparison": "Full file path/kind/size/SHA comparison with previously accepted outputs; no new 1C platform oracle.",
+      "independently_captured_and_converted": true,
+      "vendor_reuse": false,
+      "source_after_exact": true,
+      "owned_process_cleanup_confirmed": true
+    },
+    "postgresql": {
+      "status": "COMPLETE_WITH_LIMITATIONS",
+      "program_seconds": 2205.7315874999995,
+      "stages_seconds": {
+        "preflight": 5.114726499999961,
+        "capture": 613.9231103000002,
+        "cf": 25.80323060000046,
+        "profiles": 8.492518400000336,
+        "fast-pair": 1355.3131638000004,
+        "integrity": 191.8069128999996,
+        "postflight": 2.725954499999716,
+        "total": 2205.7315874999995
+      },
+      "files": 277048,
+      "available_BSL": 58049,
+      "missing": 0,
+      "extra": 0,
+      "different": 0,
+      "errors": 0,
+      "comparison": "Full file path/kind/size/SHA comparison with previously accepted outputs; no new 1C platform oracle.",
+      "independently_captured_and_converted": true,
+      "vendor_reuse": false,
+      "source_after_exact": true,
+      "owned_process_cleanup_confirmed": true
+    }
+  },
+  "cross_provider_XML": {
+    "main_files": 139493,
+    "vendor_files": 137555,
+    "different": 0,
+    "missing": 0,
+    "extra": 0,
+    "available_BSL_different": 0
+  },
+  "limitations": {
+    "main_opaque": 181,
+    "main_not_decoded": 177,
+    "main_raw_preserved": 4,
+    "vendor_opaque": 329,
+    "closed_sources_not_recovered": true,
+    "new_platform_roundtrip": false,
+    "cache_and_background_load_isolated": false,
+    "trials_per_provider": 1,
+    "main_CF_byte_identical_across_providers": false,
+    "CF_difference": "One source versions entry differs by one byte; exported XML fully identical. No output normalization."
+  },
+  "timing_notes": "Capture includes inventories, DB streaming, local writing and complete readback. fast-pair includes native conversion, helpers, transfer and assembly. Overlapping child timings must not be summed. No A/B speed claim from the provider time difference.",
+  "earlier_failures": [
+    {
+      "scope": "Old remote-compute attempt, not final local run",
+      "seconds": 5949.449,
+      "cause": "Transfer timeout on weak DB host",
+      "cleanup": "Historical NOT_ESTABLISHED retained"
+    },
+    {
+      "scope": "First local PostgreSQL capture before fix",
+      "seconds": 639.029,
+      "cause": "Hidden 600-second query ceiling despite larger capture budget",
+      "cleanup": "confirmed"
+    },
+    {
+      "scope": "First local MS SQL capture before fix",
+      "seconds": 15.808,
+      "cause": "Pinned TDS driver returned bytearray chunks",
+      "cleanup": "confirmed"
+    }
+  ]
+}

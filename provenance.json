@@ -354,13 +354,13 @@
     "note": "Four CF-derived role XML files per provider validated byte-exact; remaining form rule unresolved. Full large configuration export not repeated."
   },
   "current_packaging": {
-    "version": "0.3.0-rc.6",
+    "version": "0.3.0-rc.7",
     "performance_backend": {
       "host_route_preserved": true,
       "fast_docker": true,
       "fast_helper_manifest": {
         "bytes": 12487,
-        "sha256": "a215940d12ef799b04cff7fa8467b2ed69500236288d2f676db31bbd52170230"
+        "sha256": "5bc970913c2320ee4dca4a3eef76a66ab9337e3145d4f34ca19bbc85c5b1585b"
       },
       "rust_rebuilt_by_sealer": false,
       "converter_source_unchanged": true,
@@ -370,6 +370,7 @@
     "converter_source_unchanged": true,
     "validation": "release-validation.json",
     "sealer_executed_runtime": false,
-    "prior_runtime_validation": "Historical fields above retain their original scope and are not new release runs"
+    "prior_runtime_validation": "Historical fields above retain their original scope and are not new release runs",
+    "validation_scope": "Exact current app/helper used by accepted full MSSQL and PostgreSQL public CLI runs; Linux new regressions only. See release-validation.json."
   }
 }

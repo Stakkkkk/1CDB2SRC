@@ -18,7 +18,9 @@ class Spool:
         self.sha = hashlib.sha256()
 
     def write(self, data):
-        require(isinstance(data, bytes), 'Nonbinary driver stream')
+        # The pinned TDS reader slices its bytearray receive buffer. Both
+        # binary representations must preserve the same bytes and spool quota.
+        require(isinstance(data, (bytes, bytearray)), 'Nonbinary driver stream')
         require(self.size+len(data) <= self.quota, 'Driver BLOB spool quota exceeded')
         self.file.write(data)
         self.size += len(data)

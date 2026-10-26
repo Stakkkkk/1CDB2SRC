@@ -1,0 +1,31 @@
+{
+  "status": "PASS_RELATED_LINUX_FOUR_TESTS",
+  "tests_run": 4,
+  "passed": 4,
+  "skipped": 0,
+  "seconds": 10.545303999999305,
+  "started_utc": "2026-10-26T02:20:36.718838+00:00",
+  "finished_utc": "2026-10-26T02:20:47.264137+00:00",
+  "source": {
+    "app/onecdb2src/cli.py": {
+      "bytes": 30135,
+      "sha256": "7bdd677d6ea99fd0e2038e7477465c17c9b5acaedb76af9491df0fe05b6c4506"
+    },
+    "app/onecdb2src/db/mssql.py": {
+      "bytes": 7360,
+      "sha256": "c17a0de57b4886d9dd56937d7cbb8e17dd019bf63abfd6741b37adbebed0437b"
+    },
+    "tests/test_db_connection_regressions.py": {
+      "bytes": 4106,
+      "sha256": "4aec82521257c94b845c211a33d793ea9724af0bb285bd5349083f24324e036a"
+    }
+  },
+  "source_after_exact": true,
+  "cleanup_confirmed": true,
+  "network": "none",
+  "offline_install": true,
+  "live_DB": false,
+  "Rust_execution": false,
+  "full_Linux_suite_rerun": false,
+  "native_Linux_E2E_rerun": false
+}
